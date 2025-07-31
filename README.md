@@ -2,6 +2,8 @@
 
 A modern, responsive website for HR and recruitment services built with React, Vite, and Tailwind CSS.
 
+**🚀 Auto-Deployment Status: Active** - Deploys automatically to Hostinger via GitHub webhook
+
 ## 🚀 Features
 
 - **Modern Design**: Clean, professional UI with dark/light mode
