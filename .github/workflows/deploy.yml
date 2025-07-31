@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to Hostinger
 
 on:
   push:
@@ -26,9 +26,18 @@ jobs:
     - name: Build
       run: npm run build
       
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Deploy to Hostinger via Webhook
       if: github.ref == 'refs/heads/main'
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist 
+      run: |
+        curl -X POST \
+          -H "Content-Type: application/json" \
+          -d '{"repository":"${{ github.repository }}","branch":"${{ github.ref_name }}","commit":"${{ github.sha }}"}' \
+          https://webhooks.hostinger.com/deploy/332f8ade0a3b323cbc476b647283d98e
+      
+    - name: Deploy Status
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "🚀 Deployment triggered for ${{ github.repository }}"
+        echo "📦 Build completed successfully"
+        echo "🌐 Deploying to Hostinger..."
+        echo "✅ Webhook sent to Hostinger" 
