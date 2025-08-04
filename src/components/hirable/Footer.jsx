@@ -46,7 +46,7 @@ const Footer = () => (
           <ul className="space-y-2 text-gray-400">
             <li>Delhi, India</li>
             <li>info@hirewithprachi.com</li>
-            <li>+91 9876543210</li>
+            <li>+91 87408 89927</li>
           </ul>
         </div>
       </div>

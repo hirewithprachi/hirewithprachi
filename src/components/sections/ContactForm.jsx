@@ -2,53 +2,65 @@
 // To enable contact form submissions, update the handleSubmit logic to POST to Formspree or EmailJS for production use.
 // Example for Formspree: fetch('https://formspree.io/f/YOUR_FORM_ID', { method: 'POST', body: ... })
 import React, { useState } from 'react';
-    import { motion } from 'framer-motion';
-    import { useToast } from '@/components/ui/use-toast';
-import { addContactToHubSpot } from '../../lib/hubspot';
+import { useToast } from '../ui/use-toast';
+import { formSubmission } from '../../lib/supabase';
 
 export default function ContactForm() {
-      const { toast } = useToast();
-      const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        location: '',
-        workRequired: '',
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    location: '',
+    workRequired: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    if (!formData.name || !formData.email || !formData.workRequired) {
+      toast({
+        title: 'Please fill in all required fields',
+        variant: 'destructive',
       });
-      const [isSubmitting, setIsSubmitting] = useState(false);
+      setIsSubmitting(false);
+      return;
+    }
 
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
-      };
-
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        if (!formData.name || !formData.email || !formData.workRequired) {
-          toast({
-            title: 'Please fill in all required fields',
-            variant: 'destructive',
-          });
-          setIsSubmitting(false);
-          return;
-        }
-        // For production: POST to Formspree
-        fetch('https://formspree.io/f/manbjlrj', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
-        // Also send to HubSpot CRM
-        const [firstname, ...rest] = formData.name.split(' ');
-        const lastname = rest.join(' ');
-        await addContactToHubSpot({ email: formData.email, firstname, lastname });
+    try {
+      // Submit form to Supabase (which also sends to HubSpot)
+      const result = await formSubmission.submitContactForm(formData);
+      
+      if (result.success) {
         toast({
           title: 'Thank you! We will contact you soon.',
           variant: 'success',
         });
         setFormData({ name: '', email: '', location: '', workRequired: '' });
-        setIsSubmitting(false);
-      };
+      } else {
+        toast({
+          title: 'Failed to submit form. Please try again.',
+          variant: 'destructive',
+        });
+      }
+    } catch (error) {
+      console.error('Contact form submission error:', error);
+      toast({
+        title: 'An error occurred. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
       return (
     <section className="py-20 font-heading bg-background">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from './ui/use-toast';
+import { formSubmission } from '../lib/supabase';
 
 export default function ConsultationModal({ open, onClose }) {
   const [form, setForm] = useState({
@@ -13,6 +14,7 @@ export default function ConsultationModal({ open, onClose }) {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   const topics = [
     'Compliance',
@@ -30,16 +32,45 @@ export default function ConsultationModal({ open, onClose }) {
   const handleSubmit = async e => {
     e.preventDefault();
     setSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+    setError('');
+
+    try {
+      // Submit form to Supabase (which also sends to HubSpot)
+      const result = await formSubmission.submitForm({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        company: form.businessType,
+        designation: form.topic,
+        message: form.message
+      }, 'consultation_request');
+      
+      if (result.success) {
+        setSubmitted(true);
+        toast({ title: 'Thank you!', description: 'Your request has been received. Our team will contact you soon.' });
+        setTimeout(() => {
+          setSubmitted(false);
+          onClose();
+          setForm({
+            name: '',
+            email: '',
+            phone: '',
+            businessType: '',
+            topic: '',
+            message: ''
+          });
+        }, 2000);
+      } else {
+        setError(result.error || 'Failed to submit request. Please try again.');
+        toast({ title: 'Error', description: 'Failed to submit request. Please try again.', variant: 'destructive' });
+      }
+    } catch (error) {
+      console.error('Consultation form submission error:', error);
+      setError('An error occurred. Please try again.');
+      toast({ title: 'Error', description: 'An error occurred. Please try again.', variant: 'destructive' });
+    } finally {
       setSubmitting(false);
-      setSubmitted(true);
-      toast({ title: 'Thank you!', description: 'Your request has been received. Our team will contact you soon.' });
-      setTimeout(() => {
-        setSubmitted(false);
-        onClose();
-      }, 2000);
-    }, 1200);
+    }
   };
 
   return (

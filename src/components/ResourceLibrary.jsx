@@ -128,17 +128,46 @@ export default function ResourceLibrary() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // POST to Formspree
-    fetch('https://formspree.io/f/xeozkpyv', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-    // Also send to HubSpot CRM
-    const [firstname, ...rest] = formData.name.split(' ');
-    const lastname = rest.join(' ');
-    await addContactToHubSpot({ email: formData.email, firstname, lastname });
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      // Submit form to Supabase (which also sends to HubSpot)
+      const result = await formSubmission.submitResourceForm(formData, selectedResource?.title || 'Resource Download');
+      
+      if (result.success) {
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          designation: ''
+        });
+        
+        // Trigger download
+        if (selectedResource?.downloadUrl) {
+          const link = document.createElement('a');
+          link.href = selectedResource.downloadUrl;
+          link.download = selectedResource.title;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+        
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setSelectedResource(null);
+        }, 3000);
+      } else {
+        setError(result.error || 'Failed to submit form. Please try again.');
+      }
+    } catch (error) {
+      console.error('Resource download form submission error:', error);
+      setError('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const categories = [
@@ -153,7 +182,7 @@ export default function ResourceLibrary() {
     : filtered.filter(r => r.category === selectedCategory);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <motion.div
@@ -261,7 +290,7 @@ export default function ResourceLibrary() {
           </motion.div>
         ) : (
           <div className={viewMode === 'grid' 
-            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
+            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" 
             : "space-y-6"
           }>
             {filteredByCategory.map((resource, index) => (
@@ -272,7 +301,7 @@ export default function ResourceLibrary() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className={`group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden ${
+                className={`group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden h-full flex flex-col ${
                   viewMode === 'list' ? 'flex items-center p-6' : 'p-6'
                 }`}
               >
@@ -316,10 +345,12 @@ export default function ResourceLibrary() {
                     </div>
 
                     {/* Download Button */}
-                    <button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 flex items-center justify-center gap-2">
-                      <Download className="h-4 w-4" />
-                      Download Now
-                    </button>
+                    <div className="mt-auto">
+                      <button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 flex items-center justify-center gap-2">
+                        <Download className="h-4 w-4" />
+                        Download Now
+                      </button>
+                    </div>
                   </>
                 ) : (
                   <>

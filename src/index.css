@@ -93,6 +93,18 @@
   --border-secondary: #cbd5e1;
   --shadow-primary: rgba(0, 0, 0, 0.1);
   --shadow-secondary: rgba(0, 0, 0, 0.05);
+
+  /* Spacing System */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  
+  /* Container spacing */
+  --container-padding: var(--space-md);
+  --section-spacing: var(--space-xl);
 }
 
 /* Dark Mode Colors */
@@ -531,6 +543,11 @@ html, body {
     padding-right: 1rem;
   }
   
+  .hero-section {
+    min-height: 60vh;
+    padding: 2rem 0;
+  }
+  
   /* Improve text readability on mobile */
   .text-3xl {
     font-size: 1.875rem;
@@ -547,15 +564,26 @@ html, body {
     line-height: 1;
   }
   
+  /* Improve form inputs on mobile */
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+  
+  /* Better touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
   /* Better spacing for mobile */
   .py-20 {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
   
   .py-32 {
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
   
   /* Improve card layouts on mobile */

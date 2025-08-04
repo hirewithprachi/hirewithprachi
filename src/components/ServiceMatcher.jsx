@@ -281,7 +281,7 @@ export default function ServiceMatcher() {
                       Request Custom Quote
                     </motion.button>
                     <motion.a
-                      href="https://calendly.com/prachi-hr-services"
+                      href="/contact"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 px-8 py-4 rounded-xl bg-white text-teal-600 font-semibold shadow-lg border-2 border-teal-600 hover:bg-teal-600 hover:text-white transition-all duration-300 text-center"

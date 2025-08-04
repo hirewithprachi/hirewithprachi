@@ -1,0 +1,782 @@
+{
+  "accountId": "YOUR_GTM_ACCOUNT_ID",
+  "containerId": "GTM-XXXXXXXX",
+  "containerName": "Hire With Prachi - Website Tracking",
+  "tags": [
+    {
+      "tagId": "1",
+      "name": "GA4 Configuration",
+      "type": "gaawe",
+      "tagFiringOption": "oncePerEvent",
+      "parameters": {
+        "measurementId": "G-F2Y8KBDKWV",
+        "sendPageView": true,
+        "fieldsToSet": [
+          {
+            "fieldName": "custom_map",
+            "value": "{\"custom_parameter_1\": \"user_id\", \"custom_parameter_2\": \"session_id\", \"custom_parameter_3\": \"user_type\"}"
+          }
+        ]
+      },
+      "firingTriggerId": ["1"]
+    },
+    {
+      "tagId": "2",
+      "name": "Page View Tracking",
+      "type": "gaawe",
+      "tagFiringOption": "oncePerEvent",
+      "parameters": {
+        "measurementId": "G-F2Y8KBDKWV",
+        "eventName": "page_view",
+        "fieldsToSet": [
+          {
+            "fieldName": "page_title",
+            "value": "{{Page Title}}"
+          },
+          {
+            "fieldName": "page_location",
+            "value": "{{Page URL}}"
+          },
+          {
+            "fieldName": "page_referrer",
+            "value": "{{Referrer}}"
+          }
+        ]
+      },
+      "firingTriggerId": ["2"]
+    },
+    {
+      "tagId": "3",
+      "name": "Service Page View",
+      "type": "gaawe",
+      "tagFiringOption": "oncePerEvent",
+      "parameters": {
+        "measurementId": "G-F2Y8KBDKWV",
+        "eventName": "service_view",
+        "fieldsToSet": [
+          {
+            "fieldName": "event_category",
+            "value": "services"
+          },
+          {
+            "fieldName": "event_label",
+            "value": "{{Service Name}}"
+          },
+          {
+            "fieldName": "service_id",
+            "value": "{{Service ID}}"
+          },
+          {
+            "fieldName": "service_name",
+            "value": "{{Service Name}}"
+          }
+        ]
+      },
+      "firingTriggerId": ["3"]
+    },
+    {
+      "tagId": "4",
+      "name": "Contact Form Submission",
+      "type": "gaawe",
+      "tagFiringOption": "oncePerEvent",
+      "parameters": {
+        "measurementId": "G-F2Y8KBDKWV",
+        "eventName": "contact_form_submit",
+        "fieldsToSet": [
+          {
+            "fieldName": "event_category",
+            "value": "conversion"
+          },
+          {
+            "fieldName": "event_label",
+            "value": "{{Form Type}}"
+          },
+          {
+            "fieldName": "form_type",
+            "value": "{{Form Type}}"
+          },
+          {
+            "fieldName": "form_id",
+            "value": "{{Form ID}}"
+          }
+        ]
+      },
+      "firingTriggerId": ["4"]
+    },
+    {
+      "tagId": "5",
+      "name": "Phone Call Click",
+      "type": "gaawe",
+      "tagFiringOption": "oncePerEvent",
+      "parameters": {
+        "measurementId": "G-F2Y8KBDKWV",
+        "eventName": "phone_call",
+        "fieldsToSet": [
+          {
+            "fieldName": "event_category",
+            "value": "conversion"
+          },
+          {
+            "fieldName": "event_label",
+            "value": "{{Phone Number}}"
+          },
+          {
+            "fieldName": "phone_number",
+            "value": "{{Phone Number}}"
+          }
+        ]
+      },
+      "firingTriggerId": ["5"]
+    },
+    {
+      "tagId": "6",
+      "name": "WhatsApp Click",
+      "type": "gaawe",
+      "tagFiringOption": "oncePerEvent",
+      "parameters": {
+        "measurementId": "G-F2Y8KBDKWV",
+        "eventName": "whatsapp_click",
+        "fieldsToSet": [
+          {
+            "fieldName": "event_category",
+            "value": "conversion"
+          },
+          {
+            "fieldName": "event_label",
+            "value": "whatsapp_contact"
+          }
+        ]
+      },
+      "firingTriggerId": ["6"]
+    },
+    {
+      "tagId": "7",
+      "name": "Brochure Download",
+      "type": "gaawe",
+      "tagFiringOption": "oncePerEvent",
+      "parameters": {
+        "measurementId": "G-F2Y8KBDKWV",
+        "eventName": "brochure_download",
+        "fieldsToSet": [
+          {
+            "fieldName": "event_category",
+            "value": "conversion"
+          },
+          {
+            "fieldName": "event_label",
+            "value": "{{Service Name}}"
+          },
+          {
+            "fieldName": "service_name",
+            "value": "{{Service Name}}"
+          },
+          {
+            "fieldName": "file_name",
+            "value": "{{File Name}}"
+          }
+        ]
+      },
+      "firingTriggerId": ["7"]
+    },
+    {
+      "tagId": "8",
+      "name": "Video Play",
+      "type": "gaawe",
+      "tagFiringOption": "oncePerEvent",
+      "parameters": {
+        "measurementId": "G-F2Y8KBDKWV",
+        "eventName": "video_play",
+        "fieldsToSet": [
+          {
+            "fieldName": "event_category",
+            "value": "engagement"
+          },
+          {
+            "fieldName": "event_label",
+            "value": "{{Video Title}}"
+          },
+          {
+            "fieldName": "service_id",
+            "value": "{{Service ID}}"
+          },
+          {
+            "fieldName": "video_title",
+            "value": "{{Video Title}}"
+          }
+        ]
+      },
+      "firingTriggerId": ["8"]
+    },
+    {
+      "tagId": "9",
+      "name": "Scroll Depth Tracking",
+      "type": "gaawe",
+      "tagFiringOption": "oncePerEvent",
+      "parameters": {
+        "measurementId": "G-F2Y8KBDKWV",
+        "eventName": "scroll_depth",
+        "fieldsToSet": [
+          {
+            "fieldName": "event_category",
+            "value": "engagement"
+          },
+          {
+            "fieldName": "event_label",
+            "value": "{{Scroll Depth}}%"
+          },
+          {
+            "fieldName": "scroll_depth",
+            "value": "{{Scroll Depth}}"
+          }
+        ]
+      },
+      "firingTriggerId": ["9"]
+    },
+    {
+      "tagId": "10",
+      "name": "CTA Button Click",
+      "type": "gaawe",
+      "tagFiringOption": "oncePerEvent",
+      "parameters": {
+        "measurementId": "G-F2Y8KBDKWV",
+        "eventName": "cta_click",
+        "fieldsToSet": [
+          {
+            "fieldName": "event_category",
+            "value": "conversion"
+          },
+          {
+            "fieldName": "event_label",
+            "value": "{{CTA Type}}"
+          },
+          {
+            "fieldName": "cta_type",
+            "value": "{{CTA Type}}"
+          },
+          {
+            "fieldName": "cta_text",
+            "value": "{{CTA Text}}"
+          }
+        ]
+      },
+      "firingTriggerId": ["10"]
+    },
+    {
+      "tagId": "11",
+      "name": "Time on Page",
+      "type": "gaawe",
+      "tagFiringOption": "oncePerEvent",
+      "parameters": {
+        "measurementId": "G-F2Y8KBDKWV",
+        "eventName": "time_on_page",
+        "fieldsToSet": [
+          {
+            "fieldName": "event_category",
+            "value": "engagement"
+          },
+          {
+            "fieldName": "event_label",
+            "value": "{{Time Spent}}s"
+          },
+          {
+            "fieldName": "time_spent",
+            "value": "{{Time Spent}}"
+          }
+        ]
+      },
+      "firingTriggerId": ["11"]
+    }
+  ],
+  "triggers": [
+    {
+      "triggerId": "1",
+      "name": "All Pages",
+      "type": "pageview",
+      "filter": []
+    },
+    {
+      "triggerId": "2",
+      "name": "Page View",
+      "type": "pageview",
+      "filter": []
+    },
+    {
+      "triggerId": "3",
+      "name": "Service Page View",
+      "type": "pageview",
+      "filter": [
+        {
+          "type": "contains",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "url",
+              "value": "/services/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "4",
+      "name": "Form Submission",
+      "type": "form_submit",
+      "filter": [
+        {
+          "type": "contains",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "form_classes",
+              "value": "contact-form"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "5",
+      "name": "Phone Call Click",
+      "type": "click",
+      "filter": [
+        {
+          "type": "contains",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "click_url",
+              "value": "tel:"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "6",
+      "name": "WhatsApp Click",
+      "type": "click",
+      "filter": [
+        {
+          "type": "contains",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "click_url",
+              "value": "wa.me"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "7",
+      "name": "Brochure Download",
+      "type": "click",
+      "filter": [
+        {
+          "type": "contains",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "click_url",
+              "value": ".pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "8",
+      "name": "Video Play",
+      "type": "click",
+      "filter": [
+        {
+          "type": "contains",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "click_classes",
+              "value": "video-play"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "9",
+      "name": "Scroll Depth 25%",
+      "type": "scroll_depth",
+      "filter": [
+        {
+          "type": "equals",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "scroll_depth_threshold",
+              "value": "25"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "10",
+      "name": "Scroll Depth 50%",
+      "type": "scroll_depth",
+      "filter": [
+        {
+          "type": "equals",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "scroll_depth_threshold",
+              "value": "50"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "11",
+      "name": "Scroll Depth 75%",
+      "type": "scroll_depth",
+      "filter": [
+        {
+          "type": "equals",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "scroll_depth_threshold",
+              "value": "75"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "12",
+      "name": "Scroll Depth 100%",
+      "type": "scroll_depth",
+      "filter": [
+        {
+          "type": "equals",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "scroll_depth_threshold",
+              "value": "100"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "13",
+      "name": "CTA Button Click",
+      "type": "click",
+      "filter": [
+        {
+          "type": "contains",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "click_classes",
+              "value": "cta-button"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "14",
+      "name": "Time on Page 30s",
+      "type": "timer",
+      "filter": [
+        {
+          "type": "equals",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "interval",
+              "value": "30000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "15",
+      "name": "Time on Page 60s",
+      "type": "timer",
+      "filter": [
+        {
+          "type": "equals",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "interval",
+              "value": "60000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "triggerId": "16",
+      "name": "Time on Page 120s",
+      "type": "timer",
+      "filter": [
+        {
+          "type": "equals",
+          "parameter": [
+            {
+              "type": "template",
+              "key": "interval",
+              "value": "120000"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "variableId": "1",
+      "name": "Page Title",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "page_title"
+        }
+      ]
+    },
+    {
+      "variableId": "2",
+      "name": "Page URL",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "page_location"
+        }
+      ]
+    },
+    {
+      "variableId": "3",
+      "name": "Referrer",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "page_referrer"
+        }
+      ]
+    },
+    {
+      "variableId": "4",
+      "name": "Service Name",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "service_name"
+        }
+      ]
+    },
+    {
+      "variableId": "5",
+      "name": "Service ID",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "service_id"
+        }
+      ]
+    },
+    {
+      "variableId": "6",
+      "name": "Form Type",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "form_type"
+        }
+      ]
+    },
+    {
+      "variableId": "7",
+      "name": "Form ID",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "form_id"
+        }
+      ]
+    },
+    {
+      "variableId": "8",
+      "name": "Phone Number",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "phone_number"
+        }
+      ]
+    },
+    {
+      "variableId": "9",
+      "name": "Video Title",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "video_title"
+        }
+      ]
+    },
+    {
+      "variableId": "10",
+      "name": "Scroll Depth",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "scroll_depth"
+        }
+      ]
+    },
+    {
+      "variableId": "11",
+      "name": "CTA Type",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "cta_type"
+        }
+      ]
+    },
+    {
+      "variableId": "12",
+      "name": "CTA Text",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "cta_text"
+        }
+      ]
+    },
+    {
+      "variableId": "13",
+      "name": "Time Spent",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "time_spent"
+        }
+      ]
+    },
+    {
+      "variableId": "14",
+      "name": "File Name",
+      "type": "v",
+      "parameter": [
+        {
+          "type": "template",
+          "key": "dataLayerVersion",
+          "value": "2"
+        },
+        {
+          "type": "template",
+          "key": "name",
+          "value": "file_name"
+        }
+      ]
+    }
+  ]
+} 

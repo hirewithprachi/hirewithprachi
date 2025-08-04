@@ -192,38 +192,7 @@ export default function HirableTestimonials() {
           ))}
         </Swiper>
 
-        {/* CTA Section */}
-        <div className={`text-center transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20"></div>
-            <div className="absolute top-0 left-1/4 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-pulse"></div>
-            <div className="absolute bottom-0 right-1/4 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-pulse" style={{animationDelay: '1s'}}></div>
-            
-            <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to Transform Your HR Operations?
-              </h3>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Join hundreds of satisfied clients who have revolutionized their HR processes with our virtual HR services.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="/contact"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-white text-blue-600 font-bold rounded-2xl hover:bg-gray-100 transition-all duration-300 group"
-                >
-                  <span>Get Started Now</span>
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </a>
-                
-                
-        </div>
-      </div>
-          </div>
-        </div>
+
       </div>
     </section>
   );

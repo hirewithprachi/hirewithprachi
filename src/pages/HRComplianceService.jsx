@@ -1,5 +1,5 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
@@ -7,12 +7,21 @@ import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
 import AIChatbotWidget from '../components/AIChatbotWidget';
 import ScrollProgressBar from '../components/ScrollProgressBar';
-import Breadcrumbs from '../components/Breadcrumbs';
-import ConsultationModal from '../components/LeadCapturePreview';
-import { useState } from 'react';
+import BrochureDownloadModal from '../components/BrochureDownloadModal';
+import { CheckCircle, Users, Shield, Zap, Award, MessageSquare, BarChart2, Search, Phone, Mail, ChevronDown, ChevronUp, Download, Calendar, MessageCircle, FileText, Gavel, AlertTriangle } from 'lucide-react';
 
 export default function HRComplianceService() {
-  const [showConsultation, setShowConsultation] = useState(false);
+  const [showBrochureModal, setShowBrochureModal] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const handleBrochureDownload = () => {
+    setShowBrochureModal(true);
+  };
+
   // SEO Structured Data
   const structuredData = {
     "@context": "https://schema.org",
@@ -128,8 +137,8 @@ export default function HRComplianceService() {
         {/* Primary Meta Tags */}
         <title>HR Compliance & Legal Services | Expert HR Compliance Management India</title>
         <meta name="title" content="HR Compliance & Legal Services | Expert HR Compliance Management India" />
-        <meta name="description" content="Expert HR compliance services including labor law audits, employment contracts, policy development, and legal risk assessment. Stay compliant with Indian labor laws. Get free consultation today!" />
-        <meta name="keywords" content="HR compliance services, labor law compliance, employment contracts, HR policy development, legal risk assessment, Indian labor laws, HR compliance audit, employment law, workplace compliance, HR legal services, compliance management, statutory compliance" />
+        <meta name="description" content="Comprehensive HR compliance management including labor law audits, employment contracts, policy development, and legal risk assessment. Stay compliant with Indian labor laws and avoid legal issues." />
+        <meta name="keywords" content="HR compliance, labor law compliance, employment contracts, HR policies, legal risk assessment, Indian labor laws, HR audit, compliance management, employment law, workplace compliance, HR legal services, labor law consultant, HR compliance audit, employment contract drafting, HR policy development" />
         <meta name="author" content="Prachi Shrivastava" />
         <meta name="robots" content="index, follow" />
         <meta name="language" content="English" />
@@ -139,7 +148,7 @@ export default function HRComplianceService() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://hirewithprachi.com/services/hr-compliance" />
         <meta property="og:title" content="HR Compliance & Legal Services | Expert HR Compliance Management India" />
-        <meta property="og:description" content="Expert HR compliance services including labor law audits, employment contracts, policy development, and legal risk assessment. Stay compliant with Indian labor laws." />
+        <meta property="og:description" content="Comprehensive HR compliance management including labor law audits, employment contracts, policy development, and legal risk assessment." />
         <meta property="og:image" content="https://hirewithprachi.com/hr-compliance-og-image.png" />
         <meta property="og:site_name" content="Hire With Prachi" />
         <meta property="og:locale" content="en_US" />
@@ -148,7 +157,7 @@ export default function HRComplianceService() {
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://hirewithprachi.com/services/hr-compliance" />
         <meta property="twitter:title" content="HR Compliance & Legal Services | Expert HR Compliance Management India" />
-        <meta property="twitter:description" content="Expert HR compliance services including labor law audits, employment contracts, policy development, and legal risk assessment." />
+        <meta property="twitter:description" content="Comprehensive HR compliance management including labor law audits, employment contracts, policy development, and legal risk assessment." />
         <meta property="twitter:image" content="https://hirewithprachi.com/hr-compliance-twitter-image.png" />
         <meta property="twitter:creator" content="@prachi_hr" />
         
@@ -179,7 +188,7 @@ export default function HRComplianceService() {
                 "name": "What HR compliance services do you provide?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "We provide comprehensive HR compliance services including labor law compliance audits, employment contract drafting, policy development & updates, legal risk assessment, compliance training programs, and audit support & documentation."
+                  "text": "We provide comprehensive HR compliance services including labor law audits, employment contract drafting, policy development, legal risk assessment, compliance training, and ongoing compliance monitoring to ensure your organization meets all legal requirements."
                 }
               },
               {
@@ -187,15 +196,7 @@ export default function HRComplianceService() {
                 "name": "How do you ensure compliance with Indian labor laws?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "We stay updated with all Indian labor laws including PF, ESI, TDS, Gratuity, and workplace safety requirements. Our team conducts comprehensive compliance audits and provides expert guidance to ensure your business meets all statutory obligations."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is included in HR compliance audit?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Our HR compliance audit includes reviewing employment contracts, HR policies, statutory compliance (PF, ESI, TDS), workplace safety, employee documentation, and identifying potential legal risks with actionable recommendations."
+                  "text": "We conduct thorough audits of your current HR practices, identify compliance gaps, provide legal documentation, and offer ongoing monitoring to ensure adherence to all Indian labor laws and regulations including the Industrial Disputes Act, Factories Act, and Minimum Wages Act."
                 }
               },
               {
@@ -203,15 +204,31 @@ export default function HRComplianceService() {
                 "name": "How much do HR compliance services cost?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Our HR compliance services start at ₹25,000/month and can save you ₹5L+ annually by preventing legal issues. We offer flexible pricing plans tailored to your business size and compliance needs."
+                  "text": "Our HR compliance services start at ₹25,000 per month with flexible pricing based on organization size and compliance requirements. We offer comprehensive packages to ensure complete legal protection and avoid costly legal disputes."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Do you provide employment contract drafting?",
+                "name": "Do you provide employment contract templates?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes, we specialize in drafting legally sound employment contracts, offer letters, appointment letters, and non-disclosure agreements (NDAs) that comply with Indian labor laws and protect your business interests."
+                  "text": "Yes, we draft legally compliant employment contracts, offer letters, and HR policies tailored to your organization\'s specific needs and industry requirements. All documents are reviewed by legal experts to ensure compliance."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How often should HR compliance audits be conducted?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We recommend annual compliance audits, with quarterly reviews for high-risk areas. We also provide ongoing monitoring and updates as laws change to ensure your organization remains compliant at all times."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if we\'re not compliant?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We identify compliance gaps and provide immediate action plans to rectify issues. Our team ensures you meet all legal requirements and avoid potential penalties or legal disputes through proactive compliance management."
                 }
               }
             ]
@@ -224,435 +241,454 @@ export default function HRComplianceService() {
         <HireWithPrachiTopBar />
         <HireWithPrachiHeader />
         
-        {/* Breadcrumbs */}
-        <section className="pt-24 pb-8 bg-gradient-to-r from-teal-50 to-blue-50">
-          <div className="container mx-auto px-4">
-            <Breadcrumbs 
-              items={[
-                { label: 'Home', href: '/' },
-                { label: 'Services', href: '/services' },
-                { label: 'HR Compliance & Legal Services', href: '/services/hr-compliance', current: true }
-              ]}
-            />
-          </div>
-        </section>
-        
-        {/* Hero Section */}
-        <section className="relative overflow-hidden pt-8 pb-20">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-teal-50 to-indigo-50"></div>
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-200 to-teal-200 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-teal-200 to-indigo-200 rounded-full blur-3xl"></div>
-          <div className="container mx-auto px-4 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center max-w-4xl mx-auto"
-            >
-              <motion.div
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent mb-4"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                <span className="text-sm font-semibold uppercase tracking-wider">Legal Protection</span>
-              </motion.div>
+                {/* Enhanced Page Header Section - Mobile Optimized */}
+        <div className="bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 text-white relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="absolute top-0 left-1/4 w-48 h-48 md:w-96 md:h-96 bg-white/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-40 h-40 md:w-80 md:h-80 bg-white/5 rounded-full blur-3xl"></div>
+          
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative z-10">
+            {/* Breadcrumb - Mobile Optimized */}
+            <nav className="mb-6 md:mb-8">
+              <ol className="flex items-center space-x-1 md:space-x-2 text-xs md:text-sm flex-wrap">
+                <li>
+                  <Link to="/" className="text-blue-200 hover:text-white transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li className="text-blue-300">/</li>
+                <li>
+                  <Link to="/services" className="text-blue-200 hover:text-white transition-colors">
+                    Services
+                  </Link>
+                </li>
+                <li className="text-blue-300">/</li>
+                <li className="text-white font-medium truncate">HR Compliance & Legal Services</li>
+              </ol>
+            </nav>
+            
+            {/* Service Title with Enhanced Design - Mobile Optimized */}
+            <div className="max-w-5xl">
+              <div className="inline-flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/20 mb-4 md:mb-6">
+                <Gavel className="w-4 h-4 md:w-5 md:h-5 text-blue-200" />
+                <span className="text-blue-200 text-xs md:text-sm font-semibold uppercase tracking-widest">Legal Protection</span>
+              </div>
               
-              <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-6 leading-tight">
-                HR Compliance & Legal Services
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 leading-tight">
+                HR Compliance & 
+                <span className="bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent"> Legal Services</span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-                Comprehensive compliance management to keep your business legally protected. Expert guidance on Indian labor laws, employment contracts, and statutory compliance.
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-blue-100 leading-relaxed mb-6 md:mb-8 max-w-4xl">
+                Comprehensive HR compliance management to keep your business legally protected. Expert guidance on labor laws, employment contracts, and policy development to ensure complete legal compliance.
               </p>
               
-              <div className="flex flex-wrap justify-center gap-4 mb-12">
-                <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-teal-600 text-white rounded-xl font-semibold hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                  Get Free Compliance Audit
-                </button>
-                <button className="px-8 py-4 border-2 border-blue-500 text-blue-600 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300">
-                  View Pricing Plans
-                </button>
-              </div>
-
-              {/* Quick Stats */}
-              <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600">100%</div>
-                  <div className="text-sm text-gray-600">Compliance Rate</div>
+              {/* Key Benefits - Mobile Optimized */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-6 md:mt-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-white/20">
+                  <Shield className="w-6 h-6 md:w-8 md:h-8 text-blue-300 mb-2" />
+                  <h3 className="font-semibold text-white mb-1 text-sm md:text-base">Legal Protection</h3>
+                  <p className="text-blue-200 text-xs md:text-sm">Complete compliance with Indian labor laws</p>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600">₹5L+</div>
-                  <div className="text-sm text-gray-600">Annual Savings</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-white/20">
+                  <FileText className="w-6 h-6 md:w-8 md:h-8 text-blue-300 mb-2" />
+                  <h3 className="font-semibold text-white mb-1 text-sm md:text-base">Expert Documentation</h3>
+                  <p className="text-blue-200 text-xs md:text-sm">Legally sound contracts and policies</p>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600">500+</div>
-                  <div className="text-sm text-gray-600">Audits Completed</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-white/20 sm:col-span-2 md:col-span-1">
+                  <AlertTriangle className="w-6 h-6 md:w-8 md:h-8 text-blue-300 mb-2" />
+                  <h3 className="font-semibold text-white mb-1 text-sm md:text-base">Risk Mitigation</h3>
+                  <p className="text-blue-200 text-xs md:text-sm">Identify and prevent legal issues</p>
                 </div>
               </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* What We Provide Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                What We Provide
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Comprehensive HR compliance services designed to protect your business and ensure full adherence to Indian labor laws
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: '⚖️',
-                  title: 'Labor Law Compliance Audits',
-                  description: 'Comprehensive audits to ensure compliance with all Indian labor laws including PF, ESI, TDS, and workplace safety requirements.',
-                  features: ['PF & ESI Compliance', 'TDS Management', 'Workplace Safety', 'Legal Risk Assessment']
-                },
-                {
-                  icon: '📄',
-                  title: 'Employment Contract Drafting',
-                  description: 'Legally sound employment contracts, offer letters, appointment letters, and non-disclosure agreements.',
-                  features: ['Offer Letters', 'Appointment Letters', 'NDAs', 'Legal Compliance']
-                },
-                {
-                  icon: '📋',
-                  title: 'Policy Development & Updates',
-                  description: 'Custom HR policies covering leave, WFH, code of conduct, and other workplace regulations.',
-                  features: ['Leave Policies', 'WFH Guidelines', 'Code of Conduct', 'Regular Updates']
-                },
-                {
-                  icon: '🛡️',
-                  title: 'Legal Risk Assessment',
-                  description: 'Identify potential legal risks and provide actionable recommendations to mitigate compliance issues.',
-                  features: ['Risk Identification', 'Mitigation Strategies', 'Legal Guidance', 'Preventive Measures']
-                },
-                {
-                  icon: '🎓',
-                  title: 'Compliance Training Programs',
-                  description: 'Training sessions for HR teams and management on labor laws and compliance requirements.',
-                  features: ['HR Training', 'Management Workshops', 'Legal Updates', 'Best Practices']
-                },
-                {
-                  icon: '📊',
-                  title: 'Audit Support & Documentation',
-                  description: 'Complete documentation support and audit assistance for statutory compliance requirements.',
-                  features: ['Documentation', 'Audit Support', 'Record Keeping', 'Compliance Reports']
-                }
-              ].map((service, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-gradient-to-br from-blue-50 to-teal-50 p-8 rounded-3xl border border-blue-100 hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="text-4xl mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                  <p className="text-gray-600 mb-6">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-700">
-                        <span className="text-blue-500 mr-2">✓</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
             </div>
           </div>
-        </section>
+        </div>
 
-        {/* Benefits Section */}
-        <section className="py-20 bg-gradient-to-br from-blue-50 to-teal-50">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Benefits of Our HR Compliance Services
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Protect your business from legal risks and ensure smooth operations with our expert compliance services
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: '💰',
-                  title: 'Cost Savings',
-                  description: 'Save ₹5L+ annually by preventing legal issues and avoiding costly penalties.',
-                  benefit: 'Prevent expensive legal battles'
-                },
-                {
-                  icon: '🛡️',
-                  title: 'Legal Protection',
-                  description: 'Comprehensive protection against labor law violations and legal disputes.',
-                  benefit: 'Stay compliant with all laws'
-                },
-                {
-                  icon: '⚡',
-                  title: 'Peace of Mind',
-                  description: 'Focus on your business while we handle all compliance requirements.',
-                  benefit: 'Reduce stress and worry'
-                },
-                {
-                  icon: '📈',
-                  title: 'Business Growth',
-                  description: 'Compliance enables smooth business operations and sustainable growth.',
-                  benefit: 'Scale without legal hurdles'
-                },
-                {
-                  icon: '🎯',
-                  title: 'Expert Guidance',
-                  description: 'Access to 8+ years of HR compliance expertise and legal knowledge.',
-                  benefit: 'Professional expertise'
-                },
-                {
-                  icon: '🔄',
-                  title: 'Continuous Support',
-                  description: 'Ongoing compliance monitoring and regular updates on legal changes.',
-                  benefit: 'Always stay updated'
-                }
-              ].map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="text-4xl mb-4">{benefit.icon}</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{benefit.title}</h3>
-                  <p className="text-gray-600 mb-4">{benefit.description}</p>
-                  <div className="bg-blue-50 p-3 rounded-lg">
-                    <span className="text-blue-700 font-semibold text-sm">{benefit.benefit}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Process Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Our Compliance Process
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                A systematic approach to ensure your business stays compliant with all legal requirements
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                {
-                  step: '01',
-                  title: 'Initial Assessment',
-                  description: 'Comprehensive review of your current HR practices and compliance status'
-                },
-                {
-                  step: '02',
-                  title: 'Gap Analysis',
-                  description: 'Identify compliance gaps and potential legal risks in your HR processes'
-                },
-                {
-                  step: '03',
-                  title: 'Implementation',
-                  description: 'Develop and implement compliant policies, contracts, and procedures'
-                },
-                {
-                  step: '04',
-                  title: 'Ongoing Support',
-                  description: 'Continuous monitoring and updates to maintain compliance standards'
-                }
-              ].map((process, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="bg-gradient-to-r from-blue-500 to-teal-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">
-                    {process.step}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{process.title}</h3>
-                  <p className="text-gray-600">{process.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Classy CTA Section */}
-        <section className="py-20 bg-gradient-to-br from-blue-600 via-teal-600 to-indigo-600 relative overflow-hidden">
-          <div className="absolute inset-0 bg-black/10"></div>
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-          
-          <div className="container mx-auto px-4 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center max-w-4xl mx-auto"
-            >
-              <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm px-8 py-4 rounded-full border border-white/30 mb-8">
-                <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
-                <span className="text-white text-sm font-bold uppercase tracking-widest">Get Started Today</span>
-                <div className="w-3 h-3 bg-white rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-              </div>
-
-              <h2 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                Ready to Protect Your <br />
-                <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-                  Business?
-                </span>
-              </h2>
-
-              <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-                Join 500+ businesses that trust us with their HR compliance. Get your free compliance audit today.
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                {[
-                  { icon: '💰', text: 'Save ₹5L+ annually' },
-                  { icon: '⚡', text: 'Get audit in 48 hours' },
-                  { icon: '🛡️', text: '100% compliance guarantee' }
-                ].map((benefit, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.2 }}
-                    className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20"
-                  >
-                    <div className="text-2xl">{benefit.icon}</div>
-                    <span className="text-white font-semibold">{benefit.text}</span>
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
-                <motion.button
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="group inline-flex items-center gap-3 px-10 py-5 bg-white text-blue-600 font-bold text-lg rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1"
-                >
-                  <span>Get Free Compliance Audit</span>
-                  <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </motion.button>
-                
-                <motion.button
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="group inline-flex items-center gap-3 px-10 py-5 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-bold text-lg rounded-2xl hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1"
-                  onClick={() => setShowConsultation(true)}
-                >
-                  <span>Book Free Consultation</span>
-                  <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                </motion.button>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-8 text-white/80">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span className="text-sm font-medium">No Setup Fees</span>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+          <div className="grid lg:grid-cols-3 gap-8 md:gap-12">
+            {/* Main Content */}
+            <div className="lg:col-span-2 space-y-8 md:space-y-12">
+                            {/* Hero Image Section with Real Image - Mobile Optimized */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden"
+              >
+                <div className="aspect-video relative overflow-hidden">
+                  <img 
+                    src="/assets/images/services/hr-compliance-service.webp" 
+                    alt="HR Compliance Services - Expert labor law compliance and audit services for Indian businesses by Prachi Shrivastava"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span className="text-sm font-medium">Cancel Anytime</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span className="text-sm font-medium">Money-Back Guarantee</span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+              </motion.div>
 
-        {/* Other Services Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Explore Our Other Services
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Discover our comprehensive range of HR services designed to transform your business operations
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {otherServices.map((service, index) => (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group"
-                >
-                  <Link to={service.link}>
-                    <div className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
-                      <div className="text-4xl mb-4">{service.icon}</div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                      <p className="text-gray-600 mb-6">{service.description}</p>
-                      <div className="flex items-center text-blue-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                        Learn More
-                        <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                          <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
+                            {/* Enhanced Service Overview Section with SEO Content - Mobile Optimized */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="bg-white rounded-xl md:rounded-2xl shadow-lg p-6 md:p-8"
+              >
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-6">Comprehensive HR Compliance Management</h2>
+                <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start">
+                  <div>
+                    <p className="text-gray-700 leading-relaxed text-base md:text-lg mb-4 md:mb-6">
+                      Our comprehensive HR compliance and legal services ensure your organization operates within the framework of all applicable labor laws and regulations. We provide expert guidance on employment law compliance, contract drafting, policy development, and legal risk assessment to protect your business from potential legal disputes and regulatory penalties.
+                    </p>
+                    <p className="text-gray-700 leading-relaxed text-base md:text-lg mb-4 md:mb-6">
+                      With our deep understanding of Indian labor laws, including the Industrial Disputes Act, Factories Act, Minimum Wages Act, and other relevant legislation, we help organizations of all sizes maintain compliance while building robust HR frameworks that support business growth and employee satisfaction.
+                    </p>
+                    <div className="space-y-2 md:space-y-3">
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-blue-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm md:text-base">Labor Law Compliance Audits & Assessments</span>
+                      </div>
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-blue-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm md:text-base">Employment Contract Drafting & Review</span>
+                      </div>
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-blue-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm md:text-base">HR Policy Development & Implementation</span>
+                      </div>
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-blue-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm md:text-base">Legal Risk Assessment & Mitigation</span>
+                      </div>
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-blue-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm md:text-base">Compliance Training & Workshops</span>
                       </div>
                     </div>
-                  </Link>
+                  </div>
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Key Highlights</h3>
+                    <div className="space-y-2 md:space-y-3">
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <Award className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
+                        <span className="text-gray-700 text-sm md:text-base">100% Legal Compliance</span>
+                      </div>
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <Award className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
+                        <span className="text-gray-700 text-sm md:text-base">₹25K Per Month</span>
+                      </div>
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <Award className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
+                        <span className="text-gray-700 text-sm md:text-base">Zero Legal Disputes</span>
+                      </div>
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <Award className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
+                        <span className="text-gray-700 text-sm md:text-base">Expert Legal Team</span>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
                 </motion.div>
-              ))}
+
+              {/* Why Choose Us Section - Mobile Optimized */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-white rounded-xl md:rounded-2xl shadow-lg p-6 md:p-8"
+              >
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8 text-center">Why Choose HR Compliance Services?</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                  {[
+                    { icon: Gavel, title: 'Legal Expertise', desc: 'Deep knowledge of labor laws' },
+                    { icon: Shield, title: 'Risk Protection', desc: 'Prevent legal disputes' },
+                    { icon: FileText, title: 'Documentation', desc: 'Legally sound contracts' },
+                    { icon: AlertTriangle, title: 'Compliance Audit', desc: 'Regular legal assessments' },
+                    { icon: MessageSquare, title: 'Expert Support', desc: 'Round-the-clock assistance' },
+                    { icon: BarChart2, title: 'Proven Results', desc: '8+ years of experience' }
+                  ].map((item, index) => (
+                    <div key={index} className="text-center p-4 md:p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl">
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                        <item.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                      </div>
+                      <h3 className="text-base md:text-lg font-bold text-gray-900 mb-1 md:mb-2">{item.title}</h3>
+                      <p className="text-gray-600 text-xs md:text-sm">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Supporting Imagery Section - Mobile Optimized */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
+              >
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl md:rounded-2xl p-6 md:p-8 text-center">
+                  <div className="text-4xl md:text-6xl mb-3 md:mb-4">📊</div>
+                  <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">Data-Driven Approach</h3>
+                  <p className="text-gray-600 text-sm md:text-base">We use analytics and insights to deliver optimal results for your business.</p>
+                </div>
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl md:rounded-2xl p-6 md:p-8 text-center">
+                  <div className="text-4xl md:text-6xl mb-3 md:mb-4">🎯</div>
+                  <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">Customized Solutions</h3>
+                  <p className="text-gray-600 text-sm md:text-base">Tailored strategies that align with your specific business needs and goals.</p>
+                </div>
+              </motion.div>
+
+              {/* Service-Specific Description - Mobile Optimized */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="bg-white rounded-xl md:rounded-2xl shadow-lg p-6 md:p-8"
+              >
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-6">Comprehensive HR Compliance Solutions</h2>
+                <p className="text-gray-700 leading-relaxed text-base md:text-lg mb-6 md:mb-8">
+                  Our HR compliance services are designed to protect your business from legal risks while ensuring you meet all regulatory requirements. We provide comprehensive solutions that cover every aspect of HR compliance, from initial audits to ongoing monitoring and support.
+                </p>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+                  <div>
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">What's Included</h3>
+                    <div className="space-y-2 md:space-y-3">
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-blue-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm md:text-base">Complete Labor Law Compliance Audit</span>
+                      </div>
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-blue-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm md:text-base">Employment Contract Templates</span>
+                      </div>
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-blue-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm md:text-base">HR Policy Development</span>
+                      </div>
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-blue-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm md:text-base">Legal Risk Assessment</span>
+                      </div>
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-blue-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm md:text-base">Compliance Training Programs</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Our Process</h3>
+                    <div className="space-y-3 md:space-y-4">
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <div className="w-6 h-6 md:w-8 md:h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs md:text-sm font-bold flex-shrink-0">1</div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900 text-sm md:text-base">Initial Assessment</h4>
+                          <p className="text-gray-600 text-xs md:text-sm">Comprehensive audit of current HR practices and compliance status</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <div className="w-6 h-6 md:w-8 md:h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs md:text-sm font-bold flex-shrink-0">2</div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900 text-sm md:text-base">Gap Analysis</h4>
+                          <p className="text-gray-600 text-xs md:text-sm">Identify compliance gaps and legal risks</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <div className="w-6 h-6 md:w-8 md:h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs md:text-sm font-bold flex-shrink-0">3</div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900 text-sm md:text-base">Solution Development</h4>
+                          <p className="text-gray-600 text-xs md:text-sm">Create customized compliance solutions</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2 md:gap-3">
+                        <div className="w-6 h-6 md:w-8 md:h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs md:text-sm font-bold flex-shrink-0">4</div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900 text-sm md:text-base">Implementation</h4>
+                          <p className="text-gray-600 text-xs md:text-sm">Roll out compliance programs and training</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Enhanced FAQ Accordion Section with 6 FAQs - Mobile Optimized */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="bg-white rounded-xl md:rounded-2xl shadow-lg p-6 md:p-8"
+              >
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8">Frequently Asked Questions</h2>
+                <div className="space-y-3 md:space-y-4">
+                  {[
+                    { q: 'What HR compliance services do you provide?', a: 'We provide comprehensive HR compliance services including labor law audits, employment contract drafting, policy development, legal risk assessment, compliance training, and ongoing compliance monitoring to ensure your organization meets all legal requirements.' },
+                    { q: 'How do you ensure compliance with Indian labor laws?', a: 'We conduct thorough audits of your current HR practices, identify compliance gaps, provide legal documentation, and offer ongoing monitoring to ensure adherence to all Indian labor laws and regulations including the Industrial Disputes Act, Factories Act, and Minimum Wages Act.' },
+                    { q: 'How much do HR compliance services cost?', a: 'Our HR compliance services start at ₹25,000 per month with flexible pricing based on organization size and compliance requirements. We offer comprehensive packages to ensure complete legal protection and avoid costly legal disputes.' },
+                    { q: 'Do you provide employment contract templates?', a: 'Yes, we draft legally compliant employment contracts, offer letters, and HR policies tailored to your organization\'s specific needs and industry requirements. All documents are reviewed by legal experts to ensure compliance.' },
+                    { q: 'How often should HR compliance audits be conducted?', a: 'We recommend annual compliance audits, with quarterly reviews for high-risk areas. We also provide ongoing monitoring and updates as laws change to ensure your organization remains compliant at all times.' },
+                    { q: 'What happens if we\'re not compliant?', a: 'We identify compliance gaps and provide immediate action plans to rectify issues. Our team ensures you meet all legal requirements and avoid potential penalties or legal disputes through proactive compliance management.' }
+                  ].map((faq, index) => (
+                    <div key={index} className="border border-gray-200 rounded-xl overflow-hidden">
+                      <button
+                        onClick={() => toggleFaq(index)}
+                        className="w-full px-4 md:px-6 py-3 md:py-4 text-left bg-gray-50 hover:bg-gray-100 transition-colors flex items-center justify-between"
+                      >
+                        <span className="font-semibold text-gray-900 text-sm md:text-base pr-2">{faq.q}</span>
+                        {openFaq === index ? (
+                          <ChevronUp className="w-4 h-4 md:w-5 md:h-5 text-gray-600 flex-shrink-0" />
+                        ) : (
+                          <ChevronDown className="w-4 h-4 md:w-5 md:h-5 text-gray-600 flex-shrink-0" />
+                        )}
+                      </button>
+                      {openFaq === index && (
+                        <div className="px-4 md:px-6 py-3 md:py-4 bg-white">
+                          <p className="text-gray-700 text-sm md:text-base">{faq.a}</p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+              </div>
+
+            {/* Sidebar Section - Mobile Optimized */}
+            <div className="space-y-4 md:space-y-6">
+              {/* Service List */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 }}
+                className="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6"
+              >
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Our Services</h3>
+                <div className="space-y-2 md:space-y-3">
+                  {otherServices.map((service) => (
+                    <Link
+                      key={service.id}
+                      to={service.link}
+                      className={`block p-2 md:p-3 rounded-lg transition-colors ${
+                        service.id === 'hr-compliance'
+                          ? 'bg-blue-50 text-blue-700 border border-blue-200'
+                          : 'hover:bg-gray-50 text-gray-700'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <span className="text-xl md:text-2xl">{service.icon}</span>
+                        <div>
+                          <h4 className="font-semibold text-xs md:text-sm">{service.title}</h4>
+                          <p className="text-xs text-gray-500">{service.description}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Search Bar */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.15 }}
+                className="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6"
+              >
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Search Services</h3>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search for services..."
+                    className="w-full pl-10 pr-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm md:text-base"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Download Brochure with Modal */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl md:rounded-2xl p-4 md:p-6 text-white"
+              >
+                <div className="text-center">
+                  <Download className="w-8 h-8 md:w-12 md:h-12 mx-auto mb-3 md:mb-4" />
+                  <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2">Download Brochure</h3>
+                  <p className="text-blue-100 text-sm md:text-base mb-3 md:mb-4">Get detailed information about our HR Compliance services</p>
+                  <button 
+                    onClick={handleBrochureDownload}
+                    className="w-full bg-white text-blue-600 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm md:text-base"
+                  >
+                    Download PDF
+                  </button>
+                </div>
+              </motion.div>
+
+              {/* Contact Widget */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6"
+              >
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Need Help?</h3>
+                <div className="space-y-3 md:space-y-4">
+                  <a
+                    href="tel:+918740889927"
+                    className="flex items-center gap-2 md:gap-3 p-2 md:p-3 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors"
+                  >
+                    <Phone className="w-4 h-4 md:w-5 md:h-5" />
+                    <span className="font-semibold text-sm md:text-base">Call Us</span>
+                  </a>
+                  <a
+                    href="https://wa.me/918740889927"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 md:gap-3 p-2 md:p-3 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors"
+                  >
+                    <MessageCircle className="w-4 h-4 md:w-5 md:h-5" />
+                    <span className="font-semibold text-sm md:text-base">WhatsApp</span>
+                  </a>
+                  <a
+                    href="mailto:info@hirewithprachi.com"
+                    className="flex items-center gap-2 md:gap-3 p-2 md:p-3 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors"
+                  >
+                    <Mail className="w-4 h-4 md:w-5 md:h-5" />
+                    <span className="font-semibold text-sm md:text-base">Email Us</span>
+                  </a>
+                </div>
+              </motion.div>
+
+              {/* CTA Section */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 }}
+                className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl md:rounded-2xl p-4 md:p-6 text-white"
+              >
+                <div className="text-center">
+                  <Calendar className="w-8 h-8 md:w-12 md:h-12 mx-auto mb-3 md:mb-4" />
+                  <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2">Talk to our Experts</h3>
+                  <p className="text-purple-100 text-sm md:text-base mb-3 md:mb-4">Get a free compliance audit and personalized quote</p>
+                  <a
+                    href="/contact"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full bg-white text-purple-600 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm md:text-base"
+                  >
+                    Book Free Consultation
+                  </a>
+                </div>
+              </motion.div>
             </div>
           </div>
-        </section>
+        </div>
 
         <HireWithPrachiFooter />
         <AIChatbotWidget />
-        <ConsultationModal open={showConsultation} onClose={() => setShowConsultation(false)} />
+        
+        {/* Brochure Download Modal */}
+        <BrochureDownloadModal
+          isOpen={showBrochureModal}
+          onClose={() => setShowBrochureModal(false)}
+          serviceName="HR Compliance & Legal Services"
+          brochureUrl="/downloads/hr-compliance-brochure.pdf"
+        />
       </main>
     </>
   );

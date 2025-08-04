@@ -32,8 +32,7 @@ import {
   Heart,
   Eye,
   ThumbsUp,
-  Download,
-  Printer,
+  // Download and Printer imports removed
   Mail,
   Linkedin,
   Twitter,
@@ -172,20 +171,6 @@ const BlogPost = ({ topicId }) => {
     setIsBookmarked(!isBookmarked);
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
-
-  const handleDownload = () => {
-    const element = document.createElement('a');
-    const file = new Blob([content.content.replace(/<[^>]*>/g, '')], {type: 'text/plain'});
-    element.href = URL.createObjectURL(file);
-    element.download = `${topic.slug}.txt`;
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-  };
-
   return (
     <>
       <Helmet>
@@ -216,7 +201,7 @@ const BlogPost = ({ topicId }) => {
         <meta property="twitter:title" content={content.title} />
         <meta property="twitter:description" content={content.metaDescription} />
         <meta property="twitter:image" content="https://hirewithprachi.com/blog-twitter-image.png" />
-        <meta property="twitter:creator" content="@prachi_hr" />
+        <meta property="twitter:creator" content="@hirewithprachi" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -510,21 +495,7 @@ const BlogPost = ({ topicId }) => {
                       {isLiked ? 'Liked' : 'Like'} ({likes})
                     </button>
                     
-                    <button
-                      onClick={handlePrint}
-                      className="flex items-center px-4 py-2 bg-gray-100 text-gray-600 hover:bg-gray-200 rounded-lg transition-all duration-300 border border-gray-200"
-                    >
-                      <Printer className="h-4 w-4 mr-2" />
-                      Print
-                    </button>
-                    
-                    <button
-                      onClick={handleDownload}
-                      className="flex items-center px-4 py-2 bg-gray-100 text-gray-600 hover:bg-gray-200 rounded-lg transition-all duration-300 border border-gray-200"
-                    >
-                      <Download className="h-4 w-4 mr-2" />
-                      Download
-                    </button>
+                    {/* Print and download buttons removed as requested */}
                   </div>
                 </div>
               </motion.div>
@@ -786,66 +757,10 @@ const BlogPost = ({ topicId }) => {
               </div>
             </motion.div>
           )}
-
-          {/* Enhanced Call to Action */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 rounded-2xl p-8 text-center text-white relative overflow-hidden"
-          >
-            {/* CTA Background Pattern */}
-            <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-20 translate-x-20"></div>
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full translate-y-16 -translate-x-16"></div>
-            <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-white/5 rounded-full -translate-x-12 -translate-y-12"></div>
-            
-            <div className="relative z-10">
-              <div className="text-6xl mb-6">🚀</div>
-              <h2 className="text-4xl font-bold mb-4">Ready to Transform Your HR Operations?</h2>
-              <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-                Get expert HR guidance and solutions tailored to your organization's needs. Let's build a workplace culture that drives success.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
-                <Link 
-                  to="/contact"
-                  className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                >
-                  <Phone className="h-5 w-5 mr-2" />
-                  Book Free Consultation
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-                <Link 
-                  to="/services"
-                  className="inline-flex items-center px-8 py-4 border-2 border-white text-white rounded-xl font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105"
-                >
-                  <Briefcase className="h-5 w-5 mr-2" />
-                  Explore Services
-                  <ArrowUpRight className="ml-2 h-5 w-5" />
-                </Link>
-              </div>
-              
-              {/* Additional Contact Info */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
-                <div className="flex items-center justify-center space-x-2">
-                  <Mail className="h-5 w-5" />
-                  <span className="text-sm">info@hirewithprachi.com</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <Phone className="h-5 w-5" />
-                  <span className="text-sm">+91 8740889927</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <MapPin className="h-5 w-5" />
-                  <span className="text-sm">India</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-            </div>
-          </div>
         </div>
       </div>
+    </div>
+    </div>
     </>
   );
 };

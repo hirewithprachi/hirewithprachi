@@ -71,7 +71,7 @@ export default function HirableServices({ openConsultationModal }) {
   }, []);
 
   return (
-    <section className="services-section relative py-20 md:py-32 font-heading overflow-hidden">
+    <section className="services-section relative py-12 sm:py-16 lg:py-20 font-heading overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30"></div>
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"></div>
@@ -79,23 +79,23 @@ export default function HirableServices({ openConsultationModal }) {
       
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20 shadow-lg mb-6">
+        <div className={`text-center mb-8 sm:mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20 shadow-lg mb-4 sm:mb-6">
             <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
             <span className="text-gray-700 text-sm font-semibold uppercase tracking-widest">Virtual HR Services</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 sm:mb-6">
             Complete <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Virtual HR Solutions</span> for your business
           </h2>
           
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Transform your HR operations with our comprehensive virtual services designed for modern businesses
           </p>
         </div>
 
         {/* Featured Service - Enhanced */}
-        <div className={`mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`mb-8 sm:mb-12 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {services.filter(service => service.featured).map((service, index) => (
             <div key={service.title} className="group relative">
               <div className="bg-white/90 backdrop-blur-sm rounded-3xl border border-white/30 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-1 overflow-hidden">
@@ -188,7 +188,7 @@ export default function HirableServices({ openConsultationModal }) {
         </div>
 
         {/* Compact Services Grid - Now 4 columns */}
-        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-12 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {services.filter(service => !service.featured).map((service, index) => (
             <div
               key={service.title}
@@ -197,10 +197,10 @@ export default function HirableServices({ openConsultationModal }) {
               onMouseEnter={() => setHoveredService(index)}
               onMouseLeave={() => setHoveredService(null)}
             >
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 overflow-hidden h-full">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-white/20 shadow-md hover:shadow-lg transition-all duration-500 hover:-translate-y-1 overflow-hidden h-full">
                 
                 {/* Compact Image Section */}
-                <div className="relative h-32 overflow-hidden">
+                <div className="relative h-28 sm:h-32 overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.title}
@@ -209,26 +209,26 @@ export default function HirableServices({ openConsultationModal }) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                   
                   {/* Compact Floating Icon */}
-                  <div className={`absolute top-3 left-3 w-10 h-10 rounded-lg bg-gradient-to-br ${service.color} flex items-center justify-center text-sm shadow-lg backdrop-blur-sm`}>
+                  <div className={`absolute top-2 sm:top-3 left-2 sm:left-3 w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${service.color} flex items-center justify-center text-xs sm:text-sm shadow-lg backdrop-blur-sm`}>
                     {service.icon}
                   </div>
                 </div>
                 
                 {/* Compact Content Section */}
-                <div className="p-4">
-                  <h3 className="text-base font-bold text-gray-900 mb-2 leading-tight group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
+                <div className="p-3 sm:p-4">
+                  <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-1.5 sm:mb-2 leading-tight group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
                     {service.title}
                   </h3>
                   
-                  <p className="text-gray-600 text-xs leading-relaxed mb-3 line-clamp-3">
+                  <p className="text-gray-600 text-xs leading-relaxed mb-2 sm:mb-3 line-clamp-2">
                     {service.desc}
                   </p>
                   
                   {/* Compact Features List */}
-                  <div className="mb-4">
+                  <div className="mb-3 sm:mb-4">
                     <div className="grid grid-cols-1 gap-1">
                       {service.features.slice(0, 2).map((feature, idx) => (
-                        <div key={idx} className="flex items-center gap-2">
+                        <div key={idx} className="flex items-center gap-1.5">
                           <div className={`w-1 h-1 rounded-full bg-gradient-to-r ${service.color}`}></div>
                           <span className="text-xs text-gray-600 font-medium line-clamp-1">{feature}</span>
                         </div>
@@ -240,7 +240,7 @@ export default function HirableServices({ openConsultationModal }) {
                   <div className="relative group">
                     <a 
                       href="/services" 
-                      className={`relative inline-flex items-center px-4 py-2.5 bg-gradient-to-r ${service.color} text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 group overflow-hidden text-xs`}
+                      className={`relative inline-flex items-center px-3 sm:px-4 py-2 bg-gradient-to-r ${service.color} text-white font-semibold rounded-lg hover:shadow-md transition-all duration-300 group overflow-hidden text-xs`}
                       onClick={openConsultationModal}
                     >
                       {/* Button Background Animation */}
@@ -249,7 +249,7 @@ export default function HirableServices({ openConsultationModal }) {
                       {/* Button Content */}
                       <span className="relative z-10 flex items-center">
                         Explore Service
-                        <svg className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <svg className="ml-1.5 sm:ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                           <path d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                       </span>
@@ -277,69 +277,69 @@ export default function HirableServices({ openConsultationModal }) {
             <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white/5 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
             
             {/* Main Content */}
-            <div className="relative z-10 p-8 md:p-12 text-white">
+            <div className="relative z-10 p-6 sm:p-8 md:p-10 text-white">
               <div className="max-w-4xl mx-auto">
                 {/* Header with Icon */}
-                <div className="flex items-center justify-center gap-4 mb-8">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm shadow-lg">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <div className="flex items-center justify-center gap-4 mb-6 sm:mb-8">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm shadow-lg">
+                    <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-3xl md:text-4xl font-bold mb-2">Ready to Transform Your HR?</h3>
-                    <p className="text-lg opacity-90">Join 150+ businesses that trust our virtual HR solutions</p>
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">Ready to Transform Your HR?</h3>
+                    <p className="text-base sm:text-lg opacity-90">Join 150+ businesses that trust our virtual HR solutions</p>
                   </div>
                 </div>
                 
                 {/* Benefits Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
                   {[
                     { icon: "💰", title: "Save 60% Costs", desc: "Compared to in-house HR" },
                     { icon: "⚡", title: "Instant Setup", desc: "Get started in 24 hours" },
                     { icon: "🛡️", title: "100% Compliant", desc: "Stay updated with laws" }
                   ].map((benefit, index) => (
-                    <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/20">
-                      <div className="text-3xl mb-3">{benefit.icon}</div>
-                      <h4 className="text-lg font-bold mb-2">{benefit.title}</h4>
-                      <p className="text-sm opacity-80">{benefit.desc}</p>
+                    <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 text-center border border-white/20">
+                      <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">{benefit.icon}</div>
+                      <h4 className="text-base sm:text-lg font-bold mb-1 sm:mb-2">{benefit.title}</h4>
+                      <p className="text-xs sm:text-sm opacity-80">{benefit.desc}</p>
                     </div>
                   ))}
                 </div>
                 
                 {/* Enhanced CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
                   <button
-                    className="group relative inline-flex items-center px-8 py-4 bg-white text-gray-900 font-bold rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden"
+                    className="group relative inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-white text-gray-900 font-bold rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden"
                     onClick={openConsultationModal}
                   >
                     {/* Button Shine Effect */}
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-gray-100 to-transparent"></div>
                     
                     <span className="relative z-10 flex items-center">
-                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
                       Book Free Consultation
-                      <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </span>
                   </button>
                   
                   <button
-                    className="group relative inline-flex items-center px-8 py-4 border-2 border-white/30 text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm overflow-hidden"
+                    className="group relative inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm overflow-hidden"
                     onClick={() => window.location.href = '/services'}
                   >
                     {/* Button Shine Effect */}
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
                     
                     <span className="relative z-10 flex items-center">
-                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M9 5l7 7-7 7" />
                       </svg>
                       View All Services
-                      <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </span>
@@ -347,22 +347,22 @@ export default function HirableServices({ openConsultationModal }) {
                 </div>
                 
                 {/* Trust Indicators */}
-                <div className="mt-8 pt-8 border-t border-white/20">
-                  <div className="flex flex-wrap justify-center items-center gap-6 text-sm opacity-80">
+                <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/20">
+                  <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-xs sm:text-sm opacity-80">
                     <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 text-green-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M5 13l4 4L19 7" />
                       </svg>
                       <span>No setup fees</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 text-green-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M5 13l4 4L19 7" />
                       </svg>
                       <span>Free consultation</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 text-green-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M5 13l4 4L19 7" />
                       </svg>
                       <span>Cancel anytime</span>

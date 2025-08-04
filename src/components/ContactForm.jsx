@@ -3,128 +3,63 @@
 // Example: https://formspree.io/f/YOUR_FORM_ID
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { addContactToHubSpot } from '../lib/hubspot';
+import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { formSubmission } from '../lib/supabase';
 
-function trackEvent(name, params) {
-  if (window.gtag) {
-    window.gtag('event', name, params);
-  }
-}
-
-export default function ContactForm() {
+const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     company: '',
-    subject: '',
     message: ''
   });
-  const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [crmError, setCrmError] = useState(false);
-
-  // Validation functions
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePhone = (phone) => {
-    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-    return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    } else if (formData.name.trim().length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!validateEmail(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
-
-    if (formData.phone && !validatePhone(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
-    }
-
-    setSubmitting(true);
-    trackEvent('contact_form_submit', { 
-      email: formData.email,
-      subject: formData.subject 
-    });
+    setIsSubmitting(true);
+    setError('');
 
     try {
-      // The form will still POST to Formspree as before
-      e.target.submit();
+      // Submit form to Supabase (which also sends to HubSpot)
+      const result = await formSubmission.submitContactForm(formData);
       
-      // Also send to HubSpot CRM
-      const [firstname, ...rest] = formData.name.split(' ');
-      const lastname = rest.join(' ');
-      const ok = await addContactToHubSpot({ 
-        email: formData.email, 
-        firstname, 
-        lastname,
-        phone: formData.phone,
-        company: formData.company
-      });
-      
-      if (!ok) setCrmError(true);
-      
-      setSubmitted(true);
+      if (result.success) {
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          message: ''
+        });
+        
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 3000);
+      } else {
+        setError(result.error || 'Failed to submit form. Please try again.');
+      }
     } catch (error) {
-      console.error('Form submission error:', error);
-      setErrors({ submit: 'Failed to submit form. Please try again.' });
+      console.error('Contact form submission error:', error);
+      setError('An error occurred. Please try again.');
     } finally {
-      setSubmitting(false);
+      setIsSubmitting(false);
     }
   };
 
-  if (submitted) {
+  if (isSubmitted) {
     return (
       <motion.div 
         className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-2xl p-8 text-center"
@@ -141,24 +76,22 @@ export default function ContactForm() {
         <p className="text-green-700 mb-4">
           Your message has been sent successfully. We'll get back to you within 24 hours.
         </p>
-        {crmError && (
+        {error && (
           <div className="text-orange-600 text-sm bg-orange-50 rounded-lg p-3">
             Note: Your message was received, but there was a minor issue with our CRM system.
           </div>
         )}
         <button
           onClick={() => {
-            setSubmitted(false);
+            setIsSubmitted(false);
             setFormData({
               name: '',
               email: '',
               phone: '',
               company: '',
-              subject: '',
               message: ''
             });
-            setErrors({});
-            setCrmError(false);
+            setError('');
           }}
           className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
         >
@@ -175,8 +108,6 @@ export default function ContactForm() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.5 }}
       transition={{ duration: 0.7 }}
-      action="https://formspree.io/f/myzpjbql" 
-      method="POST"
       onSubmit={handleSubmit}
       noValidate
     >
@@ -193,14 +124,14 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleInputChange}
             className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              errors.name ? 'border-red-300 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
+              error ? 'border-red-300 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
             }`}
             placeholder="Your full name"
             required
-            aria-describedby={errors.name ? 'name-error' : undefined}
+            aria-describedby={error ? 'name-error' : undefined}
           />
-          {errors.name && (
-            <p id="name-error" className="mt-1 text-sm text-red-600">{errors.name}</p>
+          {error && (
+            <p id="name-error" className="mt-1 text-sm text-red-600">{error}</p>
           )}
         </div>
 
@@ -216,14 +147,14 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleInputChange}
             className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              errors.email ? 'border-red-300 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
+              error ? 'border-red-300 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
             }`}
             placeholder="your.email@company.com"
             required
-            aria-describedby={errors.email ? 'email-error' : undefined}
+            aria-describedby={error ? 'email-error' : undefined}
           />
-          {errors.email && (
-            <p id="email-error" className="mt-1 text-sm text-red-600">{errors.email}</p>
+          {error && (
+            <p id="email-error" className="mt-1 text-sm text-red-600">{error}</p>
           )}
         </div>
 
@@ -239,13 +170,13 @@ export default function ContactForm() {
             value={formData.phone}
             onChange={handleInputChange}
             className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              errors.phone ? 'border-red-300 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
+              error ? 'border-red-300 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
             }`}
-            placeholder="+91 98765 43210"
-            aria-describedby={errors.phone ? 'phone-error' : undefined}
+            placeholder="+91 87408 89927"
+            aria-describedby={error ? 'phone-error' : undefined}
           />
-          {errors.phone && (
-            <p id="phone-error" className="mt-1 text-sm text-red-600">{errors.phone}</p>
+          {error && (
+            <p id="phone-error" className="mt-1 text-sm text-red-600">{error}</p>
           )}
         </div>
 
@@ -277,10 +208,10 @@ export default function ContactForm() {
           value={formData.subject}
           onChange={handleInputChange}
           className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-            errors.subject ? 'border-red-300 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
+            error ? 'border-red-300 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
           }`}
           required
-          aria-describedby={errors.subject ? 'subject-error' : undefined}
+          aria-describedby={error ? 'subject-error' : undefined}
         >
           <option value="">Select a subject</option>
           <option value="HR Consultation">HR Consultation</option>
@@ -292,8 +223,8 @@ export default function ContactForm() {
           <option value="General Inquiry">General Inquiry</option>
           <option value="Other">Other</option>
         </select>
-        {errors.subject && (
-          <p id="subject-error" className="mt-1 text-sm text-red-600">{errors.subject}</p>
+        {error && (
+          <p id="subject-error" className="mt-1 text-sm text-red-600">{error}</p>
         )}
       </div>
 
@@ -309,14 +240,14 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleInputChange}
           className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none ${
-            errors.message ? 'border-red-300 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
+            error ? 'border-red-300 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
           }`}
           placeholder="Tell us about your HR needs, challenges, or questions..."
           required
-          aria-describedby={errors.message ? 'message-error' : undefined}
+          aria-describedby={error ? 'message-error' : undefined}
         />
-        {errors.message && (
-          <p id="message-error" className="mt-1 text-sm text-red-600">{errors.message}</p>
+        {error && (
+          <p id="message-error" className="mt-1 text-sm text-red-600">{error}</p>
         )}
         <p className="mt-1 text-sm text-gray-500">
           {formData.message.length}/500 characters
@@ -324,24 +255,24 @@ export default function ContactForm() {
       </div>
 
       {/* Submit Error */}
-      {errors.submit && (
+      {error && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-red-600 text-sm">{errors.submit}</p>
+          <p className="text-red-600 text-sm">{error}</p>
         </div>
       )}
 
       {/* Submit Button */}
       <button
         type="submit"
-        disabled={submitting}
+        disabled={isSubmitting}
         className={`w-full px-8 py-4 rounded-xl font-semibold shadow-lg transition-all duration-300 flex items-center justify-center gap-2 ${
-          submitting 
+          isSubmitting 
             ? 'bg-gray-400 cursor-not-allowed' 
             : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 hover:shadow-xl hover:scale-105 text-white'
         }`}
         aria-describedby="submit-status"
       >
-        {submitting ? (
+        {isSubmitting ? (
           <>
             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             Sending Message...
@@ -357,7 +288,7 @@ export default function ContactForm() {
       </button>
       
       <div id="submit-status" className="sr-only" aria-live="polite">
-        {submitting ? 'Submitting form...' : 'Form ready to submit'}
+        {isSubmitting ? 'Submitting form...' : 'Form ready to submit'}
       </div>
 
       {/* Privacy Notice */}
@@ -368,4 +299,6 @@ export default function ContactForm() {
       </p>
     </motion.form>
   );
-} 
+}
+
+export default ContactForm; 

@@ -23,7 +23,7 @@ const ContactSection = () => (
               </div>
               <div>
                 <div className="font-semibold text-gray-900">Phone</div>
-                <div className="text-gray-600">+91 9876543210</div>
+                <div className="text-gray-600">+91 87408 89927</div>
               </div>
             </div>
             <div className="flex items-center">
@@ -97,7 +97,7 @@ const ContactSection = () => (
                 <input
                   type="tel"
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                  placeholder="+91 9876543210"
+                  placeholder="+91 87408 89927"
                 />
               </div>
               <div>

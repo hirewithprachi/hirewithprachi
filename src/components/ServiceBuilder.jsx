@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { addContactToHubSpot } from '../lib/hubspot';
+import { CheckCircle } from 'lucide-react';
+import { formSubmission } from '../lib/supabase';
 
 const serviceOptions = [
   { name: 'Recruitment', price: 99 },
@@ -14,7 +15,9 @@ const serviceOptions = [
 export default function ServiceBuilder() {
   const [selected, setSelected] = useState([]);
   const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   const total = selected.reduce((sum, s) => sum + s.price, 0);
 
@@ -28,21 +31,52 @@ export default function ServiceBuilder() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    // For demo, POST to Formspree
-    fetch('https://formspree.io/f/mdkdzpqg', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, services: selected.map(s => s.name), total }),
-    });
-    // Also send to HubSpot CRM
-    const [firstname, ...rest] = email.split('@')[0].split('.');
-    const lastname = rest.join(' ');
-    await addContactToHubSpot({ email, firstname, lastname });
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      // Submit form to Supabase (which also sends to HubSpot)
+      const result = await formSubmission.submitForm({
+        email,
+        services: selected.map(s => s.name),
+        total,
+        source: 'Service Builder'
+      }, 'service_builder');
+      
+      if (result.success) {
+        setIsSubmitted(true);
+        setEmail('');
+        setSelected([]);
+        
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 3000);
+      } else {
+        setError(result.error || 'Failed to submit form. Please try again.');
+      }
+    } catch (error) {
+      console.error('Service builder form submission error:', error);
+      setError('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  if (submitted) {
-    return <div className="bg-green-100 text-green-700 rounded-xl p-6 text-center font-semibold">Thank you! We'll send your custom quote soon.</div>;
+  if (isSubmitted) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="bg-green-50 border border-green-200 rounded-xl p-6 text-center"
+      >
+        <CheckCircle className="w-12 h-12 text-green-600 mx-auto mb-4" />
+        <h3 className="text-xl font-bold text-green-800 mb-2">Thank you!</h3>
+        <p className="text-green-700">
+          We'll send your custom quote soon.
+        </p>
+      </motion.div>
+    );
   }
 
   return (
@@ -78,7 +112,7 @@ export default function ServiceBuilder() {
       />
       <button type="submit" className="w-full px-8 py-3 rounded-full bg-indigo-600 text-white font-semibold shadow-lg hover:bg-indigo-700 transition mb-2">Request Custom Quote</button>
       <a
-        href="https://calendly.com/prachi-hr-services"
+                        href="/contact"
         target="_blank"
         rel="noopener noreferrer"
         className="block w-full px-8 py-3 rounded-full bg-white text-indigo-700 font-semibold shadow-lg border border-indigo-600 hover:bg-indigo-50 transition"

@@ -55,7 +55,7 @@ export default function Footer() {
           <h4 className="font-bold mb-3">Contact</h4>
           <ul className="space-y-2 text-sm">
             <li><span className="font-semibold">Email:</span> <a href="mailto:info@hirewithprachi.com" className="hover:text-accent">info@hirewithprachi.com</a></li>
-            <li><span className="font-semibold">Phone:</span> <a href="tel:+1234567890" className="hover:text-accent">+1 234 567 890</a></li>
+            <li><span className="font-semibold">Phone:</span> <a href="tel:+918740889927" className="hover:text-accent">+91 87408 89927</a></li>
             <li><span className="font-semibold">Location:</span> Remote / India</li>
           </ul>
         </div>

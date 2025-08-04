@@ -1,113 +1,92 @@
-# HireWithPrachi - HR & Recruitment Website
+# Prachi Shrivastava Virtual HR Services
 
-A modern, responsive website for HR and recruitment services built with React, Vite, and Tailwind CSS.
+## Project Vision
+Transform the HR services website into a cutting-edge, AI-powered, interactive platform with stunning visual appeal, advanced functionality, and exceptional user experience, fully compatible with Hostinger static hosting.
 
-**🚀 Auto-Deployment Status: Active** - Deploys automatically to Hostinger via GitHub webhook
+## Tech Stack & Hosting Requirements
+- **Framework:** Vite + React (static build)
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion, AOS, GSAP (CDN), Lottie Web
+- **Routing:** React Router (client-side)
+- **Forms:** Formspree, EmailJS, Calendly (embedded)
+- **Auth:** Firebase Auth (client-side, optional)
+- **Data:** Static JSON, Airtable API, Local Storage
+- **Payments:** Stripe Checkout, PayPal Smart Buttons
+- **Analytics:** Google Analytics 4, Facebook Pixel, LinkedIn Insight Tag, Hotjar, Microsoft Clarity
+- **PWA:** Service Worker, manifest.json
+- **Output:** /dist folder for Hostinger upload
 
-## 🚀 Features
+## Site Map & Page Structure
 
-- **Modern Design**: Clean, professional UI with dark/light mode
-- **Responsive**: Mobile-first design that works on all devices
-- **Fast Performance**: Built with Vite for optimal loading speeds
-- **SEO Optimized**: Meta tags, structured data, and performance optimizations
-- **Interactive Components**: Forms, calculators, and dynamic content
-- **Blog System**: Complete blog with categories and search
-- **Contact Integration**: Formspree and HubSpot integration ready
+- `/` (Home)
+  - Hero Section (3D background, dynamic text, avatar, CTAs, trust carousel, video)
+  - Services Overview
+  - About Preview
+  - Portfolio/Case Studies Preview
+  - Lead Capture/Contact Preview
+  - Footer
+- `/about` (About)
+  - Personal Branding (photo, info cards, timeline, skills, badges, testimonials, stats)
+- `/services` (All Services)
+  - Service Cards Grid
+  - Interactive Service Builder
+  - AI Service Matcher (quiz)
+  - Service Comparison Table
+  - Process Visualization
+  - Each service links to detail page
+- `/services/[service]` (Service Detail Pages)
+  - e.g. `/services/recruitment-hiring`, `/services/payroll-compliance`, etc.
+- `/portfolio` (Portfolio & Case Studies)
+  - Project Gallery
+  - Before/After Showcases
+  - Success Metrics
+  - Downloadable Case Studies
+  - Video Testimonials
+- `/resources` (HR Tools & Resources Hub)
+  - Free Tools (calculators, generators)
+  - Resource Library (searchable)
+  - Interactive Templates
+  - HR News Feed
+- `/contact` (Contact & Lead Generation)
+  - Contact Form (Formspree/EmailJS)
+  - Calendly Booking
+  - Embedded Map/Location
+- `/client-portal` (Client Dashboard, optional, static-auth/Firebase)
+  - Project Timeline
+  - Document Repository
+  - Communication Center
+  - Invoice/Payment History
+  - Analytics, Scheduler, File Sharing, Reports, Feedback, Downloads
+- `/blog` (HR Blog, optional)
+  - Articles (from static JSON or Airtable API)
+- `/privacy-policy`, `/terms-of-service` (Legal)
 
-## 🛠️ Tech Stack
+## Key Features (Static-Compatible)
+- Animations, micro-interactions, parallax, 3D effects
+- Static data for services, blog, resources
+- Third-party integrations for forms, chat, analytics, payments
+- PWA support for offline and mobile
+- SEO: sitemap.xml, schema markup, meta tags
+- Security: HTTPS, CSP, cookie consent
 
-- **Frontend**: React 18, Vite
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **Forms**: React Hook Form
-- **Deployment**: GitHub Pages
-
-## 📦 Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/hirewithprachi/hirewithprachi.git
-   cd hirewithprachi
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start development server**
-   ```bash
-   npm run dev
-   ```
-
-4. **Build for production**
-   ```bash
-   npm run build
-   ```
-
-## 🌐 Live Website
-
-Visit: [https://hirewithprachi.github.io/hirewithprachi](https://hirewithprachi.github.io/hirewithprachi)
-
-## 📁 Project Structure
-
-```
-src/
-├── components/          # React components
-│   ├── ui/             # Reusable UI components
-│   ├── sections/       # Page sections
-│   └── hirable/        # Hirable theme components
-├── pages/              # Page components
-├── data/               # Static data and content
-├── lib/                # Utilities and configurations
-└── config/             # App configuration
-```
-
-## 🔧 Configuration
-
-### Environment Variables
-Create a `.env` file in the root directory:
-
-```env
-VITE_FORMSPREE_ID=your_formspree_id
-VITE_HUBSPOT_PORTAL_ID=your_hubspot_portal_id
-VITE_GOOGLE_ANALYTICS_ID=your_ga_id
-```
-
-### Integrations Setup
-See `INTEGRATION_SETUP.md` for detailed setup instructions for:
-- Formspree (Contact forms)
-- HubSpot (CRM integration)
-- Google Analytics
-- Firebase Authentication
-
-## 🚀 Deployment
-
-The website is automatically deployed to GitHub Pages when you push to the main branch.
-
-### Manual Deployment
-1. Build the project: `npm run build`
-2. Deploy the `dist` folder to your hosting provider
-
-## 📝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Commit changes: `git commit -m 'Add feature'`
-4. Push to branch: `git push origin feature-name`
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 🤝 Support
-
-For support and questions, please contact:
-- **Email**: [Your Email]
-- **Website**: [Your Website]
-- **LinkedIn**: [Your LinkedIn]
+## Folder Structure (for /dist or public_html)
+- index.html
+- about.html
+- services.html
+- contact.html
+- portfolio.html
+- resources.html
+- blog.html
+- client-portal.html (optional)
+- services/[service].html
+- assets/
+  - css/
+  - js/
+  - images/
+- .htaccess
+- sitemap.xml
+- manifest.json
 
 ---
 
-Built with ❤️ for HR professionals and recruiters. 
+This README serves as the implementation blueprint. Each page/component will be built to match the design and feature requirements, using static-compatible solutions as outlined above. 

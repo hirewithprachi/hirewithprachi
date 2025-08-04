@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "5 Essential HR Policies Every Startup Needs in 2024",
+    "excerpt": "Discover the critical HR policies that can protect your startup and ensure compliance with Indian labor laws. Learn how virtual HR consulting can help implement these policies effectively.",
+    "content": "Starting a business is exciting, but without proper HR policies, you're setting yourself up for potential legal issues and employee conflicts. In this comprehensive guide, we'll explore the five essential HR policies every startup needs in 2024...",
+    "image": "/Hirable – Human Resources & Recruiting WordPress Theme_files/post-1.jpg",
+    "date": "2024-03-15",
+    "category": "HR Strategy",
+    "readTime": "5 min read",
+    "author": "Prachi Shrivastava",
+    "authorImage": "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-1.jpg",
+    "featured": true,
+    "slug": "essential-hr-policies-startup-2024",
+    "tags": ["HR Policies", "Startup", "Compliance", "Legal"]
+  },
+  {
+    "id": 2,
+    "title": "Virtual HR vs In-House HR: Cost Comparison for SMEs",
+    "excerpt": "Compare the costs of virtual HR services versus hiring a full-time HR manager. See how startups and SMEs can save up to 60% while getting professional HR expertise.",
+    "content": "Many small and medium enterprises struggle with the decision of whether to hire an in-house HR manager or opt for virtual HR services. This detailed cost analysis will help you make an informed decision based on your business size and needs...",
+    "image": "/Hirable – Human Resources & Recruiting WordPress Theme_files/post-2.jpg",
+    "date": "2024-03-12",
+    "category": "Cost Analysis",
+    "readTime": "7 min read",
+    "author": "Prachi Shrivastava",
+    "authorImage": "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-2.jpg",
+    "featured": true,
+    "slug": "virtual-hr-vs-inhouse-cost-comparison",
+    "tags": ["Cost Analysis", "Virtual HR", "SME", "ROI"]
+  },
+  {
+    "id": 3,
+    "title": "Remote Team Management: Best Practices for HR Leaders",
+    "excerpt": "Learn effective strategies for managing remote teams, from virtual onboarding to performance management. Essential insights for modern HR professionals.",
+    "content": "The remote work revolution has transformed how we manage teams. HR leaders need to adapt their strategies to ensure productivity, engagement, and compliance in a virtual environment. Here are the proven best practices...",
+    "image": "/Hirable – Human Resources & Recruiting WordPress Theme_files/post-3.jpg",
+    "date": "2024-03-10",
+    "category": "Remote Work",
+    "readTime": "6 min read",
+    "author": "Prachi Shrivastava",
+    "authorImage": "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-3.jpg",
+    "featured": false,
+    "slug": "remote-team-management-best-practices",
+    "tags": ["Remote Work", "Team Management", "Virtual Teams", "Leadership"]
+  }
+] 

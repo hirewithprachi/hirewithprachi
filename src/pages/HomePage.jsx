@@ -6,7 +6,7 @@ import Services from '../components/Services';
 import Stats from '../components/Stats';
 import Testimonials from '../components/Testimonials';
 import BlogSection from '../components/BlogSection';
-import FAQSection from '../components/FAQSection';
+import FAQSection from '../components/sections/FAQSection';
 import Footer from '../components/Footer';
 import { servicesData } from '../data/servicesData';
 

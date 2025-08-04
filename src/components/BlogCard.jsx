@@ -119,14 +119,28 @@ const BlogCard = ({ post, index = 0, variant = 'default' }) => {
             )}
             <span className="text-sm text-gray-600">{post.author || 'Prachi Shrivastava'}</span>
           </div>
+          
+          {/* Ultra-Futuristic Read More Button */}
           <Link 
             to={`/blog/${post.slug}`} 
-            className="inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold text-sm group-hover:underline"
+            className="group relative inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold text-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden"
           >
-            Read More
-            <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-            </svg>
+            {/* Animated Background Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            {/* Animated Border */}
+            <div className="absolute inset-0 rounded-xl border border-white/20 group-hover:border-white/40 transition-all duration-300"></div>
+            
+            {/* Content */}
+            <span className="relative z-10 flex items-center gap-2">
+              <span>Read More</span>
+              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </span>
+            
+            {/* Holographic Glow Effect */}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400/20 to-blue-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           </Link>
         </div>
 

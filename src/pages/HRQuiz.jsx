@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { addContactToHubSpot } from '../lib/hubspot';
+import { formSubmission } from '../lib/supabase';
 
 const questions = [
   {
@@ -43,9 +43,28 @@ export default function HRQuiz() {
     e.preventDefault();
     setCompleted(true);
     localStorage.setItem('hrQuizResult', JSON.stringify({ email, answers }));
+    
+    // Submit form to Supabase (which also sends to HubSpot)
     if (email) {
-      const ok = await addContactToHubSpot({ email });
-      if (!ok) setCrmError(true);
+      try {
+        const result = await formSubmission.submitCalculatorForm({
+          email: email,
+          calculation_data: {
+            answers: answers,
+            total_questions: questions.length,
+            questions: questions.map(q => q.q)
+          },
+          lead_source: 'HR Quiz',
+          page_source: '/hr-quiz'
+        }, 'hr_quiz');
+        
+        if (!result.success) {
+          setCrmError(true);
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        setCrmError(true);
+      }
     }
   };
 
@@ -113,7 +132,7 @@ export default function HRQuiz() {
               <button onClick={handleDownload} className="inline-block px-8 py-3 rounded-full bg-indigo-100 text-indigo-700 font-semibold shadow-lg hover:bg-indigo-200 transition mb-2">Download Result</button>
               {downloaded && <div className="text-green-600 text-sm mt-2">Result downloaded!</div>}
               <a
-                href="https://calendly.com/prachi-hr-services"
+                href="/contact"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block px-8 py-3 rounded-full bg-indigo-600 text-white font-semibold shadow-lg hover:bg-indigo-700 transition mt-2"

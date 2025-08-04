@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Calculator, Users, Mail, Phone, TrendingUp, DollarSign, PieChart, Download, Share2, Star, CheckCircle, ArrowRight, Building, Award, Shield, Calendar, Clock, FileText } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { Link, useNavigate } from 'react-router-dom';
+import { Calculator, Users, Mail, Phone, TrendingUp, DollarSign, PieChart, Download, Share2, Star, CheckCircle, ArrowRight, Building, Award, Shield, Calendar, Clock, FileText, ArrowLeft, User } from 'lucide-react';
+import { formSubmission } from '../lib/supabase';
+import { downloadCalculatorPDF, shareCalculatorResult } from '../lib/html2pdfGenerator';
+import ShareResultModal from './ShareResultModal';
 
 const EmployeeSalaryCalculator = () => {
+  const navigate = useNavigate();
   const [employeeData, setEmployeeData] = useState({
     name: '',
     employeeId: '',
@@ -37,6 +43,9 @@ const EmployeeSalaryCalculator = () => {
     company: '',
     employees: ''
   });
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [crmError, setCrmError] = useState(false);
+  const [shared, setShared] = useState(false);
 
   // Calculate salary components
   const grossSalary = parseFloat(employeeData.basicSalary || 0) + 
@@ -103,12 +112,33 @@ const EmployeeSalaryCalculator = () => {
     }, 1500);
   };
 
-  const handleLeadSubmit = (e) => {
+  const handleLeadSubmit = async (e) => {
     e.preventDefault();
-    console.log('Lead data:', leadData);
     setShowLeadForm(false);
-    setCalculationCount(0);
-    alert('Thank you! Your calculation limit has been extended. We\'ll contact you soon!');
+    
+    try {
+      // Submit form to Supabase (which also sends to HubSpot)
+      const submitResult = await formSubmission.submitCalculatorForm({
+        name: leadData.name,
+        email: leadData.email,
+        phone: leadData.phone,
+        company: leadData.company,
+        calculator_result: result,
+        source: 'Employee Salary Calculator'
+      }, 'employee_salary_calculator');
+      
+      if (submitResult.success) {
+        // Trigger download after successful submission
+        downloadReport();
+        setCalculationCount(0);
+        alert('✅ Data saved successfully! Your salary report has been downloaded.');
+      } else {
+        alert('Failed to submit form. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error saving data:', error);
+      alert(`Error saving data: ${error.message}. Please try again.`);
+    }
   };
 
   const formatCurrency = (amount) => {
@@ -120,10 +150,15 @@ const EmployeeSalaryCalculator = () => {
     }).format(amount);
   };
 
-  const downloadReport = () => {
+  const downloadReport = async () => {
     if (!result) return;
     
-    const report = `
+    try {
+      const filename = await downloadCalculatorPDF('employee', result, leadData);
+    } catch (error) {
+      console.error('PDF generation failed:', error);
+      // Fallback to old TXT method
+      const report = `
 Employee Salary Report
 =====================
 
@@ -167,13 +202,18 @@ Deduction Breakdown:
 Generated on: ${new Date().toLocaleDateString()}
     `;
 
-    const blob = new Blob([report], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `salary-report-${result.employeeData.name || 'employee'}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
+      const blob = new Blob([report], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `salary-report-${result.employeeData.name || 'employee'}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  };
+
+  const handleShare = () => {
+    setShowShareModal(true);
   };
 
   useEffect(() => {
@@ -221,6 +261,44 @@ Generated on: ${new Date().toLocaleDateString()}
           </div>
         </div>
       </header>
+
+      {/* Navigation Bar */}
+      <nav className="bg-white shadow-sm border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Link 
+                to="/"
+                className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span>Back to Home</span>
+              </Link>
+              <span className="text-gray-300">|</span>
+              <Link 
+                to="/resources"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Resources
+              </Link>
+              <Link 
+                to="/services"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Services
+              </Link>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link 
+                to="/contact"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Contact
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
 
       {/* Hero Section */}
       <section className="py-12 px-4 text-center">
@@ -651,16 +729,17 @@ Generated on: ${new Date().toLocaleDateString()}
                         <span>Download Report</span>
                       </button>
                       <button
-                        onClick={() => navigator.share && navigator.share({
-                          title: 'Employee Salary Report',
-                          text: `Salary for ${result.employeeData.name}: ${formatCurrency(result.proRatedNetSalary)}`,
-                          url: window.location.href
-                        })}
+                        onClick={handleShare}
                         className="w-full bg-gray-600 text-white py-3 px-4 rounded-lg hover:bg-gray-700 transition-all font-medium flex items-center justify-center space-x-2"
                       >
                         <Share2 className="h-4 w-4" />
                         <span>Share Results</span>
                       </button>
+                      {shared && (
+                        <div className="text-green-600 text-sm text-center">
+                          ✓ Results shared successfully!
+                        </div>
+                      )}
                     </div>
                   </>
                 ) : (
@@ -816,6 +895,170 @@ Generated on: ${new Date().toLocaleDateString()}
         </div>
       )}
 
+      {/* Call-to-Action Section */}
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Need Expert HR Guidance?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Get personalized HR solutions and expert consultation to optimize your payroll processes and employee management.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-white rounded-2xl p-8 shadow-xl border border-gray-200 text-center"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Phone className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Talk to an Expert</h3>
+              <p className="text-gray-600 mb-6">
+                Schedule a free consultation with our HR experts to discuss your specific needs and get tailored solutions.
+              </p>
+              <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300">
+                Schedule Consultation
+              </button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-white rounded-2xl p-8 shadow-xl border border-gray-200 text-center"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Download className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Download Report</h3>
+              <p className="text-gray-600 mb-6">
+                Get a comprehensive salary analysis report with industry benchmarks and recommendations.
+              </p>
+              <button 
+                onClick={downloadReport}
+                className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-green-700 hover:to-emerald-700 transition-all duration-300"
+              >
+                Download Report
+              </button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white rounded-2xl p-8 shadow-xl border border-gray-200 text-center"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Mail className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Get Free Quote</h3>
+              <p className="text-gray-600 mb-6">
+                Request a customized quote for HR services tailored to your organization's needs.
+              </p>
+              <Link
+                to="/contact"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 inline-block"
+              >
+                Get Free Quote
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Services Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Featured HR Services
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Comprehensive HR solutions designed to streamline your operations and drive business success.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="group bg-white rounded-2xl p-8 shadow-xl border border-gray-200 hover:shadow-2xl transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Calculator className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Payroll Management</h3>
+              <p className="text-gray-600 mb-6">
+                End-to-end payroll processing with tax compliance, statutory deductions, and automated calculations.
+              </p>
+              <Link
+                to="/services"
+                className="flex items-center text-blue-600 font-semibold group-hover:gap-2 transition-all duration-300 cursor-pointer"
+              >
+                <span>Learn More</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="group bg-white rounded-2xl p-8 shadow-xl border border-gray-200 hover:shadow-2xl transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Users className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">HR Consulting</h3>
+              <p className="text-gray-600 mb-6">
+                Strategic HR consulting to optimize your workforce, improve productivity, and ensure compliance.
+              </p>
+              <Link
+                to="/services"
+                className="flex items-center text-green-600 font-semibold group-hover:gap-2 transition-all duration-300 cursor-pointer"
+              >
+                <span>Learn More</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="group bg-white rounded-2xl p-8 shadow-xl border border-gray-200 hover:shadow-2xl transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Shield className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Compliance Management</h3>
+              <p className="text-gray-600 mb-6">
+                Stay compliant with labor laws, statutory requirements, and industry regulations with expert guidance.
+              </p>
+              <Link
+                to="/services"
+                className="flex items-center text-purple-600 font-semibold group-hover:gap-2 transition-all duration-300 cursor-pointer"
+              >
+                <span>Learn More</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -856,7 +1099,7 @@ Generated on: ${new Date().toLocaleDateString()}
                 </div>
                 <div className="flex items-center space-x-2">
                   <Phone className="h-4 w-4" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 87408 89927</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Building className="h-4 w-4" />
@@ -880,6 +1123,15 @@ Generated on: ${new Date().toLocaleDateString()}
           </div>
         </div>
       </footer>
+
+      {/* Share Result Modal */}
+      <ShareResultModal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        calculatorType="employee"
+        result={result}
+        userData={leadData}
+      />
     </div>
   );
 };

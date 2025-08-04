@@ -1,26 +1,49 @@
-export async function addContactToHubSpot({ email, firstname, lastname }) {
-  // Updated with real HubSpot API key and portal ID
+// HubSpot Analytics Tracking Only - No Lead/Contact Saving
+// All data is saved to Supabase, HubSpot is only used for analytics
+
+export async function trackAnalyticsEvent(eventName, properties = {}) {
+  // Check if HubSpot is configured
   const apiKey = 'na2-2756-5f24-45c9-8d7b-d08e8ad93839';
   const portalId = '243445611';
-  const url = `https://api.hubapi.com/contacts/v1/contact?hapikey=${apiKey}`;
+  
+  // If no API key, skip HubSpot analytics
+  if (!apiKey || apiKey === 'YOUR_HUBSPOT_API_KEY') {
+    console.log('HubSpot not configured, skipping analytics tracking');
+    return { success: false, reason: 'not_configured' };
+  }
+  
+  // HubSpot Analytics API endpoint
+  const url = `https://api.hubapi.com/analytics/v1/events?hapikey=${apiKey}`;
+  
   const data = {
-    properties: [
-      { property: 'email', value: email },
-      { property: 'firstname', value: firstname || '' },
-      { property: 'lastname', value: lastname || '' },
-    ],
+    eventName: eventName,
+    properties: properties,
+    timestamp: Date.now()
   };
+  
   try {
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error('HubSpot API error');
-    return true;
+    
+    if (!res.ok) {
+      console.error('HubSpot analytics API error:', res.status, res.statusText);
+      return { success: false, reason: 'api_error', status: res.status };
+    }
+    
+    console.log('HubSpot analytics event tracked successfully:', eventName);
+    return { success: true };
+    
   } catch (err) {
-    // For demo, just log error
-    console.error('HubSpot error:', err);
-    return false;
+    console.error('HubSpot analytics network error:', err);
+    return { success: false, reason: 'network_error', error: err.message };
   }
+}
+
+// Legacy function - kept for backward compatibility but not used
+export async function addContactToHubSpot({ email, name, phone, company, designation, service, source }) {
+  console.log('HubSpot contact saving disabled - all data saved to Supabase only');
+  return { success: false, reason: 'disabled' };
 } 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail, Phone, MapPin, Send } from 'lucide-react';
+import { formSubmission } from '../../lib/supabase';
 
 export default function CallToActionSection() {
   const [formData, setFormData] = useState({
@@ -17,11 +18,36 @@ export default function CallToActionSection() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+    
+    try {
+      // Submit form to Supabase (which also sends to HubSpot)
+      const result = await formSubmission.submitContactForm({
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        message: formData.message,
+        lead_source: 'Call to Action Section'
+      });
+      
+      if (result.success) {
+        alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          message: ''
+        });
+      } else {
+        console.error('Form submission failed:', result.error);
+        alert('Failed to submit form. Please try again.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   return (
@@ -183,7 +209,7 @@ export default function CallToActionSection() {
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-gray-600">
                   <Phone className="h-5 w-5 text-blue-500" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+91-87408-89927</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
                   <Mail className="h-5 w-5 text-blue-500" />

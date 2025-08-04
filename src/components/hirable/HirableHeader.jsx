@@ -18,6 +18,19 @@ export default function HirableHeader({ openConsultationModal }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const location = useLocation();
 
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = !isMobileMenuOpen ? 'hidden' : 'auto';
+  };
+
+  // Clean up body scroll on unmount
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -183,7 +196,10 @@ export default function HirableHeader({ openConsultationModal }) {
         {/* Enhanced Mobile Hamburger */}
         <button 
           className="xl:hidden relative w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl md:rounded-2xl flex items-center justify-center shadow-xl md:shadow-2xl hover:shadow-primary-500/25 transition-all duration-500 group"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          onClick={handleMobileMenuToggle}
+          aria-label="Toggle mobile menu"
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-menu"
         >
           {/* Glow Effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl md:rounded-2xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
@@ -197,9 +213,14 @@ export default function HirableHeader({ openConsultationModal }) {
       </nav>
 
       {/* Enhanced Mobile Menu */}
-      <div className={`xl:hidden transition-all duration-700 overflow-hidden ${
-        isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-      }`}>
+      <div 
+        id="mobile-menu"
+        className={`xl:hidden transition-all duration-700 overflow-hidden ${
+          isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+        }`}
+        role="navigation"
+        aria-label="Mobile navigation menu"
+      >
         <div className="bg-white/95 backdrop-blur-2xl border-t border-neutral-200 shadow-2xl px-4 py-6 md:py-8">
           <ul className="flex flex-col gap-2 md:gap-3">
             {navLinks.map((link, idx) => (

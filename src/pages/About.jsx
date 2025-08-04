@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import { Star } from 'lucide-react';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
 import AIChatbotWidget from '../components/AIChatbotWidget';
 import Breadcrumbs from '../components/Breadcrumbs';
 import HireWithPrachiTestimonials from '../components/hirable/HirableTestimonials';
-import HireWithPrachiFAQ from '../components/hirable/HirableFAQ';
+import FAQSection from '../components/sections/FAQSection';
+import { aboutPageFaqs } from '../data/faqData';
+
 import ConsultationModal from '../components/LeadCapturePreview';
+import OptimizedImage from '../components/OptimizedImage';
 
 const galleryImages = [
   {
@@ -65,6 +69,7 @@ const personSchema = {
     "https://instagram.com/prachi_hr"
   ]
 };
+
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -72,6 +77,7 @@ const orgSchema = {
   "url": "https://hirewithprachi.com",
   "logo": "/Hirable – Human Resources & Recruiting WordPress Theme_files/logo.svg"
 };
+
 const imageGallerySchema = {
   "@context": "https://schema.org",
   "@type": "ImageGallery",
@@ -86,12 +92,40 @@ const imageGallerySchema = {
 
 export default function AboutPage() {
   const [showConsultation, setShowConsultation] = useState(false);
+  const [showAllCertifications, setShowAllCertifications] = useState(false);
   
+  const socialLinks = [
+    {
+      name: "LinkedIn",
+      url: "http://linkedin.com/company/hirewithprachi/",
+      icon: "linkedin",
+      color: "from-blue-600 to-blue-700"
+    },
+    {
+      name: "Instagram", 
+      url: "https://www.instagram.com/hirewithprachi/",
+      icon: "instagram",
+      color: "from-pink-500 to-purple-600"
+    },
+    {
+      name: "Facebook",
+      url: "https://www.facebook.com/hirewithprachi/", 
+      icon: "facebook",
+      color: "from-blue-600 to-blue-800"
+    },
+    {
+      name: "YouTube",
+      url: "https://www.youtube.com/@hirewithprachi",
+      icon: "youtube", 
+      color: "from-red-500 to-red-600"
+    }
+  ];
+
   return (
     <>
       <Helmet>
         <title>About Prachi Shrivastava – Virtual HR Consultant & Expert</title>
-        <meta name="description" content="Meet Prachi Shrivastava, India's leading virtual HR consultant. Explore her services and event gallery. Book a free consultation today!" />
+        <meta name="description" content="Meet Prachi Shrivastava, India's leading virtual HR consultant and POSH expert. Expert HR services for startups and SMEs across India. Book a free consultation today!" />
         <meta name="keywords" content="Prachi Shrivastava, virtual HR consultant, HR expert, HR services India, HR events, HR seminars, HR gallery, HR consulting, HR compliance" />
         <meta property="og:title" content="About Prachi Shrivastava – Virtual HR Consultant & Expert" />
         <meta property="og:description" content="Meet Prachi Shrivastava, India's leading virtual HR consultant. Explore her services and event gallery. Book a free consultation today!" />
@@ -110,6 +144,8 @@ export default function AboutPage() {
       <main className="min-h-screen bg-white" role="main" style={{ margin: 0, padding: 0 }}>
         <HireWithPrachiTopBar />
         <HireWithPrachiHeader />
+        
+
         
         {/* Hero section with responsive background video */}
         <section className="relative w-full overflow-hidden hero-section-responsive" style={{ margin: 0, padding: 0 }}>
@@ -146,8 +182,20 @@ export default function AboutPage() {
             }}
           />
           
-          {/* Subtle gradient overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+          {/* Content overlay */}
+          <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl py-20 md:py-32">
+            {/* Breadcrumbs integrated into hero */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-8"
+            >
+              <Breadcrumbs variant="dark" />
+            </motion.div>
+            
+
+          </div>
         </section>
 
         {/* About Prachi Section - Modern & Trendy Design */}
@@ -189,8 +237,8 @@ export default function AboutPage() {
                   <div className="text-center">
                     <div className="text-2xl md:text-4xl font-bold text-blue-600 mb-1 md:mb-2">8+</div>
                     <div className="text-xs md:text-sm text-gray-600 font-medium">Years Experience</div>
-              </div>
-            </motion.div>
+                  </div>
+                </motion.div>
 
                 {/* Floating achievement badge */}
                 <motion.div 
@@ -200,7 +248,7 @@ export default function AboutPage() {
                   className="absolute -top-4 md:-top-6 -left-4 md:-left-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full px-3 md:px-6 py-2 md:py-3 shadow-xl"
                 >
                   <div className="text-xs md:text-sm font-semibold">🏆 Top HR Consultant</div>
-            </motion.div>
+                </motion.div>
               </motion.div>
 
               {/* Content Section with Modern Design */}
@@ -276,44 +324,66 @@ export default function AboutPage() {
                     </blockquote>
                     <div className="text-3xl md:text-5xl text-purple-500 opacity-60 text-right">"</div>
                     <div className="absolute bottom-0 right-0 w-full h-1 bg-gradient-to-r from-purple-500 to-blue-500"></div>
-                </div>
+                  </div>
                 </motion.div>
 
                 {/* Social links with modern buttons */}
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
-                  className="flex flex-wrap gap-3 md:gap-6"
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="flex flex-wrap gap-3 md:gap-4"
                 >
                   <a 
-                    href="https://www.linkedin.com/in/prachi-shrivastava-hr" 
+                    href="http://linkedin.com/company/hirewithprachi/" 
                     target="_blank" 
                     rel="noopener" 
-                    className="flex items-center gap-2 md:gap-3 bg-blue-600 text-white px-4 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm md:text-base"
+                    className="flex items-center gap-2 bg-blue-600 text-white px-4 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm"
                   >
-                    <svg className="w-4 md:w-6 h-4 md:h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                     </svg>
                     LinkedIn
                   </a>
                   <a 
-                    href="https://instagram.com/prachi_hr" 
+                    href="https://www.facebook.com/hirewithprachi/" 
                     target="_blank" 
                     rel="noopener" 
-                    className="flex items-center gap-2 md:gap-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:from-pink-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm md:text-base"
+                    className="flex items-center gap-2 bg-blue-600 text-white px-4 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm"
                   >
-                    <svg className="w-4 md:w-6 h-4 md:h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.244c-.875.807-2.026 1.297-3.323 1.297zm7.718-1.297c-.875.807-2.026 1.297-3.323 1.297s-2.448-.49-3.323-1.297c-.928-.875-1.418-2.026-1.418-3.244s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.244z"/>
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                  </a>
+                  <a 
+                    href="https://www.instagram.com/hirewithprachi/" 
+                    target="_blank" 
+                    rel="noopener" 
+                    className="flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 py-3 rounded-full font-semibold hover:from-pink-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.244c-.875.807-2.026 1.297-3.323 1.297zm7.83-9.781c-.49 0-.928-.175-1.297-.49-.368-.315-.49-.753-.49-1.243 0-.49.122-.928.49-1.243.369-.315.807-.49 1.297-.49s.928.175 1.297.49c.368.315.49.753.49 1.243 0 .49-.122.928-.49 1.243-.369.315-.807.49-1.297.49z"/>
                     </svg>
                     Instagram
                   </a>
-
+                  <a 
+                    href="https://www.youtube.com/@hirewithprachi" 
+                    target="_blank" 
+                    rel="noopener" 
+                    className="flex items-center gap-2 bg-red-600 text-white px-4 py-3 rounded-full font-semibold hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    YouTube
+                  </a>
                 </motion.div>
               </motion.div>
             </div>
           </div>
         </section>
+
         {/* Services Offered */}
         <section id="services-section" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
           <div className="container mx-auto px-4">
@@ -332,6 +402,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
         {/* Glimpses from Events & Seminars Section - Classy Design */}
         <section className="relative py-20 md:py-32 bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 overflow-hidden">
           {/* Background decorative elements */}
@@ -425,25 +496,24 @@ export default function AboutPage() {
                 </motion.div>
               ))}
             </div>
-
-            {/* CTA Section */}
-
           </div>
         </section>
+
         {/* Tools & Tech You Use Section (after Gallery) */}
         <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-purple-50">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Tools & Tech You Use</h2>
             <div className="flex flex-wrap justify-center gap-8">
-              <img src="/images/unnamed.png" alt="Zoho HR" className="h-12 w-auto object-contain" />
-              <img src="/images/BambooHR-Logo.jpg" alt="BambooHR" className="h-12 w-auto object-contain" />
-              <img src="/images/HiView-Solutions-Google-Workspace-Reseller.-Super-G-Icon.png" alt="Google Workspace" className="h-12 w-auto object-contain" />
-              <img src="/images/microsoft-365-copilot-logo-png_seeklogo-501781.png" alt="Microsoft 365" className="h-12 w-auto object-contain" />
-              <img src="/images/nforceit-partner-google-workspace-logo-800x400.png" alt="Google Workspace Alt" className="h-12 w-auto object-contain" />
-              <img src="/images/People-Logo-1024x1024.webp" alt="People HR" className="h-12 w-auto object-contain" />
+              <OptimizedImage src="/images/unnamed.png" alt="Zoho HR" className="h-12 w-auto object-contain" />
+              <OptimizedImage src="/images/BambooHR-Logo.jpg" alt="BambooHR" className="h-12 w-auto object-contain" />
+              <OptimizedImage src="/images/HiView-Solutions-Google-Workspace-Reseller.-Super-G-Icon.png" alt="Google Workspace" className="h-12 w-auto object-contain" />
+              <OptimizedImage src="/images/microsoft-365-copilot-logo-png_seeklogo-501781.png" alt="Microsoft 365" className="h-12 w-auto object-contain" />
+              <OptimizedImage src="/images/nforceit-partner-google-workspace-logo-800x400.png" alt="Google Workspace Alt" className="h-12 w-auto object-contain" />
+              <OptimizedImage src="/images/People-Logo-1024x1024.webp" alt="People HR" className="h-12 w-auto object-contain" />
             </div>
           </div>
         </section>
+
         {/* Achievements Section - Elegant Design */}
         <section className="relative py-20 md:py-32 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden">
           {/* Background decorative elements */}
@@ -469,9 +539,9 @@ export default function AboutPage() {
               </p>
             </motion.div>
 
-            {/* Achievements Grid - 4 in a row horizontal scroll */}
+            {/* Achievements Grid - Fixed layout to prevent overlapping */}
             <div className="mb-16 md:mb-20">
-              <div className="flex gap-4 md:gap-6 overflow-x-auto pb-4 md:pb-6 scrollbar-hide">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 {[
                   {
                     icon: "🏆",
@@ -500,10 +570,10 @@ export default function AboutPage() {
                 ].map((achievement, idx) => (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, x: 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: idx * 0.1 }}
-                    className="flex-shrink-0 w-72 md:w-80 bg-white/80 backdrop-blur-md rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-xl md:shadow-2xl border border-white/30 hover:shadow-2xl hover:scale-105 transition-all duration-500 group"
+                    className="bg-white/80 backdrop-blur-md rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-xl md:shadow-2xl border border-white/30 hover:shadow-2xl hover:scale-105 transition-all duration-500 group"
                   >
                     <div className="text-center space-y-4 md:space-y-6">
                       <div className="text-4xl md:text-6xl mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -546,7 +616,7 @@ export default function AboutPage() {
                 >
                   <div className="text-2xl md:text-4xl font-bold text-blue-600 mb-2 md:mb-3">
                     {stat.number}
-                    </div>
+                  </div>
                   <div className="text-sm md:text-base text-gray-600 font-medium">
                     {stat.label}
                   </div>
@@ -577,188 +647,155 @@ export default function AboutPage() {
                   </svg>
                   Book Free Consultation
                 </button>
-            </div>
+              </div>
             </motion.div>
           </div>
         </section>
-        {/* Testimonials (imported) */}
-        <HireWithPrachiTestimonials />
-        {/* FAQ (imported) */}
-        <HireWithPrachiFAQ />
-        {/* Why Work With Me Section - Elegant Design */}
-        <section className="relative py-20 md:py-32 bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 overflow-hidden">
-          {/* Background decorative elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-48 md:w-72 h-48 md:h-72 bg-blue-500/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
-            <div className="absolute top-40 right-10 w-48 md:w-72 h-48 md:h-72 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-8 left-20 w-48 md:w-72 h-48 md:h-72 bg-indigo-500/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
-          </div>
 
-          <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl">
-            {/* Section Header */}
+        {/* Certifications & Recognitions */}
+        <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+          <div className="container mx-auto px-4">
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-16 md:mb-20"
+              initial={{ opacity: 0, y: 30 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.8 }} 
+              className="text-center mb-16"
             >
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
-                Why Work With Me?
-              </h2>
-              <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Discover what makes Prachi the preferred choice for HR transformation across India's leading companies.
-              </p>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">🏆 Certifications & Recognitions</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">Professional credentials and industry recognition that demonstrate expertise in HR and Human Rights</p>
             </motion.div>
-
-            {/* Benefits Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-20">
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  icon: "🎯",
-                  title: "Proven Expertise",
-                  description: "8+ years of hands-on experience with 500+ successful HR transformations across diverse industries"
+                  title: "SHRM – HR Generalist Certificate",
+                  organization: "Society for Human Resource Management",
+                  logo: "/assets/images/shrm-logo.webp",
+                  category: "HR Certification"
                 },
                 {
-                  icon: "⚡",
-                  title: "Fast Implementation",
-                  description: "Quick turnaround times with scalable solutions that adapt to your business needs"
+                  title: "HRCI - HR Generalist Certificate", 
+                  organization: "HR Certification Institute",
+                  logo: "/assets/images/hrci.jpg",
+                  category: "HR Certification"
                 },
                 {
-                  icon: "💰",
-                  title: "Cost-Effective",
-                  description: "Save up to 40% on HR costs while improving efficiency and compliance"
+                  title: "ISTD - Prevention of Sexual Harassment of Women at Workplace (POSH)",
+                  organization: "Indian Society for Training & Development",
+                  logo: "/assets/images/istd-lOGO.jpg",
+                  category: "Compliance"
                 },
                 {
-                  icon: "🤝",
-                  title: "Personal Touch",
-                  description: "Direct access to Prachi throughout the project with personalized attention to your needs"
+                  title: "ISTD - Young Trainer Programme",
+                  organization: "Indian Society for Training & Development", 
+                  logo: "/assets/images/istd-lOGO.jpg",
+                  category: "Training"
                 },
                 {
-                  icon: "📊",
-                  title: "Data-Driven",
-                  description: "Analytics-based approach ensuring measurable results and continuous improvement"
+                  title: "IIHR Delhi - Human rights Diploma in Women and Child Rights",
+                  organization: "Indian Institute of Human Rights",
+                  logo: "/assets/images/IIHR.png",
+                  category: "Human Rights"
                 },
                 {
-                  icon: "🛡️",
-                  title: "Compliance First",
-                  description: "100% compliance guarantee with latest labor laws and industry best practices"
+                  title: "Great Learning – Diversity Management Certificate",
+                  organization: "Great Learning",
+                  logo: "/assets/images/Great-Learning.jpg",
+                  category: "Diversity & Inclusion"
+                },
+                {
+                  title: "Naukri - Naukri Maestro Recruiter Certificate",
+                  organization: "Naukri.com",
+                  logo: "/assets/images/naukri_logo.png",
+                  category: "Recruitment"
+                },
+                {
+                  title: "LinkedIn – Cyber Security Talent Pipeline",
+                  organization: "LinkedIn Learning",
+                  logo: "/assets/images/Linkedin-Logo.png",
+                  category: "Technology"
+                },
+                {
+                  title: "LinkedIn – Compensation and Benefits",
+                  organization: "LinkedIn Learning",
+                  logo: "/assets/images/Linkedin-Logo.png", 
+                  category: "Compensation"
+                },
+                {
+                  title: "LinkedIn – Generative AI in HR",
+                  organization: "LinkedIn Learning",
+                  logo: "/assets/images/Linkedin-Logo.png",
+                  category: "AI & Technology"
+                },
+                {
+                  title: "LinkedIn – Creating an Employee Handbook",
+                  organization: "LinkedIn Learning",
+                  logo: "/assets/images/Linkedin-Logo.png",
+                  category: "Policy Development"
+                },
+                {
+                  title: "LinkedIn – HR Strategic Business Partner",
+                  organization: "LinkedIn Learning",
+                  logo: "/assets/images/Linkedin-Logo.png",
+                  category: "Strategic HR"
+                },
+                {
+                  title: "Hirist Tech – Employee Branding Certificate",
+                  organization: "Hirist Tech",
+                  logo: "/assets/images/hirist.tech.jpg",
+                  category: "Employer Branding"
+                },
+                {
+                  title: "KEKA – HR Katalyst 3.0 Certificate",
+                  organization: "KEKA",
+                  logo: "/assets/images/KEKA.png",
+                  category: "HR Technology"
                 }
-              ].map((benefit, idx) => (
+              ].slice(0, showAllCertifications ? undefined : 3).map((cert, index) => (
                 <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className="group bg-white/10 backdrop-blur-md rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/20 hover:bg-white/20 transition-all duration-500"
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
                 >
-                  <div className="space-y-4 md:space-y-6">
-                    <div className="text-4xl md:text-6xl mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                      {benefit.icon}
+                  <div className="flex items-center gap-4 mb-4">
+                    <img src={cert.logo} alt={cert.organization} className="w-12 h-12 object-contain" />
+                    <div>
+                      <h3 className="font-semibold text-gray-900 text-sm">{cert.title}</h3>
+                      <p className="text-gray-600 text-xs">{cert.organization}</p>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-blue-300 transition-colors duration-300">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed">
-                      {benefit.description}
-                    </p>
                   </div>
+                  <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">{cert.category}</span>
                 </motion.div>
               ))}
             </div>
-
-            {/* Comparison Section */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mb-16 md:mb-20"
-            >
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl md:rounded-3xl p-8 md:p-12 border border-white/20">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 md:mb-12 text-center">
-                  Traditional HR vs. Prachi's Approach
-                </h3>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-                  {/* Traditional HR */}
-                  <div className="space-y-6">
-                    <h4 className="text-xl md:text-2xl font-bold text-red-400 mb-6">Traditional HR</h4>
-                    <div className="space-y-4">
-                      {[
-                        "❌ Expensive in-house teams",
-                        "❌ Slow implementation (6-12 months)",
-                        "❌ Generic one-size-fits-all solutions",
-                        "❌ Limited expertise in modern HR tech",
-                        "❌ High turnover and training costs",
-                        "❌ Reactive approach to compliance"
-                      ].map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-3">
-                          <span className="text-red-400 text-lg md:text-xl mt-1">❌</span>
-                          <span className="text-gray-300 leading-relaxed">{item.replace("❌ ", "")}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Prachi's Approach */}
-                  <div className="space-y-6">
-                    <h4 className="text-xl md:text-2xl font-bold text-green-400 mb-6">Prachi's Approach</h4>
-                    <div className="space-y-4">
-                      {[
-                        "✅ Cost-effective virtual solutions",
-                        "✅ Fast implementation (2-4 weeks)",
-                        "✅ Customized for your business needs",
-                        "✅ Latest HR technology integration",
-                        "✅ No training or turnover costs",
-                        "✅ Proactive compliance management"
-                      ].map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-3">
-                          <span className="text-green-400 text-lg md:text-xl mt-1">✅</span>
-                          <span className="text-gray-300 leading-relaxed">{item.replace("✅ ", "")}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* CTA Section */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-center"
-            >
-              <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-md rounded-2xl md:rounded-3xl p-8 md:p-12 border border-blue-200/30">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 md:mb-6">
-                  Ready to experience the difference?
-                </h3>
-                <p className="text-lg md:text-xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto">
-                  Join hundreds of companies who have transformed their HR with Prachi's innovative approach.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
-                  <button 
-                    onClick={() => setShowConsultation(true)}
-                    className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-base md:text-lg"
-                  >
-                    <svg className="w-5 md:w-6 h-5 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
-                    Book Free Consultation
-                  </button>
-                  <a 
-                    href="/contact" 
-                    className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-md text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-semibold hover:bg-white/30 transition-all duration-300 border border-white/30 hover:border-white/50 shadow-lg hover:shadow-xl transform hover:scale-105 text-base md:text-lg"
-                  >
-                    <svg className="w-5 md:w-6 h-5 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    Get in Touch
-                  </a>
-                </div>
-              </div>
-            </motion.div>
+            
+            {/* View More Recognitions Button */}
+            <div className="text-center mt-12">
+              <button 
+                onClick={() => setShowAllCertifications(!showAllCertifications)}
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                <span>{showAllCertifications ? 'Show Less' : 'View More Recognitions'}</span>
+                <svg className={`w-5 h-5 transition-transform duration-300 ${showAllCertifications ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </button>
+            </div>
           </div>
         </section>
+
+        {/* Testimonials (imported) */}
+        <HireWithPrachiTestimonials />
+
+        {/* FAQ Section - About Page Specific */}
+        <FAQSection 
+          customFaqs={aboutPageFaqs}
+          title="About Prachi - Frequently Asked Questions"
+          subtitle="Learn more about my background, experience, and approach to HR consulting"
+        />
+
         {/* Book a Free Consultation - Modern Glassy Pill CTA */}
         <section className="py-12 sm:py-20 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center">
           <motion.div

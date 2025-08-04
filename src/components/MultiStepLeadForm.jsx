@@ -3,7 +3,8 @@
 // Example: https://formspree.io/f/YOUR_FORM_ID
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { addContactToHubSpot } from '../lib/hubspot';
+import { User, Mail, Phone, Building, CheckCircle, ArrowRight, ArrowLeft } from 'lucide-react';
+import { formSubmission } from '../lib/supabase';
 
 const steps = [
   'Contact Info',
@@ -22,8 +23,9 @@ export default function MultiStepLeadForm() {
     services: [],
     other: '',
   });
-  const [submitted, setSubmitted] = useState(false);
-  const [crmError, setCrmError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   const serviceOptions = [
     'Recruitment',
@@ -59,22 +61,53 @@ export default function MultiStepLeadForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setSubmitted(true);
-    // For demo, POST to Formspree
-    fetch('https://formspree.io/f/mwpqbwge', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    });
-    // Also send to HubSpot CRM
-    const [firstname, ...rest] = form.name.split(' ');
-    const lastname = rest.join(' ');
-    const ok = await addContactToHubSpot({ email: form.email, firstname, lastname });
-    if (!ok) setCrmError(true);
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      // Submit form to Supabase (which also sends to HubSpot)
+      const result = await formSubmission.submitForm(form, 'multi_step_lead');
+      
+      if (result.success) {
+        setIsSubmitted(true);
+        setForm({
+          name: '',
+          email: '',
+          size: '',
+          services: [],
+          other: '',
+        });
+        
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setStep(0);
+        }, 5000);
+      } else {
+        setError(result.error || 'Failed to submit form. Please try again.');
+      }
+    } catch (error) {
+      console.error('Multi-step form submission error:', error);
+      setError('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
-  if (submitted) {
-    return <div className="bg-green-100 text-green-700 rounded-xl p-6 text-center font-semibold">Thank you! We'll be in touch soon.{crmError && <div className="text-red-600 text-sm mt-2">(CRM integration failed, but your request was received.)</div>}</div>;
+  if (isSubmitted) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="bg-green-50 border border-green-200 rounded-xl p-6 text-center"
+      >
+        <CheckCircle className="w-12 h-12 text-green-600 mx-auto mb-4" />
+        <h3 className="text-xl font-bold text-green-800 mb-2">Thank you!</h3>
+        <p className="text-green-700">
+          We'll be in touch soon with personalized HR solutions for your business.
+        </p>
+      </motion.div>
+    );
   }
 
   return (

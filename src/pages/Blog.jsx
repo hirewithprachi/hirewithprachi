@@ -287,124 +287,336 @@ export default function Blog() {
         <HireWithPrachiHeader />
         <AIChatbotWidget />
 
-        {/* Hero Section with Advanced Animations */}
-        <section className="relative pt-24 pb-20 overflow-hidden">
-          {/* Animated Background Elements */}
+        {/* Ultra-Futuristic Blog Hero Section */}
+        <section className="relative min-h-[90vh] bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 overflow-hidden">
+          {/* Advanced Animated Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl floating-animation"></div>
-            <div className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-r from-indigo-400/15 to-pink-400/15 rounded-full blur-3xl floating-animation" style={{animationDelay: '2s'}}></div>
-            <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-gradient-to-r from-purple-400/10 to-blue-400/10 rounded-full blur-3xl floating-animation" style={{animationDelay: '4s'}}></div>
+            {/* Neural Network Grid */}
+            <div className="absolute inset-0 opacity-20">
+              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="neural-grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                    <circle cx="5" cy="5" r="0.5" fill="white" opacity="0.3">
+                      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <line x1="5" y1="0" x2="5" y2="10" stroke="white" strokeWidth="0.1" opacity="0.2">
+                      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="0" y1="5" x2="10" y2="5" stroke="white" strokeWidth="0.1" opacity="0.2">
+                      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.5s" repeatCount="indefinite"/>
+                    </line>
+                  </pattern>
+                </defs>
+                <rect width="100" height="100" fill="url(#neural-grid)"/>
+              </svg>
           </div>
           
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center max-w-5xl mx-auto">
+            {/* Holographic Gradient Mesh */}
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-purple-900/95 to-blue-900/90"></div>
+            
+            {/* Quantum Floating Orbs with Holographic Effects */}
+            <div className="absolute top-1/4 left-1/4 w-64 h-64">
+              <div className="w-full h-full bg-gradient-to-r from-purple-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-400/10 to-blue-400/10 rounded-full blur-2xl animate-pulse" style={{animationDelay: '0.5s'}}></div>
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-400/5 to-blue-400/5 rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
+            </div>
+            
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80">
+              <div className="w-full h-full bg-gradient-to-r from-blue-400/20 to-indigo-400/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-400/10 to-indigo-400/10 rounded-full blur-2xl animate-pulse" style={{animationDelay: '1.5s'}}></div>
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-400/5 to-indigo-400/5 rounded-full blur-xl animate-pulse" style={{animationDelay: '2s'}}></div>
+            </div>
+            
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96">
+              <div className="w-full h-full bg-gradient-to-r from-indigo-400/15 to-purple-400/15 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-indigo-400/8 to-purple-400/8 rounded-full blur-2xl animate-pulse" style={{animationDelay: '2.5s'}}></div>
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-indigo-400/3 to-purple-400/3 rounded-full blur-xl animate-pulse" style={{animationDelay: '3s'}}></div>
+            </div>
+            
+            {/* Futuristic Geometric Patterns */}
+            <div className="absolute top-0 left-0 w-full h-full opacity-15">
+              <div className="absolute top-20 left-20 w-32 h-32 border border-white/30 rounded-full animate-spin" style={{animationDuration: '20s'}}></div>
+              <div className="absolute top-40 right-32 w-24 h-24 border border-white/30 rotate-45 animate-pulse"></div>
+              <div className="absolute bottom-32 left-1/3 w-40 h-40 border border-white/30 rounded-full animate-spin" style={{animationDuration: '25s', animationDirection: 'reverse'}}></div>
+              <div className="absolute bottom-20 right-20 w-28 h-28 border border-white/30 rotate-12 animate-pulse"></div>
+              
+              {/* Hexagonal Patterns */}
+              <div className="absolute top-1/3 left-1/6 w-16 h-16 border border-white/20 rotate-45 animate-pulse" style={{animationDelay: '1s'}}></div>
+              <div className="absolute bottom-1/3 right-1/6 w-12 h-12 border border-white/20 rotate-12 animate-pulse" style={{animationDelay: '2s'}}></div>
+            </div>
+            
+            {/* AI-Powered Floating Particles with Trails */}
+            <div className="absolute top-1/3 left-1/6 w-2 h-2">
+              <div className="w-full h-full bg-purple-300 rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-purple-300/50 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+            </div>
+            <div className="absolute top-2/3 right-1/4 w-1 h-1">
+              <div className="w-full h-full bg-blue-300 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-blue-300/50 rounded-full animate-ping" style={{animationDelay: '1.5s'}}></div>
+            </div>
+            <div className="absolute bottom-1/3 left-2/3 w-1.5 h-1.5">
+              <div className="w-full h-full bg-indigo-300 rounded-full animate-bounce" style={{animationDelay: '2s'}}></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-indigo-300/50 rounded-full animate-ping" style={{animationDelay: '2.5s'}}></div>
+            </div>
+            <div className="absolute top-1/4 right-1/3 w-1 h-1">
+              <div className="w-full h-full bg-purple-400 rounded-full animate-bounce" style={{animationDelay: '3s'}}></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-purple-400/50 rounded-full animate-ping" style={{animationDelay: '3.5s'}}></div>
+            </div>
+            
+            {/* Data Stream Effect */}
+            <div className="absolute top-0 left-0 w-full h-full opacity-10">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent animate-pulse"></div>
+              <div className="absolute top-1/4 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent animate-pulse" style={{animationDelay: '0.5s'}}></div>
+              <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-400 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
+              <div className="absolute top-3/4 left-0 w-full h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent animate-pulse" style={{animationDelay: '1.5s'}}></div>
+            </div>
+          </div>
+
+          {/* Main Content with Ultra-Modern Design */}
+          <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            {/* Breadcrumbs integrated into hero */}
+              <motion.div
+              initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-8 text-center"
+            >
+              <Breadcrumbs variant="dark" />
+            </motion.div>
+            
+            <div className="text-center">
+              {/* Ultra-Premium AI Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 30, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                className="inline-flex items-center gap-4 bg-white/10 backdrop-blur-md px-8 py-4 rounded-full border border-white/20 mb-8 shadow-2xl"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></div>
+                  <div className="w-3 h-3 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
+                </div>
+                <span className="text-white text-sm font-bold uppercase tracking-widest">AI-Powered HR Insights & Trends</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.9s'}}></div>
+                  <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full animate-pulse" style={{animationDelay: '1.2s'}}></div>
+                  <div className="w-2 h-2 bg-gradient-to-r from-indigo-400 to-blue-400 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
+                </div>
+              </motion.div>
+
+              {/* Ultra-Modern Main Headline with Holographic Effect */}
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-tight mb-6 text-white relative"
+              >
+                <span className="relative">
+                  HR <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">Insights</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-indigo-400/20 blur-xl animate-pulse"></div>
+                </span>
+                <br />
+                <span className="relative">
+                  That Drive <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse" style={{animationDelay: '0.5s'}}>Success</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-indigo-400/20 blur-xl animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                </span>
+              </motion.h1>
+
+              {/* Futuristic Subheadline with Glitch Effect */}
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="text-white/90 text-lg md:text-xl lg:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed font-medium relative"
+              >
+                <span className="relative">
+                  Stay ahead with expert insights, trends, and best practices from India's leading virtual HR consultant.
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-blue-400/10 blur-sm animate-pulse" style={{animationDelay: '1s'}}></div>
+                </span>
+                <br />
+                <span className="relative">
+                  Transform your business with actionable strategies and proven solutions.
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-indigo-400/10 blur-sm animate-pulse" style={{animationDelay: '1.5s'}}></div>
+                </span>
+              </motion.p>
+
+              {/* Ultra-Modern Interactive Stats with Holographic Cards */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="mb-8"
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto"
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full border border-blue-200/50 mb-6">
-                  <span className="w-2 h-2 bg-blue-500 rounded-full pulse-glow"></span>
-                  <span className="text-sm font-medium text-blue-700">Latest HR Insights</span>
-                </div>
-                
-                <h1 className="text-5xl md:text-7xl font-bold gradient-text mb-6 leading-tight">
-                  HR Insights & Trends
-                </h1>
-                <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed max-w-3xl mx-auto">
-                  Stay ahead with the latest HR insights, trends, and best practices. 
-                  Curated by Prachi Shrivastava, India's leading virtual HR consultant.
-                </p>
+                <motion.div 
+                  whileHover={{ scale: 1.05, rotateY: 5 }}
+                  className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:shadow-2xl relative overflow-hidden group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">{posts.length}+</div>
+                    <div className="text-white/80 text-sm md:text-base">Expert Articles</div>
+                  </div>
               </motion.div>
 
-              {/* Advanced Search Bar */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                  whileHover={{ scale: 1.05, rotateY: -5 }}
+                  className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:shadow-2xl relative overflow-hidden group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-indigo-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">50K+</div>
+                    <div className="text-white/80 text-sm md:text-base">Monthly Readers</div>
+                  </div>
+                </motion.div>
+                
+                <motion.div 
+                  whileHover={{ scale: 1.05, rotateY: 5 }}
+                  className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:shadow-2xl relative overflow-hidden group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-400/10 to-purple-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">{blogCategories.length}</div>
+                    <div className="text-white/80 text-sm md:text-base">HR Categories</div>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* Ultra-Premium AI-Powered Search Bar */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative max-w-2xl mx-auto mb-12"
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="max-w-2xl mx-auto mb-8"
               >
-                <div className="relative">
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg className="h-5 w-5 text-white/60 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
                   <input 
                     type="text" 
+                    placeholder="Search articles, topics, or keywords..."
                     value={search} 
-                    onChange={e => handleSearchChange(e.target.value)} 
-                    placeholder="Search HR topics, trends, or insights..." 
-                    className="w-full px-8 py-5 rounded-2xl border-2 border-blue-200 focus:border-blue-500 transition-all duration-300 shadow-xl text-lg bg-white/80 backdrop-blur-sm focus:bg-white focus:shadow-2xl"
-                    onKeyDown={(e) => {
-                      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
-                        e.preventDefault();
-                        e.target.focus();
-                      }
-                    }}
-                    aria-label="Search blog posts"
+                    onChange={(e) => handleSearchChange(e.target.value)}
+                    className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/30"
                   />
-                  <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
-                    <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                    <kbd className="hidden md:inline-flex items-center px-2 py-1 text-xs font-medium text-gray-500 bg-gray-100 rounded border">⌘K</kbd>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-blue-400/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                 </div>
               </motion.div>
 
-              {/* Enhanced Stats */}
+              {/* Premium CTA Section */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+                transition={{ duration: 0.8, delay: 1.0 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center"
               >
-                <div className="glass-effect rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <div className="text-3xl font-bold gradient-text mb-2">{posts.length}+</div>
-                  <div className="text-gray-600 font-medium">Expert Articles</div>
-                  <div className="text-sm text-gray-500 mt-1">Curated content</div>
-                </div>
-                <div className="glass-effect rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <div className="text-3xl font-bold gradient-text mb-2">50K+</div>
-                  <div className="text-gray-600 font-medium">Monthly Readers</div>
-                  <div className="text-sm text-gray-500 mt-1">HR professionals</div>
-                </div>
-                <div className="glass-effect rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <div className="text-3xl font-bold gradient-text mb-2">{blogCategories.length}</div>
-                  <div className="text-gray-600 font-medium">Categories</div>
-                  <div className="text-sm text-gray-500 mt-1">Specialized topics</div>
-                </div>
+                <button
+                  onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+                  className="group relative inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold text-sm shadow-xl hover:shadow-purple-500/25 transition-all duration-300 overflow-hidden"
+                >
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+                  <span className="relative z-10 flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    {viewMode === 'grid' ? 'List View' : 'Grid View'}
+                  </span>
+                </button>
+                
+                <button
+                  onClick={() => setSortBy(sortBy === 'latest' ? 'popular' : 'latest')}
+                  className="group relative inline-flex items-center px-6 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold text-sm hover:bg-white/20 transition-all duration-300"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                    {sortBy === 'latest' ? 'Popular Posts' : 'Latest Posts'}
+                  </span>
+                </button>
               </motion.div>
             </div>
           </div>
+
+          {/* Decorative Elements */}
+          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white/5 to-transparent"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-400/10 to-transparent rounded-full blur-3xl"></div>
         </section>
 
-        {/* Enhanced Categories Section */}
-        <section className="py-16 bg-white/50 backdrop-blur-sm">
-          <div className="container mx-auto px-4">
+        {/* Ultra-Futuristic Categories Section */}
+        <section className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 relative overflow-hidden">
+          {/* Futuristic Background Elements */}
+          <div className="absolute inset-0">
+            {/* Neural Network Grid */}
+            <div className="absolute inset-0 opacity-10">
+              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="neural-grid-categories" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <circle cx="4" cy="4" r="0.3" fill="white" opacity="0.4">
+                      <animate attributeName="opacity" values="0.4;1;0.4" dur="4s" repeatCount="indefinite"/>
+                    </circle>
+                    <line x1="4" y1="0" x2="4" y2="8" stroke="white" strokeWidth="0.05" opacity="0.3">
+                      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="0" y1="4" x2="8" y2="4" stroke="white" strokeWidth="0.05" opacity="0.3">
+                      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.5s" repeatCount="indefinite"/>
+                    </line>
+                  </pattern>
+                </defs>
+                <rect width="100" height="100" fill="url(#neural-grid-categories)"/>
+              </svg>
+            </div>
+            
+            {/* Floating Quantum Particles */}
+            <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-purple-400 rounded-full animate-ping" style={{animationDelay: '0s'}}></div>
+            <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-blue-400 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
+            <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-indigo-400 rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
+            <div className="absolute bottom-1/3 right-1/4 w-1 h-1 bg-purple-400 rounded-full animate-ping" style={{animationDelay: '3s'}}></div>
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-12"
+              className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Explore Categories</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">Discover insights across different HR domains and stay updated with industry trends</p>
+              <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+                <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                  Explore Categories
+                </span>
+              </h2>
+              <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+                Discover insights across different HR domains and stay updated with industry trends
+              </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-8">
               <motion.button
-                className={`px-6 py-4 rounded-2xl font-semibold transition-all duration-300 ${
+                className={`relative group overflow-hidden rounded-2xl font-semibold transition-all duration-500 ${
                   selectedCategory === 'All' 
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-xl scale-105' 
-                    : 'bg-white/70 backdrop-blur-sm text-gray-700 hover:bg-white hover:shadow-lg border border-gray-200'
+                    ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-2xl scale-105' 
+                    : 'bg-white/10 backdrop-blur-md text-white hover:bg-white/20 border border-white/20'
                 }`}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, rotateY: 5 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
                   handleCategoryChange('All');
                   trackEvent('blog_category_click', 'All');
                 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <div className="text-lg mb-1">📚</div>
-                <div className="text-sm">All Posts</div>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 p-6">
+                  <div className="text-2xl mb-2">📚</div>
+                  <div className="text-sm font-bold">All Posts</div>
+                  <div className="text-xs opacity-75 mt-1">{posts.length} articles</div>
+                </div>
               </motion.button>
               
               {blogCategories.map((category, index) => (
@@ -414,125 +626,116 @@ export default function Blog() {
                     handleCategoryChange(category.name);
                     trackEvent('blog_category_click', category.name);
                   }}
-                  className={`px-6 py-4 rounded-2xl font-semibold transition-all duration-300 ${
+                  className={`relative group overflow-hidden rounded-2xl font-semibold transition-all duration-500 ${
                     selectedCategory === category.name 
-                      ? `bg-gradient-to-r ${category.color} text-white shadow-xl scale-105` 
-                      : 'bg-white/70 backdrop-blur-sm text-gray-700 hover:bg-white hover:shadow-lg border border-gray-200'
+                      ? `bg-gradient-to-r ${category.color} text-white shadow-2xl scale-105` 
+                      : 'bg-white/10 backdrop-blur-md text-white hover:bg-white/20 border border-white/20'
                   }`}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, rotateY: -5 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  transition={{ duration: 0.6, delay: (index + 1) * 0.1 }}
                 >
-                  <div className="text-lg mb-1">
-                    {category.name === 'HR Strategy' && '🎯'}
-                    {category.name === 'Cost Analysis' && '💰'}
-                    {category.name === 'Employee Engagement' && '❤️'}
-                    {category.name === 'Remote Work' && '🏠'}
-                    {category.name === 'HR Tech' && '🤖'}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10 p-6">
+                    <div className="text-2xl mb-2">
+                      {category.name === 'HR Strategy' && '🎯'}
+                      {category.name === 'Cost Analysis' && '💰'}
+                      {category.name === 'Employee Engagement' && '❤️'}
+                      {category.name === 'Remote Work' && '🏠'}
+                      {category.name === 'HR Tech' && '🤖'}
+                    </div>
+                    <div className="text-sm font-bold">{category.name}</div>
+                    <div className="text-xs opacity-75 mt-1">{category.count} articles</div>
                   </div>
-                  <div className="text-sm">{category.name}</div>
-                  <div className="text-xs opacity-75 mt-1">{category.count}</div>
                 </motion.button>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Enhanced Trending Topics */}
-        <section className="py-12 bg-gradient-to-r from-gray-50 to-blue-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
-                <span className="text-2xl">🔥</span>
-                Trending Topics
-              </h3>
+        {/* Ultra-Futuristic Latest Articles Section */}
+        <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 relative overflow-hidden">
+          {/* Futuristic Background Elements */}
+          <div className="absolute inset-0">
+            {/* Quantum Grid Pattern */}
+            <div className="absolute inset-0 opacity-5">
+              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="quantum-grid" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse">
+                    <circle cx="2.5" cy="2.5" r="0.2" fill="purple" opacity="0.6">
+                      <animate attributeName="opacity" values="0.6;1;0.6" dur="5s" repeatCount="indefinite"/>
+                    </circle>
+                  </pattern>
+                </defs>
+                <rect width="100" height="100" fill="url(#quantum-grid)"/>
+              </svg>
             </div>
-            <div className="flex flex-wrap gap-3 justify-center">
-              {trendingTopics.map((topic, index) => (
-                <motion.span
-                  key={topic}
-                  className="px-6 py-3 rounded-full bg-white/80 backdrop-blur-sm shadow-lg text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-300 cursor-pointer border border-gray-200 hover:border-blue-300"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  onClick={() => {
-                    handleSearchChange(topic);
-                    trackEvent('blog_trending_topic_click', topic);
-                  }}
-                >
-                  {topic}
-                </motion.span>
-              ))}
-            </div>
+            
+            {/* Floating Holographic Elements */}
+            <div className="absolute top-20 left-20 w-32 h-32 border border-purple-300/30 rounded-full animate-spin" style={{animationDuration: '30s'}}></div>
+            <div className="absolute bottom-20 right-20 w-24 h-24 border border-blue-300/30 rounded-full animate-spin" style={{animationDuration: '25s', animationDirection: 'reverse'}}></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-indigo-300/20 rounded-full animate-pulse"></div>
           </div>
-        </section>
 
-        {/* Featured Posts Section */}
-        <section className="py-16 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 relative z-10">
+            {/* Ultra-Modern Controls Bar */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-12"
+              className="flex flex-col lg:flex-row justify-between items-center mb-12 gap-6"
             >
-              <h2 className="text-4xl font-bold gradient-text mb-4">Featured Articles</h2>
-              <p className="text-xl text-gray-600">Handpicked insights from our HR experts</p>
-            </motion.div>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {posts.filter(post => post.featured).slice(0, 2).map((post, index) => (
-                <BlogCard 
-                  key={post.id} 
-                  post={post} 
-                  index={index}
-                  variant="featured"
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Enhanced Blog Posts Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Blog' }]} />
-            
-            {/* Controls Bar */}
-            <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-              <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">
-                  {selectedCategory === 'All' ? 'Latest Articles' : `${selectedCategory} Articles`}
+              <div className="text-center lg:text-left">
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                  <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    {selectedCategory === 'All' ? 'Latest Articles' : `${selectedCategory} Articles`}
+                  </span>
                 </h2>
-                <p className="text-gray-600">
-                  Showing {filtered.length} of {posts.length} articles
-                  {search && ` for "${search}"`}
-                  {selectedCategory !== 'All' && ` in ${selectedCategory}`}
+                <p className="text-lg text-gray-600">
+                  Showing <span className="font-bold text-purple-600">{filtered.length}</span> of <span className="font-bold text-blue-600">{posts.length}</span> articles
+                  {search && (
+                    <span className="block mt-1">
+                      Results for <span className="font-bold text-indigo-600">"{search}"</span>
+                    </span>
+                  )}
+                  {selectedCategory !== 'All' && (
+                    <span className="block mt-1">
+                      in <span className="font-bold text-purple-600">{selectedCategory}</span>
+                    </span>
+                  )}
                 </p>
               </div>
               
               <div className="flex items-center gap-4">
-                {/* Sort Dropdown */}
-                <select 
-                  value={sortBy} 
-                  onChange={(e) => handleSortChange(e.target.value)}
-                  className="px-4 py-2 rounded-lg border border-gray-300 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
-                  aria-label="Sort articles by"
-                >
-                  <option value="latest">Latest</option>
-                  <option value="popular">Popular</option>
-                  <option value="trending">Trending</option>
-                </select>
+                {/* Ultra-Modern Sort Dropdown */}
+                <div className="relative group">
+                  <select 
+                    value={sortBy} 
+                    onChange={(e) => handleSortChange(e.target.value)}
+                    className="appearance-none px-6 py-3 rounded-xl border-2 border-purple-200 bg-white/80 backdrop-blur-sm focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-300 text-gray-700 font-semibold pr-12 cursor-pointer hover:border-purple-300"
+                    aria-label="Sort articles by"
+                  >
+                    <option value="latest">Latest</option>
+                    <option value="popular">Popular</option>
+                    <option value="trending">Trending</option>
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </div>
+                </div>
                 
-                {/* View Mode Toggle */}
-                <div className="flex bg-gray-100 rounded-lg p-1" role="group" aria-label="View mode">
+                {/* Ultra-Modern View Mode Toggle */}
+                <div className="flex bg-white/80 backdrop-blur-sm rounded-xl p-1 border border-purple-200" role="group" aria-label="View mode">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`p-2 rounded-md transition-all duration-200 ${
-                      viewMode === 'grid' ? 'bg-white shadow-sm' : 'text-gray-500'
+                    className={`p-3 rounded-lg transition-all duration-300 ${
+                      viewMode === 'grid' 
+                        ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg' 
+                        : 'text-gray-600 hover:text-purple-600'
                     }`}
                     aria-label="Grid view"
                   >
@@ -542,8 +745,10 @@ export default function Blog() {
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
-                    className={`p-2 rounded-md transition-all duration-200 ${
-                      viewMode === 'list' ? 'bg-white shadow-sm' : 'text-gray-500'
+                    className={`p-3 rounded-lg transition-all duration-300 ${
+                      viewMode === 'list' 
+                        ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg' 
+                        : 'text-gray-600 hover:text-purple-600'
                     }`}
                     aria-label="List view"
                   >
@@ -553,15 +758,23 @@ export default function Blog() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
             
             {loading ? (
-              <div className="text-center py-20">
-                <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mb-4"></div>
-                <p className="text-gray-600 text-lg">Loading articles...</p>
-              </div>
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-20"
+              >
+                <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mb-4"></div>
+                <p className="text-gray-600 text-lg font-semibold">Loading articles...</p>
+              </motion.div>
             ) : error ? (
-              <div className="text-center py-20">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-20"
+              >
                 <div className="w-32 h-32 bg-gradient-to-br from-red-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-8">
                   <svg className="w-16 h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
@@ -571,13 +784,17 @@ export default function Blog() {
                 <p className="text-gray-600 mb-8 text-lg">{error}</p>
                 <button 
                   onClick={() => window.location.reload()}
-                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl hover:shadow-xl transition-all duration-300 hover:scale-105"
                 >
                   Try Again
                 </button>
-              </div>
+              </motion.div>
             ) : filtered.length === 0 ? (
-              <div className="text-center py-20">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-20"
+              >
                 <div className="w-32 h-32 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-8">
                   <svg className="w-16 h-16 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -598,7 +815,7 @@ export default function Blog() {
                       handleSearchChange(''); 
                       handleCategoryChange('All'); 
                     }}
-                    className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:shadow-xl transition-all duration-300 hover:scale-105"
+                    className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
                     Clear Filters
                   </button>
@@ -611,7 +828,7 @@ export default function Blog() {
                     </button>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ) : (
               <AnimatePresence mode="wait">
                 <motion.div
@@ -697,24 +914,179 @@ export default function Blog() {
           </div>
         </section>
 
-        {/* Enhanced Newsletter Section */}
-        <section className="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
+        {/* Ultra-Futuristic Newsletter Section */}
+        <section className="py-24 bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 relative overflow-hidden">
+          {/* Advanced Futuristic Background Elements */}
+          <div className="absolute inset-0">
+            {/* Neural Network Grid */}
+            <div className="absolute inset-0 opacity-15">
+              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="neural-grid-newsletter" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+                    <circle cx="3" cy="3" r="0.4" fill="white" opacity="0.4">
+                      <animate attributeName="opacity" values="0.4;1;0.4" dur="4s" repeatCount="indefinite"/>
+                    </circle>
+                    <line x1="3" y1="0" x2="3" y2="6" stroke="white" strokeWidth="0.1" opacity="0.3">
+                      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="0" y1="3" x2="6" y2="3" stroke="white" strokeWidth="0.1" opacity="0.3">
+                      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.5s" repeatCount="indefinite"/>
+                    </line>
+                  </pattern>
+                </defs>
+                <rect width="100" height="100" fill="url(#neural-grid-newsletter)"/>
+              </svg>
+            </div>
+            
+            {/* Quantum Floating Orbs */}
+            <div className="absolute top-1/4 left-1/4 w-64 h-64">
+              <div className="w-full h-full bg-gradient-to-r from-purple-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-400/10 to-blue-400/10 rounded-full blur-2xl animate-pulse" style={{animationDelay: '1s'}}></div>
+            </div>
+            
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80">
+              <div className="w-full h-full bg-gradient-to-r from-blue-400/20 to-indigo-400/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-400/10 to-indigo-400/10 rounded-full blur-2xl animate-pulse" style={{animationDelay: '3s'}}></div>
+            </div>
+            
+            {/* Holographic Data Streams */}
+            <div className="absolute top-0 left-0 w-full h-full opacity-20">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent animate-pulse"></div>
+              <div className="absolute top-1/4 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent animate-pulse" style={{animationDelay: '0.5s'}}></div>
+              <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-400 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
+              <div className="absolute top-3/4 left-0 w-full h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent animate-pulse" style={{animationDelay: '1.5s'}}></div>
+            </div>
+            
+            {/* Floating Particles */}
+            <div className="absolute top-1/3 left-1/6 w-2 h-2 bg-purple-300 rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
+            <div className="absolute top-2/3 right-1/4 w-1 h-1 bg-blue-300 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
+            <div className="absolute bottom-1/3 left-2/3 w-1.5 h-1.5 bg-indigo-300 rounded-full animate-bounce" style={{animationDelay: '2s'}}></div>
+            <div className="absolute top-1/4 right-1/3 w-1 h-1 bg-purple-400 rounded-full animate-bounce" style={{animationDelay: '3s'}}></div>
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-5xl mx-auto">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="glass-effect rounded-3xl p-12 shadow-2xl"
+                transition={{ duration: 0.8 }}
+                className="relative"
               >
-                <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
-                  Stay Updated with HR Trends
-                </h2>
-                <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                  Get the latest HR insights, tips, and industry updates delivered to your inbox. 
-                  Join 10,000+ HR professionals who trust our content.
-                </p>
-                <NewsletterSignup />
+                {/* Ultra-Futuristic Glass Effect Container */}
+                <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-12 md:p-16 shadow-2xl border border-white/20 overflow-hidden">
+                  {/* Holographic Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 via-blue-400/10 to-indigo-400/10 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* Geometric Patterns */}
+                  <div className="absolute top-0 left-0 w-full h-full opacity-10">
+                    <div className="absolute top-10 left-10 w-20 h-20 border border-white/30 rounded-full animate-spin" style={{animationDuration: '20s'}}></div>
+                    <div className="absolute top-20 right-20 w-16 h-16 border border-white/30 rotate-45 animate-pulse"></div>
+                    <div className="absolute bottom-20 left-20 w-12 h-12 border border-white/30 rounded-full animate-spin" style={{animationDuration: '25s', animationDirection: 'reverse'}}></div>
+                  </div>
+                  
+                  <div className="relative z-10 text-center">
+                    {/* Ultra-Modern Badge */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20 mb-8"
+                    >
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full animate-pulse"></div>
+                        <div className="w-1 h-1 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></div>
+                        <div className="w-2 h-2 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
+                      </div>
+                      <span className="text-white text-sm font-bold uppercase tracking-widest">AI-Powered HR Insights</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-1 h-1 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full animate-pulse" style={{animationDelay: '0.9s'}}></div>
+                        <div className="w-2 h-2 bg-gradient-to-r from-indigo-400 to-blue-400 rounded-full animate-pulse" style={{animationDelay: '1.2s'}}></div>
+                        <div className="w-1 h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
+                      </div>
+                    </motion.div>
+
+                    {/* Ultra-Modern Headline */}
+                    <motion.h2
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.4 }}
+                      className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8 text-white"
+                    >
+                      <span className="relative">
+                        Stay Updated with
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-indigo-400/20 blur-xl animate-pulse"></div>
+                      </span>
+                      <br />
+                      <span className="relative">
+                        <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">
+                          HR Trends
+                        </span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-indigo-400/20 blur-xl animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                      </span>
+                    </motion.h2>
+
+                    {/* Ultra-Modern Subheadline */}
+                    <motion.p
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.6 }}
+                      className="text-white/90 text-lg md:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed font-medium"
+                    >
+                      Get the latest HR insights, tips, and industry updates delivered to your inbox. 
+                      Join <span className="font-bold text-purple-300">10,000+</span> HR professionals who trust our AI-powered content.
+                    </motion.p>
+
+                    {/* Ultra-Modern Stats */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.8 }}
+                      className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto"
+                    >
+                      <motion.div 
+                        whileHover={{ scale: 1.05, rotateY: 5 }}
+                        className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:shadow-2xl relative overflow-hidden group"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                          <div className="text-3xl md:text-4xl font-bold text-white mb-2">10K+</div>
+                          <div className="text-white/80 text-sm md:text-base">HR Professionals</div>
+                        </div>
+                      </motion.div>
+                      
+                      <motion.div 
+                        whileHover={{ scale: 1.05, rotateY: -5 }}
+                        className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:shadow-2xl relative overflow-hidden group"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-indigo-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                          <div className="text-3xl md:text-4xl font-bold text-white mb-2">Weekly</div>
+                          <div className="text-white/80 text-sm md:text-base">AI-Curated Content</div>
+                        </div>
+                      </motion.div>
+                      
+                      <motion.div 
+                        whileHover={{ scale: 1.05, rotateY: 5 }}
+                        className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:shadow-2xl relative overflow-hidden group"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-indigo-400/10 to-purple-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                          <div className="text-3xl md:text-4xl font-bold text-white mb-2">100%</div>
+                          <div className="text-white/80 text-sm md:text-base">Free & Valuable</div>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+
+                    {/* Ultra-Modern Newsletter Component */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 1.0 }}
+                    >
+                      <NewsletterSignup />
+                    </motion.div>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>

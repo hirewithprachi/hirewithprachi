@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import ContactForm from '../components/ContactForm';
-import CalendlyBooking from '../components/CalendlyBooking';
 import ContactMap from '../components/ContactMap';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
 import AIChatbotWidget from '../components/AIChatbotWidget';
-import { CALENDLY_CONFIG } from '../config/calendly';
+import FAQSection from '../components/sections/FAQSection';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function Contact() {
   const [activeTab, setActiveTab] = useState('contact');
@@ -130,6 +130,8 @@ export default function Contact() {
         <HireWithPrachiTopBar />
         <HireWithPrachiHeader />
         <AIChatbotWidget />
+        
+        
 
         {/* Hero Section with Advanced Animations */}
         <section className="relative pt-24 pb-20 overflow-hidden">
@@ -141,6 +143,16 @@ export default function Contact() {
           </div>
           
           <div className="container mx-auto px-4 relative z-10">
+            {/* Breadcrumbs integrated into hero */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-8 text-center"
+            >
+              <Breadcrumbs variant="light" />
+            </motion.div>
+            
             <div className="text-center max-w-4xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -281,7 +293,19 @@ export default function Contact() {
                             Schedule a 30-minute free consultation to discuss your HR challenges and solutions.
                           </p>
                         </div>
-                        <CalendlyBooking />
+                        <div className="text-center p-8">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-4">Book Your Free Consultation</h3>
+                          <p className="text-gray-600 mb-6">Fill out the contact form above to schedule your free 30-minute consultation. We'll get back to you within 24 hours to confirm your appointment.</p>
+                          <div className="bg-blue-50 rounded-lg p-4">
+                            <p className="text-sm text-blue-800">
+                              <strong>What to expect:</strong><br/>
+                              • 30-minute free consultation<br/>
+                              • HR assessment and recommendations<br/>
+                              • Customized service proposal<br/>
+                              • No obligation to proceed
+                            </p>
+                          </div>
+                        </div>
                       </motion.div>
                     )}
 
@@ -400,42 +424,30 @@ export default function Contact() {
                     {/* Social Links */}
                     <div className="mt-8 pt-8 border-t border-gray-200">
                       <h4 className="font-semibold text-gray-900 mb-4">Connect With Me</h4>
-                      <div className="grid grid-cols-2 gap-3">
-                        <a href="https://wa.me/918740889927" target="_blank" rel="noopener noreferrer" 
-                           className="bg-green-500 hover:bg-green-600 text-white rounded-xl py-3 px-4 text-center font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
-                          <div className="flex items-center justify-center gap-2">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.571-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.205 5.077 4.372.71.306 1.263.489 1.695.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                            </svg>
-                            <span>WhatsApp</span>
-                          </div>
+                      <div className="flex gap-3 justify-center">
+                        <a href="https://wa.me/918740889927" target="_blank" rel="noopener noreferrer"
+                           className="w-12 h-12 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl">
+                          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.571-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.205 5.077 4.372.71.306 1.263.489 1.695.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                          </svg>
                         </a>
-                        <a href="https://linkedin.com/in/prachi-hr" target="_blank" rel="noopener noreferrer" 
-                           className="bg-blue-700 hover:bg-blue-800 text-white rounded-xl py-3 px-4 text-center font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
-                          <div className="flex items-center justify-center gap-2">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                            <span>LinkedIn</span>
-                          </div>
+                        <a href="http://linkedin.com/company/hirewithprachi/" target="_blank" rel="noopener noreferrer"
+                           className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl">
+                          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                          </svg>
                         </a>
-                        <a href="https://twitter.com/prachi_hr" target="_blank" rel="noopener noreferrer" 
-                           className="bg-blue-400 hover:bg-blue-500 text-white rounded-xl py-3 px-4 text-center font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
-                          <div className="flex items-center justify-center gap-2">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                            </svg>
-                            <span>Twitter</span>
-                          </div>
+                        <a href="https://www.facebook.com/hirewithprachi/" target="_blank" rel="noopener noreferrer"
+                           className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl">
+                          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                          </svg>
                         </a>
-                        <a href="https://instagram.com/prachi_hr" target="_blank" rel="noopener noreferrer" 
-                           className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-xl py-3 px-4 text-center font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
-                          <div className="flex items-center justify-center gap-2">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.297-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.807.875 1.297 2.026 1.297 3.323s-.49 2.448-1.297 3.323c-.875.807-2.026 1.297-3.323 1.297zm7.718-1.297c-.875.807-2.026 1.297-3.323 1.297s-2.448-.49-3.323-1.297c-.807-.875-1.297-2.026-1.297-3.323s.49-2.448 1.297-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.807.875 1.297 2.026 1.297 3.323s-.49 2.448-1.297 3.323z"/>
-                            </svg>
-                            <span>Instagram</span>
-                          </div>
+                        <a href="https://www.instagram.com/hirewithprachi/" target="_blank" rel="noopener noreferrer"
+                           className="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl">
+                          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.244c-.875.807-2.026 1.297-3.323 1.297zm7.83-9.781c-.49 0-.928-.175-1.297-.49-.368-.315-.49-.753-.49-1.243 0-.49.122-.928.49-1.243.369-.315.807-.49 1.297-.49z"/>
+                          </svg>
                         </a>
                       </div>
                     </div>
@@ -447,61 +459,7 @@ export default function Contact() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-12"
-              >
-                <h2 className="text-4xl font-bold gradient-text mb-6">Frequently Asked Questions</h2>
-                <p className="text-xl text-gray-600">Get quick answers to common questions about our services</p>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {[
-                  {
-                    question: "How quickly do you respond to inquiries?",
-                    answer: "We typically respond within 24 hours, often much faster. For urgent matters, you can reach us directly on WhatsApp."
-                  },
-                  {
-                    question: "Is the initial consultation really free?",
-                    answer: "Yes! The 30-minute initial consultation is completely free with no obligations. It's our way of understanding your needs."
-                  },
-                  {
-                    question: "Do you work with international clients?",
-                    answer: "Absolutely! We provide virtual HR services to clients worldwide, with expertise in both Indian and international HR practices."
-                  },
-                  {
-                    question: "What types of businesses do you serve?",
-                    answer: "We specialize in startups and SMEs, but also work with larger organizations. Our services are scalable to any business size."
-                  },
-                  {
-                    question: "What HR services do you offer?",
-                    answer: "We offer comprehensive HR services including policy development, compliance management, recruitment, employee engagement, performance management, and HR strategy consulting."
-                  },
-                  {
-                    question: "How do virtual HR services work?",
-                    answer: "Virtual HR services are delivered remotely through video calls, phone consultations, and digital tools. We provide the same expertise as in-house HR but with greater flexibility and cost-effectiveness."
-                  }
-                ].map((faq, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="glass-effect rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300"
-                  >
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
-                    <p className="text-gray-600">{faq.answer}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <FAQSection />
 
         {/* CTA Section */}
         <section className="py-20 bg-white">
@@ -529,9 +487,7 @@ export default function Contact() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
                                                    <a 
-                   href={CALENDLY_CONFIG.BOOKING_URL} 
-                   target="_blank" 
-                   rel="noopener noreferrer"
+                   href="/contact" 
                    className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                  >
                   Book Free Consultation

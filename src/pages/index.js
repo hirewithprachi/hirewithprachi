@@ -11,8 +11,8 @@ export { default as ROICalculator } from './ROICalculator';
 export { default as SalaryBenchmarkingTool } from './SalaryBenchmarkingTool';
 export { default as EmployeeEngagementCalculator } from './EmployeeEngagementCalculator';
 export { default as BIDashboard } from './BIDashboard';
-export { default as AdminIntegrations } from './AdminIntegrations';
-export { default as AdminImages } from './AdminImages';
+
+
 export { default as ResourceDownloads } from './ResourceDownloads';
 export { default as GDPRDataDeletion } from './GDPRDataDeletion';
 export { default as ComplianceRiskChecker } from './ComplianceRiskChecker';
@@ -22,7 +22,4 @@ export { default as ServiceDetailPage } from './ServiceDetailPage';
 export { default as HRComplianceService } from './HRComplianceService';
 export { default as RecruitmentService } from './RecruitmentService';
 export { default as EmployeeEngagementService } from './EmployeeEngagementService';
-export { default as ResetPassword } from './ResetPassword';
-export { default as Register } from './Register';
-export { default as Login } from './Login';
 export { default as HirableHomepage } from './HirableHomepage'; 

@@ -151,7 +151,7 @@ const Services = () => {
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 px-8 py-4">
-                <a href="https://calendly.com/prachi-hr-services" target="_blank" rel="noopener noreferrer">
+                <a href="/contact">
                   Book Free Consultation
                   <Clock className="ml-2 h-5 w-5" />
                 </a>

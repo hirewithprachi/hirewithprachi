@@ -19,7 +19,7 @@ import {
   Clock,
   Star
 } from 'lucide-react';
-import { addContactToHubSpot } from '../lib/hubspot';
+import { formSubmission } from '../lib/supabase';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
