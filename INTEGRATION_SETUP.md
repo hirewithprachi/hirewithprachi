@@ -53,8 +53,8 @@ const apiKey = localStorage.getItem('hubspotApiKey') || 'YOUR_HUBSPOT_API_KEY';
 const portalId = 'YOUR_PORTAL_ID';
 
 // After
-const apiKey = localStorage.getItem('hubspotApiKey') || 'pat-na1-12345678-1234-1234-1234-123456789abc';
-const portalId = '12345678';
+const apiKey = localStorage.getItem('hubspotApiKey') || 'YOUR_HUBSPOT_API_KEY';
+const portalId = 'YOUR_PORTAL_ID';
 ```
 
 ### **3. Firebase Authentication (Optional)**
