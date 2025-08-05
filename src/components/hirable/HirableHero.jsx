@@ -167,7 +167,7 @@ export default function HirableHero({ openConsultationModal }) {
       {/* Hero Image */}
       <div className="relative w-full flex justify-center z-20" style={{marginTop: '0.5rem', marginBottom: '-2rem'}}>
         <img
-          src="/Hirable – Human Resources & Recruiting WordPress Theme_files/hero-image.png"
+          src="/assets/images/hero-image.png"
           alt="Virtual HR Consultant Prachi Shrivastava - Professional HR Services for Startups and SMEs"
           className="w-full max-w-sm md:max-w-lg lg:max-w-2xl xl:max-w-3xl rounded-xl md:rounded-2xl lg:rounded-3xl shadow-xl md:shadow-2xl border-2 md:border-4 border-white/20 backdrop-blur-sm object-cover"
           style={{objectPosition: 'center bottom'}}

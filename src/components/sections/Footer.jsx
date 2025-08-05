@@ -32,7 +32,7 @@ export default function Footer() {
     <footer className="bg-gradient-primary text-white font-heading py-12 px-4 mt-16">
       <div className="container mx-auto grid md:grid-cols-4 gap-8">
         <div>
-          <img src="/assets/images/logo.png" alt="Logo" className="h-12 w-auto mb-3" loading="lazy" />
+          <img src="/assets/images/prachi-logo.webp" alt="Logo" className="h-12 w-auto mb-3" loading="lazy" />
           <h3 className="font-bold text-lg mb-3">Prachi HR</h3>
           <p className="text-white/80 text-sm mb-4">Virtual HR services for modern businesses. Transform your HR, amplify your success.</p>
           <div className="flex gap-3">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, Edit, Trash2, Plus, Eye, Link as LinkIcon } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
+import AdminLayout from '../components/AdminLayout';
 
 const AdminVideoManager = () => {
   const [videoData, setVideoData] = useState({});
@@ -79,13 +80,12 @@ const AdminVideoManager = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Service Video Manager</h1>
-          <p className="text-gray-600">Manage video content for all service pages. Add YouTube video URLs to enhance user engagement.</p>
-        </div>
+    <AdminLayout title="Video Manager">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Service Video Manager</h1>
+        <p className="text-gray-600">Manage video content for all service pages. Add YouTube video URLs to enhance user engagement.</p>
+      </div>
 
         {/* Success/Error Message */}
         {message && (
@@ -276,9 +276,8 @@ const AdminVideoManager = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
+      </AdminLayout>
+    );
+  };
 
-export default AdminVideoManager; 
+  export default AdminVideoManager; 

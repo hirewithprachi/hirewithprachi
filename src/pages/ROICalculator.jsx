@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { Calculator, Users, Mail, Phone, TrendingUp, DollarSign, PieChart, Download, Share2, Star, CheckCircle, ArrowRight, Building, Award, Shield, Calendar, Clock, FileText, ArrowLeft, User } from 'lucide-react';
 import { formSubmission } from '../lib/supabase';
-import { downloadCalculatorPDF, shareCalculatorResult } from '../lib/html2pdfGenerator';
+import { generatePdfWithStates } from '../lib/supabasePdfGenerator';
 import ShareResultModal from '../components/ShareResultModal';
 
 export default function ROICalculator() {
@@ -115,21 +115,19 @@ export default function ROICalculator() {
     if (!calculationResult) return;
     
     try {
-      const filename = await downloadCalculatorPDF('roi', calculationResult, leadData);
-      setDownloaded(true);
-      setTimeout(() => setDownloaded(false), 3000);
+      console.log('Preparing to send PDF via email:', calculationResult);
+      
+      await generatePdfWithStates(
+        'roi',
+        calculationResult,
+        leadData,
+        setDownloaded, // Used for loading state
+        setDownloaded, // Used for success state
+        (error) => console.error('PDF Error:', error)
+      );
     } catch (error) {
       console.error('PDF generation failed:', error);
-      // Fallback to old TXT method
-      const text = `ROI Calculator Report\n\nInvestment Amount: ${formatCurrency(Number(investment))}\nExpected Return: ${formatCurrency(Number(expectedReturn))}\nTimeframe: ${timeframe} months\n\nROI Percentage: ${roiPercentage}%\nPayback Period: ${paybackPeriod} months\n\nGenerated on: ${new Date().toLocaleDateString()}`;
-      const blob = new Blob([text], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'roi-calculator-report.txt';
-      a.click();
-      URL.revokeObjectURL(url);
-      setDownloaded(true);
+      setDownloaded(false);
     }
   }
 

@@ -30,12 +30,12 @@ export default function HirableAbout() {
           {/* Left: Images Grid */}
           <div className="flex flex-col gap-4 md:gap-6 items-center md:items-start w-full md:w-1/2">
             <div className="flex flex-row gap-4 md:gap-6 items-center">
-              <img src="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg" alt="HR Consultant Badge" className="w-32 h-32 md:w-40 md:h-40 rounded-full object-contain border-6 md:border-8 border-[#d4ff3f] bg-[#d4ff3f]" loading="lazy" />
-              <img src="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-2.jpg" alt="Virtual HR Services" className="w-44 h-56 md:w-56 md:h-72 rounded-2xl md:rounded-3xl object-cover shadow-xl" loading="lazy" />
+              <img src="/assets/images/about-img-1.jpg" alt="HR Consultant Badge" className="w-32 h-32 md:w-40 md:h-40 rounded-full object-contain border-6 md:border-8 border-[#d4ff3f] bg-[#d4ff3f]" loading="lazy" />
+<img src="/assets/images/about-img-2.jpg" alt="Virtual HR Services" className="w-44 h-56 md:w-56 md:h-72 rounded-2xl md:rounded-3xl object-cover shadow-xl" loading="lazy" />
             </div>
             <div className="flex flex-row gap-4 md:gap-6 mt-2">
-              <img src="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-3.jpg" alt="Remote HR Support" className="w-32 h-24 md:w-40 md:h-32 rounded-xl md:rounded-2xl object-cover shadow-lg" loading="lazy" />
-              <img src="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg" alt="HR Consulting" className="w-32 h-24 md:w-40 md:h-32 rounded-xl md:rounded-2xl object-cover shadow-lg" loading="lazy" />
+              <img src="/assets/images/about-img-3.jpg" alt="Remote HR Support" className="w-32 h-24 md:w-40 md:h-32 rounded-xl md:rounded-2xl object-cover shadow-lg" loading="lazy" />
+<img src="/assets/images/about-img-1.jpg" alt="HR Consulting" className="w-32 h-24 md:w-40 md:h-32 rounded-xl md:rounded-2xl object-cover shadow-lg" loading="lazy" />
               <div className="flex flex-col justify-end">
                 <div className="bg-[#d4ff3f] text-[#222] rounded-xl md:rounded-2xl px-6 md:px-8 py-4 md:py-6 text-center font-extrabold text-2xl md:text-3xl leading-tight shadow-lg">
                   8+

@@ -35,20 +35,38 @@ export default function Blog() {
         await new Promise(resolve => setTimeout(resolve, 800));
         
         // Combine existing blog posts with new blog topics
-        const allPosts = [...blogPosts, ...blogTopics.map(topic => ({
-          id: topic.id,
-          title: topic.title,
-          excerpt: topic.metaDescription,
-          content: topic.metaDescription,
-          author: 'Prachi Shrivastava',
-          date: topic.publishDate,
-          category: topic.category,
-          readTime: topic.readTime,
-          featured: topic.featured,
-          tags: topic.keywords,
-          image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-          slug: topic.slug
-        }))];
+        const allPosts = [...blogPosts, ...blogTopics.map(topic => {
+          // Set specific images for certain blog posts
+          let image = 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
+          
+          // Use specific SVG images for certain blog posts
+          if (topic.slug === 'contractual-freelance-hr-support') {
+            image = '/assets/images/Flexible HR Support for the Modern Workplace.svg';
+          } else if (topic.slug === 'employee-experience-culture-building') {
+            image = '/assets/images/Employee Experience & Culture Building.svg';
+          } else if (topic.slug === 'workplace-policy-education-institutes') {
+            image = '/assets/images/Workplace Policy for Education Institutes Ensuring Safety and Compliance.svg';
+          } else if (topic.slug === 'women-safety-legal-hr-setup') {
+            image = '/assets/images/Women Safety & Legal HR Setup Creating Inclusive Workplaces.svg';
+          } else if (topic.slug === 'labor-law-compliance-advisory') {
+            image = '/assets/images/Labor Law & Compliance Advisory.svg';
+          }
+          
+          return {
+            id: topic.id,
+            title: topic.title,
+            excerpt: topic.metaDescription,
+            content: topic.metaDescription,
+            author: 'Prachi Shrivastava',
+            date: topic.publishDate,
+            category: topic.category,
+            readTime: topic.readTime,
+            featured: topic.featured,
+            tags: topic.keywords,
+            image: image,
+            slug: topic.slug
+          };
+        })];
         
         setPosts(allPosts);
         setFiltered(allPosts);
@@ -164,7 +182,7 @@ export default function Blog() {
         {/* Open Graph */}
         <meta property="og:title" content="HR Blog | Latest HR Insights & Best Practices | Prachi Shrivastava" />
         <meta property="og:description" content="Expert HR insights, trends, and best practices from India's leading virtual HR consultant. Stay updated with the latest in HR strategy and compliance." />
-        <meta property="og:image" content="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg" />
+        <meta property="og:image" content="/assets/images/about-img-1.jpg" />
         <meta property="og:url" content="https://hirewithprachi.com/blog" />
         <meta property="og:type" content="blog" />
         <meta property="og:site_name" content="Hire With Prachi" />
@@ -173,7 +191,7 @@ export default function Blog() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="HR Blog | Latest HR Insights & Best Practices" />
         <meta name="twitter:description" content="Expert HR insights, trends, and best practices from India's leading virtual HR consultant." />
-        <meta name="twitter:image" content="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg" />
+        <meta name="twitter:image" content="/assets/images/about-img-1.jpg" />
         
         {/* Canonical */}
         <link rel="canonical" href="https://hirewithprachi.com/blog" />

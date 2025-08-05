@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { Calculator, Users, Mail, Phone, TrendingUp, DollarSign, PieChart, Download, Share2, Star, CheckCircle, ArrowRight, Building, Award, Shield, Calendar, Clock, FileText, ArrowLeft, User } from 'lucide-react';
 import { formSubmission } from '../lib/supabase';
-import { downloadCalculatorPDF, shareCalculatorResult } from '../lib/html2pdfGenerator';
+import { generatePdfWithStates } from '../lib/supabasePdfGenerator';
 import ShareResultModal from '../components/ShareResultModal';
 
 const industries = [
@@ -124,31 +124,20 @@ export default function HRNeedsAssessmentCalculator() {
       return;
     }
     
-    console.log('Attempting PDF generation with:', calculationResult);
-    
     try {
-      const filename = await downloadCalculatorPDF('needs-assessment', calculationResult, leadData);
-      console.log('PDF generated successfully:', filename);
-      setDownloaded(true);
-      setTimeout(() => setDownloaded(false), 3000);
+      console.log('Preparing to send PDF via email:', calculationResult);
+      
+      await generatePdfWithStates(
+        'needs-assessment',
+        calculationResult,
+        leadData,
+        setDownloaded, // Used for loading state
+        setDownloaded, // Used for success state
+        (error) => console.error('PDF Error:', error)
+      );
     } catch (error) {
       console.error('PDF generation failed:', error);
-      console.error('Error details:', {
-        message: error.message,
-        stack: error.stack,
-        calculationResult: calculationResult
-      });
-      
-      // Fallback to old TXT method
-      const text = `HR Needs Assessment Report\n\nCompany Details:\n- Industry: ${calculationResult.industry}\n- Number of Employees: ${calculationResult.employees}\n\nAssessment Results:\n- Recommended HR FTE: ${calculationResult.recommendedFTE}\n- Suggested Service Package: ${calculationResult.recommendedPackage}\n\nAnalysis:\nFor a ${calculationResult.industry} company with ${calculationResult.employees} employees, you typically need ${calculationResult.recommendedFTE} full-time HR staff.\n\nGenerated on: ${new Date().toLocaleDateString()}`;
-      const blob = new Blob([text], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'hr-needs-assessment-report.txt';
-      a.click();
-      URL.revokeObjectURL(url);
-      setDownloaded(true);
+      setDownloaded(false);
     }
   };
 

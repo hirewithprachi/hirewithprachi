@@ -20,24 +20,38 @@ export const AuthProvider = ({ children }) => {
     // Get initial session
     const getInitialSession = async () => {
       try {
+        console.log('🔍 Getting initial session...');
         const { data: { session } } = await supabase.auth.getSession();
+        console.log('📋 Session data:', session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
+          console.log('👤 User found, loading admin info...');
           await loadAdminInfo(session.user.id);
+        } else {
+          console.log('❌ No user in session');
         }
       } catch (error) {
-        console.error('Error getting initial session:', error);
+        console.error('❌ Error getting initial session:', error);
       } finally {
+        console.log('✅ Setting loading to false');
         setLoading(false);
       }
     };
+
+    // Add timeout to prevent infinite loading
+    const timeoutId = setTimeout(() => {
+      console.log('⏰ Authentication timeout - forcing loading to false');
+      setLoading(false);
+    }, 10000); // 10 second timeout
 
     getInitialSession();
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('🔄 Auth state change:', event, session);
+        clearTimeout(timeoutId); // Clear timeout on auth change
         setUser(session?.user ?? null);
         
         if (session?.user) {
@@ -50,31 +64,35 @@ export const AuthProvider = ({ children }) => {
       }
     );
 
-    return () => subscription.unsubscribe();
+    return () => {
+      clearTimeout(timeoutId);
+      subscription.unsubscribe();
+    };
   }, []);
 
   const loadAdminInfo = async (userId) => {
     try {
-      // Check if Supabase is available
-      if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
-        console.warn('⚠️ Supabase not configured - using mock admin info');
-        setAdminInfo({
-          email: 'prachishri005@gmail.com',
-          role: 'admin',
-          is_active: true
-        });
-        return;
-      }
+      console.log('🔍 Loading admin info for user:', userId);
       
-      const { data, error } = await supabase.rpc('get_admin_info');
+      // Use direct query to admin_users table
+      const { data, error } = await supabase
+        .from('admin_users')
+        .select('*')
+        .eq('user_id', userId)
+        .eq('is_active', true)
+        .single();
+        
+      console.log('📋 Admin query result:', { data, error });
+        
       if (!error && data) {
+        console.log('✅ Admin info loaded successfully:', data);
         setAdminInfo(data);
       } else {
-        console.error('Error loading admin info:', error);
+        console.error('❌ Error loading admin info:', error);
         setAdminInfo(null);
       }
     } catch (error) {
-      console.error('Error loading admin info:', error);
+      console.error('❌ Error loading admin info:', error);
       setAdminInfo(null);
     }
   };

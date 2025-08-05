@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { Calculator, Users, Mail, Phone, TrendingUp, DollarSign, PieChart, Download, Share2, Star, CheckCircle, ArrowRight, Building, Award, Shield, Calendar, Clock, FileText, ArrowLeft, User } from 'lucide-react';
 import { formSubmission } from '../lib/supabase';
-import { downloadCalculatorPDF, shareCalculatorResult } from '../lib/html2pdfGenerator';
+// PDF generation removed - will be replaced with Supabase Edge Function
 import ShareResultModal from './ShareResultModal';
 
 const EmployeeSalaryCalculator = () => {

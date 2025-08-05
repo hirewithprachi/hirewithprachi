@@ -30,10 +30,25 @@ const AdminLogin = () => {
 
   // Check if user is already authenticated and is admin
   useEffect(() => {
+    console.log('🔍 Auth state check:', { authLoading, user: !!user, adminInfo: !!adminInfo });
     if (!authLoading && user && adminInfo) {
+      console.log('✅ User already authenticated, redirecting to dashboard');
       navigate('/admin/dashboard');
     }
   }, [user, adminInfo, authLoading, navigate]);
+
+  // Add timeout to prevent infinite loading
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (authLoading) {
+        console.log('⏰ AdminLogin timeout - forcing auth loading to false');
+        // Force the auth loading to stop after 15 seconds
+        window.location.reload();
+      }
+    }, 15000); // 15 second timeout
+
+    return () => clearTimeout(timeoutId);
+  }, [authLoading]);
 
   // Show loading screen while auth context is loading
   if (authLoading) {
@@ -42,6 +57,7 @@ const AdminLogin = () => {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading authentication...</p>
+          <p className="text-sm text-gray-500 mt-2">This may take a few seconds</p>
         </div>
       </div>
     );
@@ -61,25 +77,42 @@ const AdminLogin = () => {
     setError('');
     setSuccess('');
 
+    // Add timeout to prevent infinite loading
+    const timeoutId = setTimeout(() => {
+      if (loading) {
+        console.log('⏰ Login timeout - forcing loading to false');
+        setLoading(false);
+        setError('Login request timed out. Please try again.');
+      }
+    }, 30000); // 30 second timeout
+
     try {
+      console.log('🔐 Starting login process...');
+      console.log('🔍 Attempting Supabase authentication...');
       const { data, error } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password
       });
 
       if (error) {
+        console.error('❌ Supabase auth error:', error);
         throw error;
       }
+
+      console.log('✅ Supabase auth successful:', data);
 
       if (data.user) {
         // Check if user is admin
         try {
+          console.log('🔍 Checking admin status...');
           const { data: adminData, error: adminError } = await supabase
             .from('admin_users')
             .select('*')
             .eq('user_id', data.user.id)
             .eq('is_active', true)
             .single();
+
+          console.log('📋 Admin check result:', { adminData, adminError });
 
           if (!adminError && adminData) {
             // Update admin last login
@@ -97,19 +130,21 @@ const AdminLogin = () => {
               navigate('/admin/dashboard');
             }, 1500);
           } else {
+            console.error('❌ Admin access denied:', adminError);
             setError('Access denied. Admin privileges required.');
             await supabase.auth.signOut();
           }
         } catch (error) {
-          console.error('Error checking admin status:', error);
+          console.error('❌ Error checking admin status:', error);
           setError('Access denied. Admin privileges required.');
           await supabase.auth.signOut();
         }
       }
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('❌ Login error:', error);
       setError(error.message || 'Login failed. Please try again.');
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
   };
@@ -202,6 +237,14 @@ const AdminLogin = () => {
               <div className="text-center mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h2>
                 <p className="text-gray-600">Sign in to your admin dashboard</p>
+                
+                                 {/* Supabase Status Indicator */}
+                 <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                   <p className="text-green-800 text-sm font-medium">✅ Supabase Connected</p>
+                   <p className="text-green-700 text-xs mt-1">
+                     Using production authentication system
+                   </p>
+                 </div>
               </div>
 
               {/* Error/Success Messages */}

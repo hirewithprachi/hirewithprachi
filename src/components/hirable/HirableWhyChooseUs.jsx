@@ -69,7 +69,7 @@ export default function HirableWhyChooseUs({ openConsultationModal }) {
         <div className="w-full md:w-1/2 flex justify-center items-center">
           <div className="relative w-full max-w-sm md:max-w-md aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
             <img
-              src="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-2.jpg"
+              src="/assets/images/about-img-2.jpg"
               alt="Virtual HR Services"
               className="w-full h-full object-cover"
             />

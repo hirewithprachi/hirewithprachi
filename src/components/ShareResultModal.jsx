@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Download, Share2, MessageCircle, Linkedin, Twitter, Mail, Copy, Check } from 'lucide-react';
-import { downloadCalculatorPDF, shareCalculatorResult } from '../lib/html2pdfGenerator';
-
+// PDF generation removed - will be replaced with Supabase Edge Function
 const ShareResultModal = ({ isOpen, onClose, calculatorType, result, userData }) => {
   const [copied, setCopied] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);

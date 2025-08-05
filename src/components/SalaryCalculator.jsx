@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Calculator, TrendingUp, MapPin, Briefcase, GraduationCap, DollarSign, Download, Share2, User, Mail, Phone, Building, ArrowLeft, Star, CheckCircle, Award, Shield, ArrowRight, Heart, Target, Zap, AlertCircle, BarChart3, TrendingDown } from 'lucide-react';
 import { formSubmission } from '../lib/supabase';
 import SearchableDropdown from './SearchableDropdown';
-import { downloadCalculatorPDF, shareCalculatorResult } from '../lib/html2pdfGenerator';
+import { generatePdfWithStates } from '../lib/supabasePdfGenerator';
 import ShareResultModal from './ShareResultModal';
 
 export default function SalaryCalculator() {
@@ -815,47 +815,38 @@ export default function SalaryCalculator() {
     if (!result) return;
     
     try {
-      const filename = await downloadCalculatorPDF('salary', result, leadData);
-      setDownloaded(true);
-      setTimeout(() => setDownloaded(false), 3000);
+      console.log('Preparing to send PDF via email:', result);
+      
+      // Prepare data for PDF generation
+      const pdfData = {
+        calculatedSalary: result.calculatedSalary,
+        minSalary: result.minSalary,
+        maxSalary: result.maxSalary,
+        position: result.position,
+        breakdown: result.breakdown,
+        skillsBonus: result.skillsBonus,
+        userDetails: {
+          name: leadData.name,
+          email: leadData.email,
+          phone: leadData.phone,
+          company: leadData.company,
+          designation: leadData.designation,
+          employees: leadData.employees
+        }
+      };
+
+      await generatePdfWithStates(
+        'salary',
+        pdfData,
+        leadData,
+        setDownloaded, // Used for loading state
+        setDownloaded, // Used for success state
+        (error) => console.error('PDF Error:', error)
+      );
+      
     } catch (error) {
       console.error('PDF generation failed:', error);
-      // Fallback to old TXT method
-      const report = `Salary Calculator Report
-=======================
-
-Position: ${result.position}
-Calculated Salary: ₹${result.calculatedSalary.toLocaleString('en-IN')}
-Salary Range: ₹${result.minSalary.toLocaleString('en-IN')} - ₹${result.maxSalary.toLocaleString('en-IN')}
-
-Breakdown:
-- Base Salary: ₹${result.breakdown.base.toLocaleString('en-IN')}
-- Experience Multiplier: ${result.breakdown.experience}x
-- Location Multiplier: ${result.breakdown.location}x
-- Education Multiplier: ${result.breakdown.education}x
-- Company Size Multiplier: ${result.breakdown.companySize}x
-- Industry Multiplier: ${result.breakdown.industry}x
-- Skills Bonus: ₹${result.skillsBonus.toLocaleString('en-IN')}
-
-User Details:
-- Name: ${leadData.name}
-- Email: ${leadData.email}
-- Phone: ${leadData.phone}
-- Company: ${leadData.company}
-- Designation: ${leadData.designation}
-- Company Size: ${leadData.employees} employees
-
-Generated on: ${new Date().toLocaleDateString('en-IN')}
-    `;
-
-      const blob = new Blob([report], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `salary-report-${result.position.toLowerCase().replace(/\s+/g, '-')}.txt`;
-      a.click();
-      URL.revokeObjectURL(url);
-      setDownloaded(true);
+      setDownloaded(false);
     }
   };
 

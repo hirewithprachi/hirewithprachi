@@ -48,23 +48,33 @@ const BlogCard = ({ post, index = 0, variant = 'default' }) => {
   };
 
   return (
-    <motion.article
-      className={`${cardVariants[variant]} hover:-translate-y-2`}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -8 }}
-    >
+    <Link to={`/blog/${post.slug}`} className="block">
+      <motion.article
+        className={`${cardVariants[variant]} hover:-translate-y-2 cursor-pointer`}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        whileHover={{ y: -8 }}
+      >
       {/* Featured Image */}
       <div className={imageVariants[variant]}>
         {post.image ? (
-          <img 
-            src={post.image} 
-            alt={post.title} 
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
+          post.image.endsWith('.svg') ? (
+            <img 
+              src={post.image} 
+              alt={post.title} 
+              className="w-full h-full object-contain p-4"
+              loading="lazy"
+            />
+          ) : (
+            <img 
+              src={post.image} 
+              alt={post.title} 
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          )
         ) : (
           <svg className="w-16 h-16 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -121,8 +131,7 @@ const BlogCard = ({ post, index = 0, variant = 'default' }) => {
           </div>
           
           {/* Ultra-Futuristic Read More Button */}
-          <Link 
-            to={`/blog/${post.slug}`} 
+          <div 
             className="group relative inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold text-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden"
           >
             {/* Animated Background Overlay */}
@@ -141,7 +150,7 @@ const BlogCard = ({ post, index = 0, variant = 'default' }) => {
             
             {/* Holographic Glow Effect */}
             <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400/20 to-blue-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          </Link>
+          </div>
         </div>
 
         {/* Tags (for featured variant) */}
@@ -158,7 +167,8 @@ const BlogCard = ({ post, index = 0, variant = 'default' }) => {
           </div>
         )}
       </div>
-    </motion.article>
+      </motion.article>
+    </Link>
   );
 };
 

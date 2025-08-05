@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { formSubmission } from '../lib/supabase';
-import { downloadCalculatorPDF, shareCalculatorResult } from '../lib/html2pdfGenerator';
+// PDF generation removed - will be replaced with Supabase Edge Function
 import { TrendingUp, Download, Mail, Calculator } from 'lucide-react';
 
 const salaryData = {
@@ -68,41 +68,18 @@ export default function SalaryBenchmarkingTool() {
   };
 
   async function handleDownload() {
+    // PDF generation will be handled by Supabase Edge Function
     try {
-      console.log('Attempting PDF generation with:', result);
+      console.log('Preparing to send PDF via email:', result);
       
-      // Prepare data for PDF generation
-      const pdfData = {
-        min: result.min,
-        avg: result.avg,
-        max: result.max,
-        jobTitle: job,
-        location: location,
-        yearsExperience: years
-      };
+      // TODO: Implement Supabase Edge Function call here
+      // This will be replaced with the new PDF generation system
       
-      const filename = await downloadCalculatorPDF('benchmarking', pdfData, { email });
-      console.log('PDF generated successfully:', filename);
       setDownloaded(true);
       setTimeout(() => setDownloaded(false), 3000);
     } catch (error) {
       console.error('PDF generation failed:', error);
-      console.error('Error details:', {
-        message: error.message,
-        stack: error.stack,
-        result: result
-      });
-      
-      // Fallback to old TXT method
-      const text = `Salary Benchmarking Result\n\nJob Title: ${job}\nLocation: ${location}\nYears of Experience: ${years}\n\nEstimated Salary Range:\nMin: ₹${result.min.toLocaleString('en-IN')}\nAvg: ₹${result.avg.toLocaleString('en-IN')}\nMax: ₹${result.max.toLocaleString('en-IN')}`;
-      const blob = new Blob([text], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'salary-benchmarking-result.txt';
-      a.click();
-      URL.revokeObjectURL(url);
-      setDownloaded(true);
+      setDownloaded(false);
     }
   }
 

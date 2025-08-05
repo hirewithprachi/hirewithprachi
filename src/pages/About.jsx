@@ -16,25 +16,25 @@ import OptimizedImage from '../components/OptimizedImage';
 
 const galleryImages = [
   {
-    src: '/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg',
+    src: '/assets/images/about-img-1.jpg',
     title: 'Keynote at HR Tech Summit',
     date: '2024-03-15',
     desc: 'Prachi delivering a keynote on digital HR transformation.'
   },
   {
-    src: '/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-2.jpg',
+    src: '/assets/images/about-img-2.jpg',
     title: 'Panelist at Women in Leadership',
     date: '2023-11-10',
     desc: 'Panel discussion on women in HR leadership roles.'
   },
   {
-    src: '/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-3.jpg',
+    src: '/assets/images/about-img-3.jpg',
     title: 'Corporate Training Workshop',
     date: '2023-08-22',
     desc: 'Prachi conducting a talent management workshop.'
   },
   {
-    src: '/Hirable – Human Resources & Recruiting WordPress Theme_files/benefit-img-1.jpg',
+    src: '/assets/images/benefit-img-1.jpg',
     title: 'HR Compliance Seminar',
     date: '2022-12-05',
     desc: 'Seminar on latest HR compliance trends.'
@@ -62,7 +62,7 @@ const personSchema = {
   "@type": "Person",
   "name": "Prachi Shrivastava",
   "jobTitle": "Virtual HR Consultant",
-  "image": "/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg",
+  "image": "/assets/images/about-img-1.jpg",
   "description": "India's leading virtual HR consultant for startups and SMEs. Expert in HR consulting, policy drafting, talent management, and compliance.",
   "sameAs": [
     "https://www.linkedin.com/in/prachi-shrivastava-hr",
@@ -75,7 +75,7 @@ const orgSchema = {
   "@type": "Organization",
   "name": "Prachi Shrivastava HR Consulting",
   "url": "https://hirewithprachi.com",
-  "logo": "/Hirable – Human Resources & Recruiting WordPress Theme_files/logo.svg"
+  "logo": "/assets/images/logo.svg"
 };
 
 const imageGallerySchema = {
@@ -129,13 +129,13 @@ export default function AboutPage() {
         <meta name="keywords" content="Prachi Shrivastava, virtual HR consultant, HR expert, HR services India, HR events, HR seminars, HR gallery, HR consulting, HR compliance" />
         <meta property="og:title" content="About Prachi Shrivastava – Virtual HR Consultant & Expert" />
         <meta property="og:description" content="Meet Prachi Shrivastava, India's leading virtual HR consultant. Explore her services and event gallery. Book a free consultation today!" />
-        <meta property="og:image" content="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg" />
+        <meta property="og:image" content="/assets/images/about-img-1.jpg" />
         <meta property="og:url" content="https://hirewithprachi.com/about" />
         <meta property="og:type" content="profile" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Prachi Shrivastava – Virtual HR Consultant & Expert" />
         <meta name="twitter:description" content="Meet Prachi Shrivastava, India's leading virtual HR consultant. Explore her services and event gallery. Book a free consultation today!" />
-        <meta name="twitter:image" content="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg" />
+        <meta name="twitter:image" content="/assets/images/about-img-1.jpg" />
         <link rel="canonical" href="https://hirewithprachi.com/about" />
         <script type="application/ld+json">{JSON.stringify(personSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
@@ -153,7 +153,7 @@ export default function AboutPage() {
           <div 
             className="absolute inset-0 w-full h-full bg-cover bg-center video-fallback"
             style={{
-              backgroundImage: 'url(/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg)',
+              backgroundImage: 'url(/assets/images/about-img-1.jpg)',
               filter: 'brightness(0.8)'
             }}
           />
@@ -218,7 +218,7 @@ export default function AboutPage() {
               >
                 <div className="relative overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl">
                   <img 
-                    src="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-2.jpg" 
+                    src="/assets/images/about-img-2.jpg" 
                     alt="Prachi Shrivastava at HR event" 
                     className="w-full h-[400px] md:h-[600px] object-cover transform group-hover:scale-110 transition-transform duration-700" 
                     loading="lazy" 
@@ -432,21 +432,21 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {[
                 {
-                  image: "/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg",
+                  image: "/assets/images/about-img-1.jpg",
                   title: "HR Tech Summit 2024",
                   description: "Keynote speaker on 'Future of HR Technology' at India's premier HR tech conference",
                   date: "March 2024",
                   attendees: "500+ HR professionals"
                 },
                 {
-                  image: "/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-3.jpg", 
+                  image: "/assets/images/about-img-3.jpg", 
                   title: "Startup HR Workshop",
                   description: "Intensive 2-day workshop on building HR foundations for early-stage startups",
                   date: "February 2024",
                   attendees: "50+ startup founders"
                 },
                 {
-                  image: "/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-2.jpg",
+                  image: "/assets/images/about-img-2.jpg",
                   title: "Women in HR Leadership",
                   description: "Panel discussion on breaking barriers and building inclusive workplaces",
                   date: "January 2024", 
@@ -504,12 +504,12 @@ export default function AboutPage() {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Tools & Tech You Use</h2>
             <div className="flex flex-wrap justify-center gap-8">
-              <OptimizedImage src="/images/unnamed.png" alt="Zoho HR" className="h-12 w-auto object-contain" />
-              <OptimizedImage src="/images/BambooHR-Logo.jpg" alt="BambooHR" className="h-12 w-auto object-contain" />
-              <OptimizedImage src="/images/HiView-Solutions-Google-Workspace-Reseller.-Super-G-Icon.png" alt="Google Workspace" className="h-12 w-auto object-contain" />
-              <OptimizedImage src="/images/microsoft-365-copilot-logo-png_seeklogo-501781.png" alt="Microsoft 365" className="h-12 w-auto object-contain" />
-              <OptimizedImage src="/images/nforceit-partner-google-workspace-logo-800x400.png" alt="Google Workspace Alt" className="h-12 w-auto object-contain" />
-              <OptimizedImage src="/images/People-Logo-1024x1024.webp" alt="People HR" className="h-12 w-auto object-contain" />
+              <OptimizedImage src="/assets/images/unnamed.png" alt="Zoho HR" className="h-12 w-auto object-contain" />
+<OptimizedImage src="/assets/images/BambooHR-Logo.jpg" alt="BambooHR" className="h-12 w-auto object-contain" />
+<OptimizedImage src="/assets/images/HiView-Solutions-Google-Workspace-Reseller.-Super-G-Icon.png" alt="Google Workspace" className="h-12 w-auto object-contain" />
+<OptimizedImage src="/assets/images/microsoft-365-copilot-logo-png_seeklogo-501781.png" alt="Microsoft 365" className="h-12 w-auto object-contain" />
+<OptimizedImage src="/assets/images/nforceit-partner-google-workspace-logo-800x400.png" alt="Google Workspace Alt" className="h-12 w-auto object-contain" />
+<OptimizedImage src="/assets/images/People-Logo-1024x1024.webp" alt="People HR" className="h-12 w-auto object-contain" />
             </div>
           </div>
         </section>

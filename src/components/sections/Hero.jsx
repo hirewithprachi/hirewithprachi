@@ -32,7 +32,7 @@ export default function Hero() {
       {/* Right: Hero Image */}
       <div className="flex-1 flex items-center justify-center mt-12 md:mt-0 relative">
         <img
-          src="/prachi-rejoin.png"
+          src="/assets/images/prachi-logo.webp"
           alt="Prachi Rejoin Hero"
           className="w-full max-w-2xl rounded-3xl shadow-2xl border-4 border-white animate-fadeInUp"
           style={{ minHeight: 320, objectFit: 'cover' }}

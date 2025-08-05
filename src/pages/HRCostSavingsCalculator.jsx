@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { Calculator, Users, Mail, Phone, TrendingUp, DollarSign, PieChart, Download, Share2, Star, CheckCircle, ArrowRight, Building, Award, Shield, Calendar, Clock, FileText, ArrowLeft, User } from 'lucide-react';
 import { formSubmission } from '../lib/supabase';
-import { downloadCalculatorPDF, shareCalculatorResult } from '../lib/html2pdfGenerator';
+
 import ShareResultModal from '../components/ShareResultModal';
 import { useFormValidation, validationRules } from '../lib/useFormValidation';
 import { LoadingSpinner } from '../components/ui/LoadingSpinner';
@@ -130,18 +130,131 @@ export default function HRCostSavingsCalculator() {
       }, 'hr_cost_savings');
       
       if (result.success) {
-        // Trigger download after successful submission
-        handleDownload();
-        setDownloaded(true);
-        setFormSubmitted(true);
-        
-        // Hide the form after successful submission
-        setTimeout(() => {
-          setShowLeadForm(false);
-          setFormSubmitted(false);
-        }, 3000);
-        
-        alert('✅ Data saved successfully! Your cost savings report has been downloaded.');
+        // Create and download the professional text report
+        try {
+          const totalCurrent = Number(salary) + Number(benefits) + Number(overhead);
+          const selectedPackage = packages.find(p => p.name === pkg);
+          const annualServiceCost = selectedPackage ? selectedPackage.monthly * 12 : 0;
+          const estimatedSavings = totalCurrent * Number(employees) - annualServiceCost;
+          
+          const report = `HIRE WITH PRACHI - PROFESSIONAL HR SOLUTIONS
+====================================================
+"Transforming HR for Startups & SMEs with Expert Solutions"
+🌐 Website: prachi-hr.com | 📧 info@hirewithprachi.com | 📱 +91-8740889927
+
+HR COST SAVINGS CALCULATOR REPORT
+=================================
+
+Dear ${leadData.name || 'Valued Client'},
+
+Thank you for using our HR Cost Savings Calculator. Here's your comprehensive analysis to help you make informed decisions about your HR strategy.
+
+📊 EXECUTIVE SUMMARY
+====================
+Your organization can achieve significant cost savings of ${((estimatedSavings / (totalCurrent * Number(employees))) * 100).toFixed(1)}% by transitioning to our Virtual HR Services, while maintaining or improving HR quality and compliance.
+
+💰 CURRENT HR COSTS BREAKDOWN
+============================
+• Salary per employee: ₹${formatCurrency(Number(salary))}
+• Benefits per employee: ₹${formatCurrency(Number(benefits))}
+• Overhead per employee: ₹${formatCurrency(Number(overhead))}
+• Total current cost per employee: ₹${formatCurrency(totalCurrent)}
+• Number of employees: ${employees}
+• Total annual HR cost: ₹${formatCurrency(totalCurrent * Number(employees))}
+
+🚀 VIRTUAL HR SERVICE SOLUTION
+==============================
+• Selected package: ${pkg}
+• Annual service cost: ₹${formatCurrency(annualServiceCost)}
+• Service includes: Complete HR management, compliance, recruitment, payroll, and employee engagement
+
+💡 SAVINGS ANALYSIS
+==================
+• Annual savings: ₹${formatCurrency(estimatedSavings)}
+• Savings percentage: ${((estimatedSavings / (totalCurrent * Number(employees))) * 100).toFixed(1)}%
+• Monthly savings: ₹${formatCurrency(estimatedSavings / 12)}
+• 3-year savings potential: ₹${formatCurrency(estimatedSavings * 3)}
+
+📈 BUSINESS IMPACT & BENEFITS
+=============================
+✅ Improved efficiency through professional HR management
+✅ Reduced compliance risks and legal costs
+✅ Enhanced employee satisfaction and retention
+✅ Scalable HR solutions as your business grows
+✅ Access to HR expertise without full-time overhead
+✅ Focus on core business activities
+✅ 24/7 HR support and guidance
+
+🎯 OUR COMPREHENSIVE SERVICES
+=============================
+• HR Strategy & Consulting
+• Recruitment & Talent Acquisition
+• Employee Engagement Programs
+• HR Compliance & Legal Support
+• Performance Management Systems
+• Payroll & Benefits Administration
+• Training & Development Programs
+• HR Technology Implementation
+• Employee Handbook Development
+• HR Audit & Risk Assessment
+• Workplace Culture Building
+• HR Process Optimization
+
+👤 CLIENT DETAILS
+=================
+• Name: ${leadData.name}
+• Email: ${leadData.email}
+• Company: ${leadData.company}
+• Designation: ${leadData.designation}
+• Company Size: ${leadData.employees} employees
+
+📞 CONTACT INFORMATION
+======================
+📧 Email: info@hirewithprachi.com
+📱 Phone: +91-8740889927
+🌐 Website: prachi-hr.com
+📍 Location: India
+
+🎯 NEXT STEPS
+=============
+Ready to transform your HR strategy? Book a FREE consultation with our HR experts to discuss how we can help you implement these cost-saving solutions and optimize your HR operations.
+
+Our expert team will:
+• Analyze your current HR processes
+• Develop a customized implementation plan
+• Guide you through the transition
+• Provide ongoing support and optimization
+
+Generated on: ${new Date().toLocaleDateString('en-IN')}
+Report ID: HR-CS-${Date.now()}
+
+---
+"Professional HR Solutions for Startups & SMEs"
+Hire With Prachi - Your HR Transformation Partner
+🌐 prachi-hr.com | 📧 info@hirewithprachi.com | 📱 +91-8740889927
+          `;
+
+          const blob = new Blob([report], { type: 'text/plain' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `hr-cost-savings-report-${new Date().toISOString().split('T')[0]}.txt`;
+          a.click();
+          URL.revokeObjectURL(url);
+          
+          setFormSubmitted(true);
+          
+          // Hide the form after successful submission
+          setTimeout(() => {
+            setShowLeadForm(false);
+            setFormSubmitted(false);
+          }, 3000);
+          
+          alert('✅ Data saved successfully! Your cost savings report has been downloaded.');
+        } catch (error) {
+          console.error('Report generation failed:', error);
+          alert('✅ Data saved successfully! However, there was an issue generating your report. Please contact support.');
+        }
       } else {
         console.error('Form submission failed:', result.error);
         alert('Failed to submit form. Please try again.');
@@ -162,27 +275,7 @@ export default function HRCostSavingsCalculator() {
     }));
   };
 
-  const handleDownload = async () => {
-    if (!calculationResult) return;
-    
-    try {
-      const filename = await downloadCalculatorPDF('cost-savings', calculationResult, leadData);
-      setDownloaded(true);
-      setTimeout(() => setDownloaded(false), 3000);
-    } catch (error) {
-      console.error('PDF generation failed:', error);
-      // Fallback to old TXT method
-      const text = `HR Cost Savings Report\n\nCurrent Costs:\n- HR Salary: ${formatCurrency(Number(salary))}\n- Benefits & Perks: ${formatCurrency(Number(benefits))}\n- Overhead: ${formatCurrency(Number(overhead))}\n- Employees: ${employees}\n\nSelected Package: ${pkg}\nAnnual Service Cost: ${formatCurrency(annualServiceCost)}\n\nEstimated Annual Savings: ${formatCurrency(estimatedSavings)}\n\nGenerated on: ${new Date().toLocaleDateString()}`;
-      const blob = new Blob([text], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'hr-cost-savings-report.txt';
-      a.click();
-      URL.revokeObjectURL(url);
-      setDownloaded(true);
-    }
-  };
+
 
   const handleShare = () => {
     setShowShareModal(true);

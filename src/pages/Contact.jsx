@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import ContactForm from '../components/ContactForm';
 import ContactMap from '../components/ContactMap';
+import CalendlyBooking from '../components/CalendlyBooking';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
@@ -25,7 +26,7 @@ export default function Contact() {
         {/* Open Graph */}
         <meta property="og:title" content="Contact Prachi Shrivastava | Virtual HR Consultant" />
         <meta property="og:description" content="Get expert virtual HR services and free consultation. Contact Prachi Shrivastava for startup and SME HR solutions across India and globally." />
-        <meta property="og:image" content="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg" />
+        <meta property="og:image" content="/assets/images/about-img-1.jpg" />
         <meta property="og:url" content="https://hirewithprachi.com/contact" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Hire With Prachi" />
@@ -34,7 +35,7 @@ export default function Contact() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contact Prachi Shrivastava | Virtual HR Consultant" />
         <meta name="twitter:description" content="Get expert virtual HR services and free consultation. Contact Prachi Shrivastava for startup and SME HR solutions." />
-        <meta name="twitter:image" content="/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg" />
+        <meta name="twitter:image" content="/assets/images/about-img-1.jpg" />
         
         {/* Canonical */}
         <link rel="canonical" href="https://hirewithprachi.com/contact" />
@@ -284,28 +285,8 @@ export default function Contact() {
                         aria-labelledby="booking-tab"
                         id="booking-panel"
                       >
-                        <div className="mb-8">
-                          <h2 className="text-3xl font-bold gradient-text mb-4 flex items-center gap-3">
-                            <span className="text-3xl">📅</span>
-                            Book Free Consultation
-                          </h2>
-                          <p className="text-gray-600 text-lg">
-                            Schedule a 30-minute free consultation to discuss your HR challenges and solutions.
-                          </p>
-                        </div>
-                        <div className="text-center p-8">
-                          <h3 className="text-2xl font-bold text-gray-900 mb-4">Book Your Free Consultation</h3>
-                          <p className="text-gray-600 mb-6">Fill out the contact form above to schedule your free 30-minute consultation. We'll get back to you within 24 hours to confirm your appointment.</p>
-                          <div className="bg-blue-50 rounded-lg p-4">
-                            <p className="text-sm text-blue-800">
-                              <strong>What to expect:</strong><br/>
-                              • 30-minute free consultation<br/>
-                              • HR assessment and recommendations<br/>
-                              • Customized service proposal<br/>
-                              • No obligation to proceed
-                            </p>
-                          </div>
-                        </div>
+
+                        <CalendlyBooking />
                       </motion.div>
                     )}
 
