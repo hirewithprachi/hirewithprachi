@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -12,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    const { type, data, user } = await req.json()
+    const { type, data, user, markdown, storagePath } = await req.json()
 
     // Validate required fields
     if (!type || !data || !user || !user.email) {
@@ -23,6 +24,31 @@ serve(async (req) => {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
         }
       )
+    }
+
+    // Optional: if markdown + storagePath provided, save PDF to Storage and return a signed URL
+    if (markdown && storagePath) {
+      // naive markdown->html conversion (clients should provide html for high fidelity)
+      const html = `<!doctype html><html><head><meta charset="utf-8"><title>Resource</title></head><body><pre>${markdown
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')}</pre></body></html>`
+
+      // Use Deno's print to PDF via chrome-aws-lambda-like approach is not available here; instead we store the markdown for now
+      const supabase = createClient(
+        Deno.env.get('SUPABASE_URL') ?? '',
+        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+      )
+
+      const encoder = new TextEncoder()
+      const bytes = encoder.encode(markdown as string)
+      const uploadRes = await supabase.storage.from('resource-downloads').upload(storagePath as string, bytes, {
+        contentType: 'text/markdown',
+        upsert: true
+      })
+      if (uploadRes.error) throw uploadRes.error
+      const { data: signed } = await supabase.storage.from('resource-downloads').createSignedUrl(storagePath as string, 300)
+      return new Response(JSON.stringify({ success: true, signedUrl: signed?.signedUrl }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
     // Create professional email content

@@ -108,7 +108,6 @@ const Footer = () => (
             <Link to="/privacy-policy" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">Privacy Policy</Link>
             <Link to="/terms-of-service" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">Terms of Service</Link>
             <Link to="/gdpr-data-deletion" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">GDPR Data Deletion</Link>
-            <Link to="/admin/dashboard" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">Admin</Link>
           </div>
         </div>
       </div>

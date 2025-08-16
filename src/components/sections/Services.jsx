@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Users, FileText, Briefcase, DollarSign, Settings, Award, Zap, MessageSquare, BarChart2, KeyRound as UsersRound, UserPlus, FileSpreadsheet, HeartHandshake as Handshake, Brain, Presentation, Smile, Search, Info, Shield, TrendingUp, Globe, Clock, Star, Target, Sparkles, Building2 } from 'lucide-react';
+import { ArrowRight, Users, FileText, Briefcase, DollarSign, Settings, Award, Zap, MessageSquare, BarChart2, KeyRound as UsersRound, UserPlus, FileSpreadsheet, HeartHandshake as Handshake, Brain, Presentation, Smile, Search, Info, Shield, TrendingUp, Globe, Clock, Star, Target, Sparkles, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const servicesData = [
@@ -18,7 +18,7 @@ const servicesData = [
   { id: 'remote-work-solutions', icon: <Globe className="h-10 w-10 text-primary mb-4" />, title: 'Remote Work Solutions', description: 'Optimize your distributed workforce.', items: ['Hybrid Work Policies', 'Virtual Team Management', 'Remote Culture Building'], color: 'from-sky-500 to-blue-500' },
   { id: 'ai-hr-analytics', icon: <TrendingUp className="h-10 w-10 text-primary mb-4" />, title: 'AI HR Analytics', description: 'Data-driven insights for better decisions.', items: ['People Analytics Dashboard', 'Predictive Turnover Modeling', 'Workforce Planning AI'], color: 'from-emerald-500 to-green-500' },
   { id: 'compliance-legal', icon: <Shield className="h-10 w-10 text-primary mb-4" />, title: 'Compliance & Legal', description: 'Stay ahead of regulatory requirements.', items: ['GDPR Compliance Auditing', 'Employment Law Updates', 'Risk Assessment Tools'], color: 'from-red-500 to-pink-500' },
-  { id: 'hr-technology-integration', icon: <Building2 className="h-10 w-10 text-primary mb-4" />, title: 'HR Technology Integration', description: 'Seamless HR system implementation and optimization.', items: ['HRMS Selection & Setup', 'System Integration Services', 'Digital Transformation Consulting'], color: 'from-slate-500 to-gray-500' },
+  { id: 'hr-technology-integration', icon: <Building className="h-10 w-10 text-primary mb-4" />, title: 'HR Technology Integration', description: 'Seamless HR system implementation and optimization.', items: ['HRMS Selection & Setup', 'System Integration Services', 'Digital Transformation Consulting'], color: 'from-slate-500 to-gray-500' },
 ];
 
 const cardVariants = {

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
-import AIChatbotWidget from '../components/AIChatbotWidget';
+import GPT4oMiniChatbot from '../components/GPT4oMiniChatbot';
 import FreeTools from '../components/FreeTools';
 import ScrollProgressBar from '../components/ScrollProgressBar';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -14,8 +13,22 @@ import { servicesData } from '../data/servicesData';
 import FAQSection from '../components/sections/FAQSection';
 import { servicesPageFaqs } from '../data/faqData';
 import { formSubmission } from '../lib/supabase';
+import SEOOptimizer from '../components/SEOOptimizer';
 
 export default function ServicesPage() {
+  // SEO Data for Services page
+  const seoData = {
+    title: "HR Services - Complete HR Solutions | Hire With Prachi",
+    description: "Complete HR services including compliance, recruitment, employee engagement, payroll management, and performance management for Indian businesses.",
+    keywords: "HR services, HR compliance, recruitment, employee engagement, payroll management, performance management, India",
+    pageType: "service",
+    pageData: {
+      title: "Complete HR Services",
+      description: "Professional HR services for Indian businesses",
+      image: "https://hirewithprachi.com/assets/images/hr-services-1200x630.jpg"
+    }
+  };
+
   const [selectedService, setSelectedService] = useState('all');
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -106,173 +119,43 @@ export default function ServicesPage() {
 
   return (
     <>
-      <Helmet>
-        {/* Primary Meta Tags */}
-        <title>Virtual HR Services & Solutions | Professional HR Consulting for Startups & SMEs</title>
-        <meta name="title" content="Virtual HR Services & Solutions | Professional HR Consulting for Startups & SMEs" />
-        <meta name="description" content="Expert virtual HR services including compliance management, strategic recruitment, employee engagement, performance management, and HR technology solutions. Transform your HR operations with professional consulting." />
-        <meta name="keywords" content="virtual HR services, HR consulting, HR compliance services, recruitment solutions, employee engagement, performance management, HR technology, startup HR services, SME HR solutions, remote HR support, HR outsourcing, HR audit, HR policy development" />
-        <meta name="author" content="Prachi Shrivastava" />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="English" />
-        <meta name="revisit-after" content="7 days" />
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://hirewithprachi.com/services" />
-        <meta property="og:title" content="Virtual HR Services & Solutions | Professional HR Consulting for Startups & SMEs" />
-        <meta property="og:description" content="Expert virtual HR services including compliance management, strategic recruitment, employee engagement, performance management, and HR technology solutions." />
-        <meta property="og:image" content="https://hirewithprachi.com/services-og-image.png" />
-        <meta property="og:site_name" content="Hire With Prachi" />
-        <meta property="og:locale" content="en_US" />
-        
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://hirewithprachi.com/services" />
-        <meta property="twitter:title" content="Virtual HR Services & Solutions | Professional HR Consulting for Startups & SMEs" />
-        <meta property="twitter:description" content="Expert virtual HR services including compliance management, strategic recruitment, employee engagement, performance management, and HR technology solutions." />
-        <meta property="twitter:image" content="https://hirewithprachi.com/services-twitter-image.png" />
-        <meta property="twitter:creator" content="@hirewithprachi" />
-        
-        {/* Additional SEO Meta Tags */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#0ea5e9" />
-        <meta name="msapplication-TileColor" content="#0ea5e9" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Hire With Prachi Services" />
-        
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://hirewithprachi.com/services" />
-        
-        {/* Structured Data for Services */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Virtual HR Services",
-            "description": "Comprehensive virtual HR services including compliance management, strategic recruitment, employee engagement, performance management, and HR technology solutions.",
-            "provider": {
-              "@type": "ProfessionalService",
-              "name": "Hire With Prachi",
-              "founder": {
-                "@type": "Person",
-                "name": "Prachi Shrivastava",
-                "jobTitle": "Virtual HR Consultant"
-              }
-            },
-            "serviceType": [
-              "HR Compliance Services",
-              "Strategic Recruitment",
-              "Employee Engagement",
-              "Performance Management",
-              "HR Technology Solutions",
-              "Startup HR Foundation"
-            ],
-            "areaServed": ["India", "United States", "United Kingdom", "Canada", "Australia"],
-            "hasOfferCatalog": {
-              "@type": "OfferCatalog",
-              "name": "Virtual HR Services Catalog",
-              "itemListElement": [
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "HR Compliance & Legal Services",
-                    "description": "Comprehensive compliance management to keep your business legally protected"
-                  },
-                  "price": "₹25,000/month",
-                  "priceCurrency": "INR"
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Strategic Recruitment & Hiring",
-                    "description": "End-to-end recruitment solutions to build your dream team"
-                  },
-                  "price": "₹15,000/hire",
-                  "priceCurrency": "INR"
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Employee Engagement & Culture",
-                    "description": "Build a thriving workplace culture that retains top talent"
-                  },
-                  "price": "₹20,000/month",
-                  "priceCurrency": "INR"
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Performance Management Systems",
-                    "description": "Data-driven performance frameworks to maximize productivity"
-                  },
-                  "price": "₹30,000/setup",
-                  "priceCurrency": "INR"
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "HR Technology & Automation",
-                    "description": "Streamline HR processes with cutting-edge technology solutions"
-                  },
-                  "price": "₹50,000/setup",
-                  "priceCurrency": "INR"
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Startup HR Foundation",
-                    "description": "Complete HR setup for startups from day one"
-                  },
-                  "price": "₹75,000/package",
-                  "priceCurrency": "INR"
-                }
-              ]
-            },
-            "review": [
-              {
-                "@type": "Review",
-                "reviewRating": {
-                  "@type": "Rating",
-                  "ratingValue": "5",
-                  "bestRating": "5"
-                },
-                "author": {
-                  "@type": "Person",
-                  "name": "Sarah Johnson"
-                },
-                "reviewBody": "Prachi's virtual HR services transformed our startup. Her expertise in HR compliance and policy development saved us countless hours and potential legal issues."
-              },
-              {
-                "@type": "Review",
-                "reviewRating": {
-                  "@type": "Rating",
-                  "ratingValue": "5",
-                  "bestRating": "5"
-                },
-                "author": {
-                  "@type": "Person",
-                  "name": "Michael Chen"
-                },
-                "reviewBody": "Working with Prachi as our virtual HR consultant has been game-changing. Her remote HR support is professional, efficient, and cost-effective."
-              }
-            ],
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.9",
-              "reviewCount": "127",
-              "bestRating": "5",
-              "worstRating": "1"
-            }
-          })}
-        </script>
+      {/* Comprehensive SEO Optimization */}
+      <SEOOptimizer
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        image={seoData.pageData.image}
+        pageType={seoData.pageType}
+        pageData={seoData.pageData}
+        canonical="https://hirewithprachi.com/services"
+      />
+      
+      {/* Organization Schema Markup */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Hire With Prachi",
+          "url": "https://hirewithprachi.com",
+          "logo": "https://hirewithprachi.com/assets/images/logo.png",
+          "description": "Professional virtual HR consulting services for startups and SMEs",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressRegion": "India"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-87408-89927",
+            "contactType": "customer service",
+            "email": "info@hirewithprachi.com"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/prachishrivastava",
+            "https://twitter.com/hirewithprachi"
+          ]
+        })}
+      </script>
         
         {/* FAQ Structured Data */}
         <script type="application/ld+json">
@@ -323,7 +206,6 @@ export default function ServicesPage() {
             ]
           })}
         </script>
-      </Helmet>
 
       <main className="min-h-screen bg-white" role="main">
         <ScrollProgressBar />
@@ -1655,7 +1537,7 @@ export default function ServicesPage() {
         </section>
 
         <HireWithPrachiFooter />
-        <AIChatbotWidget />
+        <GPT4oMiniChatbot />
       </main>
     </>
   );

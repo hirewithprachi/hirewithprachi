@@ -1,21 +1,21 @@
 import { createClient } from '@supabase/supabase-js'
+import { supabaseConfig, validateConfig } from '../config/environment.js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+// Validate configuration on import
+validateConfig()
+
+const supabaseUrl = supabaseConfig.url
+const supabaseAnonKey = supabaseConfig.anonKey
 
 // Debug environment variables
-console.log('Supabase URL:', supabaseUrl ? 'Set' : 'NOT SET')
-console.log('Supabase Anon Key:', supabaseAnonKey ? 'Set' : 'NOT SET')
+console.log('🔧 Supabase Configuration Check:')
+console.log('Supabase URL:', supabaseUrl ? '✅ Set' : '❌ NOT SET')
+console.log('Supabase Anon Key:', supabaseAnonKey ? '✅ Set' : '❌ NOT SET')
+console.log('Environment:', import.meta.env.MODE || 'development')
 
-// Check if environment variables are set
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('❌ Supabase environment variables are not set!')
-  console.error('Please create a .env.local file with your Supabase credentials:')
-  console.error('VITE_SUPABASE_URL=https://your-project-id.supabase.co')
-  console.error('VITE_SUPABASE_ANON_KEY=your-anon-key-here')
-}
+// Configuration is now handled by environment.js with fallbacks
 
-// Create Supabase client
+// Create Supabase client with enhanced error handling
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
@@ -28,6 +28,26 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     }
   }
 })
+
+// Test connection on initialization
+const testConnection = async () => {
+  try {
+    console.log('🔍 Testing Supabase connection...')
+    const { data, error } = await supabase.from('admin_users').select('count').limit(1)
+    if (error) {
+      console.error('❌ Database connection test failed:', error.message)
+      return false
+    }
+    console.log('✅ Database connection test successful')
+    return true
+  } catch (error) {
+    console.error('❌ Database connection test failed:', error.message)
+    return false
+  }
+}
+
+// Run connection test
+testConnection()
 
 // Database helper functions
 export const db = {

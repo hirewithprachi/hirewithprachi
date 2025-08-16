@@ -78,22 +78,23 @@ export default function HirableHero({ openConsultationModal }) {
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col items-center text-center z-20 mt-2 md:mt-4 lg:mt-8 relative px-2 md:px-4">
+      <div className="flex flex-col items-center text-center z-20 mt-2 md:mt-4 lg:mt-8 relative px-4 md:px-6">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 md:gap-3 bg-white/20 backdrop-blur-sm px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/30 mb-4 md:mb-6">
+        <div className="inline-flex items-center gap-2 md:gap-3 bg-white/20 backdrop-blur-sm px-3 md:px-6 py-2 md:py-3 rounded-full border border-white/30 mb-4 md:mb-6 hover:bg-white/30 transition-all duration-300">
           <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-yellow-300 rounded-full animate-pulse"></div>
-          <span className="text-white text-xs md:text-sm font-bold uppercase tracking-widest">Prachi Shrivastava - Virtual HR Service</span>
+          <span className="text-white text-xs md:text-sm font-bold uppercase tracking-wider">Prachi Shrivastava - Virtual HR Service</span>
           <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-yellow-300 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
         </div>
 
-        {/* Main Headline */}
-        <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight mb-4 md:mb-6 lg:mb-8 px-2 text-white" style={{lineHeight: '1.1'}}>
-          Expert <span className="bg-gradient-to-r from-accent-300 to-accent-400 bg-clip-text text-transparent">Virtual HR Consultant</span><br />
-          for Startups & SMEs
+        {/* Main Headline - Enhanced Mobile Typography */}
+        <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight mb-4 md:mb-6 lg:mb-8 px-2 text-white max-w-4xl" style={{lineHeight: '1.1'}}>
+          Expert <span className="bg-gradient-to-r from-accent-300 to-accent-400 bg-clip-text text-transparent">Virtual HR Consultant</span>
+          <br className="hidden sm:block" />
+          <span className="sm:hidden"> </span>for Startups & SMEs
         </h1>
 
-        {/* Subheadline */}
-        <p className="text-white/90 text-base md:text-lg lg:text-xl xl:text-2xl mb-6 md:mb-8 lg:mb-10 max-w-2xl md:max-w-3xl leading-relaxed font-medium px-2">
+        {/* Subheadline - Better Mobile Spacing */}
+        <p className="text-white/90 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 md:mb-8 lg:mb-10 max-w-xl md:max-w-3xl leading-relaxed font-medium px-2">
           Transform your business with professional HR services. Get remote HR support, compliance expertise, and strategic HR solutions without the overhead of an in-house team.
         </p>
 
@@ -113,46 +114,44 @@ export default function HirableHero({ openConsultationModal }) {
         <div className="relative flex flex-col items-center mb-6 md:mb-8 lg:mb-10">
           <button
             type="button"
-            className="group relative inline-flex items-center px-6 md:px-8 lg:px-10 py-3 md:py-4 lg:py-5 rounded-xl md:rounded-2xl bg-gradient-to-r from-accent-400 to-accent-500 text-gray-900 font-bold text-sm md:text-lg lg:text-xl shadow-xl md:shadow-2xl hover:shadow-glow-accent transition-all duration-300 overflow-hidden"
+            className="group relative inline-flex items-center px-6 md:px-8 lg:px-10 py-4 md:py-4 lg:py-5 rounded-xl md:rounded-2xl bg-gradient-to-r from-accent-400 to-accent-500 text-gray-900 font-bold text-base md:text-lg lg:text-xl shadow-xl md:shadow-2xl hover:shadow-glow-accent transition-all duration-300 overflow-hidden btn-mobile-primary will-change-transform"
             aria-label="Book Free HR Consultation"
             onClick={openConsultationModal}
           >
             {/* Button Shine Effect */}
             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
             
-            <span className="relative z-10 flex items-center gap-2 md:gap-3">
-              <svg className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24" aria-hidden="true">
+            <span className="relative z-10 flex items-center gap-3 md:gap-3">
+              <svg className="w-5 h-5 md:w-5 md:h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M8 7V3a4 4 0 118 0v4m-4 6v6m-4-6h8" />
               </svg>
-              <span className="text-xs md:text-sm lg:text-base xl:text-lg">Book Free HR Consultation</span>
-              <svg className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24" aria-hidden="true">
+              <span className="text-sm md:text-base lg:text-lg xl:text-xl">Book Free HR Consultation</span>
+              <svg className="w-5 h-5 md:w-5 md:h-5 lg:w-6 lg:h-6 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </span>
           </button>
           
-          <p className="text-white/80 text-xs md:text-sm lg:text-base mt-3 md:mt-4 text-center px-2">
-            <span className="inline-flex items-center gap-1 md:gap-2">
-              <svg className="w-3 h-3 md:w-4 md:h-4 text-accent-300" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-white/80 text-xs md:text-sm lg:text-base mt-4 md:mt-4 text-center px-2">
+            <span className="inline-flex items-center gap-2">
+              <svg className="w-4 h-4 text-accent-300" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z" clipRule="evenodd" />
               </svg>
-              <span className="text-xs md:text-sm">No commitment</span>
+              <span className="text-xs md:text-sm font-medium">No commitment</span>
             </span>
-            <span className="mx-1 md:mx-2">•</span>
-            <span className="inline-flex items-center gap-1 md:gap-2">
-              <svg className="w-3 h-3 md:w-4 md:h-4 text-accent-300" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <span className="inline-flex items-center gap-2">
+              <svg className="w-4 h-4 text-accent-300" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z" clipRule="evenodd" />
               </svg>
-              <span className="text-xs md:text-sm">30-minute session</span>
+              <span className="text-xs md:text-sm font-medium">30-minute session</span>
             </span>
-            <span className="mx-1 md:mx-2">•</span>
-            <span className="inline-flex items-center gap-1 md:gap-2">
-              <svg className="w-3 h-3 md:w-4 md:h-4 text-accent-300" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <span className="inline-flex items-center gap-2">
+              <svg className="w-4 h-4 text-accent-300" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z" clipRule="evenodd" />
               </svg>
-              <span className="text-xs md:text-sm">Expert advice</span>
+              <span className="text-xs md:text-sm font-medium">Expert advice</span>
             </span>
-          </p>
+          </div>
 
           {/* Animated Arrow */}
           <div className="absolute -bottom-6 md:-bottom-8 lg:-bottom-10 left-1/2 -translate-x-1/2 animate-bounce">

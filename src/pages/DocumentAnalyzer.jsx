@@ -153,6 +153,7 @@ export default function DocumentAnalyzer() {
       <Helmet>
         <title>Document Analyzer 2025 | AI-Powered HR Document Analysis - Prachi</title>
         <meta name="description" content="AI-powered analysis of HR documents for compliance, accuracy, and optimization. Free document analyzer tool." />
+        <link rel="canonical" href="https://www.hirewithprachi.com/document-analyzer" />
       </Helmet>
 
       {/* Header */}

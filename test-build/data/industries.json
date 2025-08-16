@@ -1,0 +1,15 @@
+[
+  { "name": "Ola", "logo": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Ola_Cabs_logo.png" },
+  { "name": "Uber", "logo": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" },
+  { "name": "Swiggy", "logo": "https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.png" },
+  { "name": "Zomato", "logo": "https://upload.wikimedia.org/wikipedia/commons/7/75/Zomato_logo.png" },
+  { "name": "Paytm", "logo": "https://upload.wikimedia.org/wikipedia/commons/5/55/Paytm_logo.png" },
+  { "name": "Infosys", "logo": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Infosys_logo.svg" },
+  { "name": "TCS", "logo": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_Consultancy_Services_Logo.svg" },
+  { "name": "Wipro", "logo": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Wipro_Primary_Logo_Color_RGB.svg" },
+  { "name": "Google", "logo": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
+  { "name": "Amazon", "logo": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+  { "name": "Flipkart", "logo": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Flipkart_logo.png" },
+  { "name": "Accenture", "logo": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Accenture_Logo.svg" },
+  { "name": "Zoho", "logo": "https://seeklogo.com/images/Z/zoho-logo-6A9E3B1B2A-seeklogo.com.png" }
+] 

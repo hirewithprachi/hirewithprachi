@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase, auth } from './supabase';
+import { supabase } from './supabase-client';
+import { adminConfig } from '../config/environment.js';
 
 const AuthContext = createContext({});
 
@@ -14,25 +15,36 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [adminInfo, setAdminInfo] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Get initial session
     const getInitialSession = async () => {
       try {
         console.log('🔍 Getting initial session...');
-        const { data: { session } } = await supabase.auth.getSession();
+        
+        // Check if Supabase is properly configured
+        if (!supabase.auth) {
+          console.error('❌ Supabase auth is not properly configured');
+          setError('Supabase configuration error');
+          setLoading(false);
+          return;
+        }
+
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        
+        if (sessionError) {
+          console.error('❌ Error getting session:', sessionError);
+          setError(sessionError.message);
+          setLoading(false);
+          return;
+        }
+
         console.log('📋 Session data:', session);
         setUser(session?.user ?? null);
-        
-        if (session?.user) {
-          console.log('👤 User found, loading admin info...');
-          await loadAdminInfo(session.user.id);
-        } else {
-          console.log('❌ No user in session');
-        }
       } catch (error) {
         console.error('❌ Error getting initial session:', error);
+        setError(error.message);
       } finally {
         console.log('✅ Setting loading to false');
         setLoading(false);
@@ -43,6 +55,7 @@ export const AuthProvider = ({ children }) => {
     const timeoutId = setTimeout(() => {
       console.log('⏰ Authentication timeout - forcing loading to false');
       setLoading(false);
+      setError('Authentication timeout - please refresh the page');
     }, 10000); // 10 second timeout
 
     getInitialSession();
@@ -52,14 +65,9 @@ export const AuthProvider = ({ children }) => {
       async (event, session) => {
         console.log('🔄 Auth state change:', event, session);
         clearTimeout(timeoutId); // Clear timeout on auth change
+        setError(null); // Clear any previous errors
+        
         setUser(session?.user ?? null);
-        
-        if (session?.user) {
-          await loadAdminInfo(session.user.id);
-        } else {
-          setAdminInfo(null);
-        }
-        
         setLoading(false);
       }
     );
@@ -70,71 +78,125 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  const loadAdminInfo = async (userId) => {
-    try {
-      console.log('🔍 Loading admin info for user:', userId);
-      
-      // Use direct query to admin_users table
-      const { data, error } = await supabase
-        .from('admin_users')
-        .select('*')
-        .eq('user_id', userId)
-        .eq('is_active', true)
-        .single();
-        
-      console.log('📋 Admin query result:', { data, error });
-        
-      if (!error && data) {
-        console.log('✅ Admin info loaded successfully:', data);
-        setAdminInfo(data);
-      } else {
-        console.error('❌ Error loading admin info:', error);
-        setAdminInfo(null);
-      }
-    } catch (error) {
-      console.error('❌ Error loading admin info:', error);
-      setAdminInfo(null);
-    }
-  };
-
   const signIn = async (email, password) => {
     try {
-      const { data, error } = await auth.signIn(email, password);
+      setError(null);
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
       if (error) throw error;
-      return data;
+
+      // Check if user is admin
+      const { data: isAdmin, error: adminError } = await supabase.rpc('is_admin_user');
+      if (adminError) {
+        console.warn('Admin check failed:', adminError.message);
+      }
+
+      // Store admin status for later use
+      if (isAdmin) {
+        console.log('✅ Admin user logged in successfully');
+      }
+
+      return { ...data, isAdmin };
     } catch (error) {
+      setError(error.message);
       throw error;
     }
   };
 
   const signOut = async () => {
     try {
-      const { error } = await auth.signOut();
+      setError(null);
+      const { error } = await supabase.auth.signOut();
       if (error) throw error;
     } catch (error) {
       console.error('Error during sign out:', error);
+      setError(error.message);
       // Clear local state even if there's an error
       setUser(null);
-      setAdminInfo(null);
     }
   };
 
   const resetPassword = async (email) => {
     try {
-      const { error } = await auth.resetPassword(email);
+      setError(null);
+      const { error } = await supabase.auth.resetPasswordForEmail(email);
       if (error) throw error;
     } catch (error) {
+      setError(error.message);
       throw error;
+    }
+  };
+
+  const clearError = () => {
+    setError(null);
+  };
+
+  // Admin-specific login function
+  const signInAsAdmin = async (email = adminConfig.email, password = adminConfig.password) => {
+    try {
+      setError(null);
+      console.log('🔐 Attempting admin login...');
+      
+      const result = await signIn(email, password);
+      
+      // Verify admin status
+      const { data: isAdmin, error: adminError } = await supabase.rpc('is_admin_user');
+      
+      if (adminError) {
+        throw new Error(`Admin verification failed: ${adminError.message}`);
+      }
+      
+      if (!isAdmin) {
+        await supabase.auth.signOut(); // Sign out if not admin
+        throw new Error('Access denied: Admin privileges required');
+      }
+      
+      console.log('✅ Admin login successful');
+      return { ...result, isAdmin: true };
+      
+    } catch (error) {
+      setError(error.message);
+      throw error;
+    }
+  };
+
+  // Check if current user is admin
+  const checkAdminStatus = async () => {
+    try {
+      if (!user) {
+        console.log('🔍 checkAdminStatus: No user found');
+        return false;
+      }
+      
+      console.log('🔍 checkAdminStatus: Checking admin status for user:', user.email);
+      
+      const { data: isAdmin, error } = await supabase.rpc('is_admin_user');
+      
+      if (error) {
+        console.error('❌ Admin status check failed:', error.message);
+        return false;
+      }
+      
+      console.log('✅ checkAdminStatus: Result:', isAdmin);
+      return isAdmin;
+    } catch (error) {
+      console.error('❌ Admin status check error:', error);
+      return false;
     }
   };
 
   const value = {
     user,
-    adminInfo,
     loading,
+    error,
     signIn,
+    signInAsAdmin,
     signOut,
-    resetPassword
+    resetPassword,
+    clearError,
+    checkAdminStatus
   };
 
   return (

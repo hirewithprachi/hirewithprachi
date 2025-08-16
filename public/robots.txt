@@ -133,7 +133,7 @@ Allow: /blog/hr-strategy-development
 Allow: /blog/workplace-diversity-inclusion
 
 # Sitemap location
-Sitemap: https://hirewithprachi.com/sitemap.xml
+Sitemap: https://www.hirewithprachi.com/sitemap.xml
 
 # Crawl delay (optional)
 Crawl-delay: 1 

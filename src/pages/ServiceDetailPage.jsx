@@ -5,11 +5,11 @@ import { Helmet } from 'react-helmet-async';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
-import AIChatbotWidget from '../components/AIChatbotWidget';
+import GPT4oMiniChatbot from '../components/GPT4oMiniChatbot';
 import ScrollProgressBar from '../components/ScrollProgressBar';
 import BrochureDownloadModal from '../components/BrochureDownloadModal';
 import ServiceVideo from '../components/ServiceVideo';
-import { CheckCircle, Users, Shield, Zap, Award, MessageSquare, BarChart2, Search, Phone, Mail, ChevronDown, ChevronUp, Download, Calendar, MessageCircle, FileText, Gavel, AlertTriangle, Target, UserPlus, Briefcase, Heart, Smile, Building, DollarSign, Settings, Brain, Presentation, HeartHandshake, Star, Clock, MapPin, Globe, TrendingUp, Users2, CheckSquare, ArrowRight, BookOpen, Lightbulb, Target as TargetIcon, Zap as ZapIcon, Shield as ShieldIcon } from 'lucide-react';
+import { CheckCircle, Users, Shield, Zap, Award, MessageSquare, BarChart2, Search, Phone, Mail, ChevronDown, ChevronUp, Download, Calendar, MessageCircle, FileText, Gavel, AlertTriangle, Target, UserPlus, Briefcase, Heart, Smile, Building, DollarSign, Settings, Brain, Presentation, HeartHandshake, Star, Clock, MapPin, Globe, TrendingUp, CheckSquare, ArrowRight, BookOpen, Lightbulb, Target as TargetIcon, Zap as ZapIcon, Shield as ShieldIcon } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import analytics from '../lib/analytics';
 
@@ -440,7 +440,7 @@ const ServiceDetailPage = () => {
       "name": "Hire With Prachi",
       "alternateName": "Prachi Shrivastava HR Consulting",
       "description": "Professional HR consulting services in India with 8+ years of experience",
-      "url": "https://hirewithprachi.com",
+      "url": "https://www.hirewithprachi.com",
       "telephone": "+91-8740889927",
       "email": "info@hirewithprachi.com",
       "address": {
@@ -464,7 +464,7 @@ const ServiceDetailPage = () => {
             "itemOffered": {
               "@type": "Service",
               "name": "Virtual HR Management",
-              "url": "https://hirewithprachi.com/services/virtual-hr-management"
+              "url": "https://www.hirewithprachi.com/services/virtual-hr-management"
             }
           },
           {
@@ -472,7 +472,7 @@ const ServiceDetailPage = () => {
             "itemOffered": {
               "@type": "Service",
               "name": "HR Policy Development",
-              "url": "https://hirewithprachi.com/services/hr-policy-development"
+              "url": "https://www.hirewithprachi.com/services/hr-policy-development"
             }
           },
           {
@@ -1100,7 +1100,7 @@ const ServiceDetailPage = () => {
                     <Link to="/services/virtual-hr-management" className="block p-4 bg-white rounded-lg hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                          <Users2 className="w-5 h-5 text-blue-600" />
+                          <Users className="w-5 h-5 text-blue-600" />
                         </div>
                         <div>
                           <h4 className="font-semibold text-gray-900">Virtual HR Management</h4>
@@ -1354,7 +1354,7 @@ const ServiceDetailPage = () => {
                     <span className="text-sm font-medium text-gray-900">4.8/5 Rating</span>
                   </div>
                   <div className="flex items-center gap-2 mb-2">
-                    <Users2 className="w-4 h-4 text-blue-500" />
+                    <Users className="w-4 h-4 text-blue-500" />
                     <span className="text-sm text-gray-700">500+ Happy Clients</span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -1388,7 +1388,7 @@ const ServiceDetailPage = () => {
         </div>
 
         <HireWithPrachiFooter />
-        <AIChatbotWidget />
+        <GPT4oMiniChatbot />
         
         {/* Brochure Download Modal */}
         <BrochureDownloadModal

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOOptimizer from '../components/SEOOptimizer';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiHero from '../components/hirable/HirableHero';
@@ -11,11 +11,23 @@ import HireWithPrachiFeatures from '../components/hirable/HirableFeatures';
 
 import HireWithPrachiBlog from '../components/hirable/HirableBlog';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
-import AIChatbotWidget from '../components/AIChatbotWidget';
+import GPT4oMiniChatbot from '../components/GPT4oMiniChatbot';
 import ConsultationModal from '../components/LeadCapturePreview';
 import { generalFaqs } from '../data/faqData';
 
 export default function HireWithPrachiHomepage() {
+  // SEO Data for Homepage
+  const seoData = {
+    title: "Hire With Prachi - Leading Virtual HR Consultant in India",
+    description: "Expert virtual HR services for startups and SMEs across India. HR compliance, recruitment, payroll, and employee engagement solutions.",
+    keywords: "virtual HR consultant, HR services India, startup HR, SME HR, HR compliance, recruitment services",
+    pageType: "homepage",
+    pageData: {
+      title: "Hire With Prachi - Leading Virtual HR Consultant",
+      description: "Expert virtual HR services for startups and SMEs across India",
+      image: "https://www.hirewithprachi.com/assets/images/homepage-1200x630.jpg"
+    }
+  };
   const [showAllFaqs, setShowAllFaqs] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
 
@@ -26,9 +38,9 @@ export default function HireWithPrachiHomepage() {
     "name": "Hire With Prachi - Virtual HR Solutions",
     "alternateName": "Prachi Shrivastava Virtual HR Agency",
     "description": "Expert virtual HR consultant providing professional HR services for startups and SMEs. Remote HR support, compliance expertise, and strategic HR solutions without the overhead of an in-house team.",
-    "url": "https://hirewithprachi.com",
-    "logo": "https://hirewithprachi.com/logo.png",
-    "image": "https://hirewithprachi.com/hero-image.png",
+    "url": "https://www.hirewithprachi.com",
+    "logo": "https://www.hirewithprachi.com/logo.png",
+    "image": "https://www.hirewithprachi.com/hero-image.png",
     "telephone": "+91-87408-89927",
     "email": "info@hirewithprachi.com",
     "address": {
@@ -139,84 +151,19 @@ export default function HireWithPrachiHomepage() {
 
   return (
     <>
-      <Helmet>
-        {/* Primary Meta Tags */}
-        <title>Virtual HR Consultant Prachi Shrivastava | HR Services for Startups & SMEs</title>
-        <meta name="title" content="Virtual HR Consultant Prachi Shrivastava | HR Services for Startups & SMEs" />
-        <meta name="description" content="Expert virtual HR consultant providing professional HR services for startups and SMEs. Remote HR support, compliance expertise, and strategic HR solutions. Book free consultation today!" />
-        <meta name="keywords" content="virtual HR consultant, HR agency, remote HR support, HR services for startups, HR services for SMEs, virtual HR agency, HR Prachi Shrivastava, online HR outsourcing India, freelance HR agency, HR compliance services, employee engagement, recruitment support" />
-        <meta name="author" content="Prachi Shrivastava" />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="English" />
-        <meta name="revisit-after" content="7 days" />
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://hirewithprachi.com/" />
-        <meta property="og:title" content="Virtual HR Consultant Prachi Shrivastava | HR Services for Startups & SMEs" />
-        <meta property="og:description" content="Expert virtual HR consultant providing professional HR services for startups and SMEs. Remote HR support, compliance expertise, and strategic HR solutions. Book free consultation today!" />
-        <meta property="og:image" content="https://hirewithprachi.com/og-image.png" />
-        <meta property="og:site_name" content="Hire With Prachi" />
-        <meta property="og:locale" content="en_US" />
-        
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://hirewithprachi.com/" />
-        <meta property="twitter:title" content="Virtual HR Consultant Prachi Shrivastava | HR Services for Startups & SMEs" />
-        <meta property="twitter:description" content="Expert virtual HR consultant providing professional HR services for startups and SMEs. Remote HR support, compliance expertise, and strategic HR solutions." />
-        <meta property="twitter:image" content="https://hirewithprachi.com/twitter-image.png" />
-        <meta property="twitter:creator" content="@hirewithprachi" />
-        
-        {/* Additional SEO Meta Tags */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#0ea5e9" />
-        <meta name="msapplication-TileColor" content="#0ea5e9" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Hire With Prachi" />
-        
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://hirewithprachi.com/" />
-        
-        {/* Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-        
-        {/* Additional Structured Data for FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What services does Prachi Shrivastava offer as a virtual HR consultant?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Prachi offers comprehensive virtual HR services including HR compliance, employee engagement, recruitment support, HR policy development, performance management, and HR cost optimization for startups and SMEs."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How much can I save with virtual HR services?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Virtual HR services can save 40-60% compared to in-house HR teams. Use our HR cost calculator to get a personalized estimate for your business."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is the initial consultation free?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes, we offer a free 30-minute HR consultation with no commitment required. Book your session to discuss your HR needs and get expert advice."
-                }
-              }
-            ]
-          })}
-        </script>
-      </Helmet>
+      {/* Comprehensive SEO Optimization */}
+      <SEOOptimizer
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        image={seoData.pageData.image}
+        pageType="organization"
+        pageData={{
+          ...seoData.pageData,
+          structuredData: structuredData
+        }}
+        canonical="https://www.hirewithprachi.com/"
+      />
 
       <main className="min-h-screen bg-white" role="main">
         <HireWithPrachiTopBar />
@@ -315,7 +262,7 @@ export default function HireWithPrachiHomepage() {
         <HireWithPrachiFooter />
         
         {/* Modern AI Chat Widget */}
-        <AIChatbotWidget />
+        <GPT4oMiniChatbot />
         <ConsultationModal open={showConsultation} onClose={closeConsultationModal} />
       </main>
     </>

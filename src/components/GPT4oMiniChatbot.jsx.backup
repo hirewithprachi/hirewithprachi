@@ -1,0 +1,1512 @@
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChatbotService } from '../services/chatbotService';
+import './chatbot-animations.css';
+import { 
+  MessageCircle, 
+  X, 
+  Send, 
+  Bot, 
+  User, 
+  Loader2, 
+  Paperclip,
+  Mic,
+  MicOff,
+  Download,
+  Share2,
+  Settings,
+  HelpCircle,
+  Star,
+  ThumbsUp,
+  ThumbsDown,
+  Copy,
+  RefreshCw,
+  Volume2,
+  VolumeX,
+  Maximize2,
+  Minimize2,
+  Clock,
+  CheckCircle,
+  AlertCircle,
+  Sparkles,
+  Zap,
+  Target,
+  Users,
+  FileText,
+  TrendingUp,
+  Calendar,
+  DollarSign,
+  Phone,
+  Mail,
+  Building,
+  MapPin,
+  UserCheck,
+  Briefcase,
+  Heart,
+  Rocket,
+  Shield,
+  Gift,
+  Crown,
+  Flame,
+  Eye,
+  PlusCircle,
+  ArrowRight,
+  ExternalLink,
+  Award,
+  Badge,
+  Gem,
+  Lightbulb,
+  BarChart,
+  Globe,
+  Lock,
+  Wand2
+} from 'lucide-react';
+
+export default function GPT4oMiniChatbot() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [inputMessage, setInputMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [sessionId, setSessionId] = useState('');
+  const [conversationId, setConversationId] = useState(null);
+  const [isTyping, setIsTyping] = useState(false);
+  const [showQuickActions, setShowQuickActions] = useState(true);
+  const [rating, setRating] = useState(null);
+  const [showRating, setShowRating] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [autoScroll, setAutoScroll] = useState(true);
+  const [messageCount, setMessageCount] = useState(0);
+  const [lastActivity, setLastActivity] = useState(new Date());
+  const [connectionStatus, setConnectionStatus] = useState('connected');
+  const [copiedMessageId, setCopiedMessageId] = useState(null);
+  
+  // Enhanced lead capture states
+  const [showLeadForm, setShowLeadForm] = useState(false);
+  const [leadData, setLeadData] = useState({
+    name: '', email: '', phone: '', company: '', position: '', 
+    company_size: '', industry: '', service_interest: '', urgent: false
+  });
+  const [leadProgress, setLeadProgress] = useState(0);
+  const [aiPersonality, setAiPersonality] = useState('professional');
+  const [conversationTheme, setConversationTheme] = useState('default');
+  const [smartSuggestions, setSmartSuggestions] = useState([]);
+  const [userIntent, setUserIntent] = useState('general');
+  const [conversationSummary, setConversationSummary] = useState('');
+  const [hasLeadInfo, setHasLeadInfo] = useState(false);
+
+  const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
+  const fileInputRef = useRef(null);
+
+  // Enhanced quick action buttons with advanced categorization and lead capture
+  const quickActions = [
+    {
+      category: "🎯 Core HR Services",
+      icon: Target,
+      gradient: "from-blue-500 to-cyan-500",
+      actions: [
+        { 
+          text: "Virtual HR Management", 
+          icon: Crown, 
+          description: "Complete remote HR department",
+          leadType: "virtual_hr",
+          urgency: "high"
+        },
+        { 
+          text: "POSH Compliance", 
+          icon: Shield, 
+          description: "Sexual harassment prevention",
+          leadType: "compliance",
+          urgency: "medium"
+        },
+        { 
+          text: "Recruitment RPO", 
+          icon: Users, 
+          description: "End-to-end recruitment outsourcing",
+          leadType: "recruitment",
+          urgency: "high"
+        },
+        { 
+          text: "Employee Handbook", 
+          icon: FileText, 
+          description: "Professional handbook development",
+          leadType: "documentation",
+          urgency: "low"
+        }
+      ]
+    },
+    {
+      category: "🚀 Business Growth",
+      icon: Rocket,
+      gradient: "from-purple-500 to-pink-500",
+      actions: [
+        { 
+          text: "Startup HR Setup", 
+          icon: Lightbulb, 
+          description: "Complete HR foundation for startups",
+          leadType: "startup",
+          urgency: "high"
+        },
+        { 
+          text: "HR Cost Calculator", 
+          icon: BarChart, 
+          description: "Calculate your HR cost savings",
+          leadType: "calculator",
+          urgency: "low"
+        },
+        { 
+          text: "Free Consultation", 
+          icon: Gift, 
+          description: "30-minute expert consultation",
+          leadType: "consultation",
+          urgency: "medium"
+        },
+        { 
+          text: "Custom Quote", 
+          icon: Badge, 
+          description: "Personalized service pricing",
+          leadType: "quote",
+          urgency: "high"
+        }
+      ]
+    },
+    {
+      category: "🏆 Premium Services",
+      icon: Award,
+      gradient: "from-amber-500 to-orange-500",
+      actions: [
+        { 
+          text: "Executive Search", 
+          icon: Crown, 
+          description: "High-level talent acquisition",
+          leadType: "executive_search",
+          urgency: "high"
+        },
+        { 
+          text: "HR Transformation", 
+          icon: Wand2, 
+          description: "Complete HR modernization",
+          leadType: "transformation",
+          urgency: "medium"
+        },
+        { 
+          text: "Leadership Development", 
+          icon: Gem, 
+          description: "Build strong leadership teams",
+          leadType: "leadership",
+          urgency: "medium"
+        },
+        { 
+          text: "HR Analytics", 
+          icon: TrendingUp, 
+          description: "Data-driven HR insights",
+          leadType: "analytics",
+          urgency: "low"
+        }
+      ]
+    }
+  ];
+
+  // Premium welcome message with advanced personalization
+  const getWelcomeMessage = () => ({
+    id: 'welcome',
+    role: 'assistant',
+    content: `✨ **Welcome to Hire With Prachi's AI HR Assistant!** ✨
+
+🏆 **I'm Prachi AI** - Your Virtual HR Consultant with **8+ years expertise** helping **500+ clients** save **₹2Cr+ in HR costs!**
+
+🎯 **How can I transform your business today?**
+
+🚀 **Instant Solutions:**
+• **Virtual HR Management** - Save 30-40% on HR costs
+• **POSH Compliance** - Mandatory for 10+ employees  
+• **Startup HR Setup** - Investor-ready HR infrastructure
+• **Free 30-min Consultation** - Expert guidance worth ₹5,000
+
+💎 **Premium Services:**
+• Executive Search & Leadership Development
+• HR Transformation & Analytics
+• Custom Solutions for your industry
+
+⚡ **Smart Features:**
+• Instant quotes & cost calculators
+• 24/7 expert-level responses  
+• Personalized recommendations
+• Direct connection to Prachi
+
+*Select a service below or tell me about your specific HR challenge. I'll provide actionable solutions within seconds!*
+
+**Ready to scale your business with world-class HR?** 🚀`,
+    timestamp: new Date(),
+    isWelcome: true,
+    features: ['lead_capture', 'smart_suggestions', 'instant_quotes']
+  });
+
+  useEffect(() => {
+    // Show the widget after 2 seconds (reduced from 3)
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Enhanced event listener for tool-specific chatbot requests
+  useEffect(() => {
+    const handleOpenChat = (event) => {
+      const { context, service } = event.detail;
+      console.log('Opening chatbot with context:', context, 'service:', service);
+      setIsModalOpen(true);
+      if (context) {
+        handleQuickAction(context);
+      }
+    };
+
+    window.addEventListener('open-chat', handleOpenChat);
+    
+    return () => {
+      window.removeEventListener('open-chat', handleOpenChat);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Initialize session when modal opens
+    if (isModalOpen && !sessionId) {
+      const newSessionId = ChatbotService.generateSessionId();
+      setSessionId(newSessionId);
+      setMessageCount(0);
+      setLastActivity(new Date());
+      
+      // Add enhanced welcome message with personalization
+      setMessages([getWelcomeMessage()]);
+      
+      // Initialize smart suggestions
+      setSmartSuggestions([
+        "Calculate HR cost savings for my company",
+        "Setup POSH compliance for 50 employees", 
+        "Get quote for virtual HR services",
+        "Book free consultation with Prachi"
+      ]);
+    }
+  }, [isModalOpen, sessionId]);
+
+  useEffect(() => {
+    // Enhanced auto-scroll with smooth behavior
+    if (autoScroll && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'end'
+      });
+    }
+  }, [messages, autoScroll]);
+
+  // Enhanced session management
+  useEffect(() => {
+    if (sessionId) {
+      const interval = setInterval(() => {
+        setLastActivity(new Date());
+      }, 60000); // Update every minute
+
+      return () => clearInterval(interval);
+    }
+  }, [sessionId]);
+
+  const handleChatClick = useCallback(() => {
+    setIsModalOpen(true);
+    setIsMinimized(false);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false);
+    setShowRating(false);
+    setShowSettings(false);
+    setRating(null);
+    setIsMinimized(false);
+  }, []);
+
+  const handleMinimize = useCallback(() => {
+    setIsMinimized(!isMinimized);
+  }, [isMinimized]);
+
+  const handleQuickAction = useCallback(async (action) => {
+    const message = typeof action === 'string' ? action : action.text;
+    
+    // Track user intent and service interest
+    if (typeof action === 'object') {
+      setUserIntent(action.leadType);
+      setLeadData(prev => ({
+        ...prev,
+        service_interest: action.text,
+        urgent: action.urgency === 'high'
+      }));
+      
+      // Update lead progress based on action
+      if (action.urgency === 'high') {
+        setLeadProgress(prev => Math.min(prev + 30, 100));
+      }
+    }
+    
+    setInputMessage(message);
+    await sendMessage(message);
+    setShowQuickActions(false);
+    
+    // Auto-suggest lead capture for high-value actions
+    if (typeof action === 'object' && action.urgency === 'high' && !hasLeadInfo) {
+      setTimeout(() => {
+        setShowLeadForm(true);
+      }, 3000); // Show lead form after 3 seconds
+    }
+  }, [hasLeadInfo]);
+
+  const sendMessage = useCallback(async (message = inputMessage) => {
+    if (!message.trim() || isLoading) return;
+
+    const userMessage = {
+      id: Date.now(),
+      role: 'user',
+      content: message,
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInputMessage('');
+    setIsLoading(true);
+    setIsTyping(true);
+    setMessageCount(prev => prev + 1);
+    setLastActivity(new Date());
+
+    try {
+      // Enhanced context for lead-oriented responses
+      const enhancedContext = `
+        User Intent: ${userIntent}
+        Lead Progress: ${leadProgress}%
+        Has Lead Info: ${hasLeadInfo}
+        Service Interest: ${leadData.service_interest}
+        Conversation Theme: ${conversationTheme}
+        
+        IMPORTANT: Always focus on lead generation and conversion. Ask for contact details when appropriate.
+        Highlight Prachi's expertise: 8+ years, 500+ clients, ₹2Cr+ savings.
+        Provide specific benefits and next steps. Be consultative, not just informative.
+        ${leadProgress > 50 ? 'User shows high interest - suggest booking consultation or getting quote.' : ''}
+      `;
+
+      const result = await ChatbotService.processUserMessage(sessionId, message, enhancedContext);
+      
+      if (result.success) {
+        const assistantMessage = {
+          id: Date.now() + 1,
+          role: 'assistant',
+          content: result.response,
+          timestamp: new Date(),
+          leadScore: leadProgress
+        };
+
+        setMessages(prev => [...prev, assistantMessage]);
+        setConversationId(result.conversationId);
+        setMessageCount(prev => prev + 1);
+        
+        // Enhanced lead extraction
+        setTimeout(async () => {
+          try {
+            const allMessages = [...messages, userMessage, assistantMessage];
+            const leadInfo = await ChatbotService.extractLeadInfo(allMessages);
+            if (leadInfo.success && leadInfo.data) {
+              const extractedData = leadInfo.data;
+              if (extractedData.name || extractedData.email || extractedData.company) {
+                setLeadData(prev => ({ ...prev, ...extractedData }));
+                setHasLeadInfo(true);
+                setLeadProgress(prev => Math.min(prev + 25, 100));
+              }
+            }
+          } catch (error) {
+            console.log('Lead extraction error:', error);
+          }
+        }, 1000);
+        
+        // Generate smart suggestions based on conversation
+        updateSmartSuggestions(result.response, userIntent);
+        
+        // Show rating after assistant response
+        setShowRating(true);
+        
+        // Play notification sound if not muted
+        if (!isMuted) {
+          playNotificationSound();
+        }
+      } else {
+        // Enhanced error handling with lead capture opportunity
+        const errorMessage = {
+          id: Date.now() + 1,
+          role: 'assistant',
+          content: `I apologize for the temporary issue! 🙏 
+
+While I resolve this, would you like me to:
+• Connect you directly with Prachi (+91-87408-89927)
+• Schedule a free 30-minute consultation
+• Send you our HR cost calculator
+
+*Your query is important to us, and we'll ensure you get the help you need!*`,
+          timestamp: new Date(),
+          isError: true,
+          showLeadCapture: true
+        };
+        setMessages(prev => [...prev, errorMessage]);
+        setConnectionStatus('error');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      const errorMessage = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        content: `Connection issue detected! 📡
+
+Don't worry - let's get you connected:
+• **Direct WhatsApp**: +91-87408-89927
+• **Email**: info@hirewithprachi.com  
+• **Free Consultation**: Book instantly
+• **Download Resources**: Get immediate value
+
+*Prachi's team responds within 24 hours (usually faster!)* ⚡`,
+        timestamp: new Date(),
+        isError: true,
+        showContactOptions: true
+      };
+      setMessages(prev => [...prev, errorMessage]);
+      setConnectionStatus('error');
+    } finally {
+      setIsLoading(false);
+      setIsTyping(false);
+      setConnectionStatus('connected');
+    }
+  }, [inputMessage, isLoading, sessionId, isMuted, userIntent, leadProgress, hasLeadInfo, leadData, conversationTheme, messages]);
+
+  const handleSubmit = useCallback((e) => {
+    e.preventDefault();
+    sendMessage();
+  }, [sendMessage]);
+
+  const handleKeyPress = useCallback((e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }, [sendMessage]);
+
+  const handleRating = useCallback((value) => {
+    setRating(value);
+    console.log('Chat rating:', value);
+    
+    // Enhanced feedback collection
+    const feedback = {
+      rating: value,
+      conversationId,
+      timestamp: new Date().toISOString(),
+      messageCount,
+      sessionDuration: Date.now() - lastActivity.getTime()
+    };
+    
+    // Here you could send feedback to analytics
+    console.log('Feedback collected:', feedback);
+    
+    setTimeout(() => setShowRating(false), 2000);
+  }, [conversationId, messageCount, lastActivity]);
+
+  const handleCopyMessage = useCallback(async (content, messageId) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopiedMessageId(messageId);
+      setTimeout(() => setCopiedMessageId(null), 2000);
+    } catch (error) {
+      console.error('Failed to copy message:', error);
+    }
+  }, []);
+
+  const handleFileUpload = useCallback((event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Handle file upload logic here
+      console.log('File selected:', file.name);
+      // You could add file processing or send to backend
+    }
+  }, []);
+
+  // Enhanced smart suggestions based on conversation context
+  const updateSmartSuggestions = useCallback((response, intent) => {
+    const suggestions = {
+      virtual_hr: [
+        "Get detailed quote for virtual HR services",
+        "Compare in-house vs virtual HR costs",
+        "Schedule implementation consultation"
+      ],
+      compliance: [
+        "Book POSH compliance audit",
+        "Get compliance checklist for my industry",
+        "Schedule legal review consultation"
+      ],
+      recruitment: [
+        "Calculate recruitment cost savings",
+        "Get executive search proposal",
+        "Book talent acquisition consultation"
+      ],
+      consultation: [
+        "Book my free 30-minute consultation now",
+        "Get custom HR strategy proposal",
+        "Connect directly with Prachi"
+      ],
+      quote: [
+        "Get detailed service breakdown",
+        "Compare service packages",
+        "Schedule pricing consultation"
+      ]
+    };
+    
+    setSmartSuggestions(suggestions[intent] || [
+      "Tell me about your HR expertise",
+      "Calculate potential cost savings",
+      "Book free consultation"
+    ]);
+  }, []);
+
+  // Lead form submission handler
+  const handleLeadSubmit = useCallback(async (formData) => {
+    try {
+      setLeadData(formData);
+      setHasLeadInfo(true);
+      setLeadProgress(100);
+      setShowLeadForm(false);
+      
+      // Update conversation with lead data
+      if (conversationId) {
+        await ChatbotService.updateConversation(conversationId, {
+          lead_data: formData
+        });
+      }
+      
+      // Send confirmation message
+      const confirmationMessage = {
+        id: Date.now(),
+        role: 'assistant',
+        content: `🎉 **Thank you ${formData.name}!** 
+
+Your information has been received. Here's what happens next:
+
+✅ **Immediate**: You'll receive our HR resource pack via email
+📞 **Within 24 hours**: Prachi will personally contact you  
+🎯 **Customized**: Solutions tailored for ${formData.company}
+💰 **Value**: Potential savings analysis for your business
+
+**Next Step**: Check your email for instant resources, or call **+91-87408-89927** for immediate assistance.
+
+*Ready to transform your HR operations?* 🚀`,
+        timestamp: new Date(),
+        isConfirmation: true
+      };
+      
+      setMessages(prev => [...prev, confirmationMessage]);
+      
+      // Play success sound
+      if (!isMuted) {
+        playNotificationSound('success');
+      }
+      
+    } catch (error) {
+      console.error('Lead submission error:', error);
+    }
+  }, [conversationId, isMuted]);
+
+  const playNotificationSound = useCallback((type = 'default') => {
+    // Enhanced notification sound system
+    try {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      if (type === 'success') {
+        // Success sound - ascending notes
+        oscillator.frequency.setValueAtTime(523, audioContext.currentTime); // C
+        oscillator.frequency.setValueAtTime(659, audioContext.currentTime + 0.1); // E  
+        oscillator.frequency.setValueAtTime(784, audioContext.currentTime + 0.2); // G
+      } else {
+        // Default notification
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(600, audioContext.currentTime + 0.1);
+      }
+      
+      gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.3);
+    } catch (error) {
+      console.log('Audio notification not supported');
+    }
+  }, []);
+
+  const formatTime = useCallback((timestamp) => {
+    return new Date(timestamp).toLocaleTimeString([], { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
+  }, []);
+
+  const formatDuration = useCallback((timestamp) => {
+    const now = new Date();
+    const diff = now - new Date(timestamp);
+    const minutes = Math.floor(diff / 60000);
+    
+    if (minutes < 1) return 'Just now';
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    return new Date(timestamp).toLocaleDateString();
+  }, []);
+
+  const getConnectionStatusColor = useCallback(() => {
+    switch (connectionStatus) {
+      case 'connected': return 'text-green-500';
+      case 'error': return 'text-red-500';
+      case 'connecting': return 'text-yellow-500';
+      default: return 'text-gray-500';
+    }
+  }, [connectionStatus]);
+
+  if (!isVisible) return null;
+
+  return (
+    <>
+      {/* Premium Floating Chat Button */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0, rotate: -180 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+        className="fixed bottom-6 right-6 z-50"
+      >
+        {/* Background Glow Effect */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 blur-xl opacity-50 animate-pulse"></div>
+        
+        <button
+          onClick={handleChatClick}
+          className="group relative flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-purple-500/40"
+          aria-label="Chat with Prachi AI - HR Expert"
+        >
+          {/* Rotating Border Animation */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-spin-slow"></div>
+          <div className="absolute inset-1 rounded-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600"></div>
+          
+          {/* Premium Icon with Animation */}
+          <div className="relative z-10 flex items-center justify-center">
+            <motion.div
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            >
+              <Bot className="w-8 h-8 text-white drop-shadow-lg" />
+            </motion.div>
+          </div>
+
+          {/* Premium Pulse Rings */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 animate-ping opacity-20"></div>
+          <div className="absolute inset-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 animate-ping opacity-15" style={{ animationDelay: '0.5s' }}></div>
+          
+          {/* Smart Status Indicators */}
+          <div className="absolute -top-1 -right-1 flex items-center gap-1">
+            <motion.div 
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className={`w-4 h-4 rounded-full border-2 border-white shadow-lg ${getConnectionStatusColor()}`}
+            />
+            {hasLeadInfo && (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="w-3 h-3 bg-green-500 rounded-full border border-white"
+              />
+            )}
+          </div>
+          
+          {/* New Message Indicator */}
+          {messageCount > 0 && (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="absolute -top-2 -left-2 w-6 h-6 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center border-2 border-white shadow-lg"
+            >
+              {messageCount > 9 ? '9+' : messageCount}
+            </motion.div>
+          )}
+        </button>
+
+        {/* Premium Tooltip with Lead Score */}
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.9 }}
+            className="absolute bottom-full right-0 mb-4 pointer-events-none"
+          >
+            <div className="bg-gradient-to-r from-gray-900 to-black text-white p-4 rounded-2xl shadow-2xl max-w-xs">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                  <Crown className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <div className="font-bold text-sm">Prachi AI Assistant</div>
+                  <div className="text-xs text-gray-300">HR Expert • 8+ Years</div>
+                </div>
+              </div>
+              
+              {leadProgress > 0 && (
+                <div className="mb-2">
+                  <div className="flex justify-between text-xs text-gray-300 mb-1">
+                    <span>Interest Level</span>
+                    <span>{leadProgress}%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-1.5">
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      animate={{ width: `${leadProgress}%` }}
+                      className="bg-gradient-to-r from-green-400 to-blue-500 h-1.5 rounded-full"
+                    />
+                  </div>
+                </div>
+              )}
+              
+              <div className="text-xs text-gray-300">
+                💬 Ask me anything about HR • 🚀 Get instant solutions
+              </div>
+              
+              {smartSuggestions.length > 0 && (
+                <div className="mt-2 text-xs text-yellow-300">
+                  💡 {smartSuggestions[0]}
+                </div>
+              )}
+            </div>
+            <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
+
+      {/* Enhanced Chat Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-end justify-end p-4"
+          >
+            {/* Enhanced Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+              onClick={handleCloseModal}
+            />
+            
+            {/* Enhanced Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className={`relative bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 ${
+                isMinimized ? 'w-80 h-16' : 'w-full max-w-md h-[700px]'
+              }`}
+            >
+              {/* Premium Modal Header */}
+              <div className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white flex-shrink-0 overflow-hidden">
+                {/* Animated Background Pattern */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 animate-pulse"></div>
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"></div>
+                
+                <div className="relative flex items-center justify-between p-5">
+                  <div className="flex items-center gap-4">
+                    {/* Premium Avatar */}
+                    <div className="relative">
+                      <div className="w-12 h-12 bg-gradient-to-br from-white/20 to-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/20">
+                        <Crown className="w-7 h-7 text-yellow-300 drop-shadow-lg" />
+                      </div>
+                      {hasLeadInfo && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white flex items-center justify-center"
+                        >
+                          <CheckCircle className="w-2 h-2 text-white" />
+                        </motion.div>
+                      )}
+                    </div>
+                    
+                    <div>
+                      <h2 className="text-lg font-bold flex items-center gap-2">
+                        Prachi AI
+                        <Sparkles className="w-4 h-4 text-yellow-300 animate-pulse" />
+                      </h2>
+                      <div className="flex items-center gap-2 text-sm">
+                        {isTyping ? (
+                          <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="flex items-center gap-2 text-cyan-200"
+                          >
+                            <div className="flex space-x-1">
+                              <div className="w-1 h-1 bg-cyan-300 rounded-full animate-bounce"></div>
+                              <div className="w-1 h-1 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                              <div className="w-1 h-1 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                            </div>
+                            <span className="text-xs">AI is thinking...</span>
+                          </motion.div>
+                        ) : (
+                          <div className="flex items-center gap-2">
+                            <div className={`w-2 h-2 rounded-full ${connectionStatus === 'connected' ? 'bg-green-400' : 'bg-red-400'} animate-pulse`}></div>
+                            <span className="text-xs text-gray-200">
+                              {connectionStatus === 'connected' ? 'Expert Online' : 'Reconnecting...'}
+                            </span>
+                            <div className="text-xs text-yellow-200 flex items-center gap-1">
+                              <Star className="w-3 h-3" />
+                              <span>8+ Years Experience</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Lead Progress Indicator */}
+                      {leadProgress > 0 && (
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: '100%' }}
+                          className="mt-2"
+                        >
+                          <div className="flex justify-between items-center text-xs text-gray-200 mb-1">
+                            <span>Interest Score</span>
+                            <span className="text-yellow-300 font-semibold">{leadProgress}%</span>
+                          </div>
+                          <div className="w-32 bg-white/20 rounded-full h-1.5">
+                            <motion.div 
+                              initial={{ width: 0 }}
+                              animate={{ width: `${leadProgress}%` }}
+                              transition={{ duration: 1, ease: "easeOut" }}
+                              className="bg-gradient-to-r from-green-400 to-yellow-400 h-1.5 rounded-full"
+                            />
+                          </div>
+                        </motion.div>
+                      )}
+                    </div>
+                  </div>
+                
+                {/* Enhanced Header Actions */}
+                <div className="flex items-center gap-2">
+                  {/* Settings Button */}
+                  <button
+                    onClick={() => setShowSettings(!showSettings)}
+                    className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors duration-200"
+                    aria-label="Settings"
+                  >
+                    <Settings className="w-4 h-4" />
+                  </button>
+                  
+                  {/* Minimize Button */}
+                  <button
+                    onClick={handleMinimize}
+                    className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors duration-200"
+                    aria-label={isMinimized ? "Maximize" : "Minimize"}
+                  >
+                    {isMinimized ? <Maximize2 className="w-4 h-4" /> : <Minimize2 className="w-4 h-4" />}
+                  </button>
+                  
+                  {/* Close Button */}
+                  <button
+                    onClick={handleCloseModal}
+                    className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors duration-200"
+                    aria-label="Close chat"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Settings Panel */}
+              <AnimatePresence>
+                {showSettings && !isMinimized && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="bg-gray-50 border-b border-gray-200 overflow-hidden"
+                  >
+                    <div className="p-4 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Sound Notifications</span>
+                        <button
+                          onClick={() => setIsMuted(!isMuted)}
+                          className="w-10 h-6 bg-gray-200 rounded-full relative transition-colors duration-200"
+                        >
+                          <div className={`w-4 h-4 bg-white rounded-full absolute top-1 transition-transform duration-200 ${isMuted ? 'translate-x-1' : 'translate-x-5'}`}></div>
+                        </button>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Auto-scroll</span>
+                        <button
+                          onClick={() => setAutoScroll(!autoScroll)}
+                          className="w-10 h-6 bg-gray-200 rounded-full relative transition-colors duration-200"
+                        >
+                          <div className={`w-4 h-4 bg-white rounded-full absolute top-1 transition-transform duration-200 ${autoScroll ? 'translate-x-5' : 'translate-x-1'}`}></div>
+                        </button>
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        Session: {sessionId ? sessionId.slice(-8) : 'Not started'}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Enhanced Messages Container */}
+              {!isMinimized && (
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white">
+                  {messages.map((message) => (
+                    <motion.div
+                      key={message.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div className={`max-w-[85%] ${message.role === 'user' ? 'order-2' : 'order-1'}`}>
+                        <div className={`flex items-start gap-3 ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                            message.role === 'user' 
+                              ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white' 
+                              : 'bg-gradient-to-r from-purple-500 to-purple-600 text-white'
+                          }`}>
+                            {message.role === 'user' ? <User className="w-5 h-5" /> : <Bot className="w-5 h-5" />}
+                          </div>
+                          <div className={`rounded-2xl px-4 py-3 relative group ${
+                            message.role === 'user'
+                              ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
+                              : message.isError
+                              ? 'bg-red-50 text-red-800 border border-red-200'
+                              : 'bg-white text-gray-800 shadow-lg border border-gray-100'
+                          }`}>
+                            <div className="prose prose-sm max-w-none">
+                              <div dangerouslySetInnerHTML={{ 
+                                __html: message.content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                                                      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                                                      .replace(/\n/g, '<br>')
+                              }} />
+                            </div>
+                            
+                            {/* Message Actions */}
+                            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                              <button
+                                onClick={() => handleCopyMessage(message.content, message.id)}
+                                className="w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center transition-colors"
+                                title="Copy message"
+                              >
+                                {copiedMessageId === message.id ? (
+                                  <CheckCircle className="w-3 h-3 text-green-600" />
+                                ) : (
+                                  <Copy className="w-3 h-3 text-gray-600" />
+                                )}
+                              </button>
+                            </div>
+                            
+                            <div className={`text-xs mt-2 flex items-center gap-2 ${
+                              message.role === 'user' ? 'text-blue-100' : 'text-gray-500'
+                            }`}>
+                              <Clock className="w-3 h-3" />
+                              {formatTime(message.timestamp)}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+
+                  {/* Enhanced Typing Indicator */}
+                  {isTyping && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex justify-start"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
+                          <Bot className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="bg-white rounded-2xl px-4 py-3 shadow-lg border border-gray-100">
+                          <div className="flex space-x-1">
+                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Premium Quick Actions */}
+                  {showQuickActions && messages.length === 1 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, staggerChildren: 0.1 }}
+                      className="space-y-6"
+                    >
+                      {quickActions.map((category, categoryIndex) => {
+                        const CategoryIcon = category.icon;
+                        return (
+                          <motion.div 
+                            key={categoryIndex} 
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: categoryIndex * 0.1 }}
+                            className="space-y-3"
+                          >
+                            {/* Premium Category Header */}
+                            <div className={`flex items-center justify-center gap-3 p-3 rounded-2xl bg-gradient-to-r ${category.gradient} text-white shadow-lg`}>
+                              <CategoryIcon className="w-5 h-5" />
+                              <h3 className="font-bold text-sm tracking-wide">
+                                {category.category}
+                              </h3>
+                            </div>
+                            
+                            {/* Premium Action Grid */}
+                            <div className="grid grid-cols-2 gap-3">
+                              {category.actions.map((action, actionIndex) => {
+                                const ActionIcon = action.icon;
+                                return (
+                                  <motion.button
+                                    key={actionIndex}
+                                    onClick={() => handleQuickAction(action)}
+                                    whileHover={{ scale: 1.02, y: -2 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className={`relative group p-4 bg-white rounded-xl border-2 border-gray-100 hover:border-transparent transition-all duration-300 text-left overflow-hidden ${
+                                      action.urgency === 'high' 
+                                        ? 'hover:shadow-red-500/20 hover:shadow-lg' 
+                                        : action.urgency === 'medium'
+                                        ? 'hover:shadow-yellow-500/20 hover:shadow-lg'
+                                        : 'hover:shadow-blue-500/20 hover:shadow-lg'
+                                    }`}
+                                  >
+                                    {/* Priority Indicator */}
+                                    {action.urgency === 'high' && (
+                                      <div className="absolute top-2 right-2">
+                                        <motion.div
+                                          animate={{ scale: [1, 1.2, 1] }}
+                                          transition={{ repeat: Infinity, duration: 2 }}
+                                          className="w-2 h-2 bg-red-500 rounded-full"
+                                        />
+                                      </div>
+                                    )}
+                                    
+                                    {/* Gradient Background */}
+                                    <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
+                                    
+                                    {/* Content */}
+                                    <div className="relative z-10">
+                                      <div className="flex items-center gap-3 mb-2">
+                                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${category.gradient} flex items-center justify-center shadow-md`}>
+                                          <ActionIcon className="w-4 h-4 text-white" />
+                                        </div>
+                                        <div className="flex-1">
+                                          <div className="font-semibold text-gray-800 text-xs leading-tight">
+                                            {action.text}
+                                          </div>
+                                          {action.urgency === 'high' && (
+                                            <div className="flex items-center gap-1 mt-1">
+                                              <Flame className="w-3 h-3 text-red-500" />
+                                              <span className="text-xs text-red-600 font-medium">Hot Lead</span>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+                                      
+                                      <p className="text-gray-600 text-xs leading-relaxed mb-2">
+                                        {action.description}
+                                      </p>
+                                      
+                                      {/* Action Benefits */}
+                                      <div className="flex items-center justify-between">
+                                        <div className="flex items-center gap-1">
+                                          <ArrowRight className="w-3 h-3 text-gray-400 group-hover:text-blue-500 transition-colors" />
+                                          <span className="text-xs text-gray-500 group-hover:text-blue-600 transition-colors">
+                                            {action.urgency === 'high' ? 'Get Instant Quote' : 
+                                             action.urgency === 'medium' ? 'Book Now' : 'Learn More'}
+                                          </span>
+                                        </div>
+                                        
+                                        {action.urgency === 'high' && (
+                                          <div className="flex items-center gap-1">
+                                            <Gift className="w-3 h-3 text-green-500" />
+                                            <span className="text-xs text-green-600 font-medium">Free</span>
+                                          </div>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </motion.button>
+                                );
+                              })}
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                      
+                      {/* Smart Suggestions */}
+                      {smartSuggestions.length > 0 && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.5 }}
+                          className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl border border-blue-100"
+                        >
+                          <div className="flex items-center gap-2 mb-3">
+                            <Lightbulb className="w-4 h-4 text-yellow-500" />
+                            <span className="text-sm font-semibold text-gray-700">Quick Suggestions</span>
+                          </div>
+                          <div className="space-y-2">
+                            {smartSuggestions.slice(0, 2).map((suggestion, idx) => (
+                              <button
+                                key={idx}
+                                onClick={() => handleQuickAction(suggestion)}
+                                className="w-full text-left p-2 text-xs text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors"
+                              >
+                                💡 {suggestion}
+                              </button>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  )}
+
+                  {/* Enhanced Rating */}
+                  {showRating && !isLoading && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex justify-center pt-2"
+                    >
+                      <div className="bg-white rounded-lg px-4 py-3 shadow-lg border border-gray-200">
+                        <p className="text-sm text-gray-700 mb-3 text-center">Was this response helpful?</p>
+                        <div className="flex gap-3 justify-center">
+                          <button
+                            onClick={() => handleRating('thumbs_up')}
+                            className={`p-2 rounded-lg transition-all duration-200 ${
+                              rating === 'thumbs_up' 
+                                ? 'bg-green-100 text-green-600 scale-110' 
+                                : 'text-gray-400 hover:text-green-600 hover:bg-green-50'
+                            }`}
+                          >
+                            <ThumbsUp className="w-5 h-5" />
+                          </button>
+                          <button
+                            onClick={() => handleRating('thumbs_down')}
+                            className={`p-2 rounded-lg transition-all duration-200 ${
+                              rating === 'thumbs_down' 
+                                ? 'bg-red-100 text-red-600 scale-110' 
+                                : 'text-gray-400 hover:text-red-600 hover:bg-red-50'
+                            }`}
+                          >
+                            <ThumbsDown className="w-5 h-5" />
+                          </button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  <div ref={messagesEndRef} />
+                </div>
+              )}
+
+              {/* Enhanced Input Area */}
+              {!isMinimized && (
+                <div className="flex-shrink-0 p-4 bg-white border-t border-gray-200">
+                  <form onSubmit={handleSubmit} className="flex items-end gap-2">
+                    <div className="flex-1 relative">
+                      <textarea
+                        ref={inputRef}
+                        value={inputMessage}
+                        onChange={(e) => setInputMessage(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                        placeholder="Type your message... (Press Enter to send)"
+                        className="w-full resize-none rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                        rows="1"
+                        style={{ minHeight: '48px', maxHeight: '120px' }}
+                        disabled={isLoading}
+                      />
+                      
+                      {/* File Upload Button */}
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        className="absolute right-2 bottom-2 w-8 h-8 text-gray-400 hover:text-gray-600 transition-colors"
+                        disabled={isLoading}
+                      >
+                        <Paperclip className="w-4 h-4" />
+                      </button>
+                      
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        onChange={handleFileUpload}
+                        className="hidden"
+                        accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png"
+                      />
+                    </div>
+                    
+                    <button
+                      type="submit"
+                      disabled={!inputMessage.trim() || isLoading}
+                      className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:from-gray-300 disabled:to-gray-400 text-white rounded-xl flex items-center justify-center transition-all duration-200 transform hover:scale-105 disabled:transform-none"
+                    >
+                      {isLoading ? (
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                      ) : (
+                        <Send className="w-5 h-5" />
+                      )}
+                    </button>
+                  </form>
+                  
+                  {/* Enhanced Footer Stats */}
+                  <div className="flex items-center justify-between text-xs text-gray-500 mt-2">
+                    <div className="flex items-center gap-4">
+                      <span className="flex items-center gap-1">
+                        <MessageCircle className="w-3 h-3" />
+                        {messageCount} messages
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {formatDuration(lastActivity)}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className={`w-2 h-2 rounded-full ${getConnectionStatusColor()}`}></div>
+                      {connectionStatus}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Premium Lead Capture Modal */}
+      <AnimatePresence>
+        {showLeadForm && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-60 flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={() => setShowLeadForm(false)}
+            />
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-hidden"
+            >
+              {/* Premium Header */}
+              <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                      <Rocket className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold">Get Instant HR Solutions!</h3>
+                      <p className="text-sm text-blue-100">Connect with Prachi directly</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowLeadForm(false)}
+                    className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+                
+                <div className="bg-white/10 rounded-xl p-3">
+                  <div className="flex items-center gap-2 text-sm">
+                    <Shield className="w-4 h-4 text-green-300" />
+                    <span>✅ Free 30-min consultation worth ₹5,000</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm mt-1">
+                    <Clock className="w-4 h-4 text-yellow-300" />
+                    <span>⚡ Prachi responds within 24 hours</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Lead Form */}
+              <div className="p-6">
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.target);
+                  const data = Object.fromEntries(formData.entries());
+                  handleLeadSubmit({ ...leadData, ...data });
+                }} className="space-y-4">
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <User className="w-4 h-4 inline mr-1" />
+                        Full Name *
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        defaultValue={leadData.name}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+                        placeholder="Your name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <Mail className="w-4 h-4 inline mr-1" />
+                        Email *
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        defaultValue={leadData.email}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <Phone className="w-4 h-4 inline mr-1" />
+                        Phone
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        defaultValue={leadData.phone}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+                        placeholder="+91-XXXXX-XXXXX"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <Building className="w-4 h-4 inline mr-1" />
+                        Company
+                      </label>
+                      <input
+                        type="text"
+                        name="company"
+                        defaultValue={leadData.company}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+                        placeholder="Company name"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <Briefcase className="w-4 h-4 inline mr-1" />
+                      Primary HR Need
+                    </label>
+                    <select
+                      name="service_interest"
+                      defaultValue={leadData.service_interest}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+                    >
+                      <option value="">Select your main need...</option>
+                      <option value="Virtual HR Management">Virtual HR Management</option>
+                      <option value="POSH Compliance">POSH Compliance</option>
+                      <option value="Recruitment Services">Recruitment Services</option>
+                      <option value="HR Audit">HR Audit & Compliance</option>
+                      <option value="Startup HR">Startup HR Setup</option>
+                      <option value="Employee Handbook">Employee Handbook</option>
+                      <option value="Other">Other HR Services</option>
+                    </select>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <Users className="w-4 h-4 inline mr-1" />
+                        Company Size
+                      </label>
+                      <select
+                        name="company_size"
+                        defaultValue={leadData.company_size}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+                      >
+                        <option value="">Select size...</option>
+                        <option value="1-10">1-10 employees</option>
+                        <option value="11-50">11-50 employees</option>
+                        <option value="51-200">51-200 employees</option>
+                        <option value="201-500">201-500 employees</option>
+                        <option value="500+">500+ employees</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <Clock className="w-4 h-4 inline mr-1" />
+                        Timeline
+                      </label>
+                      <select
+                        name="timeline"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+                      >
+                        <option value="">When do you need help?</option>
+                        <option value="Immediately">Immediately</option>
+                        <option value="Within 1 week">Within 1 week</option>
+                        <option value="Within 1 month">Within 1 month</option>
+                        <option value="Within 3 months">Within 3 months</option>
+                        <option value="Just exploring">Just exploring</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Premium CTA Buttons */}
+                  <div className="flex gap-3 pt-4">
+                    <button
+                      type="button"
+                      onClick={() => setShowLeadForm(false)}
+                      className="flex-1 px-4 py-3 text-gray-600 border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors text-sm font-medium"
+                    >
+                      Skip for now
+                    </button>
+                    <button
+                      type="submit"
+                      className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                    >
+                      <Rocket className="w-4 h-4" />
+                      Get Expert Help
+                    </button>
+                  </div>
+
+                  <p className="text-xs text-gray-500 text-center">
+                    🔒 Your information is secure and will only be used to provide you with HR solutions.
+                  </p>
+                </form>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

@@ -8,6 +8,7 @@ import Testimonials from './components/Testimonials';
 import BlogSection from './components/BlogSection';
 import FAQSection from './components/sections/FAQSection';
 import Footer from './components/Footer';
+import { ChatbotUIIntegration } from './components/ChatbotUIIntegration';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <BlogSection />
       <FAQSection />
       <Footer />
+      <ChatbotUIIntegration />
     </>
   );
 }

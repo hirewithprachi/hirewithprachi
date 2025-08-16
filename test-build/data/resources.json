@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "title": "HR Audit Checklist",
+    "desc": "A comprehensive checklist to audit your HR processes.",
+    "link": "/assets/resources/hr-audit-checklist.pdf",
+    "tags": ["audit", "checklist", "HR"]
+  },
+  {
+    "id": "2",
+    "title": "Employee Engagement Survey Template",
+    "desc": "A ready-to-use survey template to measure employee engagement.",
+    "link": "/assets/resources/employee-engagement-survey.pdf",
+    "tags": ["survey", "engagement", "template"]
+  },
+  {
+    "id": "3",
+    "title": "Compliance Checklist",
+    "desc": "Stay compliant with this easy-to-follow HR compliance checklist.",
+    "link": "/assets/resources/compliance-checklist.pdf",
+    "tags": ["compliance", "checklist"]
+  }
+] 

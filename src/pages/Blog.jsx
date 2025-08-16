@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from 'react-helmet-async';
 import Fuse from "fuse.js";
 import NewsletterSignup from "../components/NewsletterSignup";
 import Breadcrumbs from "../components/Breadcrumbs";
@@ -7,12 +6,27 @@ import { motion, AnimatePresence } from "framer-motion";
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
-import AIChatbotWidget from '../components/AIChatbotWidget';
+import GPT4oMiniChatbot from '../components/GPT4oMiniChatbot';
 import BlogCard from '../components/BlogCard';
 import { blogPosts, blogCategories, trendingTopics } from '../data/blogPosts';
 import { blogTopics, getFeaturedBlogTopics } from '../data/blogTopics';
+import SEOOptimizer from '../components/SEOOptimizer';
+import { supabase } from '../lib/supabase';
 
 export default function Blog() {
+  // SEO Data for Blog page
+  const seoData = {
+    title: "HR Blog - Latest HR Insights & Tips | Hire With Prachi",
+    description: "Latest HR insights, compliance updates, recruitment tips, and employee engagement strategies. Expert HR blog for Indian businesses.",
+    keywords: "HR blog, HR insights, HR tips, HR compliance, recruitment tips, employee engagement",
+    pageType: "blog",
+    pageData: {
+      title: "HR Blog - Latest Insights & Tips",
+      description: "Expert HR insights and strategies for Indian businesses",
+      image: "https://hirewithprachi.com/assets/images/hr-blog-1200x630.jpg"
+    }
+  };
+
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,7 +38,7 @@ export default function Blog() {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 9;
 
-  // Load blog posts from our data file
+  // Load blog posts from our data file and database
   useEffect(() => {
     const loadPosts = async () => {
       try {
@@ -34,13 +48,52 @@ export default function Blog() {
         // Simulate loading for better UX
         await new Promise(resolve => setTimeout(resolve, 800));
         
+        // Fetch blog posts from database
+        console.log('🔍 Blog: Fetching blog posts from database...');
+        const { data: dbPosts, error: dbError } = await supabase
+          .from('blog_posts')
+          .select('*')
+          .eq('status', 'published')
+          .order('published_at', { ascending: false });
+        
+        if (dbError) {
+          console.error('❌ Blog: Error fetching from database:', dbError);
+        } else {
+          console.log('✅ Blog: Fetched', dbPosts?.length || 0, 'posts from database');
+        }
+        
+        // Transform database posts to match static post format
+        const transformedDbPosts = (dbPosts || []).map(post => ({
+          id: post.id,
+          title: post.title,
+          excerpt: post.excerpt || 'No excerpt available',
+          content: post.content || '',
+          author: 'Prachi Shrivastava',
+          date: post.published_at || post.created_at,
+          category: post.category || 'HR Strategy',
+          readTime: '5 min read', // Default read time
+          featured: false, // Default to not featured
+          tags: post.tags || [],
+          image: post.featured_image_url || 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+          slug: post.slug,
+          source: 'database' // Mark as database post
+        }));
+        
         // Combine existing blog posts with new blog topics
-        const allPosts = [...blogPosts, ...blogTopics.map(topic => {
+        const staticPosts = [...blogPosts, ...blogTopics.map(topic => {
           // Set specific images for certain blog posts
           let image = 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
           
-          // Use specific SVG images for certain blog posts
-          if (topic.slug === 'contractual-freelance-hr-support') {
+          // Use specific images for certain blog posts
+          if (topic.slug === 'hr-outsourcing-services-guide') {
+            image = '/assets/images/HR Outsourcing Services When and How to Outsource HR Functions.svg';
+          } else if (topic.slug === 'hiring-recruitment-startups-strategic-approach') {
+            image = '/assets/images/Hiring & Recruitment for Startups A Strategic Approach.png';
+          } else if (topic.slug === 'employee-handbook-design-best-practices') {
+            image = '/assets/images/Employee Handbook Design Best Practices for Modern Organizations.png';
+          } else if (topic.slug === 'posh-compliance-complete-guide-2025') {
+            image = '/assets/images/POSH Compliance Complete Guide for 2025.png';
+          } else if (topic.slug === 'contractual-freelance-hr-support') {
             image = '/assets/images/Flexible HR Support for the Modern Workplace.svg';
           } else if (topic.slug === 'employee-experience-culture-building') {
             image = '/assets/images/Employee Experience & Culture Building.svg';
@@ -64,9 +117,17 @@ export default function Blog() {
             featured: topic.featured,
             tags: topic.keywords,
             image: image,
-            slug: topic.slug
+            slug: topic.slug,
+            source: 'static' // Mark as static post
           };
         })];
+        
+        // Combine static and database posts, prioritizing database posts (newer)
+        const allPosts = [...transformedDbPosts, ...staticPosts];
+        
+        console.log('✅ Blog: Total posts loaded:', allPosts.length);
+        console.log('   - Database posts:', transformedDbPosts.length);
+        console.log('   - Static posts:', staticPosts.length);
         
         setPosts(allPosts);
         setFiltered(allPosts);
@@ -172,75 +233,16 @@ export default function Blog() {
 
   return (
     <>
-      <Helmet>
-        <title>HR Blog | Latest HR Insights, Trends & Best Practices | Prachi Shrivastava</title>
-        <meta name="description" content="Stay ahead with the latest HR insights, trends, and best practices from India's leading virtual HR consultant. Expert articles on HR strategy, compliance, employee engagement, and more." />
-        <meta name="keywords" content="HR blog, HR insights, HR trends, HR best practices, virtual HR, HR consulting India, employee engagement, HR compliance, startup HR, SME HR services, HR strategy, remote work HR" />
-        <meta name="author" content="Prachi Shrivastava" />
-        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-        
-        {/* Open Graph */}
-        <meta property="og:title" content="HR Blog | Latest HR Insights & Best Practices | Prachi Shrivastava" />
-        <meta property="og:description" content="Expert HR insights, trends, and best practices from India's leading virtual HR consultant. Stay updated with the latest in HR strategy and compliance." />
-        <meta property="og:image" content="/assets/images/about-img-1.jpg" />
-        <meta property="og:url" content="https://hirewithprachi.com/blog" />
-        <meta property="og:type" content="blog" />
-        <meta property="og:site_name" content="Hire With Prachi" />
-        
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="HR Blog | Latest HR Insights & Best Practices" />
-        <meta name="twitter:description" content="Expert HR insights, trends, and best practices from India's leading virtual HR consultant." />
-        <meta name="twitter:image" content="/assets/images/about-img-1.jpg" />
-        
-        {/* Canonical */}
-        <link rel="canonical" href="https://hirewithprachi.com/blog" />
-        
-        {/* Schema Markup */}
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Blog",
-          "name": "HR Blog | Prachi Shrivastava Virtual HR",
-          "description": "Latest HR insights, trends, and best practices from India's leading virtual HR consultant",
-          "url": "https://hirewithprachi.com/blog",
-          "author": {
-            "@type": "Person",
-            "name": "Prachi Shrivastava",
-            "jobTitle": "Virtual HR Consultant",
-            "worksFor": {
-              "@type": "Organization",
-              "name": "Hire With Prachi"
-            }
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "Hire With Prachi",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://hirewithprachi.com/logo.png"
-            }
-          },
-          "mainEntity": {
-            "@type": "ItemList",
-            "itemListElement": blogPosts.slice(0, 10).map((post, index) => ({
-              "@type": "ListItem",
-              "position": index + 1,
-              "item": {
-                "@type": "BlogPosting",
-                "headline": post.title,
-                "description": post.excerpt,
-                "author": {
-                  "@type": "Person",
-                  "name": post.author
-                },
-                "datePublished": post.date,
-                "image": post.image,
-                "url": `https://hirewithprachi.com/blog/${post.slug}`
-              }
-            }))
-          }
-        })}</script>
-      </Helmet>
+      {/* Comprehensive SEO Optimization */}
+      <SEOOptimizer
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        image={seoData.pageData.image}
+        pageType={seoData.pageType}
+        pageData={seoData.pageData}
+        canonical="https://hirewithprachi.com/blog"
+      />
       
       <style>
         {`
@@ -303,7 +305,7 @@ export default function Blog() {
       <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50" role="main">
         <HireWithPrachiTopBar />
         <HireWithPrachiHeader />
-        <AIChatbotWidget />
+        <GPT4oMiniChatbot />
 
         {/* Ultra-Futuristic Blog Hero Section */}
         <section className="relative min-h-[90vh] bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 overflow-hidden">

@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
-import AIChatbotWidget from '../components/AIChatbotWidget';
+import GPT4oMiniChatbot from '../components/GPT4oMiniChatbot';
 import Breadcrumbs from '../components/Breadcrumbs';
 import HireWithPrachiTestimonials from '../components/hirable/HirableTestimonials';
 import FAQSection from '../components/sections/FAQSection';
 import { aboutPageFaqs } from '../data/faqData';
+import SEOOptimizer from '../components/SEOOptimizer';
 
 import ConsultationModal from '../components/LeadCapturePreview';
 import OptimizedImage from '../components/OptimizedImage';
+
+  // SEO Data for About page
+  const seoData = {
+    title: "About Prachi Shrivastava - Virtual HR Consultant | Hire With Prachi",
+    description: "Meet Prachi Shrivastava, leading virtual HR consultant in India. Expert in HR compliance, recruitment, and employee engagement for startups and SMEs.",
+    keywords: "Prachi Shrivastava, HR consultant, virtual HR, HR expert, India, startup HR, SME HR",
+    pageType: "person",
+    pageData: {
+      name: "Prachi Shrivastava",
+      jobTitle: "Virtual HR Consultant",
+      description: "Leading virtual HR consultant and POSH expert in India",
+      image: "https://hirewithprachi.com/assets/images/about-img-1.jpg"
+    }
+  };
 
 const galleryImages = [
   {
@@ -123,24 +137,16 @@ export default function AboutPage() {
 
   return (
     <>
-      <Helmet>
-        <title>About Prachi Shrivastava – Virtual HR Consultant & Expert</title>
-        <meta name="description" content="Meet Prachi Shrivastava, India's leading virtual HR consultant and POSH expert. Expert HR services for startups and SMEs across India. Book a free consultation today!" />
-        <meta name="keywords" content="Prachi Shrivastava, virtual HR consultant, HR expert, HR services India, HR events, HR seminars, HR gallery, HR consulting, HR compliance" />
-        <meta property="og:title" content="About Prachi Shrivastava – Virtual HR Consultant & Expert" />
-        <meta property="og:description" content="Meet Prachi Shrivastava, India's leading virtual HR consultant. Explore her services and event gallery. Book a free consultation today!" />
-        <meta property="og:image" content="/assets/images/about-img-1.jpg" />
-        <meta property="og:url" content="https://hirewithprachi.com/about" />
-        <meta property="og:type" content="profile" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About Prachi Shrivastava – Virtual HR Consultant & Expert" />
-        <meta name="twitter:description" content="Meet Prachi Shrivastava, India's leading virtual HR consultant. Explore her services and event gallery. Book a free consultation today!" />
-        <meta name="twitter:image" content="/assets/images/about-img-1.jpg" />
-        <link rel="canonical" href="https://hirewithprachi.com/about" />
-        <script type="application/ld+json">{JSON.stringify(personSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(imageGallerySchema)}</script>
-      </Helmet>
+      {/* Comprehensive SEO Optimization */}
+      <SEOOptimizer
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        image={seoData.pageData.image}
+        pageType={seoData.pageType}
+        pageData={seoData.pageData}
+        canonical="https://hirewithprachi.com/about"
+      />
       <main className="min-h-screen bg-white" role="main" style={{ margin: 0, padding: 0 }}>
         <HireWithPrachiTopBar />
         <HireWithPrachiHeader />
@@ -825,7 +831,7 @@ export default function AboutPage() {
         </section>
         <ConsultationModal open={showConsultation} onClose={() => setShowConsultation(false)} />
         <HireWithPrachiFooter />
-        <AIChatbotWidget />
+        <GPT4oMiniChatbot />
       </main>
     </>
   );

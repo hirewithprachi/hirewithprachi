@@ -1,0 +1,48 @@
+## Pages
+
+### Main Pages
+- [Home](/) : Expert virtual HR services for startups and SMEs across India. HR compliance, recruitment, payroll, and employee engagement solutions.
+- [About](/about) : Learn about Prachi Shrivastava, certified HR consultant and POSH instructor with 15+ years of experience helping businesses with virtual HR services.
+- [Services](/services) : Comprehensive HR services including recruitment, policy development, POSH training, compliance audit, and strategic HR consulting for businesses.
+- [Contact](/contact) : Get in touch with Prachi Shrivastava for expert virtual HR consulting services. Contact information and consultation booking.
+- [Blog](/blog) : Latest HR insights, compliance updates, best practices, and industry trends from expert HR consultant Prachi Shrivastava.
+- [Resources](/resources) : Access 500+ professional HR resources including free templates, calculators, compliance checklists, and expert guides.
+
+### HR Tools & Calculators
+- [HR Cost Savings Calculator](/hr-cost-savings-calculator) : Calculate HR cost savings and ROI from virtual HR services vs in-house HR team.
+- [HR Needs Assessment Calculator](/hr-needs-assessment-calculator) : Calculate how many HR staff you need based on company size and industry.
+- [Turnover Calculator](/turnover-calculator) : Calculate employee turnover rates and associated costs to understand HR impact on business.
+- [Performance Calculator](/performance-calculator) : Calculate performance metrics and KPIs to measure employee effectiveness.
+- [Employee Engagement Calculator](/employee-engagement-calculator) : Measure and analyze employee engagement levels with comprehensive assessment.
+- [Document Analyzer](/document-analyzer) : AI-powered analysis of HR documents for compliance and optimization recommendations.
+- [Resume Parser](/resume-parser) : Extract and analyze candidate information from resumes for efficient recruitment.
+- [Salary Benchmarking Tool](/salary-benchmarking-tool) : Benchmark salaries across industries and positions for competitive compensation.
+- [Benefits Calculator](/benefits-calculator) : Calculate employee benefits and associated costs for comprehensive compensation planning.
+- [ROI Calculator](/roi-calculator) : Calculate return on investment for HR services and measure business impact.
+- [Compliance Risk Checker](/compliance-risk-checker) : Assess HR compliance status and identify potential risks and gaps.
+
+### Service Pages  
+- [HR Compliance](/services/hr-compliance) : Comprehensive HR compliance services ensuring adherence to Indian labor laws and regulations.
+- [Recruitment & Hiring](/services/recruitment-hiring) : End-to-end recruitment services from job posting to candidate onboarding.
+- [Employee Engagement](/services/employee-engagement) : Strategies and programs to improve employee satisfaction and retention.
+- [Virtual HR Services](/services/virtual-hr-services) : Complete virtual HR management services for businesses of all sizes.
+- [Payroll Management](/services/payroll-management) : Accurate payroll processing and compliance with statutory requirements.
+- [Performance Management](/services/performance-management) : Performance evaluation systems and improvement strategies.
+- [HR Audit](/services/hr-audit) : Comprehensive HR audit services to identify gaps and improvement opportunities.
+
+### City-Specific Services
+- [HR Services Mumbai](/hr-services-mumbai) : Professional HR consulting services in Mumbai for local and multinational companies.
+- [HR Services Delhi](/hr-services-delhi) : Expert HR services in Delhi NCR region with deep understanding of local business needs.
+- [HR Services Bangalore](/hr-services-bangalore) : Specialized HR services for Bangalore's dynamic startup and tech ecosystem.
+- [HR Services Chennai](/hr-services-chennai) : Comprehensive HR solutions for Chennai's manufacturing and IT industries.
+- [HR Services Hyderabad](/hr-services-hyderabad) : Professional HR consulting services in Hyderabad for growing businesses.
+- [HR Services Pune](/hr-services-pune) : Expert HR services in Pune for automotive, IT, and manufacturing sectors.
+- [HR Services Ahmedabad](/hr-services-ahmedabad) : Professional HR consulting in Ahmedabad for textile, chemical, and pharmaceutical industries.
+- [HR Services Kolkata](/hr-services-kolkata) : Comprehensive HR solutions for Kolkata's diverse business landscape.
+- [HR Services Jaipur](/hr-services-jaipur) : Expert HR services in Jaipur for heritage tourism and emerging industries.
+- [HR Services Lucknow](/hr-services-lucknow) : Professional HR consulting services in Lucknow for government and private sectors.
+
+### Legal & Compliance
+- [Privacy Policy](/privacy-policy) : Privacy policy and data protection practices for Hire With Prachi HR services.
+- [Terms of Service](/terms-of-service) : Terms and conditions for using Hire With Prachi virtual HR services.
+- [GDPR Data Deletion](/gdpr-data-deletion) : GDPR compliance and data deletion request procedures.

@@ -1,0 +1,73 @@
+# Docker Compose for Enhanced Resume Builder Services
+# Self-hosted LanguageTool for grammar checking
+
+version: '3.8'
+
+services:
+  # LanguageTool Grammar Check Service
+  languagetool:
+    image: silviof/docker-languagetool:latest
+    container_name: languagetool-server
+    restart: unless-stopped
+    ports:
+      - "8010:8010"
+    environment:
+      - Java_Xms=512m
+      - Java_Xmx=1024m
+      - langtool_languageModel=/ngrams
+      - langtool_fasttextModel=/fasttext/lid.176.bin
+    volumes:
+      - ./languagetool-data:/ngrams:ro
+      - ./fasttext-data:/fasttext:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8010/v2/languages"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - resume-builder
+
+  # Redis for caching (optional but recommended)
+  redis:
+    image: redis:7-alpine
+    container_name: redis-cache
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - resume-builder
+
+  # Nginx proxy (optional - for production)
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/ssl/certs:ro
+    depends_on:
+      - languagetool
+    networks:
+      - resume-builder
+    profiles:
+      - production
+
+volumes:
+  redis-data:
+    driver: local
+
+networks:
+  resume-builder:
+    driver: bridge

@@ -9,8 +9,7 @@ import {
   Heart, Target, Zap, Save, History, BarChart3, TrendingDown,
   AlertCircle, Info, Clock, Users, Globe, Database, Brain, 
   TrendingUp2, PieChart, BarChart, LineChart, Activity,
-  Smartphone, Monitor, Globe2, Zap2, Sparkles, Target2,
-  TrendingUp3, BarChart4, PieChart2, Activity2, Brain2
+  Smartphone, Monitor, Sparkles
 } from 'lucide-react';
 import { db, auth, analytics } from '../lib/supabase';
 

@@ -240,6 +240,7 @@ export default function TurnoverCalculator() {
       <Helmet>
         <title>Turnover Calculator 2025 | Employee Turnover Analysis - Prachi</title>
         <meta name="description" content="Analyze employee turnover rates and identify retention improvement opportunities. Free turnover calculator tool." />
+        <link rel="canonical" href="https://www.hirewithprachi.com/turnover-calculator" />
       </Helmet>
 
       {/* Header */}

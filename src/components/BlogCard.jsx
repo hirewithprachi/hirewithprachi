@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import OptimizedImage from './ui/OptimizedImage';
 
 const BlogCard = ({ post, index = 0, variant = 'default' }) => {
   const formatDate = (dateString) => {
@@ -61,18 +62,20 @@ const BlogCard = ({ post, index = 0, variant = 'default' }) => {
       <div className={imageVariants[variant]}>
         {post.image ? (
           post.image.endsWith('.svg') ? (
-            <img 
+            <OptimizedImage 
               src={post.image} 
               alt={post.title} 
               className="w-full h-full object-contain p-4"
               loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
-            <img 
+            <OptimizedImage 
               src={post.image} 
               alt={post.title} 
               className="w-full h-full object-cover"
               loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           )
         ) : (
@@ -114,11 +117,12 @@ const BlogCard = ({ post, index = 0, variant = 'default' }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             {post.authorImage ? (
-              <img 
+              <OptimizedImage 
                 src={post.authorImage} 
                 alt={post.author} 
                 className="w-8 h-8 rounded-full object-cover"
                 loading="lazy"
+                sizes="32px"
               />
             ) : (
               <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">

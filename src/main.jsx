@@ -22,13 +22,31 @@ import { HelmetProvider } from 'react-helmet-async';
 import ErrorBoundary from './components/ErrorBoundary';
 
 
-import AIChatbotWidget from './components/AIChatbotWidget';
+import GPT4oMiniChatbot from './components/GPT4oMiniChatbot';
+import FacebookPixel from './components/FacebookPixel';
 import ServiceDetailPage from './pages/ServiceDetailPage';
 import HRComplianceService from './pages/HRComplianceService';
 import RecruitmentService from './pages/RecruitmentService';
 import EmployeeEngagementService from './pages/EmployeeEngagementService';
-import AdminRoute from './components/AdminRoute';
-import AdminRedirect from './components/AdminRedirect';
+import VirtualHRServices from './pages/VirtualHRServices';
+import PayrollManagementService from './pages/PayrollManagementService';
+import HRServicesMumbai from './pages/HRServicesMumbai';
+import PerformanceManagementService from './pages/PerformanceManagementService';
+import HRServicesDelhi from './pages/HRServicesDelhi';
+import HRAuditService from './pages/HRAuditService';
+import HRServicesBangalore from './pages/HRServicesBangalore';
+import HRServicesChennai from './pages/HRServicesChennai';
+import HRServicesHyderabad from './pages/HRServicesHyderabad';
+import HRServicesPune from './pages/HRServicesPune';
+import HRServicesAhmedabad from './pages/HRServicesAhmedabad';
+import HRServicesKolkata from './pages/HRServicesKolkata';
+import HRServicesJaipur from './pages/HRServicesJaipur';
+import HRServicesLucknow from './pages/HRServicesLucknow';
+import HRServicesIndore from './pages/HRServicesIndore';
+import HRServicesBhubaneswar from './pages/HRServicesBhubaneswar';
+import HRServicesNagpur from './pages/HRServicesNagpur';
+import HRServicesCoimbatore from './pages/HRServicesCoimbatore';
+import PrachiPortfolio from './pages/PrachiPortfolio';
 
 const Blog = React.lazy(() => import('./pages/Blog.jsx'));
 const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage.jsx'));
@@ -49,12 +67,14 @@ const SalaryCalculator = React.lazy(() => import('./components/SalaryCalculator.
 const EmployeeSalaryCalculator = React.lazy(() => import('./components/EmployeeSalaryCalculator.jsx'));
 const EmployeeEngagementCalculator = React.lazy(() => import('./pages/EmployeeEngagementCalculator.jsx'));
 const BIDashboard = React.lazy(() => import('./pages/BIDashboard.jsx'));
-const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard.jsx'));
-const AdminLogin = React.lazy(() => import('./pages/AdminLogin.jsx'));
-const AdminRegister = React.lazy(() => import('./pages/AdminRegister.jsx'));
-const AdminVideoManager = React.lazy(() => import('./pages/AdminVideoManager.jsx'));
-const AdminResetPassword = React.lazy(() => import('./pages/AdminResetPassword.jsx'));
-const AdminResetPasswordConfirm = React.lazy(() => import('./pages/AdminResetPasswordConfirm.jsx'));
+const WorldClassAdminDashboard = React.lazy(() => import('./pages/WorldClassAdminDashboard.jsx'));
+const ProtectedRoute = React.lazy(() => import('./components/ProtectedRoute.jsx'));
+const HRToolsLibrary = React.lazy(() => import('./pages/HRToolsLibrary.jsx'));
+const UserDashboard = React.lazy(() => import('./pages/UserDashboard.jsx'));
+const EnhancedResumeBuilder = React.lazy(() => import('./pages/EnhancedResumeBuilder.jsx'));
+const PremiumResumeBuilder = React.lazy(() => import('./pages/PremiumResumeBuilder.jsx'));
+const ModernResumeBuilder = React.lazy(() => import('./pages/ModernResumeBuilder.jsx'));
+const HRPolicyGenerator = React.lazy(() => import('./pages/HRPolicyGenerator.jsx'));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -85,6 +105,24 @@ function AnimatedRoutes() {
             <Route path="/services/hr-compliance" element={<HRComplianceService />} />
             <Route path="/services/recruitment-hiring" element={<RecruitmentService />} />
             <Route path="/services/employee-engagement" element={<EmployeeEngagementService />} />
+            <Route path="/services/virtual-hr-services" element={<VirtualHRServices />} />
+            <Route path="/services/payroll-management" element={<PayrollManagementService />} />
+            <Route path="/services/performance-management" element={<PerformanceManagementService />} />
+            <Route path="/services/hr-audit" element={<HRAuditService />} />
+            <Route path="/hr-services-mumbai" element={<HRServicesMumbai />} />
+            <Route path="/hr-services-delhi" element={<HRServicesDelhi />} />
+            <Route path="/hr-services-bangalore" element={<HRServicesBangalore />} />
+            <Route path="/hr-services-chennai" element={<HRServicesChennai />} />
+            <Route path="/hr-services-hyderabad" element={<HRServicesHyderabad />} />
+            <Route path="/hr-services-pune" element={<HRServicesPune />} />
+            <Route path="/hr-services-ahmedabad" element={<HRServicesAhmedabad />} />
+            <Route path="/hr-services-kolkata" element={<HRServicesKolkata />} />
+            <Route path="/hr-services-jaipur" element={<HRServicesJaipur />} />
+            <Route path="/hr-services-lucknow" element={<HRServicesLucknow />} />
+            <Route path="/hr-services-indore" element={<HRServicesIndore />} />
+            <Route path="/hr-services-bhubaneswar" element={<HRServicesBhubaneswar />} />
+            <Route path="/hr-services-nagpur" element={<HRServicesNagpur />} />
+            <Route path="/hr-services-coimbatore" element={<HRServicesCoimbatore />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
@@ -107,17 +145,24 @@ function AnimatedRoutes() {
             <Route path="/employee-salary-calculator" element={<EmployeeSalaryCalculator />} />
             <Route path="/employee-engagement-calculator" element={<EmployeeEngagementCalculator />} />
             <Route path="/bi-dashboard" element={<BIDashboard />} />
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <WorldClassAdminDashboard />
+              </ProtectedRoute>
+            } />
             <Route path="/resource-downloads" element={<ResourceDownloads />} />
             <Route path="/resource-downloads/:templateId" element={<ResourceDownloads />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin/register" element={<AdminRegister />} />
-            <Route path="/admin/reset-password" element={<AdminResetPassword />} />
-            <Route path="/admin/reset-password-confirm" element={<AdminResetPasswordConfirm />} />
 
-            <Route path="/admin/videos" element={<AdminRoute><AdminVideoManager /></AdminRoute>} />
-            <Route path="/admin/dashboard" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
             <Route path="/gdpr-data-deletion" element={<GDPRDataDeletion />} />
             <Route path="/hirable-homepage" element={<HirableHomepage />} />
+            <Route path="/prachi-shrivastava" element={<PrachiPortfolio />} />
+            <Route path="/tools" element={<HRToolsLibrary />} />
+            <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/hr-policy-generator" element={<HRPolicyGenerator />} />
+                            <Route path="/resume-builder" element={<ModernResumeBuilder />} />
+                <Route path="/enhanced-resume-builder" element={<EnhancedResumeBuilder />} />
+                <Route path="/premium-resume-builder" element={<PremiumResumeBuilder />} />
+                <Route path="/modern-resume-builder" element={<ModernResumeBuilder />} />
           </Routes>
         </Suspense>
       </motion.div>
@@ -132,10 +177,11 @@ function App() {
         <BrowserRouter>
           <ErrorBoundary>
             <div className="App">
+              <FacebookPixel />
               <CookieConsent />
               <ScrollProgressBar />
               {/* <ExitIntentPopup /> */}
-              <AIChatbotWidget />
+              <GPT4oMiniChatbot />
       
               <AnimatedRoutes />
             </div>

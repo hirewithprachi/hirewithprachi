@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOOptimizer from '../components/SEOOptimizer';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
-import AIChatbotWidget from '../components/AIChatbotWidget';
+import GPT4oMiniChatbot from '../components/GPT4oMiniChatbot';
 import ScrollProgressBar from '../components/ScrollProgressBar';
 import BrochureDownloadModal from '../components/BrochureDownloadModal';
 import { CheckCircle, Users, Shield, Zap, Award, MessageSquare, BarChart2, Search, Phone, Mail, ChevronDown, ChevronUp, Download, Calendar, MessageCircle, Target, UserPlus, Briefcase } from 'lucide-react';
 
 export default function RecruitmentService() {
+  // SEO Data for Recruitment Service
+  const seoData = {
+    title: "Recruitment Services - Professional Hiring Solutions",
+    description: "Professional recruitment and hiring services for Indian businesses. End-to-end recruitment process, candidate sourcing, and hiring solutions.",
+    keywords: "recruitment services, hiring solutions, candidate sourcing, recruitment process, India",
+    pageType: "service",
+    pageData: {
+      title: "Recruitment Services",
+      description: "Professional recruitment and hiring solutions",
+      image: "https://hirewithprachi.com/assets/images/recruitment-1200x630.jpg"
+    }
+  };
+
   const [showBrochureModal, setShowBrochureModal] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
 
@@ -24,10 +37,16 @@ export default function RecruitmentService() {
 
   return (
     <>
-      <Helmet>
-        <title>Strategic Recruitment & Hiring Services | Expert Talent Acquisition India</title>
-        <meta name="description" content="End-to-end recruitment solutions including job description optimization, candidate sourcing, interview management, and onboarding programs. Build your dream team efficiently." />
-      </Helmet>
+      {/* Comprehensive SEO Optimization */}
+      <SEOOptimizer
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        image={seoData.pageData.image}
+        pageType={seoData.pageType}
+        pageData={seoData.pageData}
+        canonical="https://hirewithprachi.com/services/recruitment-hiring"
+      />
 
       <main className="min-h-screen bg-white" role="main">
         <ScrollProgressBar />
@@ -480,7 +499,7 @@ export default function RecruitmentService() {
         </div>
 
         <HireWithPrachiFooter />
-        <AIChatbotWidget />
+        <GPT4oMiniChatbot />
         
         {/* Brochure Download Modal */}
         <BrochureDownloadModal

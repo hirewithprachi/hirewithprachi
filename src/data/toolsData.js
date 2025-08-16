@@ -49,6 +49,20 @@ export const toolsData = [
     features: ['Working Days Calculation', 'Attendance Tracking', 'Salary Breakdown', 'Download Reports']
   },
   {
+    id: 'hr-policy-generator',
+    title: 'AI HR Policy Generator',
+    description: 'Generate comprehensive, legally compliant HR policies instantly with AI. Choose from 200+ templates for all policy types.',
+    icon: '📋',
+    color: 'from-purple-500 to-blue-600',
+    bgColor: 'from-purple-50 to-blue-50',
+    borderColor: 'border-purple-200',
+    link: '/hr-policy-generator',
+    category: 'generator',
+    badge: 'AI Powered',
+    timeEstimate: '5-10 min',
+    features: ['AI Generation', 'Legal Compliance', 'Multi-language', 'Email Distribution', 'Acknowledgment Tracking', 'Premium Templates']
+  },
+  {
     id: 'roi-calculator',
     title: 'ROI Calculator',
     description: 'Measure the return on investment for your HR initiatives and virtual HR services.',

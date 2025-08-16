@@ -163,6 +163,7 @@ export default function ResumeParser() {
       <Helmet>
         <title>Resume Parser 2025 | AI-Powered Resume Analysis - Prachi</title>
         <meta name="description" content="Extract and analyze candidate information from resumes for efficient hiring. Free resume parser tool." />
+        <link rel="canonical" href="https://www.hirewithprachi.com/resume-parser" />
       </Helmet>
 
       {/* Header */}

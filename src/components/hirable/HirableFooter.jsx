@@ -95,8 +95,8 @@ export default function HirableFooter() {
       </div>
       
       {/* Main Footer */}
-      <div className="pt-12 md:pt-16 pb-6 md:pb-8">
-        <div className="max-w-7xl mx-auto px-4">
+      <div className="pt-12 md:pt-16 pb-6 md:pb-8 safe-area-bottom">
+        <div className="max-w-7xl mx-auto px-4 mobile-container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {/* Company Info */}
             <div className="lg:col-span-1">
@@ -114,9 +114,16 @@ export default function HirableFooter() {
                   <div className="text-sm md:text-base text-neutral-400">Virtual HR Consultant</div>
                 </div>
               </div>
-              <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-6">
+              <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-4">
                 Expert virtual HR services for startups and SMEs. Transform your business with professional HR solutions, compliance expertise, and strategic HR planning.
               </p>
+              <div className="flex items-start gap-2 text-sm text-neutral-400 mb-6">
+                <svg className="w-4 h-4 text-accent-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>New Delhi, India</span>
+              </div>
               <div className="flex gap-4">
                 <a href="http://linkedin.com/company/hirewithprachi/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors duration-200">
                   <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -182,21 +189,21 @@ export default function HirableFooter() {
               
               {/* Subscribe */}
               <div className="mt-6 md:mt-8">
-                <h4 className="text-sm md:text-base font-bold text-white mb-3">Get Free HR Resources</h4>
+                <h4 className="text-sm md:text-base font-bold text-white mb-4">Get Free HR Resources</h4>
                 <form onSubmit={handleEmailSubmit} className="space-y-3">
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Your email"
-                      className="flex-1 px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-lg text-sm text-white placeholder-neutral-400 focus:border-primary-500 focus:outline-none transition-colors duration-200"
+                      placeholder="Your email address"
+                      className="flex-1 px-4 py-3 bg-neutral-800 border border-neutral-700 rounded-xl text-sm text-white placeholder-neutral-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 input-mobile"
                       disabled={isSubmitting}
                     />
                     <button 
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-4 py-2 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-lg hover:from-accent-600 hover:to-accent-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-xl hover:from-accent-600 hover:to-accent-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-sm whitespace-nowrap btn-mobile-primary"
                     >
                       {isSubmitting ? (
                         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">

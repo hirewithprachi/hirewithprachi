@@ -40,8 +40,8 @@ const ContactSection = () => (
                 <MapPin className="w-6 h-6 text-pink-600" />
               </div>
               <div>
-                <div className="font-semibold text-gray-900">Location</div>
-                <div className="text-gray-600">Delhi, India</div>
+                <div className="font-semibold text-gray-900">Address</div>
+                <div className="text-gray-600">New Delhi, India</div>
               </div>
             </div>
           </div>

@@ -240,6 +240,7 @@ export default function EmployeeEngagementCalculator() {
         <title>Employee Engagement Calculator 2025 | Team Engagement Score - Prachi</title>
         <meta name="description" content="Calculate your team's engagement score with our free employee engagement calculator. Get insights and recommendations for improving workplace morale." />
         <meta name="keywords" content="employee engagement calculator, team engagement score, workplace morale calculator, hr engagement tool, employee satisfaction calculator" />
+        <link rel="canonical" href="https://www.hirewithprachi.com/employee-engagement-calculator" />
       </Helmet>
 
       {/* Header */}

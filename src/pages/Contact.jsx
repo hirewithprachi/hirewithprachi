@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import ContactForm from '../components/ContactForm';
 import ContactMap from '../components/ContactMap';
@@ -7,71 +6,39 @@ import CalendlyBooking from '../components/CalendlyBooking';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
-import AIChatbotWidget from '../components/AIChatbotWidget';
+import GPT4oMiniChatbot from '../components/GPT4oMiniChatbot';
 import FAQSection from '../components/sections/FAQSection';
 import Breadcrumbs from '../components/Breadcrumbs';
+import SEOOptimizer from '../components/SEOOptimizer';
 
 export default function Contact() {
+  // SEO Data for Contact page
+  const seoData = {
+    title: "Contact Hire With Prachi - HR Consultant | Get Free Consultation",
+    description: "Contact Hire With Prachi for expert HR services. Get free consultation for HR compliance, recruitment, and employee engagement solutions.",
+    keywords: "contact HR consultant, HR consultation, HR services contact, free HR consultation",
+    pageType: "contact",
+    pageData: {
+      title: "Contact Hire With Prachi",
+      description: "Get free HR consultation and expert advice",
+      image: "https://hirewithprachi.com/assets/images/contact-1200x630.jpg"
+    }
+  };
+
   const [activeTab, setActiveTab] = useState('contact');
 
   return (
     <>
-      <Helmet>
-        <title>Contact Prachi Shrivastava | Virtual HR Consultant | Free Consultation</title>
-        <meta name="description" content="Contact Prachi Shrivastava for expert virtual HR services, consultations, and support. Book a free consultation today. Serving startups and SMEs across India and globally." />
-        <meta name="keywords" content="contact HR consultant, virtual HR services, HR consultation, Prachi Shrivastava contact, HR support India, startup HR services, SME HR consulting, free HR consultation" />
-        <meta name="author" content="Prachi Shrivastava" />
-        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-        
-        {/* Open Graph */}
-        <meta property="og:title" content="Contact Prachi Shrivastava | Virtual HR Consultant" />
-        <meta property="og:description" content="Get expert virtual HR services and free consultation. Contact Prachi Shrivastava for startup and SME HR solutions across India and globally." />
-        <meta property="og:image" content="/assets/images/about-img-1.jpg" />
-        <meta property="og:url" content="https://hirewithprachi.com/contact" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Hire With Prachi" />
-        
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Contact Prachi Shrivastava | Virtual HR Consultant" />
-        <meta name="twitter:description" content="Get expert virtual HR services and free consultation. Contact Prachi Shrivastava for startup and SME HR solutions." />
-        <meta name="twitter:image" content="/assets/images/about-img-1.jpg" />
-        
-        {/* Canonical */}
-        <link rel="canonical" href="https://hirewithprachi.com/contact" />
-        
-        {/* Schema Markup */}
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "ContactPage",
-          "name": "Contact Prachi Shrivastava - Virtual HR Consultant",
-          "description": "Contact Prachi Shrivastava for expert virtual HR services, consultations, and support. Book a free consultation today.",
-          "url": "https://hirewithprachi.com/contact",
-          "mainEntity": {
-            "@type": "Organization",
-            "name": "Hire With Prachi",
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "telephone": "+91-87408-89927",
-              "contactType": "customer service",
-              "email": "info@hirewithprachi.com",
-              "availableLanguage": ["English", "Hindi"],
-              "areaServed": ["IN", "Worldwide"],
-              "hoursAvailable": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                "opens": "09:00",
-                "closes": "18:00"
-              }
-            },
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "IN",
-              "addressRegion": "India"
-            }
-          }
-        })}</script>
-      </Helmet>
+      {/* Comprehensive SEO Optimization */}
+      <SEOOptimizer
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        image={seoData.pageData.image}
+        pageType={seoData.pageType}
+        pageData={seoData.pageData}
+        canonical="https://hirewithprachi.com/contact"
+      />
 
       <style>
         {`
@@ -130,12 +97,12 @@ export default function Contact() {
       <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-x-hidden">
         <HireWithPrachiTopBar />
         <HireWithPrachiHeader />
-        <AIChatbotWidget />
+        <GPT4oMiniChatbot />
         
         
 
         {/* Hero Section with Advanced Animations */}
-        <section className="relative pt-24 pb-20 overflow-hidden">
+        <section className="relative pt-24 pb-20 overflow-hidden safe-area-top">
           {/* Animated Background Elements */}
           <div className="absolute inset-0">
             <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full floating-animation"></div>
@@ -143,7 +110,7 @@ export default function Contact() {
             <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-gradient-to-r from-purple-400/10 to-blue-400/10 rounded-full floating-animation" style={{animationDelay: '4s'}}></div>
           </div>
           
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="mobile-container mx-auto px-4 relative z-10">
             {/* Breadcrumbs integrated into hero */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -161,15 +128,15 @@ export default function Contact() {
                 transition={{ duration: 0.8 }}
                 className="mb-8"
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full border border-blue-200/50 mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full border border-blue-200/50 mb-6 hover:bg-blue-500/20 transition-all duration-300">
                   <span className="w-2 h-2 bg-blue-500 rounded-full pulse-glow"></span>
                   <span className="text-sm font-medium text-blue-700">Let's Connect</span>
                 </div>
                 
-                <h1 className="text-5xl md:text-7xl font-bold gradient-text mb-6 leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold gradient-text mb-6 leading-tight">
                   Get in Touch
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed max-w-3xl mx-auto">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 mb-8 leading-relaxed max-w-3xl mx-auto px-4">
                   Let's build a better workplace together. Reach out for a free consultation 
                   or just say hello! I'm here to help transform your HR operations.
                 </p>
@@ -180,24 +147,24 @@ export default function Contact() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto"
               >
-                <div className="glass-effect rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <div className="text-3xl font-bold gradient-text mb-2">24h</div>
-                  <div className="text-gray-600 font-medium">Response Time</div>
-                  <div className="text-sm text-gray-500 mt-1">Usually faster</div>
+                <div className="glass-effect rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 card-mobile">
+                  <div className="text-2xl md:text-3xl font-bold gradient-text mb-2">24h</div>
+                  <div className="text-gray-600 font-medium text-sm md:text-base">Response Time</div>
+                  <div className="text-xs md:text-sm text-gray-500 mt-1">Usually faster</div>
                   <div className="text-xs text-green-600 font-semibold mt-2">✓ Urgent: WhatsApp</div>
                 </div>
-                <div className="glass-effect rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <div className="text-3xl font-bold gradient-text mb-2">Free</div>
-                  <div className="text-gray-600 font-medium">Initial Consultation</div>
-                  <div className="text-sm text-gray-500 mt-1">No obligations</div>
+                <div className="glass-effect rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 card-mobile">
+                  <div className="text-2xl md:text-3xl font-bold gradient-text mb-2">Free</div>
+                  <div className="text-gray-600 font-medium text-sm md:text-base">Initial Consultation</div>
+                  <div className="text-xs md:text-sm text-gray-500 mt-1">No obligations</div>
                   <div className="text-xs text-blue-600 font-semibold mt-2">⏱️ 30 minutes</div>
                 </div>
-                <div className="glass-effect rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <div className="text-3xl font-bold gradient-text mb-2">100+</div>
-                  <div className="text-gray-600 font-medium">Happy Clients</div>
-                  <div className="text-sm text-gray-500 mt-1">Across India</div>
+                <div className="glass-effect rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 card-mobile sm:col-span-2 md:col-span-1">
+                  <div className="text-2xl md:text-3xl font-bold gradient-text mb-2">100+</div>
+                  <div className="text-gray-600 font-medium text-sm md:text-base">Happy Clients</div>
+                  <div className="text-xs md:text-sm text-gray-500 mt-1">Across India</div>
                   <div className="text-xs text-purple-600 font-semibold mt-2">🌍 Global Services</div>
                 </div>
               </motion.div>
@@ -207,20 +174,20 @@ export default function Contact() {
 
         {/* Tab Navigation */}
         <section className="py-8 bg-white/50 backdrop-blur-sm">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-center">
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-2 shadow-xl border border-gray-200" role="tablist" aria-label="Contact methods">
-                <div className="flex gap-2">
+          <div className="mobile-container mx-auto px-4">
+            <div className="flex justify-center overflow-x-auto">
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-2 shadow-xl border border-gray-200 min-w-max" role="tablist" aria-label="Contact methods">
+                <div className="flex gap-1 md:gap-2">
                   {[
-                    { id: 'contact', label: 'Contact Form', icon: '📧' },
-                    { id: 'booking', label: 'Book Consultation', icon: '📅' },
-                    { id: 'location', label: 'Location', icon: '📍' }
+                    { id: 'contact', label: 'Contact Form', shortLabel: 'Form', icon: '📧' },
+                    { id: 'booking', label: 'Book Consultation', shortLabel: 'Book', icon: '📅' },
+                    { id: 'location', label: 'Location', shortLabel: 'Location', icon: '📍' }
                   ].map((tab) => (
                     <button
                       key={tab.id}
                       id={`${tab.id}-tab`}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${
+                      className={`px-3 sm:px-4 md:px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 text-sm md:text-base whitespace-nowrap ${
                         activeTab === tab.id
                           ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
                           : 'text-gray-700 hover:bg-gray-100'
@@ -230,7 +197,8 @@ export default function Contact() {
                       role="tab"
                     >
                       <span aria-hidden="true">{tab.icon}</span>
-                      <span>{tab.label}</span>
+                      <span className="hidden sm:inline">{tab.label}</span>
+                      <span className="sm:hidden">{tab.shortLabel}</span>
                     </button>
                   ))}
                 </div>

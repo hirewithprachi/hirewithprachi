@@ -223,6 +223,7 @@ export default function PerformanceCalculator() {
       <Helmet>
         <title>Performance Calculator 2025 | Employee Performance Assessment - Prachi</title>
         <meta name="description" content="Calculate and track employee performance metrics for better management decisions." />
+        <link rel="canonical" href="https://www.hirewithprachi.com/performance-calculator" />
       </Helmet>
 
       {/* Header */}

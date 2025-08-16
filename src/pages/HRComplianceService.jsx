@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
-import AIChatbotWidget from '../components/AIChatbotWidget';
+import GPT4oMiniChatbot from '../components/GPT4oMiniChatbot';
 import ScrollProgressBar from '../components/ScrollProgressBar';
 import BrochureDownloadModal from '../components/BrochureDownloadModal';
+import SEOOptimizer from '../components/SEOOptimizer';
 import { CheckCircle, Users, Shield, Zap, Award, MessageSquare, BarChart2, Search, Phone, Mail, ChevronDown, ChevronUp, Download, Calendar, MessageCircle, FileText, Gavel, AlertTriangle } from 'lucide-react';
 
 export default function HRComplianceService() {
+  // SEO Data for HR Compliance Service
+  const seoData = {
+    title: "HR Compliance Services - Complete Management",
+    description: "Complete HR compliance services for Indian businesses. POSH compliance, labor law adherence, and regulatory management.",
+    keywords: "HR compliance, POSH compliance, labor law, regulatory compliance, India",
+    pageType: "service",
+    pageData: {
+      title: "HR Compliance Services",
+      description: "Complete HR compliance management for Indian businesses",
+      image: "https://hirewithprachi.com/assets/images/hr-compliance-1200x630.jpg"
+    }
+  };
+
   const [showBrochureModal, setShowBrochureModal] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
 
@@ -133,108 +146,16 @@ export default function HRComplianceService() {
 
   return (
     <>
-      <Helmet>
-        {/* Primary Meta Tags */}
-        <title>HR Compliance & Legal Services | Expert HR Compliance Management India</title>
-        <meta name="title" content="HR Compliance & Legal Services | Expert HR Compliance Management India" />
-        <meta name="description" content="Comprehensive HR compliance management including labor law audits, employment contracts, policy development, and legal risk assessment. Stay compliant with Indian labor laws and avoid legal issues." />
-        <meta name="keywords" content="HR compliance, labor law compliance, employment contracts, HR policies, legal risk assessment, Indian labor laws, HR audit, compliance management, employment law, workplace compliance, HR legal services, labor law consultant, HR compliance audit, employment contract drafting, HR policy development" />
-        <meta name="author" content="Prachi Shrivastava" />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="English" />
-        <meta name="revisit-after" content="7 days" />
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://hirewithprachi.com/services/hr-compliance" />
-        <meta property="og:title" content="HR Compliance & Legal Services | Expert HR Compliance Management India" />
-        <meta property="og:description" content="Comprehensive HR compliance management including labor law audits, employment contracts, policy development, and legal risk assessment." />
-        <meta property="og:image" content="https://hirewithprachi.com/hr-compliance-og-image.png" />
-        <meta property="og:site_name" content="Hire With Prachi" />
-        <meta property="og:locale" content="en_US" />
-        
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://hirewithprachi.com/services/hr-compliance" />
-        <meta property="twitter:title" content="HR Compliance & Legal Services | Expert HR Compliance Management India" />
-        <meta property="twitter:description" content="Comprehensive HR compliance management including labor law audits, employment contracts, policy development, and legal risk assessment." />
-        <meta property="twitter:image" content="https://hirewithprachi.com/hr-compliance-twitter-image.png" />
-        <meta property="twitter:creator" content="@prachi_hr" />
-        
-        {/* Additional SEO Meta Tags */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#0ea5e9" />
-        <meta name="msapplication-TileColor" content="#0ea5e9" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="HR Compliance Services" />
-        
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://hirewithprachi.com/services/hr-compliance" />
-        
-        {/* Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-        
-        {/* FAQ Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What HR compliance services do you provide?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "We provide comprehensive HR compliance services including labor law audits, employment contract drafting, policy development, legal risk assessment, compliance training, and ongoing compliance monitoring to ensure your organization meets all legal requirements."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How do you ensure compliance with Indian labor laws?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "We conduct thorough audits of your current HR practices, identify compliance gaps, provide legal documentation, and offer ongoing monitoring to ensure adherence to all Indian labor laws and regulations including the Industrial Disputes Act, Factories Act, and Minimum Wages Act."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How much do HR compliance services cost?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Our HR compliance services start at ₹25,000 per month with flexible pricing based on organization size and compliance requirements. We offer comprehensive packages to ensure complete legal protection and avoid costly legal disputes."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Do you provide employment contract templates?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes, we draft legally compliant employment contracts, offer letters, and HR policies tailored to your organization\'s specific needs and industry requirements. All documents are reviewed by legal experts to ensure compliance."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How often should HR compliance audits be conducted?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "We recommend annual compliance audits, with quarterly reviews for high-risk areas. We also provide ongoing monitoring and updates as laws change to ensure your organization remains compliant at all times."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What happens if we\'re not compliant?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "We identify compliance gaps and provide immediate action plans to rectify issues. Our team ensures you meet all legal requirements and avoid potential penalties or legal disputes through proactive compliance management."
-                }
-              }
-            ]
-          })}
-        </script>
-      </Helmet>
+      {/* Comprehensive SEO Optimization */}
+      <SEOOptimizer
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        image={seoData.pageData.image}
+        pageType={seoData.pageType}
+        pageData={seoData.pageData}
+        canonical="https://hirewithprachi.com/services/hr-compliance"
+      />
 
       <main className="min-h-screen bg-white" role="main">
         <ScrollProgressBar />
@@ -680,7 +601,7 @@ export default function HRComplianceService() {
         </div>
 
         <HireWithPrachiFooter />
-        <AIChatbotWidget />
+        <GPT4oMiniChatbot />
         
         {/* Brochure Download Modal */}
         <BrochureDownloadModal

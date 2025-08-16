@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOOptimizer from '../components/SEOOptimizer';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
 import HireWithPrachiHeader from '../components/hirable/HirableHeader';
 import HireWithPrachiFooter from '../components/hirable/HirableFooter';
-import AIChatbotWidget from '../components/AIChatbotWidget';
+import GPT4oMiniChatbot from '../components/GPT4oMiniChatbot';
 import ScrollProgressBar from '../components/ScrollProgressBar';
 import BrochureDownloadModal from '../components/BrochureDownloadModal';
 import { CheckCircle, Users, Shield, Zap, Award, MessageSquare, BarChart2, Search, Phone, Mail, ChevronDown, ChevronUp, Download, Calendar, MessageCircle, Heart, Smile, Users as TeamIcon } from 'lucide-react';
 
 export default function EmployeeEngagementService() {
+  // SEO Data for Employee Engagement Service
+  const seoData = {
+    title: "Employee Engagement Services - Boost Team Performance",
+    description: "Employee engagement services to boost team performance and retention. Engagement strategies, team building, and performance management.",
+    keywords: "employee engagement, team performance, retention, team building, performance management",
+    pageType: "service",
+    pageData: {
+      title: "Employee Engagement Services",
+      description: "Boost team performance and retention",
+      image: "https://hirewithprachi.com/assets/images/employee-engagement-1200x630.jpg"
+    }
+  };
+
   const [showBrochureModal, setShowBrochureModal] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
 
@@ -133,100 +146,16 @@ export default function EmployeeEngagementService() {
 
   return (
     <>
-      <Helmet>
-        {/* Primary Meta Tags */}
-        <title>Employee Engagement & Culture Services | Build Thriving Workplace Culture</title>
-        <meta name="title" content="Employee Engagement & Culture Services | Build Thriving Workplace Culture" />
-        <meta name="description" content="Build a thriving workplace culture that retains top talent. Employee satisfaction surveys, culture assessment, recognition programs, and team building initiatives. Reduce turnover by 40%." />
-        <meta name="keywords" content="employee engagement, workplace culture, employee satisfaction surveys, culture assessment, recognition programs, team building, employee retention, workplace wellness, employee motivation, HR culture services, employee experience, workplace happiness" />
-        <meta name="author" content="Prachi Shrivastava" />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="English" />
-        <meta name="revisit-after" content="7 days" />
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://hirewithprachi.com/services/employee-engagement" />
-        <meta property="og:title" content="Employee Engagement & Culture Services | Build Thriving Workplace Culture" />
-        <meta property="og:description" content="Build a thriving workplace culture that retains top talent. Employee satisfaction surveys, culture assessment, recognition programs, and team building initiatives." />
-        <meta property="og:image" content="https://hirewithprachi.com/employee-engagement-og-image.png" />
-        <meta property="og:site_name" content="Hire With Prachi" />
-        <meta property="og:locale" content="en_US" />
-        
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://hirewithprachi.com/services/employee-engagement" />
-        <meta property="twitter:title" content="Employee Engagement & Culture Services | Build Thriving Workplace Culture" />
-        <meta property="twitter:description" content="Build a thriving workplace culture that retains top talent. Employee satisfaction surveys, culture assessment, recognition programs, and team building initiatives." />
-        <meta property="twitter:image" content="https://hirewithprachi.com/employee-engagement-twitter-image.png" />
-        <meta property="twitter:creator" content="@prachi_hr" />
-        
-        {/* Additional SEO Meta Tags */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#0ea5e9" />
-        <meta name="msapplication-TileColor" content="#0ea5e9" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Employee Engagement Services" />
-        
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://hirewithprachi.com/services/employee-engagement" />
-        
-        {/* Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-        
-        {/* FAQ Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What employee engagement services do you provide?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "We provide comprehensive employee engagement services including employee satisfaction surveys, culture assessment & strategy, recognition programs, team building initiatives, communication frameworks, and wellness programs."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How do you measure employee engagement?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "We use scientifically designed employee satisfaction surveys, pulse surveys, and engagement metrics to measure and track employee engagement levels. Our surveys provide actionable insights for improvement."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How much do employee engagement services cost?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Our employee engagement services start at ₹20,000/month and can reduce turnover by 40%. We offer flexible pricing plans tailored to your organization size and engagement needs."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Do you provide team building activities?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes, we design and facilitate virtual and in-person team building activities, games, and contests to boost morale, collaboration, and team spirit in your organization."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How do you improve workplace culture?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "We assess your current culture, identify improvement areas, and implement strategies including recognition programs, communication frameworks, wellness initiatives, and culture-building activities."
-                }
-              }
-            ]
-          })}
-        </script>
-      </Helmet>
+      {/* Comprehensive SEO Optimization */}
+      <SEOOptimizer
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        image={seoData.pageData.image}
+        pageType={seoData.pageType}
+        pageData={seoData.pageData}
+        canonical="https://hirewithprachi.com/services/employee-engagement"
+      />
 
       <main className="min-h-screen bg-white" role="main">
         <ScrollProgressBar />
@@ -657,7 +586,7 @@ export default function EmployeeEngagementService() {
         </div>
 
         <HireWithPrachiFooter />
-        <AIChatbotWidget />
+        <GPT4oMiniChatbot />
         
         {/* Brochure Download Modal */}
         <BrochureDownloadModal
