@@ -28,7 +28,6 @@ Disallow: /_next/
 Disallow: /node_modules/
 
 # Disallow legacy and deprecated pages
-Disallow: /old-home
 Disallow: /hirable-homepage
 
 # Disallow legal and compliance pages (not for crawling)
@@ -37,7 +36,6 @@ Disallow: /terms-of-service
 Disallow: /gdpr-data-deletion
 
 # Disallow other pages that shouldn't be crawled
-Disallow: /bi-dashboard
 Disallow: /resource-downloads
 Disallow: /resource-downloads/
 
@@ -136,4 +134,4 @@ Allow: /blog/workplace-diversity-inclusion
 Sitemap: https://www.hirewithprachi.com/sitemap.xml
 
 # Crawl delay (optional)
-Crawl-delay: 1 
+Crawl-delay: 1

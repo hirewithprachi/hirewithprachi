@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
 
 // Lazy load main pages
-const HomePage = lazy(() => import('./pages/HomePage'));
+// const HomePage = lazy(() => import('./pages/HomePage')); // Removed - old home page
 const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
 const Resources = lazy(() => import('./pages/Resources'));
@@ -20,7 +20,7 @@ const ScrollProgressBar = lazy(() => import('./components/ScrollProgressBar'));
 import { AuthProvider } from './lib/AuthContext';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
-const ErrorBoundary = lazy(() => import('./components/ErrorBoundary'));
+import ErrorBoundary from './components/ErrorBoundary';
 const LoadingFallback = lazy(() => import('./components/ui/LoadingFallback'));
 
 
@@ -41,7 +41,7 @@ const PayrollManagementService = lazy(() => import('./pages/PayrollManagementSer
 const HRServicesMumbai = lazy(() => import('./pages/HRServicesMumbai'));
 const PerformanceManagementService = lazy(() => import('./pages/PerformanceManagementService'));
 const HRServicesDelhi = lazy(() => import('./pages/HRServicesDelhi'));
-const HRAuditService = lazy(() => import('./pages/HRAuditService'));
+// const HRAuditService = lazy(() => import('./pages/HRAuditService')); // Removed - HR audit service page
 const HRServicesBangalore = lazy(() => import('./pages/HRServicesBangalore'));
 const HRServicesChennai = lazy(() => import('./pages/HRServicesChennai'));
 const HRServicesHyderabad = lazy(() => import('./pages/HRServicesHyderabad'));
@@ -74,7 +74,7 @@ const SalaryCalculator = React.lazy(() => import('./components/SalaryCalculator.
 
 const EmployeeSalaryCalculator = React.lazy(() => import('./components/EmployeeSalaryCalculator.jsx'));
 const EmployeeEngagementCalculator = React.lazy(() => import('./pages/EmployeeEngagementCalculator.jsx'));
-const BIDashboard = React.lazy(() => import('./pages/BIDashboard.jsx'));
+// const BIDashboard = React.lazy(() => import('./pages/BIDashboard.jsx')); // Removed - BI dashboard page
 const WorldClassAdminDashboard = React.lazy(() => import('./pages/WorldClassAdminDashboard.jsx'));
 const ProtectedRoute = React.lazy(() => import('./components/ProtectedRoute.jsx'));
 const HRToolsLibrary = React.lazy(() => import('./pages/HRToolsLibrary.jsx'));
@@ -97,7 +97,7 @@ function AnimatedRoutes() {
         <Suspense fallback={<SimpleLoader />}>
           <Routes location={location}>
             <Route path="/" element={<HirableHomepage />} />
-            <Route path="/old-home" element={<HomePage />} />
+            {/* <Route path="/old-home" element={<HomePage />} /> */} {/* Removed - old home page */}
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/services/:serviceId" element={<ServiceDetailPage />} />
@@ -107,7 +107,7 @@ function AnimatedRoutes() {
             <Route path="/services/virtual-hr-services" element={<VirtualHRServices />} />
             <Route path="/services/payroll-management" element={<PayrollManagementService />} />
             <Route path="/services/performance-management" element={<PerformanceManagementService />} />
-            <Route path="/services/hr-audit" element={<HRAuditService />} />
+            {/* <Route path="/services/hr-audit" element={<HRAuditService />} /> */} {/* Removed - HR audit service */}
             <Route path="/hr-services-mumbai" element={<HRServicesMumbai />} />
             <Route path="/hr-services-delhi" element={<HRServicesDelhi />} />
             <Route path="/hr-services-bangalore" element={<HRServicesBangalore />} />
@@ -143,7 +143,7 @@ function AnimatedRoutes() {
 
             <Route path="/employee-salary-calculator" element={<EmployeeSalaryCalculator />} />
             <Route path="/employee-engagement-calculator" element={<EmployeeEngagementCalculator />} />
-            <Route path="/bi-dashboard" element={<BIDashboard />} />
+            {/* <Route path="/bi-dashboard" element={<BIDashboard />} /> */} {/* Removed - BI dashboard */}
             <Route path="/admin" element={
               <ProtectedRoute>
                 <WorldClassAdminDashboard />

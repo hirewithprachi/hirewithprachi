@@ -4,7 +4,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = 'https://ktqrzokrqizfjqdgwmqs.supabase.co';
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0cXJ6b2tycWl6ZmpxZGd3bXFzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NDIzMjM5MiwiZXhwIjoyMDY5ODA4MzkyLCJzdWIiOiIifQ.Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0cXJ6b2tycWl6ZmpxZGd3bXFzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NDIzMjM5MiwiZXhwIjoyMDY5ODA4MzkyfQ.WP_7F1w5xmbYPRrf5NQ-KM8X-uHlq44pYMaagTSGNis';
 
 // Create admin client with service role key
 const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);

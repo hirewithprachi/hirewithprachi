@@ -102,25 +102,49 @@ export class EmailService {
     }
   }
 
-  // Main send function with fallback
+  // Main send function using Supabase Edge Function
   async sendEmail(emailData) {
     try {
       // Validate email data
       this.validateEmailData(emailData);
 
-      // Try Resend first
-      try {
-        const result = await this.sendWithResend(emailData);
-        console.log('Email sent successfully via Resend:', result.messageId);
-        return result;
-      } catch (resendError) {
-        console.warn('Resend failed, trying SendGrid...', resendError.message);
-        
-        // Fallback to SendGrid
-        const result = await this.sendWithSendGrid(emailData);
-        console.log('Email sent successfully via SendGrid:', result.messageId);
-        return result;
+      // Use Supabase Edge Function to avoid CORS issues
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      
+      if (!supabaseUrl || !supabaseKey) {
+        throw new Error('Supabase configuration missing');
       }
+
+      const response = await fetch(`${supabaseUrl}/functions/v1/send-email`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${supabaseKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: Array.isArray(emailData.to) ? emailData.to : [emailData.to],
+          subject: emailData.subject,
+          html: emailData.html,
+          text: emailData.text || this.stripHtml(emailData.html),
+          replyTo: emailData.replyTo || 'contact@hirewithprachi.com',
+          priority: emailData.priority || '3'
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('Email sent successfully via Edge Function:', result.messageId);
+      
+      return {
+        success: true,
+        messageId: result.messageId,
+        provider: result.provider || 'edge-function'
+      };
 
     } catch (error) {
       console.error('Email sending failed:', error);

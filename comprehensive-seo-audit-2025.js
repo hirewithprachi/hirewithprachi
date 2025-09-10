@@ -60,7 +60,7 @@ const PUBLIC_PAGES = [
   { path: '/services/virtual-hr-services', name: 'Virtual HR Services', priority: 'high' },
   { path: '/services/payroll-management', name: 'Payroll Management Service', priority: 'high' },
   { path: '/services/performance-management', name: 'Performance Management Service', priority: 'high' },
-  { path: '/services/hr-audit', name: 'HR Audit Service', priority: 'high' },
+  
   
   // City pages (14 cities)
   { path: '/hr-services-mumbai', name: 'HR Services Mumbai', priority: 'high' },

@@ -237,9 +237,9 @@ const PrachiPortfolio = () => {
   return (
     <>
       <Helmet>
-        <title>Prachi Shrivastava - Director & Virtual HR Consultant | Hire With Prachi</title>
-        <meta name="description" content="Official profile of Prachi Shrivastava — Director at Hire With Prachi, Virtual HR Consultant, and Certified POSH Trainer. 8+ years of HR excellence in compliance, recruitment, and employee engagement." />
-        <meta name="keywords" content="Prachi Shrivastava, Virtual HR Consultant, POSH Trainer, HR Compliance, HR Consultant India, Hire With Prachi, Prachi HR" />
+        <title>Prachi Shrivastava - Leading HR Expert & Virtual HR Consultant | Hire With Prachi</title>
+        <meta name="description" content="Prachi Shrivastava - India's leading Virtual HR Consultant, POSH Expert & Director at Hire With Prachi. 8+ years transforming businesses through strategic HR solutions, compliance expertise & employee engagement. Trusted by 200+ companies." />
+        <meta name="keywords" content="Prachi Shrivastava, Virtual HR Consultant India, POSH Expert, HR Compliance Specialist, Employee Engagement Expert, HR Consultant Delhi, Startup HR Solutions, SME HR Services, HR Policy Development, Recruitment Expert, HR Thought Leader, Prachi HR, Hire With Prachi Director" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="author" content="Prachi Shrivastava" />
 
@@ -280,7 +280,7 @@ const PrachiPortfolio = () => {
               "nationality": "Indian",
               "jobTitle": "Director & Virtual HR Consultant",
               "knowsLanguage": ["English", "Hindi"],
-              "description": "Certified HR professional with 8+ years of experience in HR compliance, recruitment, POSH training, and employee engagement.",
+              "description": "India's leading Virtual HR Consultant and POSH Expert with 8+ years of experience transforming businesses through strategic HR solutions. Director at Hire With Prachi, specializing in HR compliance, recruitment excellence, employee engagement, and organizational development. Trusted advisor to 200+ companies across startups and SMEs.",
               "url": "https://hirewithprachi.com/prachi-shrivastava",
               "image": [
                 { "@type": "ImageObject", "contentUrl": "https://hirewithprachi.com/assets/images/about-img-1.jpg" },
@@ -298,16 +298,30 @@ const PrachiPortfolio = () => {
                 "url": "https://hirewithprachi.com"
               },
               "knowsAbout": [
-                "Human Resources",
-                "POSH Training",
-                "Recruitment",
-                "Employee Engagement",
-                "HR Compliance"
+                "Human Resources Management",
+                "POSH Training & Compliance",
+                "Strategic Recruitment",
+                "Employee Engagement & Retention",
+                "HR Compliance & Audit",
+                "Virtual HR Consulting",
+                "Startup HR Solutions",
+                "SME HR Strategy",
+                "Organizational Development",
+                "HR Policy Development",
+                "Performance Management",
+                "Payroll Management",
+                "Labor Law Compliance",
+                "Workplace Culture Building",
+                "HR Technology Implementation"
               ],
               "hasCredential": [
-                "Certified POSH Trainer",
-                "HR Management Certification",
-                "Compliance Specialist"
+                "Certified POSH Trainer & Expert",
+                "HR Management Professional Certification",
+                "Labor Law Compliance Specialist",
+                "Virtual HR Consulting Expert",
+                "Employee Engagement Specialist",
+                "Organizational Development Consultant",
+                "Strategic HR Planning Professional"
               ],
               "address": { "@type": "PostalAddress", "addressCountry": "IN" },
               "telephone": "+918740889927",
@@ -340,10 +354,14 @@ const PrachiPortfolio = () => {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
-              {"@type":"Question","name":"Who is Prachi Shrivastava?","acceptedAnswer":{"@type":"Answer","text":"Prachi Shrivastava is the Director at Hire With Prachi and a Virtual HR Consultant specializing in HR compliance, POSH training, recruitment, and employee engagement."}},
-              {"@type":"Question","name":"What services does Prachi offer?","acceptedAnswer":{"@type":"Answer","text":"End-to-end virtual HR services including compliance audits, POSH training, policy development, recruitment, and engagement programs."}},
-              {"@type":"Question","name":"How can I contact Prachi?","acceptedAnswer":{"@type":"Answer","text":"Email prachi@rejoin.co.in or call +91 87408 89927. You can also book a consultation via Calendly."}},
-              {"@type":"Question","name":"Does Prachi serve startups and SMEs?","acceptedAnswer":{"@type":"Answer","text":"Yes. Prachi specializes in cost-effective HR solutions for startups and SMEs across India and globally."}}
+              {"@type":"Question","name":"Who is Prachi Shrivastava?","acceptedAnswer":{"@type":"Answer","text":"Prachi Shrivastava is India's leading Virtual HR Consultant, POSH Expert, and Director at Hire With Prachi. With 8+ years of experience, she has transformed 200+ businesses through strategic HR solutions, specializing in compliance, recruitment, and employee engagement."}},
+              {"@type":"Question","name":"What makes Prachi Shrivastava a top HR expert in India?","acceptedAnswer":{"@type":"Answer","text":"Prachi is a Certified POSH Trainer with 8+ years of experience, having successfully served 200+ companies. She specializes in virtual HR consulting, startup HR solutions, compliance expertise, and has a proven track record of reducing employee turnover by 40% and improving workplace culture."}},
+              {"@type":"Question","name":"What services does Prachi Shrivastava offer?","acceptedAnswer":{"@type":"Answer","text":"Prachi offers comprehensive virtual HR services including POSH training & compliance, strategic recruitment, employee engagement programs, HR policy development, compliance audits, payroll management, performance management, and organizational development for startups and SMEs."}},
+              {"@type":"Question","name":"How can I hire Prachi Shrivastava for HR consulting?","acceptedAnswer":{"@type":"Answer","text":"Contact Prachi at prachi@rejoin.co.in, call +91 87408 89927, or book a free consultation at calendly.com/prachi-hr/virtual-hr-consultation. She offers virtual HR consulting services across India and globally."}},
+              {"@type":"Question","name":"Does Prachi Shrivastava work with startups and small businesses?","acceptedAnswer":{"@type":"Answer","text":"Yes, Prachi specializes in cost-effective HR solutions for startups and SMEs. She has helped 200+ companies build strong HR foundations, ensuring compliance while optimizing costs and improving employee satisfaction."}},
+              {"@type":"Question","name":"What are Prachi Shrivastava's qualifications and certifications?","acceptedAnswer":{"@type":"Answer","text":"Prachi is a Certified POSH Trainer & Expert, HR Management Professional, Labor Law Compliance Specialist, and Virtual HR Consulting Expert. She holds multiple certifications in employee engagement, organizational development, and strategic HR planning."}},
+              {"@type":"Question","name":"What is Prachi Shrivastava's experience in POSH training?","acceptedAnswer":{"@type":"Answer","text":"Prachi is a Certified POSH Trainer with extensive experience in conducting POSH training sessions, policy development, and compliance audits. She has helped numerous organizations create safe and inclusive workplaces while ensuring legal compliance."}},
+              {"@type":"Question","name":"How does Prachi Shrivastava help with employee engagement?","acceptedAnswer":{"@type":"Answer","text":"Prachi specializes in employee engagement strategies that have proven to reduce turnover by 40%. She focuses on culture building, recognition programs, employee surveys, team building, and creating thriving workplace environments that boost satisfaction and retention."}}
             ]
           })}
         </script>
@@ -1621,4 +1639,4 @@ const PrachiPortfolio = () => {
   );
 };
 
-export default PrachiPortfolio; 
+export default PrachiPortfolio;

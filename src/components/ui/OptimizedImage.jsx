@@ -82,18 +82,10 @@ const OptimizedImage = ({
       return originalSrc;
     }
     
-    // For local images, use optimized folder structure
+    // For local images, first try the original path, then optimized if available
     try {
-      const baseName = originalSrc.replace(/\.[^/.]+$/, '');
-      const fileExtension = originalSrc.match(/\.[^/.]+$/);
-      const extension = fileExtension ? fileExtension[0] : '.jpg';
-      
-      // Extract filename from path for optimized images
-      const filename = baseName.split('/').pop();
-      const pathPrefix = baseName.substring(0, baseName.lastIndexOf('/'));
-      const optimizedPath = `${pathPrefix}/optimized/${filename}-optimized${extension}`;
-      
-      return optimizedPath;
+      // First, try to use the original image path as-is
+      return originalSrc;
     } catch (error) {
       return originalSrc;
     }
@@ -110,29 +102,16 @@ const OptimizedImage = ({
         </div>
       )}
       
-      {/* Main image with picture element for better optimization */}
-      <picture>
-        {/* Try WebP format first */}
-        <source 
-          srcSet={optimizedSrc.replace(/\.[^/.]+$/, '.webp')} 
-          type="image/webp" 
-        />
-        {/* Try AVIF format */}
-        <source 
-          srcSet={optimizedSrc.replace(/\.[^/.]+$/, '.avif')} 
-          type="image/avif" 
-        />
-        {/* Fallback to optimized original format */}
-        <img 
-          src={optimizedSrc} 
-          alt={alt} 
-          className={`${className}`} 
-          sizes={sizes} 
-          loading={loading} 
-          onLoad={handleLoad} 
-          onError={handleError} 
-        />
-      </picture>
+      {/* Main image */}
+      <img 
+        src={optimizedSrc} 
+        alt={alt} 
+        className={`${className}`} 
+        sizes={sizes} 
+        loading={loading} 
+        onLoad={handleLoad} 
+        onError={handleError} 
+      />
       
       {/* Error fallback */}
       {hasError && fallbackSrc && (

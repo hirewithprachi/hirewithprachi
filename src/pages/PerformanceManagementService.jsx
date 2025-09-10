@@ -129,13 +129,7 @@ export default function PerformanceManagementService() {
       icon: '💰',
       link: '/services/payroll-management'
     },
-    {
-      id: 'hr-audit',
-      title: 'HR Audit Services',
-      description: 'Comprehensive HR process evaluation and optimization',
-      icon: '🔍',
-      link: '/services/hr-audit'
-    }
+
   ];
 
   return (

@@ -40,11 +40,7 @@
     }
   ],
   "redirects": [
-    {
-      "source": "/old-home",
-      "destination": "/",
-      "permanent": true
-    },
+
     {
       "source": "/hirable-homepage",
       "destination": "/",

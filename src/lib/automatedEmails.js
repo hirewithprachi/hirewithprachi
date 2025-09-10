@@ -3,10 +3,10 @@ import { supabase } from '../lib/supabase';
 
 // Email service configuration
 const EMAIL_CONFIG = {
-  provider: process.env.REACT_APP_EMAIL_PROVIDER || 'sendgrid',
-  apiKey: process.env.REACT_APP_SENDGRID_API_KEY,
-  fromEmail: process.env.REACT_APP_FROM_EMAIL || 'noreply@hirewithprachi.com',
-  fromName: process.env.REACT_APP_FROM_NAME || 'Hire with Prachi'
+  provider: import.meta.env.VITE_EMAIL_PROVIDER || 'sendgrid',
+  apiKey: import.meta.env.VITE_SENDGRID_API_KEY,
+  fromEmail: import.meta.env.VITE_FROM_EMAIL || 'noreply@hirewithprachi.com',
+  fromName: import.meta.env.VITE_FROM_NAME || 'Hire with Prachi'
 };
 
 // Template variable replacement function

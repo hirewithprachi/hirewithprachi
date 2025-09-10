@@ -41,7 +41,7 @@ const servicePages = [
   { id: 'recruitment-service', name: 'Recruitment Service', path: '/services/recruitment-service' },
   { id: 'performance-management', name: 'Performance Management', path: '/services/performance-management' },
   { id: 'employee-engagement', name: 'Employee Engagement', path: '/services/employee-engagement' },
-  { id: 'hr-audit', name: 'HR Audit', path: '/services/hr-audit' },
+  
   { id: 'mumbai', name: 'HR Services Mumbai', path: '/services/hr-services-mumbai' },
   { id: 'delhi', name: 'HR Services Delhi', path: '/services/hr-services-delhi' },
   { id: 'bangalore', name: 'HR Services Bangalore', path: '/services/hr-services-bangalore' },

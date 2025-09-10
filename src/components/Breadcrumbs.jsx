@@ -32,7 +32,6 @@ export default function Breadcrumbs({ variant = 'light' }) {
     'salary-benchmarking-tool': 'Salary Benchmarking Tool',
     'employee-salary-calculator': 'Employee Salary Calculator',
     'employee-engagement-calculator': 'Employee Engagement Calculator',
-    'bi-dashboard': 'BI Dashboard',
     'resource-downloads': 'Resource Downloads',
     'hr-quiz': 'HR Quiz',
     'privacy-policy': 'Privacy Policy',
@@ -92,4 +91,4 @@ export default function Breadcrumbs({ variant = 'light' }) {
       })}
     </nav>
   );
-} 
+}
