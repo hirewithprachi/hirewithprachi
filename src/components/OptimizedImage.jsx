@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ResponsiveImage from './ui/ResponsiveImage';
 
 export default function OptimizedImage({ 
   src, 
@@ -28,15 +29,7 @@ export default function OptimizedImage({
       {isLoading && (
         <div className="absolute inset-0 bg-gray-200 animate-pulse rounded"></div>
       )}
-      <img
-        src={imageSrc}
-        alt={alt}
-        className={`w-full h-full object-cover ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-        loading="lazy"
-        onLoad={handleLoad}
-        onError={handleError}
-        {...props}
-      />
+      <ResponsiveImage src={imageSrc} alt={alt} className={`w-full h-full object-cover ${isLoading ? 'opacity-0' : 'opacity-100'}`} />
     </div>
   );
-} 
+}

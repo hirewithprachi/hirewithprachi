@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
 import SEOOptimizer from '../components/SEOOptimizer';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -129,11 +130,7 @@ export default function RecruitmentService() {
                 className="bg-white rounded-2xl shadow-lg overflow-hidden"
               >
                 <div className="aspect-video relative overflow-hidden">
-                  <img 
-                    src="/assets/images/services/recruitment-service.webp" 
-                    alt="Recruitment Process Outsourcing - End-to-end hiring solutions for startups and SMEs in India by Prachi Shrivastava"
-                    className="w-full h-full object-cover"
-                  />
+                  <ResponsiveImage src="/assets/images/services/recruitment-service.webp" alt="Recruitment Process Outsourcing - End-to-end hiring solutions for startups and SMEs in India by Prachi Shrivastava" className="w-full h-full object-cover" />
                 </div>
               </motion.div>
 

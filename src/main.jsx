@@ -1,52 +1,60 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
-import {
-  HomePage,
-  About,
-  Services,
-  Resources,
-  Contact,
-  PrivacyPolicy,
-  TermsOfService,
-  GDPRDataDeletion,
-  HirableHomepage,
-} from './pages';
-import CookieConsent from './components/CookieConsent';
-import ScrollProgressBar from './components/ScrollProgressBar';
+
+// Lazy load main pages
+const HomePage = lazy(() => import('./pages/HomePage'));
+const About = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const Resources = lazy(() => import('./pages/Resources'));
+const Contact = lazy(() => import('./pages/Contact'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const GDPRDataDeletion = lazy(() => import('./pages/GDPRDataDeletion'));
+const HirableHomepage = lazy(() => import('./pages/HirableHomepage'));
+// Core components that should load immediately
+const CookieConsent = lazy(() => import('./components/CookieConsent'));
+const ScrollProgressBar = lazy(() => import('./components/ScrollProgressBar'));
 // import ExitIntentPopup from './components/ExitIntentPopup';
 import { AuthProvider } from './lib/AuthContext';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
-import ErrorBoundary from './components/ErrorBoundary';
+const ErrorBoundary = lazy(() => import('./components/ErrorBoundary'));
+const LoadingFallback = lazy(() => import('./components/ui/LoadingFallback'));
 
 
-import GPT4oMiniChatbot from './components/GPT4oMiniChatbot';
-import FacebookPixel from './components/FacebookPixel';
-import ServiceDetailPage from './pages/ServiceDetailPage';
-import HRComplianceService from './pages/HRComplianceService';
-import RecruitmentService from './pages/RecruitmentService';
-import EmployeeEngagementService from './pages/EmployeeEngagementService';
-import VirtualHRServices from './pages/VirtualHRServices';
-import PayrollManagementService from './pages/PayrollManagementService';
-import HRServicesMumbai from './pages/HRServicesMumbai';
-import PerformanceManagementService from './pages/PerformanceManagementService';
-import HRServicesDelhi from './pages/HRServicesDelhi';
-import HRAuditService from './pages/HRAuditService';
-import HRServicesBangalore from './pages/HRServicesBangalore';
-import HRServicesChennai from './pages/HRServicesChennai';
-import HRServicesHyderabad from './pages/HRServicesHyderabad';
-import HRServicesPune from './pages/HRServicesPune';
-import HRServicesAhmedabad from './pages/HRServicesAhmedabad';
-import HRServicesKolkata from './pages/HRServicesKolkata';
-import HRServicesJaipur from './pages/HRServicesJaipur';
-import HRServicesLucknow from './pages/HRServicesLucknow';
-import HRServicesIndore from './pages/HRServicesIndore';
-import HRServicesBhubaneswar from './pages/HRServicesBhubaneswar';
-import HRServicesNagpur from './pages/HRServicesNagpur';
-import HRServicesCoimbatore from './pages/HRServicesCoimbatore';
-import PrachiPortfolio from './pages/PrachiPortfolio';
+// Non-critical components that can be lazy loaded
+const GPT4oMiniChatbot = lazy(() => import('./components/GPT4oMiniChatbot'));
+// Import FacebookPixel as lazy component
+const FacebookPixel = lazy(() => import('./components/FacebookPixel'));
+
+// Lazy load service pages
+const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'));
+const HRComplianceService = lazy(() => import('./pages/HRComplianceService'));
+const RecruitmentService = lazy(() => import('./pages/RecruitmentService'));
+const EmployeeEngagementService = lazy(() => import('./pages/EmployeeEngagementService'));
+const VirtualHRServices = lazy(() => import('./pages/VirtualHRServices'));
+const PayrollManagementService = lazy(() => import('./pages/PayrollManagementService'));
+
+// Lazy load location-specific pages
+const HRServicesMumbai = lazy(() => import('./pages/HRServicesMumbai'));
+const PerformanceManagementService = lazy(() => import('./pages/PerformanceManagementService'));
+const HRServicesDelhi = lazy(() => import('./pages/HRServicesDelhi'));
+const HRAuditService = lazy(() => import('./pages/HRAuditService'));
+const HRServicesBangalore = lazy(() => import('./pages/HRServicesBangalore'));
+const HRServicesChennai = lazy(() => import('./pages/HRServicesChennai'));
+const HRServicesHyderabad = lazy(() => import('./pages/HRServicesHyderabad'));
+const HRServicesPune = lazy(() => import('./pages/HRServicesPune'));
+const HRServicesAhmedabad = lazy(() => import('./pages/HRServicesAhmedabad'));
+const HRServicesKolkata = lazy(() => import('./pages/HRServicesKolkata'));
+const HRServicesJaipur = lazy(() => import('./pages/HRServicesJaipur'));
+const HRServicesLucknow = lazy(() => import('./pages/HRServicesLucknow'));
+const HRServicesIndore = lazy(() => import('./pages/HRServicesIndore'));
+const HRServicesBhubaneswar = lazy(() => import('./pages/HRServicesBhubaneswar'));
+const HRServicesNagpur = lazy(() => import('./pages/HRServicesNagpur'));
+const HRServicesCoimbatore = lazy(() => import('./pages/HRServicesCoimbatore'));
+const PrachiPortfolio = lazy(() => import('./pages/PrachiPortfolio'));
 
 const Blog = React.lazy(() => import('./pages/Blog.jsx'));
 const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage.jsx'));
@@ -71,9 +79,7 @@ const WorldClassAdminDashboard = React.lazy(() => import('./pages/WorldClassAdmi
 const ProtectedRoute = React.lazy(() => import('./components/ProtectedRoute.jsx'));
 const HRToolsLibrary = React.lazy(() => import('./pages/HRToolsLibrary.jsx'));
 const UserDashboard = React.lazy(() => import('./pages/UserDashboard.jsx'));
-const EnhancedResumeBuilder = React.lazy(() => import('./pages/EnhancedResumeBuilder.jsx'));
-const PremiumResumeBuilder = React.lazy(() => import('./pages/PremiumResumeBuilder.jsx'));
-const ModernResumeBuilder = React.lazy(() => import('./pages/ModernResumeBuilder.jsx'));
+
 const HRPolicyGenerator = React.lazy(() => import('./pages/HRPolicyGenerator.jsx'));
 
 function AnimatedRoutes() {
@@ -88,14 +94,7 @@ function AnimatedRoutes() {
         transition={{ duration: 0.4 }}
         style={{ minHeight: '100vh' }}
       >
-        <Suspense fallback={
-          <div className="min-h-screen flex items-center justify-center">
-            <div className="text-center">
-              <div className="animate-spin rounded-full border-2 border-gray-300 border-t-primary-600 w-8 h-8 mx-auto mb-4"></div>
-              <p className="text-gray-600">Loading...</p>
-            </div>
-          </div>
-        }>
+        <Suspense fallback={<SimpleLoader />}>
           <Routes location={location}>
             <Route path="/" element={<HirableHomepage />} />
             <Route path="/old-home" element={<HomePage />} />
@@ -159,10 +158,7 @@ function AnimatedRoutes() {
             <Route path="/tools" element={<HRToolsLibrary />} />
             <Route path="/dashboard" element={<UserDashboard />} />
             <Route path="/hr-policy-generator" element={<HRPolicyGenerator />} />
-                            <Route path="/resume-builder" element={<ModernResumeBuilder />} />
-                <Route path="/enhanced-resume-builder" element={<EnhancedResumeBuilder />} />
-                <Route path="/premium-resume-builder" element={<PremiumResumeBuilder />} />
-                <Route path="/modern-resume-builder" element={<ModernResumeBuilder />} />
+
           </Routes>
         </Suspense>
       </motion.div>
@@ -170,22 +166,44 @@ function AnimatedRoutes() {
   );
 }
 
+// Simple loading fallback for immediate use
+const SimpleLoader = () => (
+  <div className="flex items-center justify-center p-2">
+    <div className="animate-spin rounded-full border-2 border-gray-300 border-t-blue-600 w-4 h-4"></div>
+  </div>
+);
+
 function App() {
   return (
     <HelmetProvider>
       <AuthProvider>
-        <BrowserRouter>
-          <ErrorBoundary>
-            <div className="App">
-              <FacebookPixel />
-              <CookieConsent />
-              <ScrollProgressBar />
-              {/* <ExitIntentPopup /> */}
-              <GPT4oMiniChatbot />
-      
-              <AnimatedRoutes />
-            </div>
-          </ErrorBoundary>
+        <BrowserRouter
+          future={{
+            v7_startTransition: true,
+            v7_relativeSplatPath: true
+          }}
+        >
+          <Suspense fallback={<SimpleLoader />}>
+            <ErrorBoundary>
+              <div className="App">
+                <Suspense fallback={null}>
+                  <FacebookPixel />
+                </Suspense>
+                <Suspense fallback={null}>
+                  <CookieConsent />
+                </Suspense>
+                <Suspense fallback={null}>
+                  <ScrollProgressBar />
+                </Suspense>
+                {/* <ExitIntentPopup /> */}
+                <Suspense fallback={null}>
+                  <GPT4oMiniChatbot />
+                </Suspense>
+        
+                <AnimatedRoutes />
+              </div>
+            </ErrorBoundary>
+          </Suspense>
         </BrowserRouter>
       </AuthProvider>
     </HelmetProvider>

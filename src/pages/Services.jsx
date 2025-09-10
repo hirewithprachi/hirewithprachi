@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
@@ -347,7 +348,7 @@ export default function ServicesPage() {
                 <div className="relative">
                   {/* Main Image */}
                   <motion.img
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    src="/assets/images/service-detail.jpg"
                     alt="Modern HR Services"
                     className="w-full h-96 md:h-[500px] object-cover rounded-3xl shadow-2xl"
                     whileHover={{ scale: 1.02 }}
@@ -842,11 +843,7 @@ export default function ServicesPage() {
                   {/* Profile Picture */}
                   <div className="flex items-center gap-4 mb-6">
                     <div className="relative">
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.author}
-                        className="w-16 h-16 rounded-2xl object-cover border-4 border-white shadow-lg"
-                      />
+                      <ResponsiveImage src={testimonial.image} alt={testimonial.author} className="w-16 h-16 rounded-2xl object-cover border-4 border-white shadow-lg" />
                       {testimonial.isHighlighted && (
                         <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center text-white text-lg shadow-lg">
                           "
@@ -1040,7 +1037,7 @@ export default function ServicesPage() {
               >
                 <div className="relative">
                   <img
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    src="/assets/images/services-hero.jpg"
                     alt="HR Consultation"
                     className="w-full h-96 md:h-[500px] object-cover rounded-3xl shadow-2xl"
                   />
@@ -1541,4 +1538,4 @@ export default function ServicesPage() {
       </main>
     </>
   );
-} 
+}

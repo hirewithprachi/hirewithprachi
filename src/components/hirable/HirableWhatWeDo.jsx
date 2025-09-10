@@ -1,4 +1,5 @@
 import React from 'react';
+import ResponsiveImage from '../ui/ResponsiveImage';
 
 const mainFeatures = [
   {
@@ -26,11 +27,7 @@ export default function HirableWhatWeDo() {
     <section className="relative w-full flex flex-col md:flex-row min-h-[520px]">
       {/* Left: Image */}
       <div className="w-full md:w-1/2 h-[340px] md:h-auto">
-        <img
-          src="/assets/images/about-img-3.jpg"
-          alt="What We Do"
-          className="w-full h-full object-cover md:rounded-none rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none"
-        />
+        <ResponsiveImage src="/assets/images/about-img-3.jpg" alt="What We Do" className="w-full h-full object-cover md:rounded-none rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none" />
       </div>
       {/* Right: Purple Content */}
       <div className="w-full md:w-1/2 bg-[#7c5cff] flex flex-col justify-center px-6 md:px-12 py-12 text-white relative">
@@ -86,4 +83,4 @@ export default function HirableWhatWeDo() {
       </div>
     </section>
   );
-} 
+}

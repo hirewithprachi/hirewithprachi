@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
 import { useAuth } from '../lib/AuthContext';
 import { supabase } from '../lib/supabase';
 import AdminLogin from '../components/AdminLogin';
@@ -2181,7 +2182,7 @@ const MediaCenterSection = ({ videos, files, onOpenModal, onOpenServiceVideoMana
             <div key={video.id} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
               <div className="aspect-video bg-gray-200 dark:bg-gray-600 rounded-lg mb-3 flex items-center justify-center">
                 {video.thumbnail_url ? (
-                  <img src={video.thumbnail_url} alt={video.title} className="w-full h-full object-cover rounded-lg" />
+                  <ResponsiveImage src={video.thumbnail_url} alt={video.title} className="w-full h-full object-cover rounded-lg" />
                 ) : (
                   <Video className="w-8 h-8 text-gray-400" />
                 )}

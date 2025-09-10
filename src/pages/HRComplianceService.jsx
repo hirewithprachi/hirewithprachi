@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
@@ -238,11 +239,7 @@ export default function HRComplianceService() {
                 className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden"
               >
                 <div className="aspect-video relative overflow-hidden">
-                  <img 
-                    src="/assets/images/services/hr-compliance-service.webp" 
-                    alt="HR Compliance Services - Expert labor law compliance and audit services for Indian businesses by Prachi Shrivastava"
-                    className="w-full h-full object-cover"
-                  />
+                  <ResponsiveImage src="/assets/images/services/hr-compliance-service.webp" alt="HR Compliance Services - Expert labor law compliance and audit services for Indian businesses by Prachi Shrivastava" className="w-full h-full object-cover" />
                 </div>
               </motion.div>
 

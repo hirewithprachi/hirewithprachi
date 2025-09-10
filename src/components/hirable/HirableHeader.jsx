@@ -76,12 +76,15 @@ export default function HirableHeader({ openConsultationModal }) {
       <nav className="relative container mx-auto flex items-center justify-between py-2 px-4 md:px-6 lg:px-8">
         {/* Logo - Optimized spacing */}
         <Link to="/" className="flex items-center flex-shrink-0">
-          <OptimizedImage 
+          <img 
             src="/assets/images/hirewithprachi_navbar_logo.png" 
             alt="Hire With Prachi Logo" 
             className="h-10 md:h-12 lg:h-14 w-auto object-contain"
             loading="eager"
-            sizes="(max-width: 768px) 100px, (max-width: 1024px) 120px, 140px"
+            onError={(e) => {
+              console.error('Logo failed to load:', e.target.src);
+              e.target.style.display = 'none';
+            }}
           />
         </Link>
 
@@ -311,4 +314,4 @@ export default function HirableHeader({ openConsultationModal }) {
       </div>
     </header>
   );
-} 
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveImage from './ui/ResponsiveImage';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { servicesData } from '../data/servicesData';
@@ -121,10 +122,10 @@ export default function ServicesSection({ showAll = false, filteredServices = nu
                 {/* Service Image */}
                 <div className="h-32 sm:h-36 w-full overflow-hidden relative">
                   {!shouldShowFallback(service.id) ? (
-                    <img
-                      src={service.imageUrl}
-                      alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    <ResponsiveImage 
+                      src={service.imageUrl} 
+                      alt={service.title} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                       onError={() => handleImageError(service.id)}
                     />
                   ) : (
@@ -241,4 +242,4 @@ export default function ServicesSection({ showAll = false, filteredServices = nu
       </div>
     </section>
   );
-} 
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import ResponsiveImage from '../ui/ResponsiveImage';
     import { Link } from 'react-router-dom';
 
 const features = [
@@ -31,12 +32,7 @@ export default function Hero() {
       </div>
       {/* Right: Hero Image */}
       <div className="flex-1 flex items-center justify-center mt-12 md:mt-0 relative">
-        <img
-          src="/assets/images/prachi-logo.webp"
-          alt="Prachi Rejoin Hero"
-          className="w-full max-w-2xl rounded-3xl shadow-2xl border-4 border-white animate-fadeInUp"
-          style={{ minHeight: 320, objectFit: 'cover' }}
-        />
+        <ResponsiveImage src="/assets/images/prachi-logo.webp" alt="Prachi Rejoin Hero" className="w-full max-w-2xl rounded-3xl shadow-2xl border-4 border-white animate-fadeInUp" />
         {/* Decorative SVG or shapes can be added here if needed */}
           </div>
         </section>

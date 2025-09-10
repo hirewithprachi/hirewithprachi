@@ -129,7 +129,7 @@ export default function ServiceMatcher() {
             <div className="relative">
               {/* Main Image */}
               <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                src="/images/services/generic-service.svg"
                 alt="HR Services"
                 className="w-full h-96 md:h-[500px] object-cover rounded-3xl shadow-2xl"
               />
@@ -321,4 +321,4 @@ export default function ServiceMatcher() {
       </div>
     </section>
   );
-} 
+}

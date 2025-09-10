@@ -1,4 +1,5 @@
 import React from 'react';
+import ResponsiveImage from '../ui/ResponsiveImage';
 
 const featureCards = [
   {
@@ -60,7 +61,7 @@ export default function HirableBenefits() {
           <div className="relative w-full flex flex-col items-end gap-6">
             {/* Top Image with Contact Badge */}
             <div className="relative w-[340px] h-[220px] rounded-3xl overflow-hidden shadow-lg">
-              <img src="/assets/images/benefit-img-1.jpg" alt="Benefits" className="w-full h-full object-cover" loading="lazy" />
+              <ResponsiveImage src="/assets/images/benefit-img-1.jpg" alt="Benefits" className="w-full h-full object-cover" />
               {/* Circular Contact Badge */}
               <div className="absolute -right-10 top-8 z-10 animate-fadeInDown">
                 <div className="relative w-24 h-24 flex items-center justify-center">
@@ -79,7 +80,7 @@ export default function HirableBenefits() {
             </div>
             {/* Bottom Image with Stat Card */}
             <div className="relative w-[320px] h-[180px] rounded-3xl overflow-hidden shadow-lg mt-4">
-              <img src="/assets/images/benefit-img-2.jpg" alt="Benefits" className="w-full h-full object-cover" loading="lazy" />
+              <ResponsiveImage src="/assets/images/benefit-img-2.jpg" alt="Benefits" className="w-full h-full object-cover" />
               {/* Floating Stat Card */}
               <div className="absolute -left-16 top-10 bg-white rounded-2xl shadow-lg flex items-center gap-3 px-6 py-4 border border-[#ececec] animate-fadeInUp">
                 <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#edeaff] text-[#7c5cff]">
@@ -96,4 +97,4 @@ export default function HirableBenefits() {
       </div>
     </section>
   );
-} 
+}

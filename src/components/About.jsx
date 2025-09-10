@@ -6,7 +6,7 @@ const About = () => (
       {/* Left: Image */}
       <div className="relative flex justify-center">
         <img
-          src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=500&q=80"
+          src="/images/services/generic-service.svg"
           alt="About HR Team"
           className="rounded-2xl shadow-2xl w-full max-w-md border-4 border-white dark:border-gray-800"
         />
@@ -30,4 +30,4 @@ const About = () => (
   </section>
 );
 
-export default About; 
+export default About;

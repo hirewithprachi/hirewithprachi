@@ -278,11 +278,7 @@ const ToolCard = ({ tool, index }) => {
   
   const handleToolClick = () => {
     // Navigate to tool page
-    if (tool.slug === 'resume-builder') {
-      window.location.href = '/resume-builder';
-    } else {
-      window.location.href = `/tools/${tool.slug}`;
-    }
+    window.location.href = `/tools/${tool.slug}`;
   };
 
   return (

@@ -203,15 +203,24 @@ export class BlogService {
     } catch (error) {
       console.error('Error fetching blog posts:', error);
       
-      // Fallback: return only localStorage posts
+      // Fallback: return offline posts
       const localPosts = JSON.parse(localStorage.getItem('offline_blog_posts') || '[]');
       return { 
         success: true, 
         data: localPosts,
         offline: true,
-        message: 'Showing offline posts only (database unavailable)' 
+        message: 'Showing offline posts (database unavailable)' 
       };
     }
+  }
+
+  // Alias for backward compatibility
+  static async getBlogPosts(options = {}) {
+    return this.getAllBlogPosts(options);
+  }
+
+  static async getPublishedBlogPosts(options = {}) {
+    return this.getAllBlogPosts({ ...options, status: 'published' });
   }
 
   static async getBlogPostBySlug(slug) {

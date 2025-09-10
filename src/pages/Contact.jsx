@@ -21,7 +21,7 @@ export default function Contact() {
     pageData: {
       title: "Contact Hire With Prachi",
       description: "Get free HR consultation and expert advice",
-      image: "https://hirewithprachi.com/assets/images/contact-1200x630.jpg"
+      image: "https://hirewithprachi.com/assets/images/consultation.jpg"
     }
   };
 
@@ -467,4 +467,4 @@ export default function Contact() {
       </main>
     </>
   );
-} 
+}

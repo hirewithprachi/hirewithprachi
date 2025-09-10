@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import ResponsiveImage from '../ui/ResponsiveImage';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../../lib/supabase';
 import RichTextEditor from './RichTextEditor';
@@ -767,7 +768,7 @@ const BlogCard = ({ blog, viewMode, isSelected, onSelect, onEdit, onDelete, blog
             />
             <div className="w-20 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
               {blog.featured_image_url ? (
-                <img src={blog.featured_image_url} alt="" className="w-full h-full object-cover rounded-lg" />
+                <ResponsiveImage src={blog.featured_image_url} alt="" className="w-full h-full object-cover rounded-lg" />
               ) : (
                 <PenTool className="w-6 h-6 text-gray-400" />
               )}
@@ -819,11 +820,7 @@ const BlogCard = ({ blog, viewMode, isSelected, onSelect, onEdit, onDelete, blog
     >
       <div className="aspect-video bg-gray-100 dark:bg-gray-700 relative">
         {blog.featured_image_url ? (
-          <img 
-            src={blog.featured_image_url} 
-            alt={blog.title} 
-            className="w-full h-full object-cover"
-          />
+          <ResponsiveImage src={blog.featured_image_url} alt={blog.title} className="w-full h-full object-cover" />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <PenTool className="w-12 h-12 text-gray-400" />
@@ -1351,11 +1348,7 @@ const AdvancedBlogModal = ({
                   </div>
 
                   {formData.featured_image_url && (
-                    <img 
-                      src={formData.featured_image_url} 
-                      alt={formData.title}
-                      className="w-full aspect-video object-cover rounded-lg mb-6"
-                    />
+                    <ResponsiveImage src={formData.featured_image_url} alt={formData.title} className="w-full aspect-video object-cover rounded-lg mb-6" />
                   )}
 
                   {formData.excerpt && (

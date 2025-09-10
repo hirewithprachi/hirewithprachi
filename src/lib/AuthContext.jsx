@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from './supabase-client';
+import { supabase } from './supabase';
 import { adminConfig } from '../config/environment.js';
 
 const AuthContext = createContext({});
@@ -87,6 +87,12 @@ export const AuthProvider = ({ children }) => {
       });
       if (error) throw error;
 
+      // Update user state immediately
+      setUser(data.user);
+      
+      // Wait for user state to be set before checking admin status
+      await new Promise(resolve => setTimeout(resolve, 500));
+
       // Check if user is admin
       const { data: isAdmin, error: adminError } = await supabase.rpc('is_admin_user');
       if (adminError) {
@@ -115,6 +121,46 @@ export const AuthProvider = ({ children }) => {
       setError(error.message);
       // Clear local state even if there's an error
       setUser(null);
+    }
+  };
+
+  const signUp = async (email, password, userData = {}) => {
+    try {
+      setError(null);
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: userData.full_name || userData.firstName + ' ' + (userData.lastName || ''),
+            company: userData.company,
+            position: userData.position,
+            phone: userData.phone
+          }
+        }
+      });
+      
+      if (error) throw error;
+      
+      // If user is created successfully, trigger welcome email automation
+      if (data.user) {
+        try {
+          // Import email automation service
+          const { handleUserRegistration } = await import('../lib/automatedEmails');
+          
+          // Trigger welcome email automation
+          console.log('🎉 Triggering welcome email automation for new user');
+          await handleUserRegistration(data.user);
+        } catch (emailError) {
+          console.error('❌ Failed to trigger welcome email automation:', emailError);
+          // Don't throw error here as user registration was successful
+        }
+      }
+      
+      return data;
+    } catch (error) {
+      setError(error.message);
+      throw error;
     }
   };
 
@@ -165,18 +211,35 @@ export const AuthProvider = ({ children }) => {
   // Check if current user is admin
   const checkAdminStatus = async () => {
     try {
-      if (!user) {
-        console.log('🔍 checkAdminStatus: No user found');
+      // Get current user from Supabase auth
+      const { data: { user: currentUser }, error: userError } = await supabase.auth.getUser();
+      
+      if (userError || !currentUser) {
+        console.log('🔍 checkAdminStatus: No authenticated user found');
         return false;
       }
       
-      console.log('🔍 checkAdminStatus: Checking admin status for user:', user.email);
+      console.log('🔍 checkAdminStatus: Checking admin status for user:', currentUser.email);
       
       const { data: isAdmin, error } = await supabase.rpc('is_admin_user');
       
       if (error) {
         console.error('❌ Admin status check failed:', error.message);
-        return false;
+        // Try alternative check by email
+        const { data: adminByEmail, error: emailError } = await supabase
+          .from('admin_users')
+          .select('is_active')
+          .eq('email', currentUser.email)
+          .eq('is_active', true)
+          .single();
+          
+        if (emailError) {
+          console.error('❌ Alternative admin check failed:', emailError.message);
+          return false;
+        }
+        
+        console.log('✅ checkAdminStatus: Alternative check result:', !!adminByEmail);
+        return !!adminByEmail;
       }
       
       console.log('✅ checkAdminStatus: Result:', isAdmin);
@@ -192,6 +255,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     error,
     signIn,
+    signUp,
     signInAsAdmin,
     signOut,
     resetPassword,
@@ -204,4 +268,4 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-}; 
+};

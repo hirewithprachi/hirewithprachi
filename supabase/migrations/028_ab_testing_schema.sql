@@ -72,15 +72,6 @@ CREATE TABLE IF NOT EXISTS conversion_funnels (
 
 -- Example funnel data
 INSERT INTO conversion_funnels (name, description, steps) VALUES
-('resume_builder_funnel', 'Complete resume building journey', '[
-  {"step": 1, "name": "page_visit", "description": "User visits resume builder"},
-  {"step": 2, "name": "step_1_completed", "description": "Personal info completed"},
-  {"step": 3, "name": "step_3_completed", "description": "Experience section completed"},
-  {"step": 4, "name": "ai_feature_used", "description": "Used AI enhancement"},
-  {"step": 5, "name": "resume_completed", "description": "Completed all steps"},
-  {"step": 6, "name": "resume_exported", "description": "Downloaded resume"},
-  {"step": 7, "name": "user_upgraded", "description": "Upgraded to Pro plan"}
-]'),
 ('upgrade_funnel', 'Freemium to Pro conversion', '[
   {"step": 1, "name": "quota_warning", "description": "User reached quota limit"},
   {"step": 2, "name": "upgrade_modal_viewed", "description": "Viewed upgrade modal"},
@@ -107,7 +98,7 @@ CREATE TABLE IF NOT EXISTS user_cohorts (
 
 -- Example cohorts
 INSERT INTO user_cohorts (name, description, criteria) VALUES
-('power_users', 'Users who have created multiple resumes', '{"resume_count": {"gte": 3}, "ai_usage": {"gte": 10}}'),
+('power_users', 'Users who have created multiple documents', '{"document_count": {"gte": 3}, "ai_usage": {"gte": 10}}'),
 ('new_users', 'Users registered in the last 7 days', '{"days_since_signup": {"lte": 7}}'),
 ('trial_users', 'Users on free trial', '{"subscription_plan": "free", "days_since_signup": {"lte": 30}}'),
 ('enterprise_prospects', 'Users with enterprise-like usage patterns', '{"team_size": {"gte": 50}, "export_count": {"gte": 20}}');
@@ -131,11 +122,11 @@ CREATE TABLE IF NOT EXISTS feature_flags (
 -- Example feature flags
 INSERT INTO feature_flags (name, description, is_enabled, rollout_percentage) VALUES
 ('enhanced_ai_polish', 'Advanced AI content improvement with style options', true, 50),
-('real_time_collaboration', 'Real-time resume editing with team members', false, 0),
+('real_time_collaboration', 'Real-time document editing with team members', false, 0),
 ('linkedin_import', 'Import profile data from LinkedIn', true, 25),
-('video_resume_builder', 'Create video introductions for resumes', false, 0),
-('industry_templates', 'Industry-specific resume templates', true, 75),
-('ats_score_realtime', 'Real-time ATS compatibility scoring', true, 100);
+('video_introductions', 'Create video introductions for job applications', false, 0),
+('industry_templates', 'Industry-specific document templates', true, 75),
+('document_scoring', 'Real-time document quality scoring', true, 100);
 
 -- =============================================
 -- Performance Metrics

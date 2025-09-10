@@ -1,4 +1,5 @@
 import React from 'react';
+import ResponsiveImage from './ui/ResponsiveImage';
 
 const testimonials = [
   {
@@ -24,7 +25,7 @@ const Testimonials = () => (
       <div className="grid md:grid-cols-2 gap-8">
         {testimonials.map((t, i) => (
           <div key={i} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 flex flex-col items-center hover:shadow-2xl transition">
-            <img src={t.img} alt={t.name} className="w-20 h-20 object-cover rounded-full mx-auto mb-4 border-4 border-pink-300 dark:border-pink-400" loading="lazy" />
+            <ResponsiveImage src={t.img} alt={t.name} className="w-20 h-20 object-cover rounded-full mx-auto mb-4 border-4 border-pink-300 dark:border-pink-400" />
             <blockquote className="italic text-gray-700 dark:text-gray-200 mb-4">“{t.quote}”</blockquote>
             <div className="flex items-center justify-center mb-2">
               {[...Array(t.rating)].map((_, idx) => (
@@ -48,4 +49,4 @@ const Testimonials = () => (
   </section>
 );
 
-export default Testimonials; 
+export default Testimonials;

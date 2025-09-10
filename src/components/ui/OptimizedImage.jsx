@@ -73,28 +73,27 @@ const OptimizedImage = ({
     }
   };
 
-  // Generate optimized image URL with query parameters
+  // Generate optimized image URL using optimized folder structure
   const getOptimizedSrc = (originalSrc) => {
     if (!originalSrc || originalSrc === placeholder) return originalSrc;
-    
-    // If it's already an optimized URL, return as is
-    if (originalSrc.includes('?') || originalSrc.includes('&')) {
-      return originalSrc;
-    }
     
     // For external URLs, return as is
     if (originalSrc.startsWith('http')) {
       return originalSrc;
     }
     
-    // Add optimization parameters for local images
+    // For local images, use optimized folder structure
     try {
-      const url = new URL(originalSrc, window.location.origin);
-      url.searchParams.set('format', 'webp');
-      url.searchParams.set('quality', '80');
-      url.searchParams.set('w', '800');
+      const baseName = originalSrc.replace(/\.[^/.]+$/, '');
+      const fileExtension = originalSrc.match(/\.[^/.]+$/);
+      const extension = fileExtension ? fileExtension[0] : '.jpg';
       
-      return url.toString();
+      // Extract filename from path for optimized images
+      const filename = baseName.split('/').pop();
+      const pathPrefix = baseName.substring(0, baseName.lastIndexOf('/'));
+      const optimizedPath = `${pathPrefix}/optimized/${filename}-optimized${extension}`;
+      
+      return optimizedPath;
     } catch (error) {
       return originalSrc;
     }
@@ -111,28 +110,33 @@ const OptimizedImage = ({
         </div>
       )}
       
-      {/* Main image */}
-      <img
-        src={optimizedSrc}
-        alt={alt}
-        className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500 ease-in-out`}
-        loading={isInView ? 'eager' : 'lazy'}
-        sizes={sizes}
-        onLoad={handleLoad}
-        onError={handleError}
-        {...props}
-      />
+      {/* Main image with picture element for better optimization */}
+      <picture>
+        {/* Try WebP format first */}
+        <source 
+          srcSet={optimizedSrc.replace(/\.[^/.]+$/, '.webp')} 
+          type="image/webp" 
+        />
+        {/* Try AVIF format */}
+        <source 
+          srcSet={optimizedSrc.replace(/\.[^/.]+$/, '.avif')} 
+          type="image/avif" 
+        />
+        {/* Fallback to optimized original format */}
+        <img 
+          src={optimizedSrc} 
+          alt={alt} 
+          className={`${className}`} 
+          sizes={sizes} 
+          loading={loading} 
+          onLoad={handleLoad} 
+          onError={handleError} 
+        />
+      </picture>
       
       {/* Error fallback */}
       {hasError && fallbackSrc && (
-        <img
-          src={fallbackSrc}
-          alt={alt}
-          className={className}
-          loading="lazy"
-          sizes={sizes}
-          {...props}
-        />
+        <img src={fallbackSrc} alt={alt} className={className} sizes={sizes} loading={loading} />
       )}
       
       {/* Error placeholder */}
@@ -147,4 +151,4 @@ const OptimizedImage = ({
   );
 };
 
-export default OptimizedImage; 
+export default OptimizedImage;

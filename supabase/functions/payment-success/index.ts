@@ -100,7 +100,43 @@ serve(async (req) => {
       // Don't fail the request for this error
     }
 
-    // 3. Create lead in leads table
+    // 3. Trigger email automation for purchase confirmation
+    try {
+      const automationResponse = await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/trigger-email-automation`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          trigger_event: 'tool_purchased',
+          user_email: user_details.email,
+          template_variables: {
+            user_name: user_details.name,
+            user_email: user_details.email,
+            tool_name: tool_details.title,
+            amount: tool_details.price,
+            transaction_id: transaction_id,
+            purchase_date: new Date().toLocaleDateString(),
+            tool_access_url: tool_details.tool_type === 'Template' ? 
+              `${Deno.env.get('SITE_URL')}/download/${transaction_id}` : 
+              `${Deno.env.get('SITE_URL')}/resources`,
+            receipt_url: `${Deno.env.get('SITE_URL')}/receipt/${transaction_id}`
+          }
+        })
+      })
+
+      if (!automationResponse.ok) {
+        console.error('Email automation trigger error:', await automationResponse.text())
+      } else {
+        console.log('✅ Purchase confirmation email automation triggered successfully')
+      }
+    } catch (automationError) {
+      console.error('Error triggering email automation:', automationError)
+      // Don't fail the request for this error
+    }
+
+    // 4. Create lead in leads table
     const { error: leadError } = await supabase
       .from('leads')
       .insert({
@@ -127,7 +163,7 @@ serve(async (req) => {
       // Don't fail the request for this error
     }
 
-    // 4. Send email notification to user
+    // 5. Send email notification to user
     try {
       const emailResponse = await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/send-email`, {
         method: 'POST',
@@ -162,7 +198,7 @@ serve(async (req) => {
       // Don't fail the request for this error
     }
 
-    // 5. Send notification to admin
+    // 6. Send notification to admin
     try {
       const adminEmailResponse = await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/send-email`, {
         method: 'POST',
@@ -197,7 +233,7 @@ serve(async (req) => {
       // Don't fail the request for this error
     }
 
-    // 6. Record analytics event
+    // 7. Record analytics event
     try {
       await supabase
         .from('ai_tool_analytics')

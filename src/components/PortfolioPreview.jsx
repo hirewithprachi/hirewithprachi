@@ -1,4 +1,5 @@
 import React from 'react';
+import ResponsiveImage from './ui/ResponsiveImage';
 
 const projects = [
   {
@@ -26,7 +27,7 @@ export default function PortfolioPreview() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {projects.map((p, i) => (
             <div key={p.title} className="bg-white rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center p-8 hover:shadow-2xl transition duration-300 group">
-              <img src={p.img} alt={p.title} className="w-full h-48 object-cover rounded-2xl mb-6 border-4 border-primary group-hover:scale-105 transition duration-300" loading="lazy" />
+              <ResponsiveImage src={p.img} alt={p.title} className="w-full h-48 object-cover rounded-2xl mb-6 border-4 border-primary group-hover:scale-105 transition duration-300" />
               <h3 className="text-xl font-bold text-primary mb-2 text-center">{p.title}</h3>
               <p className="text-neutral text-base text-center mb-4">{p.desc}</p>
             </div>
@@ -35,4 +36,4 @@ export default function PortfolioPreview() {
       </div>
     </section>
   );
-} 
+}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
 import SEOOptimizer from '../components/SEOOptimizer';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -238,11 +239,7 @@ export default function EmployeeEngagementService() {
                 className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden"
               >
                 <div className="aspect-video relative overflow-hidden">
-                  <img 
-                    src="/assets/images/services/employee-engagement-service.webp" 
-                    alt="Employee Engagement Services - Workplace culture and team building solutions for Indian businesses by Prachi Shrivastava"
-                    className="w-full h-full object-cover"
-                  />
+                  <ResponsiveImage src="/assets/images/services/employee-engagement-service.webp" alt="Employee Engagement Services - Workplace culture and team building solutions for Indian businesses by Prachi Shrivastava" className="w-full h-full object-cover" />
                 </div>
               </motion.div>
 

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // Facebook Pixel Configuration
@@ -7,18 +7,23 @@ const FB_PIXEL_ID = '123456789012345'; // Replace with your actual Pixel ID
 // Initialize Facebook Pixel
 const initializeFacebookPixel = () => {
   if (typeof window !== 'undefined' && !window.fbq) {
-    // Facebook Pixel Code
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    
-    fbq('init', FB_PIXEL_ID);
-    fbq('track', 'PageView');
+    try {
+      // Facebook Pixel Code
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;t.onerror=function(){console.log('Facebook Pixel script failed to load')};
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      
+      fbq('init', FB_PIXEL_ID);
+      fbq('track', 'PageView');
+    } catch (error) {
+      console.error('Error initializing Facebook Pixel:', error);
+    }
   }
 };
 
@@ -117,12 +122,12 @@ const FacebookPixel = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Initialize Facebook Pixel on first load
+    // Initialize Facebook Pixel on component mount
     initializeFacebookPixel();
   }, []);
 
   useEffect(() => {
-    // Track page views on route changes
+    // Track page views when route changes
     if (typeof window !== 'undefined' && window.fbq) {
       const pagePath = location.pathname;
       const pageTitle = document.title || 'Hire With Prachi';
@@ -157,7 +162,6 @@ const FacebookPixel = () => {
 
 // Export functions for use in other components
 export {
-  FacebookPixel,
   trackEvent,
   trackPageView,
   trackFormSubmission,

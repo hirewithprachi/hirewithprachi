@@ -1,4 +1,5 @@
 import React from 'react';
+import ResponsiveImage from './ui/ResponsiveImage';
 
 const testimonials = [
   {
@@ -17,7 +18,7 @@ export default function TestimonialsSection() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-primary">What Our Clients Say</h2>
         {testimonials.map((t, i) => (
           <div key={i} className="bg-white rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center p-10 mb-8">
-            <img src={t.img} alt={t.name} className="w-20 h-20 object-cover rounded-full border-4 border-primary mb-4" loading="lazy" />
+            <ResponsiveImage src={t.img} alt={t.name} className="w-20 h-20 object-cover rounded-full border-4 border-primary mb-4" />
             <blockquote className="text-lg md:text-xl text-neutral font-medium italic mb-4 text-center">“{t.quote}”</blockquote>
             <div className="flex items-center gap-2 mb-2">
               {[...Array(t.rating)].map((_, j) => (
@@ -31,4 +32,4 @@ export default function TestimonialsSection() {
       </div>
     </section>
   );
-} 
+}

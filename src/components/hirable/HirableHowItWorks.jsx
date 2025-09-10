@@ -1,9 +1,10 @@
 import React from 'react';
+import ResponsiveImage from '../ui/ResponsiveImage';
 
 const steps = [
-  { label: 'Consultation & Assessment', desc: 'We analyze your HR need customized strategy that align with your business goals and workforce requirements.', step: 'STEP 01', img: '/Hirable – Human Resources & Recruiting WordPress Theme_files/how-work-process-img-1.jpg' },
-  { label: 'Talent Sourcing & Screening', desc: 'We analyze your HR need customized strategy that align with your business goals and workforce requirements.', step: 'STEP 02', img: '/Hirable – Human Resources & Recruiting WordPress Theme_files/how-work-process-img-2.jpg' },
-  { label: 'Compliance Support', desc: 'We analyze your HR need customized strategy that align with your business goals and workforce requirements.', step: 'STEP 03', img: '/Hirable – Human Resources & Recruiting WordPress Theme_files/how-work-process-img-3.jpg' },
+  { label: 'Consultation & Assessment', desc: 'We analyze your HR need customized strategy that align with your business goals and workforce requirements.', step: 'STEP 01', img: '/assets/images/how-work-process-img-1.jpg' },
+  { label: 'Talent Sourcing & Screening', desc: 'We analyze your HR need customized strategy that align with your business goals and workforce requirements.', step: 'STEP 02', img: '/assets/images/how-work-process-img-2.jpg' },
+  { label: 'Compliance Support', desc: 'We analyze your HR need customized strategy that align with your business goals and workforce requirements.', step: 'STEP 03', img: '/assets/images/how-work-process-img-3.jpg' },
 ];
 
 export default function HirableHowItWorks() {
@@ -29,7 +30,7 @@ export default function HirableHowItWorks() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {steps.map((s, i) => (
             <div key={s.label} className="bg-background rounded-2xl shadow flex flex-col items-center justify-center p-8 border border-gray-100 animate-fadeInUp" style={{ animationDelay: `${i * 100}ms` }}>
-              <img src={s.img} alt={s.label} className="w-32 h-32 object-cover rounded-2xl mb-4 border-4 border-primary" loading="lazy" />
+              <ResponsiveImage src={s.img} alt={s.label} className="w-32 h-32 object-cover rounded-2xl mb-4 border-4 border-primary" />
               <div className="text-lg font-semibold text-primary mb-2 text-center">{s.label}</div>
               <div className="text-neutral text-base text-center mb-2">{s.desc}</div>
               <div className="text-accent font-bold text-sm mt-2">{s.step}</div>
@@ -39,4 +40,4 @@ export default function HirableHowItWorks() {
       </div>
     </section>
   );
-} 
+}

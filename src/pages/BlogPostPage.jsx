@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -679,11 +680,7 @@ const BlogPostPage = () => {
                   {/* Featured Image */}
                   {dbBlogPost.featured_image_url && (
                     <div className="relative h-64 md:h-96">
-                      <img
-                        src={dbBlogPost.featured_image_url}
-                        alt={dbBlogPost.title}
-                        className="w-full h-full object-cover"
-                      />
+                      <ResponsiveImage src={dbBlogPost.featured_image_url} alt={dbBlogPost.title} className="w-full h-full object-cover" />
                     </div>
                   )}
 

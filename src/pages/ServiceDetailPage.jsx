@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
@@ -815,10 +816,10 @@ const ServiceDetailPage = () => {
                 className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden"
               >
                 <div className="aspect-video relative overflow-hidden">
-                  <img 
+                  <ResponsiveImage 
                     src={service.imageUrl || "/assets/images/services/hr-compliance-service.webp"} 
-                    alt={`${service.title} - Expert ${service.title.toLowerCase()} services for startups and SMEs in India by Prachi Shrivastava`}
-                    className="w-full h-full object-cover"
+                    alt={`${service.title} service`}
+                    className="w-full h-full object-cover" 
                   />
                 </div>
               </motion.div>
@@ -1223,12 +1224,12 @@ const ServiceDetailPage = () => {
                   {allServices.map((s) => (
                     <Link
                       key={s.id}
-                      to={`/services/${s.id}`}
-                      className={`block p-2 md:p-3 rounded-lg transition-colors ${
+                      to={'/services/' + s.id}
+                      className={'block p-2 md:p-3 rounded-lg transition-colors ' + (
                         s.id === serviceId
                           ? 'bg-blue-50 text-blue-700 border border-blue-200'
                           : 'hover:bg-gray-50 text-gray-700'
-                      }`}
+                      )}
                     >
                       <div className="flex items-center gap-2 md:gap-3">
                         <span className="text-xl md:text-2xl">{s.icon}</span>
@@ -1395,7 +1396,7 @@ const ServiceDetailPage = () => {
           isOpen={showBrochureModal}
           onClose={() => setShowBrochureModal(false)}
           serviceName={service.title}
-          brochureUrl={`/downloads/${serviceId}-brochure.pdf`}
+          brochureUrl={"/downloads/" + serviceId + "-brochure.pdf"}
         />
       </main>
     </>

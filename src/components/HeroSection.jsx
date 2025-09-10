@@ -28,7 +28,7 @@ const HeroSection = () => (
       {/* Right: Group HR Team Image */}
       <div className="w-full lg:w-[420px] flex-shrink-0 flex justify-center relative">
         <img
-          src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=600&h=600&facepad=3"
+          src="/images/services/generic-service.svg"
           alt="HR Team Group"
           className="rounded-2xl shadow-2xl border-4 border-white dark:border-gray-800 w-full max-w-xs lg:max-w-none"
         />
@@ -39,4 +39,4 @@ const HeroSection = () => (
   </section>
 );
 
-export default HeroSection; 
+export default HeroSection;

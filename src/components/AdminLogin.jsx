@@ -48,8 +48,8 @@ const AdminLogin = ({ onLoginSuccess }) => {
       const result = await signIn(email, password);
       console.log('🔍 AdminLogin: Sign in result:', result);
       
-      // Wait a moment for user state to update
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Wait a shorter time for user state to update
+      await new Promise(resolve => setTimeout(resolve, 300));
       
       // Verify admin status
       console.log('🔍 AdminLogin: Checking admin status...');
@@ -57,7 +57,14 @@ const AdminLogin = ({ onLoginSuccess }) => {
       console.log('🔍 AdminLogin: Admin status result:', isAdmin);
       
       if (!isAdmin) {
-        throw new Error('Access denied: Admin privileges required');
+        // Try one more time after a brief delay
+        await new Promise(resolve => setTimeout(resolve, 500));
+        const isAdminRetry = await checkAdminStatus();
+        console.log('🔍 AdminLogin: Admin status retry result:', isAdminRetry);
+        
+        if (!isAdminRetry) {
+          throw new Error('Access denied: Admin privileges required');
+        }
       }
       
       console.log('✅ Admin login successful');

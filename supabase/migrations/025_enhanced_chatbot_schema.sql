@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS service_pricing (
 -- FAQs by category
 CREATE TABLE IF NOT EXISTS faqs (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    category TEXT NOT NULL,           -- 'Payments', 'Resume', 'Employers'
+    category TEXT NOT NULL,           -- 'Payments', 'Policies', 'Employers'
     question TEXT NOT NULL,
     answer TEXT NOT NULL,
     is_active BOOLEAN DEFAULT true,
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS chatbot_leads (
     consent BOOLEAN DEFAULT false,
     consent_given_at TIMESTAMPTZ,
     conversation_id UUID REFERENCES chat_conversations(id),
-    intent_category TEXT,             -- 'Support', 'Sales', 'Resume', 'Employer', 'Pricing', 'Booking'
+    intent_category TEXT,             -- 'Support', 'Sales', 'Policies', 'Employer', 'Pricing', 'Booking'
     service_interest TEXT,
     budget_range TEXT,
     timeline TEXT,
@@ -308,7 +308,7 @@ INSERT INTO site_copies (slug, title, content) VALUES
 ('process', 'Our Process', '1. Initial Consultation\n2. Needs Assessment\n3. Custom Solution Design\n4. Implementation\n5. Ongoing Support\n\nWe work closely with you to ensure your HR needs are met efficiently and effectively.'),
 ('contact', 'Contact Information', 'Email: info@hirewithprachi.com\nPhone: +91-XXXXXXXXXX\nAddress: [Your Business Address]\n\nAvailable for consultations Monday-Friday, 9 AM - 6 PM IST.'),
 ('privacy', 'Privacy Policy', 'We are committed to protecting your privacy. All information shared with us is kept confidential and used only for providing our services. We never share your data with third parties without explicit consent.'),
-('hr-tools', 'HR Tools & Resources', 'Our comprehensive HR tools and resources include:\n\n• Resume Templates & Builders\n• Job Description Templates\n• Interview Question Banks\n• Performance Review Templates\n• Employee Handbook Templates\n• HR Compliance Checklists\n\nAll resources are designed to streamline your HR processes and improve efficiency.')
+('hr-tools', 'HR Tools & Resources', 'Our comprehensive HR tools and resources include:\n\n• Job Description Templates\n• Interview Question Banks\n• Performance Review Templates\n• Employee Handbook Templates\n• HR Compliance Checklists\n• Policy Generators\n\nAll resources are designed to streamline your HR processes and improve efficiency.')
 ON CONFLICT (slug) DO NOTHING;
 
 -- Insert sample FAQs

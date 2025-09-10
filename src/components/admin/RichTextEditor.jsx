@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ResponsiveImage from '../ui/ResponsiveImage';
 import { 
   Bold, 
   Italic, 
@@ -80,7 +81,7 @@ const RichTextEditor = ({
   const insertImage = () => {
     const url = prompt('Enter image URL:');
     if (url) {
-      insertHTML(`<img src="${url}" alt="Image" style="max-width: 100%; height: auto;" />`);
+      insertHTML(`<ResponsiveImage src="${url}" alt="Image" />`);
     }
   };
 

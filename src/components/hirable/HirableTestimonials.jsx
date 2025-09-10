@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveImage from '../ui/ResponsiveImage';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation, FreeMode } from 'swiper/modules';
 import 'swiper/css';
@@ -10,7 +11,7 @@ const testimonials = [
     quote: "Prachi's virtual HR services transformed our startup. Her expertise in HR compliance and policy development saved us countless hours and potential legal issues. Highly recommended for any growing business!",
     author: "Sarah Johnson",
     title: "CEO Of Company",
-    image: "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-1.jpg",
+    image: "/assets/images/author-1.jpg",
     rating: 5,
     isHighlighted: false,
   },
@@ -18,7 +19,7 @@ const testimonials = [
     quote: "Working with Prachi as our virtual HR consultant has been game-changing. Her remote HR support is professional, efficient, and cost-effective. She's become an invaluable part of our team.",
     author: "Michael Chen",
     title: "CEO Of Company",
-    image: "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-2.jpg",
+    image: "/assets/images/author-2.jpg",
     rating: 5,
     isHighlighted: true, // Middle card with blue background
   },
@@ -26,7 +27,7 @@ const testimonials = [
     quote: "As a small business owner, I was struggling with HR compliance. Prachi's virtual HR agency provided the perfect solution - expert guidance without the overhead. Our HR processes are now streamlined and compliant.",
     author: "Emily Rodriguez",
     title: "CEO Of Company",
-    image: "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-3.jpg",
+    image: "/assets/images/author-3.jpg",
     rating: 5,
     isHighlighted: false,
   },
@@ -34,7 +35,7 @@ const testimonials = [
     quote: "The level of professionalism and attention to detail Prachi brings is exceptional. Our employee satisfaction scores increased by 40% within 6 months of working with her virtual HR services.",
     author: "David Kumar",
     title: "CEO Of Company",
-    image: "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-4.jpg",
+    image: "/assets/images/author-4.jpg",
     rating: 5,
     isHighlighted: false,
   },
@@ -42,7 +43,7 @@ const testimonials = [
     quote: "Prachi's HR expertise helped us set up all compliance and policies for our tech startup in Bangalore. Highly recommended for Indian SMEs!",
     author: "Rohit Sharma",
     title: "Founder, Tech Innovate Pvt Ltd",
-    image: "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-5.jpg",
+    image: "/assets/images/author-1.jpg",
     rating: 5,
     isHighlighted: false,
   },
@@ -50,7 +51,7 @@ const testimonials = [
     quote: "We were struggling with employee engagement. Prachi's virtual HR solutions made a huge difference for our team in Mumbai.",
     author: "Anjali Mehta",
     title: "HR Manager, FinEdge Solutions",
-    image: "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-6.jpg",
+    image: "/assets/images/author-2.jpg",
     rating: 5,
     isHighlighted: false,
   },
@@ -58,7 +59,7 @@ const testimonials = [
     quote: "Prachi's remote HR support is professional and cost-effective. Our compliance audits are now always successful.",
     author: "Suresh Kumar",
     title: "Director, Kumar Textiles",
-    image: "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-7.jpg",
+    image: "/assets/images/author-3.jpg",
     rating: 5,
     isHighlighted: false,
   },
@@ -66,7 +67,7 @@ const testimonials = [
     quote: "We needed HR policies for our growing business in Delhi. Prachi delivered everything on time and with great attention to detail.",
     author: "Neha Gupta",
     title: "COO, Gupta Logistics",
-    image: "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-8.jpg",
+    image: "/assets/images/author-4.jpg",
     rating: 5,
     isHighlighted: false,
   },
@@ -156,11 +157,7 @@ export default function HirableTestimonials() {
                 {/* Profile Picture */}
                 <div className="flex items-center gap-4 mb-6">
                   <div className="relative">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.author}
-                      className="w-16 h-16 rounded-2xl object-cover border-4 border-white shadow-lg"
-                    />
+                    <ResponsiveImage src={testimonial.image} alt={testimonial.author} className="w-16 h-16 rounded-2xl object-cover border-4 border-white shadow-lg" />
                     {testimonial.isHighlighted && (
                       <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center text-white text-lg shadow-lg">
                         "
@@ -196,4 +193,4 @@ export default function HirableTestimonials() {
       </div>
     </section>
   );
-} 
+}

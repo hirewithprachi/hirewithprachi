@@ -1,4 +1,5 @@
 import React from 'react';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
 import { Helmet } from 'react-helmet-async';
 
 const kpis = [
@@ -29,11 +30,11 @@ export default function BIDashboard() {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg rounded-xl shadow p-6">
               <h2 className="font-semibold mb-4">Project Status (Bar Chart)</h2>
-              <img src="/assets/images/demo-bar-chart.png" alt="Bar Chart" className="w-full h-48 object-contain" loading="lazy" />
+              <ResponsiveImage src="/assets/images/demo-bar-chart.png" alt="Bar Chart" className="w-full h-48 object-contain" />
             </div>
             <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg rounded-xl shadow p-6">
               <h2 className="font-semibold mb-4">Engagement Breakdown (Pie Chart)</h2>
-              <img src="/assets/images/demo-pie-chart.png" alt="Pie Chart" className="w-full h-48 object-contain" loading="lazy" />
+              <ResponsiveImage src="/assets/images/demo-pie-chart.png" alt="Pie Chart" className="w-full h-48 object-contain" />
             </div>
           </div>
         </div>

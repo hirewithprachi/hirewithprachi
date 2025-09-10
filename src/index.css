@@ -1342,9 +1342,41 @@ video {
   }
   
   /* Logo hover effects */
-  .navbar-logo {
-    @apply transition-transform duration-300 hover:scale-105;
+.navbar-logo {
+  @apply transition-transform duration-300 hover:scale-105;
+}
+
+/* Ensure logo is visible and properly sized */
+.navbar-logo img {
+  @apply block max-w-full h-auto;
+  min-height: 32px;
+  object-fit: contain;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Mobile chatbot improvements */
+@media (max-width: 640px) {
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
   }
+  
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 475px) {
+  .xs\:w-\[380px\] {
+    width: 380px;
+  }
+  
+  .xs\:h-\[550px\] {
+    height: 550px;
+  }
+}
   
   /* Navigation link improvements */
   .nav-link {

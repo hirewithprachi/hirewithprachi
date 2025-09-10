@@ -9,7 +9,7 @@
     "category": "HR Strategy",
     "readTime": "5 min read",
     "author": "Prachi Shrivastava",
-    "authorImage": "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-1.jpg",
+    "authorImage": "/assets/images/author-1.jpg",
     "featured": true,
     "slug": "essential-hr-policies-startup-2024",
     "tags": ["HR Policies", "Startup", "Compliance", "Legal"]
@@ -24,7 +24,7 @@
     "category": "Cost Analysis",
     "readTime": "7 min read",
     "author": "Prachi Shrivastava",
-    "authorImage": "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-2.jpg",
+    "authorImage": "/assets/images/author-2.jpg",
     "featured": true,
     "slug": "virtual-hr-vs-inhouse-cost-comparison",
     "tags": ["Cost Analysis", "Virtual HR", "SME", "ROI"]
@@ -39,9 +39,9 @@
     "category": "Remote Work",
     "readTime": "6 min read",
     "author": "Prachi Shrivastava",
-    "authorImage": "/Hirable – Human Resources & Recruiting WordPress Theme_files/author-3.jpg",
+    "authorImage": "/assets/images/author-3.jpg",
     "featured": false,
     "slug": "remote-team-management-best-practices",
     "tags": ["Remote Work", "Team Management", "Virtual Teams", "Leadership"]
   }
-] 
+]

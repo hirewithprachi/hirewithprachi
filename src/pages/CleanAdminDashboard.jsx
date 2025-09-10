@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
 import { useAuth } from '../lib/AuthContext';
-import { supabase } from '../lib/supabase-client';
+import { supabase } from '../lib/supabase';
 import AdminLogin from '../components/AdminLogin';
 
 const CleanAdminDashboard = () => {
@@ -1325,7 +1326,7 @@ const CleanAdminDashboard = () => {
                   <div key={video.id} className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300">
                     <div className="aspect-video bg-gray-200 relative">
                       {video.thumbnail_url ? (
-                        <img src={video.thumbnail_url} alt={video.title} className="w-full h-full object-cover" />
+                        <ResponsiveImage src={video.thumbnail_url} alt={video.title} className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
                           <span className="text-4xl">🎥</span>
@@ -2214,7 +2215,7 @@ const CreateBlogPostForm = ({ onSubmit, onCancel }) => {
         />
         {imagePreview && (
           <div className="mt-2">
-            <img src={imagePreview} alt="Preview" className="w-32 h-32 object-cover rounded-lg border" />
+            <ResponsiveImage src={imagePreview} alt="Preview" className="w-32 h-32 object-cover rounded-lg border" />
           </div>
         )}
       </div>

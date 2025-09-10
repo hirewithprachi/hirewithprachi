@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react'
+import ResponsiveImage from '../../components/ui/ResponsiveImage';
 import { motion } from 'framer-motion'
 import { cva } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
@@ -183,11 +184,7 @@ const FeatureCard = forwardRef(({
     >
       {image && (
         <div className="aspect-video w-full overflow-hidden">
-          <img 
-            src={image} 
-            alt={title}
-            className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-          />
+          <ResponsiveImage src={image} alt={title} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
         </div>
       )}
       <CardContent className="p-6">
@@ -249,11 +246,7 @@ const TestimonialCard = forwardRef(({
           </blockquote>
           <div className="flex items-center space-x-3">
             {avatar && (
-              <img 
-                src={avatar} 
-                alt={author}
-                className="h-10 w-10 rounded-full object-cover"
-              />
+              <ResponsiveImage src={avatar} alt={author} className="h-10 w-10 rounded-full object-cover" />
             )}
             <div>
               <p className="font-medium text-gray-900">{author}</p>

@@ -637,7 +637,7 @@ export default function Resources() {
               <div className="relative">
                 {/* Main Image */}
                 <motion.img
-                  src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                  src="/assets/images/resources-hero.jpg"
                   alt="HR Resources Hub"
                   className="w-full h-96 md:h-[500px] object-cover rounded-3xl shadow-2xl"
                   whileHover={{ scale: 1.02 }}
@@ -1149,4 +1149,4 @@ export default function Resources() {
       <HireWithPrachiFooter />
     </>
   );
-} 
+}

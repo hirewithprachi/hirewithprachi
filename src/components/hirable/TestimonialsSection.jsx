@@ -1,4 +1,5 @@
 import React from "react";
+import ResponsiveImage from '../ui/ResponsiveImage';
 
 const testimonials = [
   {
@@ -28,7 +29,7 @@ const TestimonialsSection = () => (
       <div className="grid md:grid-cols-3 gap-8">
         {testimonials.map((t) => (
           <div key={t.name} className="bg-white rounded-2xl shadow-lg p-8 text-center hover:scale-105 hover:shadow-2xl transition">
-            <img src={t.img} alt={t.name} className="w-20 h-20 object-cover rounded-full mx-auto mb-4 border-4 border-[#6c5ce7]" />
+            <ResponsiveImage src={t.img} alt={t.name} className="w-20 h-20 object-cover rounded-full mx-auto mb-4 border-4 border-[#6c5ce7]" />
             <blockquote className="italic text-gray-700 mb-4">“{t.quote}”</blockquote>
             <div className="font-bold text-[#6c5ce7]">{t.name}</div>
             <div className="text-gray-500 text-sm">{t.title}</div>
@@ -39,4 +40,4 @@ const TestimonialsSection = () => (
   </section>
 );
 
-export default TestimonialsSection; 
+export default TestimonialsSection;

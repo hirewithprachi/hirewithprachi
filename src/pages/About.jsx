@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 import HireWithPrachiTopBar from '../components/hirable/HirableTopBar';
@@ -24,31 +25,31 @@ import OptimizedImage from '../components/OptimizedImage';
       name: "Prachi Shrivastava",
       jobTitle: "Virtual HR Consultant",
       description: "Leading virtual HR consultant and POSH expert in India",
-      image: "https://hirewithprachi.com/assets/images/about-img-1.jpg"
+      image: "https://hirewithprachi.com/assets/images/about-section.jpg"
     }
   };
 
 const galleryImages = [
   {
-    src: '/assets/images/about-img-1.jpg',
+    src: '/assets/images/about-section.jpg',
     title: 'Keynote at HR Tech Summit',
     date: '2024-03-15',
     desc: 'Prachi delivering a keynote on digital HR transformation.'
   },
   {
-    src: '/assets/images/about-img-2.jpg',
+    src: '/assets/images/team-profile.jpg',
     title: 'Panelist at Women in Leadership',
     date: '2023-11-10',
     desc: 'Panel discussion on women in HR leadership roles.'
   },
   {
-    src: '/assets/images/about-img-3.jpg',
+    src: '/assets/images/consultation.jpg',
     title: 'Corporate Training Workshop',
     date: '2023-08-22',
     desc: 'Prachi conducting a talent management workshop.'
   },
   {
-    src: '/assets/images/benefit-img-1.jpg',
+    src: '/assets/images/service-detail.jpg',
     title: 'HR Compliance Seminar',
     date: '2022-12-05',
     desc: 'Seminar on latest HR compliance trends.'
@@ -76,7 +77,7 @@ const personSchema = {
   "@type": "Person",
   "name": "Prachi Shrivastava",
   "jobTitle": "Virtual HR Consultant",
-  "image": "/assets/images/about-img-1.jpg",
+  "image": "/assets/images/about-section.jpg",
   "description": "India's leading virtual HR consultant for startups and SMEs. Expert in HR consulting, policy drafting, talent management, and compliance.",
   "sameAs": [
     "https://www.linkedin.com/in/prachi-shrivastava-hr",
@@ -223,12 +224,7 @@ export default function AboutPage() {
                 className="relative group order-2 lg:order-1"
               >
                 <div className="relative overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl">
-                  <img 
-                    src="/assets/images/about-img-2.jpg" 
-                    alt="Prachi Shrivastava at HR event" 
-                    className="w-full h-[400px] md:h-[600px] object-cover transform group-hover:scale-110 transition-transform duration-700" 
-                    loading="lazy" 
-                  />
+                  <ResponsiveImage src="/assets/images/about-img-2.jpg" alt="Prachi Shrivastava at HR event" className="w-full h-[400px] md:h-[600px] object-cover transform group-hover:scale-110 transition-transform duration-700" />
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                 </div>
@@ -468,12 +464,7 @@ export default function AboutPage() {
                 >
                   {/* Image */}
                   <div className="relative overflow-hidden h-48 md:h-64">
-                    <img 
-                      src={event.image} 
-                      alt={event.title}
-                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                      loading="lazy"
-                    />
+                    <ResponsiveImage src={event.image} alt={event.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                   </div>
 
@@ -766,7 +757,7 @@ export default function AboutPage() {
                   className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
                 >
                   <div className="flex items-center gap-4 mb-4">
-                    <img src={cert.logo} alt={cert.organization} className="w-12 h-12 object-contain" />
+                    <ResponsiveImage src={cert.logo} alt={cert.organization} className="w-12 h-12 object-contain" />
                     <div>
                       <h3 className="font-semibold text-gray-900 text-sm">{cert.title}</h3>
                       <p className="text-gray-600 text-xs">{cert.organization}</p>
@@ -835,4 +826,4 @@ export default function AboutPage() {
       </main>
     </>
   );
-} 
+}

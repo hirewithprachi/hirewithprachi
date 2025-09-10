@@ -1,4 +1,5 @@
 import React from 'react';
+import ResponsiveImage from './ui/ResponsiveImage';
 import { motion } from 'framer-motion';
 import { 
   TrendingUp, 
@@ -178,11 +179,7 @@ export const TestimonialCard = ({
       
       <div className="flex items-center">
         {avatar && (
-          <img 
-            src={avatar} 
-            alt={name} 
-            className="w-12 h-12 rounded-full mr-4 object-cover"
-          />
+          <ResponsiveImage src={avatar} alt={name} className="w-12 h-12 rounded-full mr-4 object-cover" />
         )}
         <div>
           <div className="font-semibold text-gray-800 dark:text-white">
@@ -341,4 +338,4 @@ export const ContactInfo = () => {
       ))}
     </div>
   );
-}; 
+};

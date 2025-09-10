@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveImage from '../ui/ResponsiveImage';
 import ConsultationModal from '../LeadCapturePreview';
 
 const services = [
@@ -6,7 +7,7 @@ const services = [
     title: 'Virtual HR Consulting',
     desc: 'Expert HR guidance for startups and SMEs. Get strategic HR advice, policy development, and compliance support remotely.',
     icon: '🎯',
-    image: '/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-1.jpg',
+    image: '/assets/images/about-img-1.jpg',
     features: ['Strategic HR Planning', 'Policy Development', 'Compliance Support', 'Remote Implementation'],
     color: 'from-blue-500 to-cyan-500',
     delay: 0
@@ -15,7 +16,7 @@ const services = [
     title: 'Remote HR Support',
     desc: 'Complete HR outsourcing for growing businesses. Handle recruitment, employee relations, and HR administration remotely.',
     icon: '🌐',
-    image: '/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-2.jpg',
+    image: '/assets/images/about-img-2.jpg',
     features: ['Recruitment & Hiring', 'Employee Relations', 'HR Administration', 'Performance Management'],
     color: 'from-purple-500 to-pink-500',
     delay: 100
@@ -24,7 +25,7 @@ const services = [
     title: 'HR Compliance & Policies',
     desc: 'Ensure your business meets all HR regulations. Get expert compliance guidance, policy development, and audit support.',
     icon: '⚖️',
-    image: '/Hirable – Human Resources & Recruiting WordPress Theme_files/about-img-3.jpg',
+    image: '/assets/images/about-img-3.jpg',
     features: ['Legal Compliance', 'Policy Development', 'Audit Support', 'Risk Management'],
     color: 'from-emerald-500 to-teal-500',
     delay: 200,
@@ -34,7 +35,7 @@ const services = [
     title: 'Startup HR Solutions',
     desc: 'Tailored HR services for startups and small businesses. Build strong HR foundations from day one with expert guidance.',
     icon: '🚀',
-    image: '/Hirable – Human Resources & Recruiting WordPress Theme_files/hero-image.png',
+    image: '/assets/images/hero-image.png',
     features: ['HR Foundation', 'Growth Strategy', 'Team Building', 'Scalable Solutions'],
     color: 'from-orange-500 to-red-500',
     delay: 300
@@ -43,7 +44,7 @@ const services = [
     title: 'Employee Engagement',
     desc: 'Boost team morale and productivity with our employee engagement strategies and performance management solutions.',
     icon: '💪',
-    image: '/Hirable – Human Resources & Recruiting WordPress Theme_files/benefit-img-1.jpg',
+    image: '/assets/images/benefit-img-1.jpg',
     features: ['Team Building', 'Performance Reviews', 'Employee Recognition', 'Culture Development'],
     color: 'from-indigo-500 to-purple-500',
     delay: 400
@@ -103,11 +104,7 @@ export default function HirableServices({ openConsultationModal }) {
                   
                   {/* Enhanced Image Section */}
                   <div className="lg:col-span-1 relative overflow-hidden h-64 lg:h-full">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
+                    <ResponsiveImage src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                     
                     {/* Enhanced Floating Elements */}
@@ -201,11 +198,7 @@ export default function HirableServices({ openConsultationModal }) {
                 
                 {/* Compact Image Section */}
                 <div className="relative h-28 sm:h-32 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                  <ResponsiveImage src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                   
                   {/* Compact Floating Icon */}
@@ -376,4 +369,4 @@ export default function HirableServices({ openConsultationModal }) {
       </div>
     </section>
   );
-} 
+}

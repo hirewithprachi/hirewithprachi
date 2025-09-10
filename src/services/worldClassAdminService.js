@@ -3,7 +3,7 @@
 // Advanced backend service for admin dashboard
 // ========================================
 
-import { supabase } from '../lib/supabase-client';
+import { supabase } from '../lib/supabase';
 
 // ========================================
 // ANALYTICS & REPORTING SERVICE

@@ -1,4 +1,5 @@
 import React from 'react';
+import ResponsiveImage from './ui/ResponsiveImage';
 import { motion } from 'framer-motion';
 
 const services = [
@@ -22,7 +23,7 @@ export default function ServicesGrid() {
               className="bg-white rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center p-8 hover:shadow-2xl transition duration-300 group"
               whileHover={{ scale: 1.04 }}
             >
-              <img src={s.img} alt={s.name} className="w-24 h-24 object-cover rounded-full mb-6 border-4 border-primary group-hover:scale-110 transition duration-300" loading="lazy" />
+              <ResponsiveImage src={s.img} alt={s.name} className="w-24 h-24 object-cover rounded-full mb-6 border-4 border-primary group-hover:scale-110 transition duration-300" />
               <h3 className="text-xl font-bold text-primary mb-2 text-center">{s.name}</h3>
               <p className="text-neutral text-base text-center mb-4">{s.desc}</p>
             </motion.div>
@@ -31,4 +32,4 @@ export default function ServicesGrid() {
       </div>
     </section>
   );
-} 
+}

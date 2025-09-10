@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveImage from '../ui/ResponsiveImage';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../../lib/supabase';
 import { 
@@ -528,7 +529,7 @@ const VideoCard = ({ video, viewMode, onEdit, onDelete, servicePages }) => {
           <div className="flex items-center space-x-4 flex-1">
             <div className="w-16 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
               {video.thumbnail_url ? (
-                <img src={video.thumbnail_url} alt="" className="w-full h-full object-cover rounded-lg" />
+                <ResponsiveImage src={video.thumbnail_url} alt="" className="w-full h-full object-cover rounded-lg" />
               ) : (
                 <Video className="w-6 h-6 text-gray-400" />
               )}
@@ -589,11 +590,7 @@ const VideoCard = ({ video, viewMode, onEdit, onDelete, servicePages }) => {
     >
       <div className="aspect-video bg-gray-100 dark:bg-gray-700 relative">
         {video.thumbnail_url ? (
-          <img 
-            src={video.thumbnail_url} 
-            alt={video.title} 
-            className="w-full h-full object-cover"
-          />
+          <ResponsiveImage src={video.thumbnail_url} alt={video.title} className="w-full h-full object-cover" />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <Video className="w-12 h-12 text-gray-400" />

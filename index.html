@@ -5,6 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/main.jsx" as="script" crossorigin />
+    <link rel="preload" href="/src/index.css" as="stylesheet" />
+    
     <!-- Primary Meta Tags -->
     <title>Prachi Shrivastava - Virtual HR Services & POSH Training</title>
     <meta name="title" content="Prachi Shrivastava - Virtual HR Services & POSH Training">
@@ -24,7 +28,7 @@
     <meta property="twitter:image" content="https://digitalpenta.com/wp-content/uploads/WhatsApp-Image-2024-06-08-at-12.24.55.jpeg" />
 
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script defer>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -66,6 +70,6 @@
     <!-- End Google Tag Manager (noscript) -->
     
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.jsx" defer></script>
   </body>
 </html>

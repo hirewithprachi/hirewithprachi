@@ -1,4 +1,5 @@
 import React from 'react';
+import ResponsiveImage from '../ui/ResponsiveImage';
 
 const features = [
   '8+ Years of HR Excellence',
@@ -68,11 +69,7 @@ export default function HirableWhyChooseUs({ openConsultationModal }) {
         {/* Right: Image with Play Button */}
         <div className="w-full md:w-1/2 flex justify-center items-center">
           <div className="relative w-full max-w-sm md:max-w-md aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
-            <img
-              src="/assets/images/about-img-2.jpg"
-              alt="Virtual HR Services"
-              className="w-full h-full object-cover"
-            />
+            <ResponsiveImage src="/assets/images/about-img-2.jpg" alt="Virtual HR Services" className="w-full h-full object-cover" />
             <a
               href="https://www.youtube.com/embed/Y-x0efG1seA?feature=oembed?playlist=Y-x0efG1seA&mute=0&autoplay=1&loop=1&controls=0&start=0&end="
               target="_blank"
@@ -100,4 +97,4 @@ export default function HirableWhyChooseUs({ openConsultationModal }) {
       </div>
     </section>
   );
-} 
+}

@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
+import ResponsiveImage from './ui/ResponsiveImage';
 import { motion } from 'framer-motion';
 
 const showcases = [
   {
     title: 'Payroll Compliance Overhaul',
-    beforeImg: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2',
-    afterImg: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
+    beforeImg: '/images/services/generic-service.svg',
+    afterImg: '/images/services/generic-service.svg',
     before: 'Frequent payroll errors, compliance risks',
     after: '100% error-free payroll, audit ready',
   },
   {
     title: 'AI-Driven Talent Acquisition',
-    beforeImg: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca',
-    afterImg: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308',
+    beforeImg: '/images/services/generic-service.svg',
+    afterImg: '/images/services/generic-service.svg',
     before: 'Slow hiring, poor candidate fit',
     after: 'AI-matched hires, 2x faster recruitment',
   },
@@ -22,8 +23,8 @@ function BeforeAfterSlider({ beforeImg, afterImg }) {
   const [pos, setPos] = useState(50);
   return (
     <div className="relative w-full h-56 md:h-72 rounded-xl overflow-hidden shadow-lg mb-4 select-none">
-      <img src={beforeImg} alt="Before" className="absolute inset-0 w-full h-full object-cover" style={{ zIndex: 1 }} loading="lazy" />
-      <img src={afterImg} alt="After" className="absolute inset-0 w-full h-full object-cover" style={{ clipPath: `inset(0 0 0 ${pos}%)`, zIndex: 2, transition: 'clip-path 0.3s' }} loading="lazy" />
+      <ResponsiveImage src={beforeImg} alt="Before" className="absolute inset-0 w-full h-full object-cover" />
+      <ResponsiveImage src={afterImg} alt="After" className="absolute inset-0 w-full h-full object-cover" />
       <input
         type="range"
         min={0}
@@ -68,4 +69,4 @@ export default function BeforeAfterShowcase() {
       </div>
     </section>
   );
-} 
+}

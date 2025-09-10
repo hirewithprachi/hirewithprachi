@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS document_templates (
     tool_id UUID REFERENCES hr_tools(id),
     name TEXT NOT NULL,
     description TEXT,
-    template_type TEXT NOT NULL CHECK (template_type IN ('resume', 'cover_letter', 'policy', 'contract', 'report')),
+    template_type TEXT NOT NULL CHECK (template_type IN ('cover_letter', 'policy', 'contract', 'report')),
     template_data JSONB NOT NULL, -- Template structure and styling
     is_premium BOOLEAN DEFAULT false,
     price_inr INTEGER DEFAULT 0,
@@ -454,37 +454,22 @@ CREATE TRIGGER on_document_created
 
 -- Insert tool categories
 INSERT INTO hr_tool_categories (name, slug, description, icon, color, display_order) VALUES
-('Resume & CV', 'resume-cv', 'Professional resume builders and CV templates', '📄', '#3B82F6', 1),
-('Job Search', 'job-search', 'Cover letters, interview prep, and job search tools', '🔍', '#10B981', 2),
-('HR Policies', 'hr-policies', 'Company policies, handbooks, and compliance documents', '📋', '#F59E0B', 3),
-('Recruitment', 'recruitment', 'Job descriptions, offer letters, and hiring tools', '👥', '#8B5CF6', 4),
-('Employee Management', 'employee-management', 'Performance reviews, contracts, and employee documents', '👤', '#EF4444', 5),
-('Calculators', 'calculators', 'Salary calculators, cost analysis, and HR metrics', '🧮', '#06B6D4', 6)
+('Job Search', 'job-search', 'Cover letters, interview prep, and job search tools', '🔍', '#10B981', 1),
+('HR Policies', 'hr-policies', 'Company policies, handbooks, and compliance documents', '📋', '#F59E0B', 2),
+('Recruitment', 'recruitment', 'Job descriptions, offer letters, and hiring tools', '👥', '#8B5CF6', 3),
+('Employee Management', 'employee-management', 'Performance reviews, contracts, and employee documents', '👤', '#EF4444', 4),
+('Calculators', 'calculators', 'Salary calculators, cost analysis, and HR metrics', '🧮', '#06B6D4', 5)
 ON CONFLICT (slug) DO NOTHING;
 
 -- Insert subscription plans
 INSERT INTO subscription_plans (name, slug, description, price_inr, billing_cycle, document_limit, features, is_popular) VALUES
-('Free', 'free', 'Basic tools with limited usage', 0, 'monthly', 5, '["Basic resume builder", "Simple templates", "Email support"]', false),
+('Free', 'free', 'Basic tools with limited usage', 0, 'monthly', 5, '["Basic document templates", "Simple tools", "Email support"]', false),
 ('Basic', 'basic', 'Perfect for job seekers and small businesses', 999, 'monthly', 50, '["All tools", "Premium templates", "PDF downloads", "Email support", "Document history"]', false),
 ('Pro', 'pro', 'For HR professionals and growing companies', 2499, 'monthly', -1, '["Unlimited documents", "AI enhancement", "Priority support", "Custom branding", "API access", "Advanced analytics"]', true),
 ('Enterprise', 'enterprise', 'For large organizations with custom needs', 4999, 'monthly', -1, '["Everything in Pro", "White-label solution", "Dedicated support", "Custom integrations", "Team management", "Advanced security"]', false)
 ON CONFLICT (slug) DO NOTHING;
 
 -- Insert sample HR tools
-INSERT INTO hr_tools (category_id, name, slug, description, tool_type, input_schema, is_free, price_inr, is_popular) 
-SELECT 
-    c.id,
-    'Professional Resume Builder',
-    'resume-builder',
-    'Create ATS-friendly resumes with AI enhancement',
-    'generator',
-    '{"fields": [{"name": "full_name", "type": "text", "required": true}, {"name": "email", "type": "email", "required": true}, {"name": "phone", "type": "tel", "required": true}, {"name": "experience", "type": "array", "required": true}, {"name": "education", "type": "array", "required": true}, {"name": "skills", "type": "array", "required": true}]}',
-    true,
-    0,
-    true
-FROM hr_tool_categories c WHERE c.slug = 'resume-cv'
-ON CONFLICT (slug) DO NOTHING;
-
 INSERT INTO hr_tools (category_id, name, slug, description, tool_type, input_schema, is_free, price_inr, is_popular) 
 SELECT 
     c.id,
@@ -516,7 +501,7 @@ ON CONFLICT (slug) DO NOTHING;
 -- Insert sample email templates
 INSERT INTO email_templates (template_name, subject, html_content, text_content, variables) VALUES
 ('welcome_email', 'Welcome to HireWithPrachi HR Tools! 🎉', 
-'<h1>Welcome to HireWithPrachi!</h1><p>Hi {{user_name}},</p><p>Thank you for joining our HR tools platform. You now have access to professional HR tools and templates.</p><p>Get started with our most popular tools:</p><ul><li>Resume Builder</li><li>HR Policy Generator</li><li>Cover Letter Creator</li></ul><p>Best regards,<br>The HireWithPrachi Team</p>',
+'<h1>Welcome to HireWithPrachi!</h1><p>Hi {{user_name}},</p><p>Thank you for joining our HR tools platform. You now have access to professional HR tools and templates.</p><p>Get started with our most popular tools:</p><ul><li>HR Policy Generator</li><li>Cover Letter Creator</li><li>Employee Handbook Templates</li></ul><p>Best regards,<br>The HireWithPrachi Team</p>',
 'Welcome to HireWithPrachi! Hi {{user_name}}, Thank you for joining our HR tools platform. Get started with our tools today!',
 '["user_name", "user_email"]'),
 ('document_ready', 'Your {{document_type}} is ready! 📄', 

@@ -7,6 +7,7 @@ import {
   FileText, MessageSquare, Copy, ExternalLink
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import { sendTestEmail } from '../../lib/automatedEmails';
 
 const EmailAutomation = () => {
   const [automations, setAutomations] = useState([]);
@@ -233,25 +234,19 @@ Prachi & Team`
 
   const handleTestEmail = async (automation) => {
     try {
-      const response = await fetch('/api/email/test', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          automation_id: automation.id,
-          test_email: 'test@example.com',
-          test_data: {
-            user_name: 'Test User',
-            user_email: 'test@example.com',
-            tool_name: 'Sample Tool',
-            amount: '299',
-            transaction_id: 'TEST123'
-          }
-        })
-      });
+      const testData = {
+        user_name: 'Test User',
+        user_email: 'test@example.com',
+        tool_name: 'Sample HR Tool',
+        amount: '299',
+        transaction_id: 'TEST123456',
+        dashboard_url: `${window.location.origin}/dashboard`,
+        tool_access_url: `${window.location.origin}/tools/sample`,
+        feedback_url: `${window.location.origin}/feedback`,
+        support_url: `${window.location.origin}/support`
+      };
 
-      const result = await response.json();
+      const result = await sendTestEmail(automation.id, 'test@example.com', testData);
       
       if (result.success) {
         alert('Test email sent successfully!');

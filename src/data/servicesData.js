@@ -53,7 +53,7 @@ export const servicesData = {
         'Scalable solutions for growing businesses'
       ],
       icon: '💼',
-      imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/virtual-hr.svg',
       features: ['Remote HR operations', 'Employee lifecycle management', 'HR policy implementation']
     },
     {
@@ -67,7 +67,7 @@ export const servicesData = {
         'Regular updates and maintenance'
       ],
       icon: '📋',
-      imageUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/hr-policy.svg',
       features: ['Policy drafting and review', 'Legal compliance check', 'Employee handbook creation']
     },
     {
@@ -81,7 +81,7 @@ export const servicesData = {
         'Reduced recruitment costs'
       ],
       icon: '🎯',
-      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/recruitment.svg',
       features: ['Job analysis and posting', 'Candidate screening', 'Interview coordination']
     },
     {
@@ -95,7 +95,7 @@ export const servicesData = {
         'Enhanced employee experience'
       ],
       icon: '🚀',
-      imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/onboarding.svg',
       features: ['Orientation programs', 'Training coordination', 'Integration support']
     },
     {
@@ -109,7 +109,7 @@ export const servicesData = {
         'Career development support'
       ],
       icon: '📊',
-      imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Goal setting frameworks', 'Performance reviews', 'Development planning']
     },
     {
@@ -123,7 +123,7 @@ export const servicesData = {
         'Market-aligned salary structures'
       ],
       icon: '💰',
-      imageUrl: 'https://images.unsplash.com/photo-1554224154-26032cdc0c0f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Salary benchmarking', 'Benefits package design', 'Compensation strategy']
     },
     {
@@ -137,7 +137,7 @@ export const servicesData = {
         'Enhanced organizational culture'
       ],
       icon: '🤝',
-      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Conflict resolution', 'Employee counseling', 'Workplace investigations']
     },
     {
@@ -151,7 +151,7 @@ export const servicesData = {
         'Enhanced employee self-service'
       ],
       icon: '🤖',
-      imageUrl: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['HRIS selection', 'System implementation', 'Training and support']
     },
     {
@@ -165,7 +165,7 @@ export const servicesData = {
         'Process optimization opportunities'
       ],
       icon: '🔍',
-      imageUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Compliance audits', 'Risk assessments', 'Remediation planning']
     },
 
@@ -181,7 +181,7 @@ export const servicesData = {
         'Scalable HR framework'
       ],
       icon: '🚀',
-      imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['HR infrastructure setup', 'Policy framework creation', 'Growth planning']
     },
     {
@@ -195,7 +195,7 @@ export const servicesData = {
         'Enhanced employee experience'
       ],
       icon: '🔄',
-      imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['HR process redesign', 'Technology modernization', 'Change management']
     },
     {
@@ -209,7 +209,7 @@ export const servicesData = {
         'Reduced integration risks'
       ],
       icon: '🤝',
-      imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Due diligence support', 'Integration planning', 'Cultural assessment']
     },
     {
@@ -223,7 +223,7 @@ export const servicesData = {
         'Long-term leadership success'
       ],
       icon: '👑',
-      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Executive profiling', 'Talent mapping', 'Succession planning']
     },
     {
@@ -237,7 +237,7 @@ export const servicesData = {
         'Better change management'
       ],
       icon: '🏗️',
-      imageUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Culture assessment', 'Structure optimization', 'Change initiatives']
     },
     {
@@ -251,7 +251,7 @@ export const servicesData = {
         'Better succession planning'
       ],
       icon: '⭐',
-      imageUrl: 'https://images.unsplash.com/photo-1554224154-26032cdc0c0f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Talent identification', 'Development programs', 'Retention strategies']
     },
     {
@@ -265,7 +265,7 @@ export const servicesData = {
         'Enhanced team performance'
       ],
       icon: '🎯',
-      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Leadership assessment', 'Development programs', 'Coaching support']
     },
     {
@@ -279,7 +279,7 @@ export const servicesData = {
         'Improved adoption rates'
       ],
       icon: '🔄',
-      imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Change strategy', 'Communication planning', 'Stakeholder engagement']
     },
     {
@@ -293,7 +293,7 @@ export const servicesData = {
         'Strategic workforce planning'
       ],
       icon: '📈',
-      imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Data analysis', 'Performance metrics', 'Strategic insights']
     },
 
@@ -309,7 +309,7 @@ export const servicesData = {
         'Employee protection measures'
       ],
       icon: '📜',
-      imageUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Policy drafting', 'Legal review', 'Implementation guidance']
     },
     {
@@ -323,7 +323,7 @@ export const servicesData = {
         'Safer workplace environment'
       ],
       icon: '🎓',
-      imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Employee training', 'Manager training', 'Committee training']
     },
     {
@@ -337,7 +337,7 @@ export const servicesData = {
         'Impartial investigation process'
       ],
       icon: '⚖️',
-      imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Committee formation', 'Member training', 'Process establishment']
     },
     {
@@ -351,7 +351,7 @@ export const servicesData = {
         'Fair resolution process'
       ],
       icon: '🔍',
-      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Complaint investigation', 'Evidence collection', 'Report preparation']
     },
     {
@@ -365,7 +365,7 @@ export const servicesData = {
         'Remediation guidance'
       ],
       icon: '📋',
-      imageUrl: 'https://images.unsplash.com/photo-1554224154-26032cdc0c0f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Compliance assessment', 'Gap analysis', 'Remediation planning']
     },
     {
@@ -379,7 +379,7 @@ export const servicesData = {
         'Annual reporting support'
       ],
       icon: '📊',
-      imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Annual reporting', 'Documentation maintenance', 'Compliance tracking']
     },
 
@@ -395,7 +395,7 @@ export const servicesData = {
         'Educational compliance'
       ],
       icon: '🎓',
-      imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Academic staff management', 'Educational policies', 'Staff development']
     },
     {
@@ -409,7 +409,7 @@ export const servicesData = {
         'Educational rights advocacy'
       ],
       icon: '📚',
-      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Rights awareness', 'Grievance support', 'Advocacy services']
     },
     {
@@ -423,7 +423,7 @@ export const servicesData = {
         'Professional growth'
       ],
       icon: '👨‍🏫',
-      imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Training programs', 'Career development', 'Performance support']
     },
     {
@@ -437,7 +437,7 @@ export const servicesData = {
         'Quality assurance'
       ],
       icon: '✅',
-      imageUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Regulatory compliance', 'Audit support', 'Quality standards']
     },
     {
@@ -451,7 +451,7 @@ export const servicesData = {
         'Student protection'
       ],
       icon: '🛡️',
-      imageUrl: 'https://images.unsplash.com/photo-1554224154-26032cdc0c0f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Safety policies', 'Emergency planning', 'Security protocols']
     },
     {
@@ -465,7 +465,7 @@ export const servicesData = {
         'Best practice implementation'
       ],
       icon: '💡',
-      imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Strategic planning', 'Policy development', 'Operational support']
     },
 
@@ -481,7 +481,7 @@ export const servicesData = {
         'Career advancement'
       ],
       icon: '💪',
-      imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Leadership training', 'Skill development', 'Career guidance']
     },
     {
@@ -495,7 +495,7 @@ export const servicesData = {
         'Safety awareness'
       ],
       icon: '👶',
-      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Rights advocacy', 'Safety programs', 'Protection measures']
     },
     {
@@ -509,7 +509,7 @@ export const servicesData = {
         'Inclusive culture'
       ],
       icon: '⚖️',
-      imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Equality training', 'Diversity programs', 'Inclusion initiatives']
     },
     {
@@ -523,7 +523,7 @@ export const servicesData = {
         'Counseling services'
       ],
       icon: '🆘',
-      imageUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Counseling support', 'Legal assistance', 'Safety planning']
     },
     {
@@ -537,7 +537,7 @@ export const servicesData = {
         'Legal awareness'
       ],
       icon: '🤱',
-      imageUrl: 'https://images.unsplash.com/photo-1554224154-26032cdc0c0f?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Rights advocacy', 'Workplace support', 'Legal guidance']
     },
     {
@@ -551,7 +551,7 @@ export const servicesData = {
         'Rights protection'
       ],
       icon: '📖',
-      imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
+      imageUrl: '/images/services/generic-service.svg',
       features: ['Education advocacy', 'Access support', 'Quality assurance']
     }
   ]
@@ -574,4 +574,4 @@ export const getServiceById = (serviceId) => {
   return servicesData.services.find(service => service.id === serviceId);
 };
 
-export default servicesData; 
+export default servicesData;

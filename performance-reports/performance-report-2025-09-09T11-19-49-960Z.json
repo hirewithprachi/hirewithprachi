@@ -1,0 +1,58 @@
+{
+  "timestamp": "2025-09-09T11-19-49-960Z",
+  "imageOptimization": {
+    "status": "error",
+    "message": "Error checking image optimization: Command failed: grep -r \"<ResponsiveImage\" F:\\programing\\Projects\\hr\\hirewithprachi\\src --include=\"*.jsx\" --include=\"*.js\" | wc -l\n'grep' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n"
+  },
+  "javaScriptSize": {
+    "status": "success",
+    "details": {
+      "totalJsFiles": 251,
+      "totalSize": 4213951,
+      "formattedSize": "4.02 MB",
+      "lazyLoadedComponents": 57,
+      "codeSplittingImplemented": true
+    },
+    "message": "Found 251 JavaScript files (4.02 MB), 57 lazy-loaded components, and code splitting is implemented."
+  },
+  "htmlSize": {
+    "status": "success",
+    "details": {
+      "sizeBytes": 4187,
+      "formattedSize": "4.09 KB",
+      "preloadDirectives": 4,
+      "deferredScripts": 2,
+      "asyncScripts": 0,
+      "renderBlockingResources": 1
+    },
+    "message": "Index HTML is 4.09 KB with 4 preload directives, 2 deferred scripts, 0 async scripts, and 1 potential render-blocking resources."
+  },
+  "cssSize": {
+    "status": "success",
+    "details": {
+      "totalCssFiles": 1,
+      "totalSize": 44796,
+      "formattedSize": "43.75 KB",
+      "inlinedCriticalCSS": false
+    },
+    "message": "Found 1 CSS files (43.75 KB), and critical CSS is not inlined."
+  },
+  "fontFiles": {
+    "status": "success",
+    "details": {
+      "totalFontFiles": 0,
+      "fontDisplaySwapCount": 0,
+      "preloadedFonts": 0
+    },
+    "message": "Found 0 font files, 0 @font-face rules with font-display: swap, and 0 preloaded fonts."
+  },
+  "redirects": {
+    "status": "success",
+    "details": {
+      "redirectRules": 0,
+      "wwwToNonWwwRedirect": true,
+      "httpToHttpsRedirect": true
+    },
+    "message": "Found 0 redirect rules in .htaccess. WWW to non-WWW redirect: Yes. HTTP to HTTPS redirect: Yes."
+  }
+}

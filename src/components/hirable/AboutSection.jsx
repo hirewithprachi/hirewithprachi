@@ -56,7 +56,7 @@ const AboutSection = () => (
         {/* Image */}
         <div className="relative">
           <img
-            src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            src="/images/services/generic-service.svg"
             alt="Prachi Shrivastava - HR Expert"
             className="rounded-2xl shadow-2xl w-full h-auto"
           />
@@ -78,4 +78,4 @@ const AboutSection = () => (
   </section>
 );
 
-export default AboutSection; 
+export default AboutSection;

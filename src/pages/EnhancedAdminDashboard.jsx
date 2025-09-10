@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../lib/AuthContext';
-import { supabase } from '../lib/supabase-client';
+import { supabase } from '../lib/supabase';
 import AdminLogin from '../components/AdminLogin';
 
 const EnhancedAdminDashboard = () => {

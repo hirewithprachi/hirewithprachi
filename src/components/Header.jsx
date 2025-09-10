@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveImage from './ui/ResponsiveImage';
 import { Link, useLocation } from 'react-router-dom';
 import { User } from 'lucide-react';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+import { supabase } from '../lib/supabase.js';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -96,10 +92,18 @@ const Header = () => {
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
           {/* Logo - Enhanced with hover effects */}
           <Link to="/" className="flex items-center flex-shrink-0 navbar-logo">
-            <img
-              src="/assets/images/hirewithprachi_navbar_logo.png"
-              alt="Hire With Prachi Logo"
-              className="h-10 md:h-12 w-auto object-contain"
+            <img 
+              src="/assets/images/hirewithprachi_navbar_logo.png" 
+              alt="Hire with Prachi - HR Consulting Services" 
+              className="h-8 w-auto max-w-[150px] transition-transform duration-300 hover:scale-105 block"
+              onError={(e) => {
+                console.error('Logo failed to load:', e.target.src);
+                e.target.style.border = '2px solid red';
+                e.target.alt = 'Logo Error';
+                // Try fallback logo
+                e.target.src = '/assets/images/logo.svg';
+              }}
+              onLoad={() => console.log('Logo loaded successfully')}
               loading="eager"
             />
           </Link>
@@ -338,4 +342,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;
